@@ -1,0 +1,13 @@
+.ThemeToggler {
+  font-size: 28px;
+  cursor: pointer;
+}
+.ThemeToggler:hover {
+  opacity: 0.7;
+}
+
+@media (min-width: 768px) {
+  .ThemeToggler {
+    font-size: 20px;
+  }
+}

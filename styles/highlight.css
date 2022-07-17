@@ -1,0 +1,94 @@
+pre {
+  color: var(--code-default);
+  background: var(--code-background);
+  padding: 1rem 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+pre::-webkit-scrollbar {
+  height: 0.5rem;
+}
+
+pre::-webkit-scrollbar-track {
+  background: var(--background-4);
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: var(--highlight);
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: var(--code-keyword);
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: var(--code-section);
+}
+
+.hljs-literal {
+  color: var(--code-literal);
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: var(--code-string);
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: var(--code-number);
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: var(--code-symbol);
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: var(--code-class);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+.language-bash > * {
+  color: var(--code-default);
+}

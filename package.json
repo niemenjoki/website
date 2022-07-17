@@ -1,0 +1,37 @@
+{
+  "name": "website",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "rss": "node ./utils/generateRss.js",
+    "postbuild": "npm run rss && next-sitemap --config sitemap.config.js",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next export",
+    "test": "jest -o -b",
+    "test-coverage": "jest --coverage",
+    "test-report": "jest --coverage && npx serve coverage/lcov-report/"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "fuse.js": "^6.6.2",
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.6.0",
+    "marked": "^4.0.18",
+    "next": "12.2.2",
+    "next-compose-plugins": "^2.2.1",
+    "next-pwa": "^5.5.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.20.0",
+    "eslint-config-next": "12.2.2",
+    "next-sitemap": "^3.1.11"
+  },
+  "license": "MIT"
+}

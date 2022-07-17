@@ -1,0 +1,56 @@
+.Post {
+  margin: 3rem 0;
+}
+
+.Title {
+  font-size: 22px;
+  transition: color 0.1s ease-in-out;
+}
+.Excerpt {
+  margin: 1rem 0;
+}
+.Tags {
+  margin: 1rem 0;
+}
+.Tag {
+  margin-right: 1rem;
+  background: var(--highlight);
+  padding: 0.25rem 0.5rem;
+  color: var(--text-color);
+  border-radius: 4px;
+}
+
+.Post:hover .Title {
+  color: var(--highlight);
+}
+
+.Arrow > span {
+  border: solid var(--highlight);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  opacity: 0;
+  transition: all 0.2s ease-out;
+  transition-delay: 0.3s;
+}
+
+.Arrow > span:nth-child(1) {
+  transform: rotate(-45deg);
+}
+
+.Arrow > span:nth-child(2) {
+  transform: translateX(-8px) rotate(-45deg);
+}
+
+.Arrow > span:nth-child(3) {
+  transform: translateX(-16px) rotate(-45deg);
+}
+
+.Post:hover .Arrow > span {
+  opacity: 1;
+}
+
+.Post:hover .Arrow > span:nth-child(2),
+.Post:hover .Arrow > span:nth-child(3) {
+  transform: rotate(-45deg);
+}

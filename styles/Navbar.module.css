@@ -1,0 +1,160 @@
+.Nav {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--overlay-color-initial);
+  transition: background-color 200ms ease-in-out;
+  transform: translateX(-100vw);
+}
+
+.Brand {
+  font-size: 1.25rem;
+}
+.Open {
+  left: 0;
+  background: var(--overlay-color-final);
+  transform: translateX(0);
+}
+.Socials {
+  display: inline-block;
+  font-size: 24px;
+}
+.Socials > span {
+  display: flex;
+  flex-flow: row;
+  gap: 1rem;
+}
+
+.Drawer {
+  z-index: 0;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  justify-content: center;
+  padding-left: 15vw;
+  gap: 2rem;
+  transition: left 400ms ease-in-out;
+}
+
+.NavButton {
+  font-size: 2rem;
+  width: 100vw;
+  cursor: pointer;
+}
+
+.NavButton:hover div {
+  opacity: 0.7;
+}
+
+.Nav > span {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateX(100vw);
+}
+
+.Nav.Open > span {
+  transform: translateX(0);
+}
+
+.Drawer {
+  list-style: none;
+}
+
+.Drawer li {
+  width: fit-content;
+}
+.Toggler {
+  display: inline-block;
+}
+
+.NavbarWrapper {
+  background: linear-gradient(var(--background-1), var(--background-2));
+  color: var(--text-color);
+  position: relative;
+  z-index: 100;
+}
+
+.Navbar {
+  height: 150px;
+  padding: 2em;
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+
+.Divider {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.Divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 50px;
+}
+
+.Divider svg path {
+  fill: var(--background-1);
+}
+
+@media (min-width: 550px) {
+  .Divider svg {
+    height: 100px;
+  }
+  .NavButton {
+    font-size: 3rem;
+  }
+  .Socials {
+    font-size: 28px;
+  }
+  .Socials > span {
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .Divider svg {
+    height: 150px;
+  }
+  .Toggler {
+    display: none;
+  }
+  .Nav {
+    position: static;
+    width: initial;
+    height: initial;
+    transform: translateX(0);
+  }
+
+  .Drawer {
+    z-index: 0;
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+    justify-content: center;
+    padding-left: 15vw;
+    gap: 3rem;
+    transition: left 400ms ease-in-out;
+  }
+
+  .NavButton {
+    font-size: 1.25rem;
+    width: 100vw;
+  }
+  .Socials {
+    display: none;
+  }
+}

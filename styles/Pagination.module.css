@@ -1,0 +1,38 @@
+.Pagination {
+}
+
+.Pagination a:hover {
+  filter: brightness(1.3);
+}
+.Pagination ul {
+  list-style: none;
+}
+
+.Pagination ul li {
+  display: inline-block;
+}
+
+.TextButton,
+.NumberButton {
+  position: relative;
+  display: inline-block;
+
+  margin: 0.2rem;
+  text-align: center;
+  height: 35px;
+  color: var(--text-color);
+  background-color: var(--background-2);
+  line-height: 35px;
+  vertical-align: middle;
+}
+.TextButton {
+  width: 90px;
+}
+.NumberButton {
+  width: 35px;
+  font-size: 1.2em;
+}
+
+.ActiveButton {
+  color: var(--highlight);
+}
