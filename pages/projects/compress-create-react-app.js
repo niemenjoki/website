@@ -1,20 +1,12 @@
 import Layout from '@/components/Layout';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
-import URLS from '../../data/urls';
+import { COMPRESS_CRA_README } from '@/data/vars';
 
-const CompressCreateReactAppPage = ({ contentMarkdown }) => {
-  marked.setOptions({
-    highlight: function (code, lang) {
-      return hljs.highlight(code, { language: 'javascript' }).value;
-    },
-  });
+const CompressCreateReactAppPage = ({ content }) => {
   return (
     <Layout>
-      <div
-        className="md"
-        dangerouslySetInnerHTML={{ __html: marked(contentMarkdown) }}
-      ></div>
+      <div className="md" dangerouslySetInnerHTML={{ __html: content }}></div>
     </Layout>
   );
 };
@@ -22,10 +14,18 @@ const CompressCreateReactAppPage = ({ contentMarkdown }) => {
 export default CompressCreateReactAppPage;
 
 const getStaticProps = async () => {
-  const response = await fetch(URLS.COMPRESS_CRA_README);
-  const contentMarkdown = await response.text();
+  const response = await fetch(COMPRESS_CRA_README);
+  const content = await response.text();
+  marked.setOptions({
+    highlight: function (code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    },
+    langPrefix: 'hljs language-',
+  });
+  const htmlContent = marked(content);
   return {
-    props: { contentMarkdown },
+    props: { content: htmlContent },
   };
 };
 

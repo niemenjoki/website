@@ -10,14 +10,6 @@ import SocialShareButtons from '@/components/SocialShareButtons';
 
 const PostPage = ({ data, content }) => {
   const { title, date, tags, excerpt } = data;
-  marked.setOptions({
-    highlight: function (code, lang) {
-      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-      return hljs.highlight(code, { language }).value;
-    },
-    langPrefix: 'hljs language-',
-  });
-
   return (
     <Layout
       title={title + ' | Joonas Jokinen'}
@@ -29,7 +21,7 @@ const PostPage = ({ data, content }) => {
         <div className={classes.Date}>Published: {date}</div>
         <div
           className={classes.Content}
-          dangerouslySetInnerHTML={{ __html: marked(content) }}
+          dangerouslySetInnerHTML={{ __html: content }}
         ></div>
       </article>
       <SocialShareButtons title={title} text={excerpt} tags={tags} />
@@ -56,9 +48,16 @@ const getStaticProps = async ({ params: { slug } }) => {
   );
 
   const { data, content } = extractFrontMatter(markdownWithMeta);
-
+  marked.setOptions({
+    highlight: function (code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    },
+    langPrefix: 'hljs language-',
+  });
+  const htmlContent = marked(content);
   return {
-    props: { data, content },
+    props: { data, content: htmlContent },
   };
 };
 
