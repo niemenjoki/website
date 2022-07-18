@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-const matter = require('gray-matter');
+const extractFrontMatter = require('./extractFrontMatter');
 
 const getAllPosts = () => {
   const filenames = fs.readdirSync(path.join('posts'));
   const posts = filenames.map((filename) => {
     const filepath = path.join('posts', filename);
     const markdownWithMeta = fs.readFileSync(filepath, 'utf-8');
-    const postData = matter(markdownWithMeta);
+    const postData = extractFrontMatter(markdownWithMeta);
 
     return {
       title: postData.data.title,

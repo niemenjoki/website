@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
+import extractFrontMatter from '@/utils/extractFrontMatter';
 import Link from 'next/link';
 import { sortByDate } from '@/utils/index.js';
-import { POSTS_PER_PAGE } from '../../../../config/index';
+import { POSTS_PER_PAGE } from '@/data/vars.js';
 import Layout from '@/components/Layout';
 import Post from '@/components/Post.js';
 import Advert from '@/components/Advert';
@@ -52,7 +52,7 @@ const getStaticPaths = async () => {
         'utf-8'
       );
 
-      const { data } = matter(markdownWithMeta);
+      const { data } = extractFrontMatter(markdownWithMeta);
       const tags = data.tags.split(',').map((tag) => tag.trim().toLowerCase());
       tags.forEach((tag) => {
         if (!groupedPosts[tag]) groupedPosts[tag] = [];
@@ -81,7 +81,7 @@ const getStaticProps = async ({ params }) => {
         path.join('posts', filename),
         'utf-8'
       );
-      const { data, content } = matter(markdownWithMeta);
+      const { data, content } = extractFrontMatter(markdownWithMeta);
       const slug = filename.replace('.md', '');
 
       return {

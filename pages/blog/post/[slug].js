@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
+import extractFrontMatter from '@/utils/extractFrontMatter';
 import { marked } from 'marked';
 import classes from '@/styles/PostPage.module.css';
 import Layout from '@/components/Layout';
@@ -8,8 +8,8 @@ import hljs from 'highlight.js';
 import Advert from '@/components/Advert';
 import SocialShareButtons from '@/components/SocialShareButtons';
 
-const PostPage = ({ data, content, slug }) => {
-  const { title, category, date, tags, excerpt } = data;
+const PostPage = ({ data, content }) => {
+  const { title, date, tags, excerpt } = data;
   marked.setOptions({
     highlight: function (code, lang) {
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
@@ -55,10 +55,10 @@ const getStaticProps = async ({ params: { slug } }) => {
     'utf-8'
   );
 
-  const { data, content } = matter(markdownWithMeta);
+  const { data, content } = extractFrontMatter(markdownWithMeta);
 
   return {
-    props: { data, content, slug },
+    props: { data, content },
   };
 };
 

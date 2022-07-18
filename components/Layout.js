@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
-import Advert from './Advert';
 
 const Layout = ({ title, description, canonical = false, children }) => {
   const router = useRouter();
