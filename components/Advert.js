@@ -5,7 +5,6 @@ const Advert = () => {
   const router = useRouter();
   useEffect(() => {
     if (!window.adsbygoogle) {
-      console.log('Advert useEffect');
       window.adsbygoogle = window.adsbygoogle || [];
       window.adsbygoogle.push({});
     }
