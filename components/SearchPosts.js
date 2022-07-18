@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Fuse from 'fuse.js';
 
 import useDebounce from '@/hooks/useDebounce';
 import useToggle from '@/hooks/useToggle';
@@ -18,7 +17,7 @@ const Search = ({ list, keys, placeholder }) => {
   const [searchResultsShown, toggleSearchResultsShown] = useToggle(false);
   useDebounce(() => search(searchTerm), 700, [searchTerm]);
 
-  const search = (pattern) => {
+  const search = async (pattern) => {
     const options = {
       includeScore: true,
       minMatchCharLength: 3,
@@ -27,6 +26,7 @@ const Search = ({ list, keys, placeholder }) => {
       keys,
     };
 
+    const Fuse = (await import('fuse.js')).default;
     const fuse = new Fuse(list, options);
     const results = fuse.search(pattern);
     const relevantResultData = results
