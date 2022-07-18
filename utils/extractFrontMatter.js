@@ -12,4 +12,4 @@ const extractFrontMatter = (entireFile) => {
   return { data, content };
 };
 
-export default extractFrontMatter;
+module.exports = extractFrontMatter;
