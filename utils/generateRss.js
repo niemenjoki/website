@@ -13,7 +13,7 @@ const getAllPosts = () => {
       title: postData.data.title,
       date: postData.data.date,
       excerpt: postData.data.excerpt,
-      link: 'https://joonasjokinen.fi/blog/' + filename.replace('.md', ''),
+      link: 'https://joonasjokinen.fi/blog/post/' + filename.replace('.md', ''),
     };
   });
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
