@@ -4,6 +4,7 @@ date: 'October 19, 2021'
 excerpt: 'We all know that the electricity in the regular outlets of our homes easily enough to be fatal. Yet, birds have no problem sitting on power lines that carry electricity at a 1000 times higher voltages. How is this possible?'
 tags: 'InLaymansTerms,Physics'
 keywords: 'electricity,outlet,engineering,current,voltage,electron,potential,difference'
+language: 'en'
 ---
 
 We all know that the electricity in the regular outlets of our homes easily enough to be fatal. Yet, birds have no problem sitting on power lines that carry electricity at a 1000 times higher voltages. How is this possible?

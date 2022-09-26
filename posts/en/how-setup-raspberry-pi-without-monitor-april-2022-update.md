@@ -4,6 +4,7 @@ date: 'April 11, 2022'
 excerpt: "An update to the Raspberry Pi OS in April 2022 changed how you can setup your Raspberry Pi headlessly. Here's the whole process explained."
 tags: 'RaspberryPi'
 keywords: 'raspi,setup,software,computer,ssh,operating,system,debugging,microSD,hostname,locale'
+language: 'en'
 ---
 
 If you're planning on using your Raspberry Pi just to run software on it, or to control electronics, there is no need to set up a monitor, mouse and keyboard for it. You can simply connect it to your home network and use it from your main computer. Setting up a device like this is called headless setup.

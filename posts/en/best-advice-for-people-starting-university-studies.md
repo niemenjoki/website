@@ -4,6 +4,7 @@ date: 'February 25, 2022'
 excerpt: 'In this blog post, I give my best advice for anyone who is starting their university studies based on my own experience as a recent university graduate'
 tags: 'Learning'
 keywords: 'eat,the,frog,time,management,brian,tracy,procrastination,fundamentals,teaching,school,university,college'
+language: 'en'
 ---
 
 ## Learn to Eat the Frog

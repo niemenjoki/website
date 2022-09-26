@@ -4,6 +4,7 @@ date: 'June 17, 2022'
 excerpt: 'Most of us have heard of the Chernobyl accident but few people understand what caused it. In this blogpost, I do my best to explain it as simple as possible'
 tags: 'History,Physics,InLaymansTerms'
 keywords: 'nuclear,power,plant,catastrophe,incompetence,radon,uranium,xenon,poisoning,pit,atom,nucleus,radiation,fission,fissile'
+language: 'en'
 ---
 
 ## Foreword

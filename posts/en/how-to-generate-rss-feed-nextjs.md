@@ -4,6 +4,7 @@ date: 'October 5, 2021'
 excerpt: 'Create an RSS feed for your static Next.js website to allow users to subscribe to your amazing content'
 tags: 'NextJS,RSS'
 keywords: 'xml,static,website,automatically,database,build,script'
+language: 'en'
 ---
 
 If you have a static Next.js website, you might think there's no way for you to create a notification system for new content since you don't have your own backend server. Luckily, this is not true. Creating an RSS feed for your content allows your users to use any of the free RSS subscription services to subscribe to your content and get notifications for each new post by email or even push notifications.

@@ -4,6 +4,7 @@ date: 'February 26, 2022'
 excerpt: 'It can be difficult to learn couple dozen equations when you are studying physics. How on earth do great physicist remember all the equations?'
 tags: 'Physics,Learning'
 keywords: 'memorize,byheart,physics,laws,education,high,school,college,university'
+language: 'en'
 ---
 
 Physicists don't actually learn equations by heart. They understand how things are related to each other and the equations can be deducted from these relationships.

@@ -4,6 +4,7 @@ date: 'April 11, 2022'
 excerpt: 'The Raspberry Pi foundation recently launched an update which caused a lot of headache for me personally. The fix is actually really simple and I explain everything on this blogpost'
 tags: 'RaspberryPi'
 keywords: 'setup,headless,official,imager,version,lite,bash,apt'
+language: 'en'
 ---
 
 The Raspberry Pi foundation recently launched an update to the Raspberry Pi OS which changes how you need to setup your Pi for the first time. Until now, the Raspberry Pi OS has had a default user called "pi", which is no longer the case for fresh OS installs. Having a default username and password has caused some worry about potential brute-force attacks and some countries are introducing legislation to forbid any Internet-connected device from having default login credentials.

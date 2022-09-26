@@ -4,6 +4,7 @@ date: 'February 27, 2022'
 excerpt: 'It can be difficult to figure out how to get started with JavaScript. In this blogpost, I do my best to help with that problem'
 tags: 'Programming,JavaScript,Learning'
 keywords: 'learn,javascript,resources,MDN,Mozilla,planning'
+language: 'en'
 ---
 
 There is no universally agreed way that could be called the correct one for everyone. People come from different backgrounds and different learning methods work for different people.

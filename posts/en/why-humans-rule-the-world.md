@@ -4,6 +4,7 @@ date: 'February 27, 2022'
 excerpt: 'All animals have their own ways of communication and their own brains, so why do only humans rule the world?'
 tags: 'InLaymansTerms'
 keywords: 'animal,africa,chimpanzee,democracy,dolphin,Harari,Yuval,sapiens'
+language: 'en'
 ---
 
 70 000 years ago our ancestors were insignificant animals minding their own business in the Eastern parts of Africa. Today we rule the world. When we think about it, it's common to wonder what is so different between us and other animals as individuals. We want to believe that there's something special about us, that something in our bodies or brain makes us more advanced than other animals. In reality, as individuals, we really not that far from chimpanzees.

@@ -4,6 +4,7 @@ date: 'September 16, 2021'
 excerpt: 'Decrease page load times and improve SEO in 10 minutes by setting up compression for your app built with create-react-app'
 tags: 'React'
 keywords: 'page,load,time,user,experience,performance,web,development,search,engine,seo,cra,brotli,gzip'
+language: 'en'
 ---
 
 While React apps are nice and snappy, their initial page load time is usually not good. This negatively impacts user experience, especially for users who use a slower internet connection. Slower page loading increases the chance of the user leaving your app. Website performance is also among the top factors search engines use to decide which websites they show in their search results.

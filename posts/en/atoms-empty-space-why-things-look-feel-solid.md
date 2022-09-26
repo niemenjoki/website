@@ -4,6 +4,7 @@ date: 'October 20, 2021'
 excerpt: 'If most things around us are just empty space, why do we see or feel anything?'
 tags: 'InLaymansTerms,Physics'
 keywords: 'atom,pauli,exclusion,principle,electron,nucleus,energy'
+language: 'en'
 ---
 
 Many things we've been taught at school are simplified to make them easier to understand. In reality, electrons don't orbit the nucleus like planets orbit the sun:

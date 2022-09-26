@@ -4,6 +4,7 @@ date: 'February 28, 2022'
 excerpt: 'Synchronizing time seems simple enough now that we have atomic clocks and internet, but how did we do it before we had these technologies?'
 tags: 'InLaymansTerms,History'
 keywords: 'universal,time,utc,gmt,zone,Britain,telegraph,Sandford,fleming,radio,broadcast,internet'
+language: 'en'
 ---
 
 There were no accurate universal time until quite recently and everybody had to figure out how they set their clocks. Many people considered clock towers or the timing of church bells ringing to tell the "real time" and set their clocks based on that time.
