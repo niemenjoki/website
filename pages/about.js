@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import Layout from '@/components/Layout';
 import Advert from '@/components/Advert';
-import portrait from '../public/images/portrait.png';
+import Layout from '@/components/Layout';
 import classes from '@/styles/AboutPage.module.css';
+import Image from 'next/image';
+import portrait from '../public/images/portrait.png';
 
 const AboutPage = () => {
   return (
-    <Layout>
+    <Layout title={'About | Joonas Jokinen'} language="en">
       <div className={classes.AboutPage}>
         <div className={classes.Info}>
           <Image
@@ -23,16 +23,16 @@ const AboutPage = () => {
             My name is Joonas Jokinen. I&apos;m a Finnish engineer and a self
             taught programmer. I&apos;ve been practising programming since the
             beginning of 2019, and I now confidently use web technologies like
-            React, Node.js, Next.js, MondoDB, Express. I&apos;ve also dabbled
-            with React Native, Electron, Python, C++ and Bash.
+            React, Node.js, Next.js, MondoDB, and Express. I&apos;ve also
+            dabbled with React Native, Electron, Python, C++ and Bash.
           </p>
           <p>
             I currently make my living as a project manager for a Finnish
             building automation company, making buildings smarter and more
             environmentally friendly. My job involves communication with clients
-            and other contractors, programming HVAC systems as well as
+            and other contractors, programming automation systems as well as
             scheduling and testing installations. I aim to eventually shift away
-            from automation projects and more towards the R&amp;D side of
+            from automation projects and more towards programming and developing
             automation systems.
           </p>
           <p>
@@ -42,7 +42,7 @@ const AboutPage = () => {
           </p>
         </div>
       </div>
-      <Advert />
+      <Advert language="en" />
     </Layout>
   );
 };

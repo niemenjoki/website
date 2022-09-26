@@ -1,24 +1,25 @@
-import fs from 'fs';
-import path from 'path';
-import extractFrontMatter from '@/utils/extractFrontMatter';
-import Link from 'next/link';
-import { sortByDate } from '@/utils/index.js';
-import { POSTS_PER_PAGE } from '@/data/vars.js';
-import Layout from '@/components/Layout';
-import Post from '@/components/Post.js';
 import Advert from '@/components/Advert';
+import Layout from '@/components/Layout';
 import Pagination from '@/components/Pagination';
+import Post from '@/components/Post.js';
 import SearchPosts from '@/components/SearchPosts';
+import { POSTS_PER_PAGE } from '@/data/vars.js';
 import classes from '@/styles/PostPage.module.css';
+import extractFrontMatter from '@/utils/extractFrontMatter';
+import { sortByDate } from '@/utils/index.js';
+import fs from 'fs';
+import Link from 'next/link';
+import path from 'path';
 
 const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
   return (
-    <Layout title={'Blog | Joonas Jokinen'}>
+    <Layout title={'Blog | Joonas Jokinen'} language="en">
       <h1>Latest posts tagged with &quot;{tag}&quot;</h1>
       <SearchPosts
         list={posts}
         keys={['title', 'excerpt', 'keywords', 'tags']}
         placeholder="Search posts by title or keyword.."
+        language="en"
       />
       <div className={classes.Taglist}>
         {tags
@@ -32,23 +33,23 @@ const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
       {posts
         .filter((post) => post.onPage === true)
         .map((post, index) => (
-          <Post key={index} post={post} />
+          <Post key={index} post={post} language="en" />
         ))}
-      <Pagination numPages={numPages} currentPage={currentPage} />
-      <Advert />
+      <Pagination numPages={numPages} currentPage={currentPage} language="en" />
+      <Advert language="en" />
     </Layout>
   );
 };
 export default BlogTagPage;
 
 const getStaticPaths = async () => {
-  const files = fs.readdirSync(path.join('posts'));
+  const files = fs.readdirSync(path.join('posts', 'en'));
   const groupedPosts = {};
   files
     .filter((filename) => filename.substring(0, 5) !== 'draft')
     .forEach((filename) => {
       const markdownWithMeta = fs.readFileSync(
-        path.join('posts', filename),
+        path.join('posts', 'en', filename),
         'utf-8'
       );
 
@@ -74,11 +75,11 @@ const getStaticPaths = async () => {
 
 const getStaticProps = async ({ params }) => {
   const currentPage = parseInt((params && params.pageIndex) || 1);
-  const files = fs.readdirSync(path.join('posts'));
+  const files = fs.readdirSync(path.join('posts', 'en'));
   const posts = files
     .map((filename) => {
       const markdownWithMeta = fs.readFileSync(
-        path.join('posts', filename),
+        path.join('posts', 'en', filename),
         'utf-8'
       );
       const { data, content } = extractFrontMatter(markdownWithMeta);

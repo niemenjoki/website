@@ -1,11 +1,11 @@
 import Layout from '@/components/Layout';
-import { marked } from 'marked';
-import hljs from 'highlight.js';
 import { COMPRESS_CRA_README } from '@/data/vars';
+import hljs from 'highlight.js';
+import { marked } from 'marked';
 
 const CompressCreateReactAppPage = ({ content }) => {
   return (
-    <Layout>
+    <Layout title={'compress-create-react-app | Joonas Jokinen'} language="en">
       <div className="md" dangerouslySetInnerHTML={{ __html: content }}></div>
     </Layout>
   );

@@ -1,12 +1,12 @@
-import fs from 'fs';
-import path from 'path';
-import extractFrontMatter from '@/utils/extractFrontMatter';
-import { marked } from 'marked';
-import classes from '@/styles/PostPage.module.css';
-import Layout from '@/components/Layout';
-import hljs from 'highlight.js';
 import Advert from '@/components/Advert';
+import Layout from '@/components/Layout';
 import SocialShareButtons from '@/components/SocialShareButtons';
+import classes from '@/styles/PostPage.module.css';
+import extractFrontMatter from '@/utils/extractFrontMatter';
+import fs from 'fs';
+import hljs from 'highlight.js';
+import { marked } from 'marked';
+import path from 'path';
 
 const PostPage = ({ data, content }) => {
   const { title, date, tags, excerpt } = data;
@@ -15,6 +15,7 @@ const PostPage = ({ data, content }) => {
       title={title + ' | Joonas Jokinen'}
       ads={true}
       description={excerpt}
+      language="en"
     >
       <article className={classes.PostPage}>
         <h1>{title}</h1>
@@ -25,14 +26,14 @@ const PostPage = ({ data, content }) => {
         ></div>
       </article>
       <SocialShareButtons title={title} text={excerpt} tags={tags} />
-      <Advert />
+      <Advert language="en" />
     </Layout>
   );
 };
 
 export default PostPage;
 const getStaticPaths = async () => {
-  const files = fs.readdirSync(path.join('posts'));
+  const files = fs.readdirSync(path.join('posts', 'en'));
   const paths = files.map((filename) => ({
     params: {
       slug: filename.replace('.md', ''),
@@ -43,7 +44,7 @@ const getStaticPaths = async () => {
 
 const getStaticProps = async ({ params: { slug } }) => {
   const markdownWithMeta = fs.readFileSync(
-    path.join('posts', slug + '.md'),
+    path.join('posts', 'en', slug + '.md'),
     'utf-8'
   );
 
