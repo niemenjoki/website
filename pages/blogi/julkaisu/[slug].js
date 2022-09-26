@@ -19,7 +19,9 @@ const PostPage = ({ data, content }) => {
     >
       <article className={classes.PostPage}>
         <h1>{title}</h1>
-        <div className={classes.Date}>Julkaistu: {date}</div>
+        <div className={classes.Date}>
+          Julkaistu: {new Date(date).toLocaleDateString()}
+        </div>
         <div
           className={classes.Content}
           dangerouslySetInnerHTML={{ __html: content }}
