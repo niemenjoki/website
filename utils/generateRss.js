@@ -2,18 +2,22 @@ const fs = require('fs');
 const path = require('path');
 const extractFrontMatter = require('./extractFrontMatter');
 
-const getAllPosts = () => {
-  const filenames = fs.readdirSync(path.join('posts'));
+const getAllPosts = (language) => {
+  const filenames = fs.readdirSync(path.join('posts', language));
   const posts = filenames.map((filename) => {
-    const filepath = path.join('posts', filename);
+    const filepath = path.join('posts', language, filename);
     const markdownWithMeta = fs.readFileSync(filepath, 'utf-8');
     const postData = extractFrontMatter(markdownWithMeta);
+
+    const linkbase = 'https://joonasjokinen.fi';
+    const pathname = language === 'en' ? '/blog/post/' : '/blogi/julkaisu/';
+    const link = `${linkbase}${pathname}${filename.replace('.md', '')}`;
 
     return {
       title: postData.data.title,
       date: postData.data.date,
       excerpt: postData.data.excerpt,
-      link: 'https://joonasjokinen.fi/blog/' + filename.replace('.md', ''),
+      link,
     };
   });
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -35,7 +39,21 @@ const getXmlItems = (blogPosts) => {
     .join('');
 };
 
-const getRssXml = (xmlItems, latestPostDate) => {
+const getRssXml = (xmlItems, latestPostDate, language) => {
+  const data = {
+    title: {
+      fi: 'Joonas Jokisen blogi',
+      en: "Joonas Jokinen's blog",
+    },
+    link: {
+      fi: 'https://joonasjokinen.fi',
+      en: 'https://joonasjokinen.fi/en',
+    },
+    description: {
+      fi: 'Lapsenomaisen uteliaisuuden omaavan insinöörin blogi, joka keskittyy enimmäkseen verkkokehitykseen ja satunnaisiin mielenkiintoisiin faktoihin',
+      en: 'The blog of an engineer with a childlike curiosity focusing mostly on web development and occasionally random interesting facts',
+    },
+  };
   return `<?xml version="1.0" ?>
   <rss
     xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -44,24 +62,29 @@ const getRssXml = (xmlItems, latestPostDate) => {
     version="2.0"
   >
     <channel>
-        <title><![CDATA[ Joonas Jokinen's blog ]]></title>
-        <link>https://joonasjokinen.fi</link>
-        <description><![CDATA[ The blog of an engineer with a childlike curiosity focusing mostly on web development and occasionally random interesting facts ]]></description>
-        <language>en</language>
+        <title><![CDATA[ ${data.description[language]} ]]></title>
+        <link>${data.link[language]}</link>
+        <description><![CDATA[ ${data.description[language]} ]]></description>
+        <language>${language}</language>
         <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>
         ${xmlItems}
     </channel>
   </rss>`;
 };
 
-const postData = getAllPosts();
-const xmlItems = getXmlItems(postData);
-const rssXml = getRssXml(xmlItems, postData[0].date);
+const generateRSSFeed = (language, filename) => {
+  const postData = getAllPosts(language);
+  const xmlItems = getXmlItems(postData);
+  const rssXml = getRssXml(xmlItems, postData[0].date, language);
 
-fs.writeFile(path.join('public', 'rss.xml'), rssXml, (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('RSS feed written successfully');
-  }
-});
+  fs.writeFile(path.join('public', filename), rssXml, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(`RSS feed ${filename} written successfully`);
+    }
+  });
+};
+
+generateRSSFeed('en', 'rss-en.xml');
+generateRSSFeed('fi', 'rss-fi.xml');
