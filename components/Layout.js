@@ -23,7 +23,7 @@ const Layout = ({
 
   useEffect(() => {
     document.documentElement.lang = language;
-  }, []);
+  }, [language]);
 
   const handleRouteChange = (url) => {
     window.gtag?.('config', 'UA-142172758-1', {

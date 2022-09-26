@@ -20,7 +20,7 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
     if (languagePreference === 'en') {
       router.push('/en');
     }
-  }, []);
+  }, [router]);
   return (
     <Layout
       title={'Blogi | Joonas Jokinen'}

@@ -20,7 +20,7 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
     if (languagePreference === 'fi') {
       router.push('/');
     }
-  }, []);
+  }, [router]);
 
   return (
     <Layout
