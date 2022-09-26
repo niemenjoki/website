@@ -1,49 +1,55 @@
 import Link from 'next/link';
 
-import Socials from './Socials';
 import classes from '@/styles/Footer.module.css';
+import Socials from './Socials';
 
-const Footer = () => {
+const Footer = ({ language }) => {
   return (
     <footer className={classes.Footer}>
       <div className={classes.Left}>
         <ul className={classes.Links}>
           <li>
-            <Link href="/blog">
-              <a>Blog</a>
+            <Link href={language === 'en' ? '/blog' : '/blogi'}>
+              <a>{language === 'en' ? 'Blog' : 'Blogi'}</a>
             </Link>
           </li>
           <li>
-            <Link href="/projects">
-              <a>Projects</a>
+            <Link href={language === 'en' ? '/projects' : '/projektit'}>
+              <a>{language === 'en' ? 'Projects' : 'Projektit'}</a>
             </Link>
           </li>
           <li>
             <ul className={classes.ProjectLinks}>
               <li>
-                <Link href="/projects/compress-create-react-app">
+                <Link
+                  href={
+                    language === 'en'
+                      ? '/projects/compress-create-react-app'
+                      : '"/projektit/compress-create-react-app"'
+                  }
+                >
                   <a>- compress-create-react-app</a>
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <Link href="/about">
-              <a>About</a>
+            <Link href={language === 'en' ? '/about' : '/tietoa'}>
+              <a>{language === 'en' ? 'About' : 'Tietoa'}</a>
             </Link>
           </li>
         </ul>
 
         <div className={classes.NoMobile}>
           <div>
-            &copy; 2020-{new Date().getFullYear()} Joonas Jokinen. Code and
-            content are{' '}
+            &copy; 2020-{new Date().getFullYear()} Joonas Jokinen.{' '}
+            {language === 'en' ? 'Code and content are' : 'Koodi ja sisältö on'}{' '}
             <a
               href="https://github.com/jnsjknn/website/blob/master/LICENSE.md"
               target="_blank"
               rel="license noopener noreferrer"
             >
-              licensed
+              {language === 'en' ? 'licensed' : 'lisensoitu'}
             </a>
           </div>
           <div></div>
@@ -57,24 +63,24 @@ const Footer = () => {
               rel="noreferrer"
               href="https://github.com/jnsjknn/website"
             >
-              Source code
+              {language === 'en' ? 'Source code' : 'Lähdekoodi'}
             </a>
           </li>
           <li className={classes.Socials}>
-            <Socials />
+            <Socials language={language} />
           </li>
         </ul>
       </div>
       <div className={classes.Mobile}>
         <div>&copy; 2020-{new Date().getFullYear()} Joonas Jokinen</div>
         <div>
-          Code and content are{' '}
+          {language === 'en' ? 'Code and content are' : 'Koodi ja sisältö on'}{' '}
           <a
             href="https://github.com/jnsjknn/website/blob/master/LICENSE.md"
             target="_blank"
             rel="license noopener noreferrer"
           >
-            licensed
+            {language === 'en' ? 'licensed' : 'lisensoitu'}
           </a>
         </div>
       </div>

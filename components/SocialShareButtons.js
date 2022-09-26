@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import Icon from './Icon';
 import classes from '@/styles/SocialShareButtons.module.css';
+import Icon from './Icon';
 
 export const sharelinks = [
   {

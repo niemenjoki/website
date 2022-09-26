@@ -1,12 +1,18 @@
 import Head from 'next/head';
-import Script from 'next/script';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { useEffect } from 'react';
 
-import Navbar from './Navbar';
 import Footer from './Footer';
+import Navbar from './Navbar';
 
-const Layout = ({ title, description, canonical = false, children }) => {
+const Layout = ({
+  title,
+  description,
+  canonical = false,
+  language,
+  children,
+}) => {
   const router = useRouter();
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange);
@@ -16,7 +22,7 @@ const Layout = ({ title, description, canonical = false, children }) => {
   }, [router.events]);
 
   useEffect(() => {
-    document.documentElement.lang = 'en';
+    document.documentElement.lang = language;
   }, []);
 
   const handleRouteChange = (url) => {
@@ -72,10 +78,10 @@ const Layout = ({ title, description, canonical = false, children }) => {
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
         crossOrigin="anonymous"
       />
-      <Navbar />
+      <Navbar language={language} />
 
       <main>{children}</main>
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 };

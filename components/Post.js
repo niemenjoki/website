@@ -2,7 +2,10 @@ import Link from 'next/link';
 
 import classes from '@/styles/Post.module.css';
 
-const Post = ({ post, compact = false }) => {
+const Post = ({ post, compact = false, language }) => {
+  const blogInLanguage = language === 'en' ? 'blog' : 'blogi';
+  const postInLanguage = language === 'en' ? 'post' : 'julkaisu';
+  const pageInLanguage = language === 'en' ? 'page' : 'sivu';
   if (typeof post.tags === 'string') {
     post.tags = post.tags.split(',').map((tag) => tag.trim());
   }
@@ -10,7 +13,11 @@ const Post = ({ post, compact = false }) => {
   return (
     <div className={classes.Post}>
       <h2 className={classes.Title}>
-        <Link href={`/${post.altPath || 'blog/post'}/${post.slug}`}>
+        <Link
+          href={`/${post.altPath || `${blogInLanguage}/${postInLanguage}`}/${
+            post.slug
+          }`}
+        >
           <a>{post.title}</a>
         </Link>
       </h2>
@@ -18,16 +25,27 @@ const Post = ({ post, compact = false }) => {
       <p className={classes.Tags}>
         {post.tags &&
           post.tags.map((tag) => (
-            <Link href={`/blog/${tag.toLowerCase()}/page/1`} key={tag}>
+            <Link
+              href={`/${blogInLanguage}/${tag.toLowerCase()}/${pageInLanguage}/1`}
+              key={tag}
+            >
               <a className={classes.Tag}>{tag}</a>
             </Link>
           ))}
       </p>
       {!compact && (
-        <Link href={`/${post.altPath || 'blog/post'}/${post.slug}`}>
-          <a aria-label={`Open post ${post.title}`}>
+        <Link
+          href={`/${post.altPath || `${blogInLanguage}/${postInLanguage}`}/${
+            post.slug
+          }`}
+        >
+          <a
+            aria-label={`${language === 'en' ? 'Open post' : 'Avaa julkaisu'} ${
+              post.title
+            }`}
+          >
             <h3>
-              Read more{' '}
+              {language === 'en' ? 'Read more' : 'Lue lisää'}{' '}
               <span className={classes.Arrow}>
                 <span></span>
                 <span></span>

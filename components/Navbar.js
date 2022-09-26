@@ -1,40 +1,61 @@
-import Link from 'next/link';
-
-import classes from '@/styles/Navbar.module.css';
-import Toggler from './Toggler';
-import Socials from './Socials';
 import useToggle from '@/hooks/useToggle';
+import classes from '@/styles/Navbar.module.css';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Socials from './Socials';
 import ThemeToggler from './ThemeToggler';
+import Toggler from './Toggler';
 
-const Navbar = () => {
+const Navbar = ({ language }) => {
+  const router = useRouter();
   const navLinks = [
     {
-      href: '/blog',
-      text: 'Blog',
+      href: `${language === 'en' ? '/blog' : '/blogi'}`,
+      text: `${language === 'en' ? 'Blog' : 'Blogi'}`,
     },
     {
-      href: '/projects',
-      text: 'Projects',
+      href: `${language === 'en' ? '/projects' : '/projektit'}`,
+      text: `${language === 'en' ? 'Projects' : 'Projektit'}`,
     },
     {
-      href: '/about',
-      text: 'About',
+      href: `${language === 'en' ? '/about' : '/tietoa'}`,
+      text: `${language === 'en' ? 'About' : 'Tietoa'}`,
     },
   ];
 
   const [isOpen, toggleIsOpen] = useToggle(false);
 
+  const updateLanguagePreference = (e, language) => {
+    e.preventDefault();
+    if (language === 'en') {
+      localStorage.setItem('languagePreference', 'fi');
+      router.push('/');
+    } else {
+      localStorage.setItem('languagePreference', 'en');
+      router.push('/en');
+    }
+  };
+
   return (
     <header className={classes.NavbarWrapper}>
       <div className={classes.Navbar}>
         <div className={classes.Brand}>
-          <Link href="/">Joonas Jokinen</Link>
+          <Link href={language === 'en' ? '/en' : '/'}>Joonas Jokinen</Link>
         </div>
         <nav className={[classes.Nav, isOpen ? classes.Open : null].join(' ')}>
           <span className={classes.Toggler}>
             <Toggler drawerOpen={isOpen} clicked={toggleIsOpen} />
           </span>
           <ul className={classes.Drawer}>
+            <li>
+              <a
+                href={language === 'en' ? '/' : '/en'}
+                className={classes.NavButton}
+                onClick={(e) => updateLanguagePreference(e, language)}
+              >
+                {language === 'en' ? 'FI' : 'EN'}
+              </a>
+            </li>
             <li>
               <ThemeToggler style={{ fontSize: '28px' }} />
             </li>

@@ -1,10 +1,14 @@
-import Icon from './Icon';
 import { SOCIALS } from '../data/socials';
+import Icon from './Icon';
 
-const Socials = () => {
+const Socials = ({ language }) => {
   return (
     <span>
-      {SOCIALS.map((social) => (
+      {SOCIALS.filter((social) => {
+        if (social.onlyForLanguage && social.onlyForLanguage !== language)
+          return false;
+        return true;
+      }).map((social) => (
         <a
           className={social.icon + '-icon'}
           key={social.icon}

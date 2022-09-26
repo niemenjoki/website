@@ -5,7 +5,7 @@ import useToggle from '@/hooks/useToggle';
 import classes from '@/styles/Search.module.css';
 import Post from './Post';
 
-const Search = ({ list, keys, placeholder }) => {
+const Search = ({ list, keys, placeholder, language }) => {
   list = list.map((post) => {
     if (!Array.isArray(post.tags)) post.tags = post.tags.split(',');
     if (!Array.isArray(post.keywords)) post.keywords = post.keywords.split(',');
@@ -44,7 +44,9 @@ const Search = ({ list, keys, placeholder }) => {
 
   return (
     <div className={classes.Search}>
-      <div className={classes.Label}>Search posts</div>
+      <div className={classes.Label}>
+        {language === 'en' ? 'Search posts' : 'Etsi julkaisuja'}
+      </div>
       <input
         onChange={handleInput}
         onFocus={() => toggleSearchResultsShown(true)}
@@ -68,7 +70,8 @@ const Search = ({ list, keys, placeholder }) => {
             ))
           ) : (
             <div className={classes.NoResults}>
-              No results for: {searchTerm}
+              {language === 'en' ? 'No results for:' : 'Ei tuloksia haulle:'}{' '}
+              {searchTerm}
             </div>
           )}
         </div>

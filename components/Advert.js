@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-const Advert = () => {
+const Advert = ({ language }) => {
   const router = useRouter();
   useEffect(() => {
     if (!window.adsbygoogle) {
@@ -12,7 +12,7 @@ const Advert = () => {
 
   return (
     <div style={{ background: '#ffffff07', marginTop: '1rem' }}>
-      <div>Advertisement</div>
+      <div>{language === 'en' ? 'Advertisement' : 'Mainos'}</div>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
