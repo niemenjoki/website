@@ -18,7 +18,7 @@
 /build
 /out/
 public/sitemap.xml
-public/rss.xml
+public/rss*.xml
 
 # misc
 .DS_Store
