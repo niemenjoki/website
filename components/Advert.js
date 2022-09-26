@@ -4,14 +4,17 @@ import { useEffect } from 'react';
 const Advert = ({ language }) => {
   const router = useRouter();
   useEffect(() => {
-    if (!window.adsbygoogle) {
+    if (process.env.NODE_ENV !== 'development') {
       window.adsbygoogle = window.adsbygoogle || [];
       window.adsbygoogle.push({});
     }
   }, [router.asPath]);
 
   return (
-    <div style={{ background: '#ffffff07', marginTop: '1rem' }}>
+    <div
+      style={{ background: '#ffffff07', marginTop: '1rem' }}
+      key={router.asPath}
+    >
       <div>{language === 'en' ? 'Advertisement' : 'Mainos'}</div>
       <ins
         className="adsbygoogle"
