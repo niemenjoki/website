@@ -20,14 +20,6 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
     if (languagePreference === 'en') {
       router.push('/en');
     }
-
-    const browserInFinnish = (
-      navigator.language || navigator.userLanguage
-    ).includes('fi');
-    if (!languagePreference && !browserInFinnish) {
-      localStorage.setItem('languagePreference', 'en');
-      router.push('/en');
-    }
   }, [router]);
   return (
     <Layout
