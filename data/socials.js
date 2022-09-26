@@ -25,8 +25,15 @@ export const SOCIALS = [
     ariaLabel: 'Quora',
   },
   {
+    onlyForLanguage: 'fi',
     icon: 'rss',
-    href: 'https://joonasjokinen.fi/rss.xml',
-    ariaLabel: 'RSS Feed',
+    href: 'https://joonasjokinen.fi/rss-fi.xml',
+    ariaLabel: 'RSS-Syöte',
+  },
+  {
+    onlyForLanguage: 'en',
+    icon: 'rss',
+    href: 'https://joonasjokinen.fi/rss-en.xml',
+    ariaLabel: 'RSS ',
   },
 ];
