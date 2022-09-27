@@ -67,7 +67,7 @@ const Navbar = ({ language }) => {
               </li>
             ))}
             <li className={classes.Socials}>
-              <Socials />
+              <Socials language={language} />
             </li>
           </ul>
         </nav>
