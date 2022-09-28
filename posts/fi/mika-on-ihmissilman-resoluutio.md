@@ -2,7 +2,7 @@
 title: 'Mikä on ihmissilmän resoluutio?'
 date: '27 September, 2022'
 excerpt: 'Valokuvien ja kameroiden yhteydessä kuvan laatua kuvataan usein pikseleinä. Miten laadukasta kuvaa omat silmämme tuottavat?'
-tags: 'maallikonKielellä,biologia'
+tags: 'MaallikonKielellä,Biologia'
 keywords: 'ihminen,silmä,resoluutio,kamera,pikseli,digitaalinen,näkö,näkökenttä,illuusio'
 language: 'fi'
 ---
