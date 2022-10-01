@@ -66,7 +66,7 @@ const Search = ({ list, keys, placeholder, language }) => {
           </span>
           {searchResults.length > 0 ? (
             searchResults.map((result, i) => (
-              <Post key={i} post={result} compact={true} />
+              <Post key={i} post={result} compact={true} language={language} />
             ))
           ) : (
             <div className={classes.NoResults}>
