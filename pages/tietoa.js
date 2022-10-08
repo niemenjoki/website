@@ -6,7 +6,11 @@ import portrait from '../public/images/portrait.png';
 
 const AboutPage = () => {
   return (
-    <Layout title={'Tietoa | Joonas Jokinen'} language="fi">
+    <Layout
+      title={'Tietoa | Joonas Jokinen'}
+      language="fi"
+      i18n={`https://joonasjokinen.fi/about`}
+    >
       <div className={classes.AboutPage}>
         <div className={classes.Info}>
           <Image

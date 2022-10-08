@@ -5,7 +5,11 @@ import { marked } from 'marked';
 
 const CompressCreateReactAppPage = ({ content }) => {
   return (
-    <Layout title={'compress-create-react-app | Joonas Jokinen'} language="en">
+    <Layout
+      title={'compress-create-react-app | Joonas Jokinen'}
+      language="en"
+      i18n={`https://joonasjokinen.fi/projektit/compress-create-react-app`}
+    >
       <div className="md" dangerouslySetInnerHTML={{ __html: content }}></div>
     </Layout>
   );

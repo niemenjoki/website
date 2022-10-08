@@ -15,7 +15,14 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
   return (
     <Layout
       title={'Blog | Joonas Jokinen'}
-      canonical={currentPage == 1}
+      canonical={
+        currentPage === 1 && [
+          `https://joonasjokinen.fi/blog`,
+          `https://joonasjokinen.fi/en`,
+          `https://joonasjokinen.fi/blog/page/${currentPage}`,
+        ]
+      }
+      i18n="https://joonasjokinen.fi/"
       language="en"
     >
       <h1>Latest posts</h1>

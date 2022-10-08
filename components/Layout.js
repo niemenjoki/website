@@ -9,7 +9,8 @@ import Navbar from './Navbar';
 const Layout = ({
   title,
   description,
-  canonical = false,
+  canonical,
+  i18n,
   language,
   children,
 }) => {
@@ -39,7 +40,19 @@ const Layout = ({
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
         <title>{title}</title>
-        {canonical && <link rel="canonical" href="https://joonasjokinen.fi" />}
+        {canonical &&
+          canonical.map((canonicalUrl) => {
+            return (
+              <link key={canonicalUrl} rel="canonical" href={canonicalUrl} />
+            );
+          })}
+        {i18n && (
+          <link
+            rel="alternate"
+            hrefLang={language === 'en' ? 'fi' : 'en'}
+            href={i18n}
+          />
+        )}
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
         <meta
