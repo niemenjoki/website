@@ -9,19 +9,9 @@ import extractFrontMatter from '@/utils/extractFrontMatter';
 import { sortByDate } from '@/utils/index.js';
 import fs from 'fs';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import path from 'path';
-import { useEffect } from 'react';
 
 const BlogPage = ({ posts, numPages, currentPage, tags }) => {
-  const router = useRouter();
-  useEffect(() => {
-    const languagePreference = localStorage.getItem('languagePreference');
-    if (languagePreference === 'fi') {
-      router.push('/');
-    }
-  }, [router]);
-
   return (
     <Layout
       title={'Blog | Joonas Jokinen'}
