@@ -62,7 +62,7 @@ const Layout = ({
         />
         <meta
           property="og:url"
-          content={`https://joonasjokinen.fi${router?.asPath}`}
+          content={`https://niemenjoki.fi${router?.asPath}`}
         />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -100,7 +100,7 @@ const Layout = ({
 };
 
 Layout.defaultProps = {
-  title: 'Joonas Jokinen',
+  title: 'Joonas Niemenjoki',
   keywords: 'engineering, development, web, javascript, automation, science',
   description:
     'Sharing the things I have learned with a focus on web development, engineering, and science!',

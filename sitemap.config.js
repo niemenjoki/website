@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://joonasjokinen.fi',
+  siteUrl: 'https://niemenjoki.fi',
   changefreq: 'monthly',
   priority: 0.7,
   generateIndexSitemap: false,

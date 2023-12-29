@@ -9,7 +9,7 @@ const getAllPosts = (language) => {
     const markdownWithMeta = fs.readFileSync(filepath, 'utf-8');
     const postData = extractFrontMatter(markdownWithMeta);
 
-    const linkbase = 'https://joonasjokinen.fi';
+    const linkbase = 'https://niemenjoki.fi';
     const pathname = language === 'en' ? '/blog/post/' : '/blogi/julkaisu/';
     const link = `${linkbase}${pathname}${filename.replace('.md', '')}`;
 
@@ -32,7 +32,7 @@ const getXmlItems = (blogPosts) => {
             <guid>${post.link}</guid>
             <pubDate>${new Date(post.date).toUTCString()}</pubDate>
             <description>${post.excerpt}</description>
-            <dc:creator>Joonas Jokinen</dc:creator>
+            <dc:creator>Joonas Niemenjoki</dc:creator>
         </item>
         `;
     })
@@ -42,12 +42,12 @@ const getXmlItems = (blogPosts) => {
 const getRssXml = (xmlItems, latestPostDate, language) => {
   const data = {
     title: {
-      fi: 'Joonas Jokisen blogi',
-      en: "Joonas Jokinen's blog",
+      fi: 'Joonas Niemenjoen blogi',
+      en: "Joonas Niemenjoki's blog",
     },
     link: {
-      fi: 'https://joonasjokinen.fi',
-      en: 'https://joonasjokinen.fi/en',
+      fi: 'https://niemenjoki.fi',
+      en: 'https://niemenjoki.fi/en',
     },
     description: {
       fi: 'Lapsenomaisen uteliaisuuden omaavan insinöörin blogi, joka keskittyy enimmäkseen verkkokehitykseen ja satunnaisiin mielenkiintoisiin faktoihin',

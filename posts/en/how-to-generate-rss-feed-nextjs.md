@@ -48,7 +48,7 @@ const getAllPosts = () => {
       title: data.title,
       date: data.date,
       excerpt: data.excerpt,
-      link: 'https://joonasjokinen.fi/blog/' + filename.replace('.md', ''),
+      link: 'https://niemenjoki.fi/blog/' + filename.replace('.md', ''),
     };
   });
   // Sort the blogposts by date
@@ -72,7 +72,7 @@ const getXmlItems = (blogPosts) => {
             <guid>${post.link}</guid>
             <pubDate>${new Date(post.date).toUTCString()}</pubDate>
             <description>${post.excerpt}</description>
-            <dc:creator>Joonas Jokinen</dc:creator>
+            <dc:creator>Joonas Niemenjoki</dc:creator>
         </item>
         `;
     })
@@ -102,8 +102,8 @@ const getRssXml = (xmlItems, latestPostDate) => {
     version="2.0"
   >
     <channel>
-        <title>Joonas Jokinen's blog</title>
-        <link>https://joonasjokinen.fi</link>
+        <title>Joonas Niemenjoki's blog</title>
+        <link>https://niemenjoki.fi</link>
         <description>The blog of an engineer with a childlike curiosity focusing mostly on web development and occasionally random interesting facts></description>
         <language>en</language>
         <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>

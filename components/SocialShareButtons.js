@@ -35,7 +35,7 @@ const SocialShareButtons = ({ title = '', text = '', tags = '' }) => {
       <div>
         {sharelinks.map((sharelink) => {
           const href = sharelink.href
-            .replace('__URL__', 'https://joonasjokinen.fi' + currentPath)
+            .replace('__URL__', 'https://niemenjoki.fi' + currentPath)
             .replace('__TITLE__', title)
             .replace('__TAGS__', tags);
           return (

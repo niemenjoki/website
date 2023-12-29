@@ -42,7 +42,7 @@ const Footer = ({ language }) => {
 
         <div className={classes.NoMobile}>
           <div>
-            &copy; 2020-{new Date().getFullYear()} Joonas Jokinen.{' '}
+            &copy; 2020-{new Date().getFullYear()} Joonas Niemenjoki.{' '}
             {language === 'en' ? 'Code and content are' : 'Koodi ja sisältö on'}{' '}
             <a
               href="https://github.com/jnsjknn/website/blob/master/LICENSE.md"
@@ -72,7 +72,7 @@ const Footer = ({ language }) => {
         </ul>
       </div>
       <div className={classes.Mobile}>
-        <div>&copy; 2020-{new Date().getFullYear()} Joonas Jokinen</div>
+        <div>&copy; 2020-{new Date().getFullYear()} Joonas Niemenjoki</div>
         <div>
           {language === 'en' ? 'Code and content are' : 'Koodi ja sisältö on'}{' '}
           <a

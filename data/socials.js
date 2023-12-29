@@ -1,7 +1,7 @@
 export const SOCIALS = [
   {
     icon: 'github',
-    href: 'https://www.github.com/jnsjknn',
+    href: 'https://www.github.com/niemenjoki',
     ariaLabel: 'Github',
   },
   {
@@ -11,29 +11,29 @@ export const SOCIALS = [
   },
   {
     icon: 'linkedin',
-    href: 'https://www.linkedin.com/in/joonasjokinen/',
+    href: 'https://fi.linkedin.com/in/joonasniemenjoki',
     ariaLabel: 'LinkedIn',
   },
   {
     icon: 'instagram',
-    href: 'https://www.instagram.com/jnsjknn.dev',
+    href: 'https://www.instagram.com/niemenjoki.dev',
     ariaLabel: 'Instagram',
   },
   {
     icon: 'quora',
-    href: 'https://www.quora.com/profile/Joonas-Jokinen-6',
+    href: 'https://fi.quora.com/profile/Joonas-Niemenjoki',
     ariaLabel: 'Quora',
   },
   {
     onlyForLanguage: 'fi',
     icon: 'rss',
-    href: 'https://joonasjokinen.fi/rss-fi.xml',
+    href: 'https://niemenjoki.fi/rss-fi.xml',
     ariaLabel: 'RSS-Syöte',
   },
   {
     onlyForLanguage: 'en',
     icon: 'rss',
-    href: 'https://joonasjokinen.fi/rss-en.xml',
+    href: 'https://niemenjoki.fi/rss-en.xml',
     ariaLabel: 'RSS ',
   },
 ];

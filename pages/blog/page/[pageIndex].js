@@ -14,15 +14,15 @@ import path from 'path';
 const BlogPage = ({ posts, numPages, currentPage, tags }) => {
   return (
     <Layout
-      title={'Blog | Joonas Jokinen'}
+      title={'Blog | Joonas Niemenjoki'}
       canonical={
         currentPage === 1 && [
-          `https://joonasjokinen.fi/blog`,
-          `https://joonasjokinen.fi/en`,
-          `https://joonasjokinen.fi/blog/page/${currentPage}`,
+          `https://niemenjoki.fi/blog`,
+          `https://niemenjoki.fi/en`,
+          `https://niemenjoki.fi/blog/page/${currentPage}`,
         ]
       }
-      i18n="https://joonasjokinen.fi/"
+      i18n="https://niemenjoki.fi/"
       language="en"
     >
       <h1>Latest posts</h1>

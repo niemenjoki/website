@@ -7,24 +7,24 @@ import portrait from '../public/images/portrait.png';
 const AboutPage = () => {
   return (
     <Layout
-      title={'About | Joonas Jokinen'}
+      title={'About | Joonas Niemenjoki'}
       language="en"
-      i18n={`https://joonasjokinen.fi/tietoa`}
+      i18n={`https://niemenjoki.fi/tietoa`}
     >
       <div className={classes.AboutPage}>
         <div className={classes.Info}>
           <Image
             src={portrait}
-            alt="Picture of Joonas Jokinen"
+            alt="Picture of Joonas Niemenjoki"
             placeholder="blur"
             width={200}
             height={200}
           />
-          <h1>Joonas Jokinen</h1>
+          <h1>Joonas Niemejoki</h1>
         </div>
         <div className={classes.Bio}>
           <p>
-            My name is Joonas Jokinen. I&apos;m a Finnish engineer and a self
+            My name is Joonas Niemenjoki. I&apos;m a Finnish engineer and a self
             taught programmer. I&apos;ve been practising programming since the
             beginning of 2019, and I now confidently use web technologies like
             React, Node.js, Next.js, MondoDB, and Express. I&apos;ve also

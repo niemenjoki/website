@@ -24,7 +24,7 @@ const NotFoundPage = () => {
   };
 
   return (
-    <Layout title={'404 | Joonas Jokinen'} language={language}>
+    <Layout title={'404 | Joonas Niemenjoki'} language={language}>
       <div className={classNames.Oops}>
         {language === 'en' ? 'Oops!' : 'Hups!'}
       </div>

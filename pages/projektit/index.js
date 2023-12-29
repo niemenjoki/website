@@ -6,9 +6,9 @@ import projects from '../../data/projects';
 const ProjectsPage = () => {
   return (
     <Layout
-      title={'Projektit | Joonas Jokinen'}
+      title={'Projektit | Joonas Niemenjoki'}
       language="fi"
-      i18n={`https://joonasjokinen.fi/projects`}
+      i18n={`https://niemenjoki.fi/projects`}
     >
       <h1>Projektit</h1>
       {projects.fi.map((project, index) => (

@@ -12,7 +12,7 @@ const PostPage = ({ data, content }) => {
   const { title, date, tags, excerpt } = data;
   return (
     <Layout
-      title={title + ' | Joonas Jokinen'}
+      title={title + ' | Joonas Niemenjoki'}
       ads={true}
       description={excerpt}
       language="fi"

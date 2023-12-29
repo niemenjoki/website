@@ -7,24 +7,24 @@ import portrait from '../public/images/portrait.png';
 const AboutPage = () => {
   return (
     <Layout
-      title={'Tietoa | Joonas Jokinen'}
+      title={'Tietoa | Joonas Niemenjoki'}
       language="fi"
-      i18n={`https://joonasjokinen.fi/about`}
+      i18n={`https://niemenjoki.fi/about`}
     >
       <div className={classes.AboutPage}>
         <div className={classes.Info}>
           <Image
             src={portrait}
-            alt="Valokuva Joonas Jokisesta"
+            alt="Valokuva Joonas Niemenjoesta"
             placeholder="blur"
             width={200}
             height={200}
           />
-          <h1>Joonas Jokinen</h1>
+          <h1>Joonas Niemenjoki</h1>
         </div>
         <div className={classes.Bio}>
           <p>
-            Olen Joonas Jokinen. Olen suomalainen insinööri ja itseopiskellut
+            Olen Joonas Niemejoki. Olen suomalainen insinööri ja itseopiskellut
             koodari. Olen harjoitellut koodaamista vuoden 2019 alusta lähtien.
             Osaan erityisesti web-teknologioita kuten React, Node.js, Next.js,
             MondoDB ja Express. Lisäksi olen myös käyttänyt hieman React

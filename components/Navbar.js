@@ -40,7 +40,7 @@ const Navbar = ({ language }) => {
     <header className={classes.NavbarWrapper}>
       <div className={classes.Navbar}>
         <div className={classes.Brand}>
-          <Link href={language === 'en' ? '/en' : '/'}>Joonas Jokinen</Link>
+          <Link href={language === 'en' ? '/en' : '/'}>Joonas Niemenjoki</Link>
         </div>
         <nav className={[classes.Nav, isOpen ? classes.Open : null].join(' ')}>
           <span className={classes.Toggler}>

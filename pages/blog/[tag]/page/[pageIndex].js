@@ -13,7 +13,7 @@ import path from 'path';
 
 const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
   return (
-    <Layout title={'Blog | Joonas Jokinen'} language="en">
+    <Layout title={'Blog | Joonas Niemenjoki'} language="en">
       <h1>Latest posts tagged with &quot;{tag}&quot;</h1>
       <SearchPosts
         list={posts}
