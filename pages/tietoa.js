@@ -24,27 +24,35 @@ const AboutPage = () => {
         </div>
         <div className={classes.Bio}>
           <p>
-            Olen Joonas Niemejoki. Olen suomalainen insinööri ja itseopiskellut
-            koodari. Olen harjoitellut koodaamista vuoden 2019 alusta lähtien.
-            Osaan erityisesti web-teknologioita kuten React, Node.js, Next.js,
-            MondoDB ja Express. Lisäksi olen myös käyttänyt hieman React
-            Nativea, Electronia, Pythonia, C++:aa sekä Bashiä.
+            Moi👋 Olen Joonas, suomalainen insinööri ja ohjelmoija. Olen
+            harjoitellut koodaamista noin vuoden 2019 alusta lähtien. Osaan
+            erityisesti rakennusautomaation prosessien ohjelmointia sekä
+            web-teknologioita kuten React, Node.js, Next.js, MondoDB ja Express.
+            Lisäksi olen myös käyttänyt hieman React Nativea, Electronia,
+            Pythonia, C++:aa sekä Bashiä.
           </p>
           <p>
-            Työskentelen tällä hetkellä projektinhoitajana
-            rakennusautomaatioalalla. Teen rakennuksista älykkäämpiä ja
-            ympäristöystävällisempiä. Työni sisältää muun muassa paljon
-            kommunikointia asiakkaiden ja muiden urakoitsijoiden kanssa,
-            automaatiojärjestelmien ohjelmointia, laitetilausten tekoa,
-            asennusten aikatauluttamista sekä järjestelmien testausta. Pyrin
-            tulevaisuudessa projektihommista automaatiojärjestelmien
-            ohjelmointi- ja kehityshommiin.
+            Työni on vuodesta 2021 lähtien keskittynyt pääasiassa
+            lämpöpumppujärjestelmien ohjelmointiin, testaamiseen ja
+            toiminnanvarmistamiseen. Autan ihmisiä löytämään ja korjaamaan
+            ongelmien syitä huonosti toimivissa lämmitysjärjestelmissä. Olen
+            myös osallistunut lämpöpumppujärjestelmien suunnitteluun ja
+            ohjelmoinut järjestelmiä, joissa suurin osa lämpöpumpun toiminnasta
+            on ohjattu kiinteistöautomaatiojärjestelmän avulla, mukaan lukien
+            toiminnallisuuksia kompressorien ohjaus lämpötilapoikkeamaan
+            perustuvaan muuttuvan viiveen avulla, vuorotteluautomaatio ja
+            vaihtoventtiilikytkentäisten järjestelmien käyntijärjestyksen
+            määrittely.
           </p>
           <p>
-            En ole vielä kadottanut lapsenomaista uteliaisuuttani, mikä on
-            johtanut siihen, että olen oppinut kaikenlaisia, välillä
-            erikoisiakin asioita. Tässä blogissa kirjoitan asioista, joita olen
-            oppinut.
+            Nautin eniten haastavista ohjelmointiprojekteista, joissa minulla on
+            mahdollisuus luoda uusia ratkaisuja sen sijaan, että kopioisin
+            rutinoituneesti koodia vanhoista projekteista.
+          </p>
+          <p>
+            Laita viestiä, jos tarvitset apua lämpöpumppuongelmissa tai
+            tarvitset jonkun koodaamaan haastavan prosessin
+            kiinteistöautomaatiojärjestelmään.
           </p>
         </div>
       </div>
