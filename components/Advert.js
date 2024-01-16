@@ -19,8 +19,8 @@ const Advert = ({ language }) => {
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-8064636821608705"
-        data-ad-slot="8885189702"
+        data-ad-client="ca-pub-5560402633923389"
+        data-ad-slot="1051764153"
         data-ad-format="auto"
         data-full-width-responsive="true"
       />

@@ -27,7 +27,7 @@ const Layout = ({
   }, [language]);
 
   const handleRouteChange = (url) => {
-    window.gtag?.('config', 'UA-142172758-1', {
+    window.gtag?.('config', 'G-0448XXF0S0', {
       page_path: url,
     });
   };
@@ -71,7 +71,7 @@ const Layout = ({
       </Head>
       <Script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=UA-142172758-1"
+        src="https://www.googletagmanager.com/gtag/js?id=G-0448XXF0S0"
         strategy="afterInteractive"
       />
       <Script
@@ -81,7 +81,7 @@ const Layout = ({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'UA-142172758-1', { page_path: window.location.pathname });
+              gtag('config', 'G-0448XXF0S0', { page_path: window.location.pathname });
             `,
         }}
         strategy="afterInteractive"
