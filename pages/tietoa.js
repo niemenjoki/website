@@ -2,7 +2,7 @@ import Advert from '@/components/Advert';
 import Layout from '@/components/Layout';
 import classes from '@/styles/AboutPage.module.css';
 import Image from 'next/image';
-import portrait from '../public/images/portrait.png';
+import portrait from '../public/images/portrait2024.png';
 
 const AboutPage = () => {
   return (
