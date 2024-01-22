@@ -38,6 +38,11 @@ const Footer = ({ language }) => {
               <a>{language === 'en' ? 'About' : 'Tietoa'}</a>
             </Link>
           </li>
+          <li>
+            <Link href={language === 'en' ? '/privacy' : '/tietosuoja'}>
+              <a>{language === 'en' ? 'Privacy' : 'Tietosuoja'}</a>
+            </Link>
+          </li>
         </ul>
 
         <div className={classes.NoMobile}>
