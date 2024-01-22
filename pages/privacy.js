@@ -43,6 +43,7 @@ const PrivacyPage = () => {
           <a
             href="https://support.google.com/adsense/topic/13821022?hl=en"
             target="_blank"
+            rel="noreferrer"
           >
             Google AdSense Privacy & Terms
           </a>{' '}
@@ -50,6 +51,7 @@ const PrivacyPage = () => {
           <a
             href="https://support.google.com/analytics/topic/2919631?hl=en"
             target="_blank"
+            rel="noreferrer"
           >
             Google Analytics Privacy & Terms.
           </a>
