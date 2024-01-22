@@ -9,13 +9,14 @@ import { marked } from 'marked';
 import path from 'path';
 
 const PostPage = ({ data, content }) => {
-  const { title, date, tags, excerpt } = data;
+  const { title, date, tags, excerpt, i18n } = data;
   return (
     <Layout
       title={title + ' | Joonas Niemenjoki'}
       ads={true}
       description={excerpt}
       language="en"
+      i18n={i18n}
     >
       <article className={classes.PostPage}>
         <h1>{title}</h1>

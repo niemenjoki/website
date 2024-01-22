@@ -5,6 +5,7 @@ excerpt: 'Fysiikkaa opiskellessa voi tuntua hankalalta opetella ulkoa edes muuta
 tags: 'fysiikka,oppiminen'
 keywords: 'muistaa,ulkoa,fysiikka,lait,koulutus,lukio,korkeakoulu,yliopisto'
 language: 'fi'
+i18n: 'https://niemenjoki.fi/blog/post/how-great-physicists-remember-all-equations-formulas'
 ---
 
 Fyysikot eivät opettele kaavoja ulkoa. He ymmärtävät, miten fysiikan eri osa-alueet liittyvät toisiinsa ja osaavat johtaa kaavat ymmärryksensä perusteella.

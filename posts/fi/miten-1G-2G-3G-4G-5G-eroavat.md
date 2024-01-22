@@ -5,6 +5,7 @@ excerpt: 'Yhä uudempia verkkoteknologioita jatkuvasti kehitetään ja otetaan k
 tags: 'MaallikonKielellä,Infrastruktuuri'
 keywords: 'MTA,Ruotsi,1G,Hz,taajuus,modulaatio,am,fm,kaistanleveys,radio,kommunikatio,teksti,viesti,internet,asioiden,data,langaton,4G,5G'
 language: 'fi'
+i18n: 'https://niemenjoki.fi/blog/post/how-cellular-networks-like-5g-4g-are-different'
 ---
 
 ## Analoginen verkko ja puhelut (0G-1G)

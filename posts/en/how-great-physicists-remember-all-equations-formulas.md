@@ -5,6 +5,7 @@ excerpt: 'It can be difficult to learn couple dozen equations when you are study
 tags: 'Physics,Learning'
 keywords: 'memorize,byheart,physics,laws,education,high,school,college,university'
 language: 'en'
+i18n: 'https://niemenjoki.fi/blogi/julkaisu/miten-fyysikot-muistavat-kaavat-lait'
 ---
 
 Physicists don't actually learn equations by heart. They understand how things are related to each other and the equations can be deducted from these relationships.

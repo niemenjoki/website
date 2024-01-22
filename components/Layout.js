@@ -91,7 +91,7 @@ const Layout = ({
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
         crossOrigin="anonymous"
       />
-      <Navbar language={language} />
+      <Navbar language={language} i18n={i18n} />
 
       <main>{children}</main>
       <Footer language={language} />

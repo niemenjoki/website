@@ -5,6 +5,7 @@ excerpt: 'Me kaikki tarvitsemme unta ja kehomme kyllä varmasti kertoo sen meill
 tags: 'MaallikonKielellä,Biologia'
 keywords: 'uni,melatoniini,adenosiini,paine,sisäinen,kello,oreksiini,sykronoitu,kofeiini'
 language: 'fi'
+i18n: 'https://niemenjoki.fi/blog/post/why-do-we-feel-sleepy'
 ---
 
 Me kaikki tarvitsemme unta ja kehomme kyllä varmasti kertoo sen meille, jos pysymme liian pitkään hereillä, mutta mikä oikein aiheuttaa väsymyksen tunteen? Luin jonkin aikaa sitten loistavan kirjan unesta ja opin vastauksen juuri tuohon kysymykseen.

@@ -6,7 +6,7 @@ import Socials from './Socials';
 import ThemeToggler from './ThemeToggler';
 import Toggler from './Toggler';
 
-const Navbar = ({ language }) => {
+const Navbar = ({ language, i18n }) => {
   const router = useRouter();
   const navLinks = [
     {
@@ -27,13 +27,16 @@ const Navbar = ({ language }) => {
 
   const updateLanguagePreference = (e, language) => {
     e.preventDefault();
+
+    const i18nHomePagePath = language === 'en' ? '/' : '/en';
+    const i18nTargetPath = i18n ? new URL(i18n).pathname : i18nHomePagePath;
+
     if (language === 'en') {
       localStorage.setItem('languagePreference', 'fi');
-      router.push('/');
     } else {
       localStorage.setItem('languagePreference', 'en');
-      router.push('/en');
     }
+    router.push(i18nTargetPath);
   };
 
   return (

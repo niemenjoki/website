@@ -5,6 +5,7 @@ excerpt: "It looks like more and more new generations of cellular networks are b
 tags: 'InLaymansTerms,Infrastructure'
 keywords: 'MTA,Sweden,1G,Hz,frequency,modulation,am,fm,bandwidth,radio,communication,text,message,internet,things,data,wireless,4G,5G'
 language: 'en'
+i18n: 'https://niemenjoki.fi/blogi/julkaisu/miten-1G-2G-3G-4G-5G-eroavat'
 ---
 
 ## Analog Networks and Phone Calls (0G-1G)
