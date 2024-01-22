@@ -9,3 +9,7 @@
 .PrivacyPage a:hover {
   opacity: 0.7;
 }
+
+.PrivacyPage p {
+  margin: 1rem 0;
+}
