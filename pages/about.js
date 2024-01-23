@@ -20,7 +20,7 @@ const AboutPage = () => {
             width={200}
             height={200}
           />
-          <h1>Joonas Niemejoki</h1>
+          <h1>Joonas Niemenjoki</h1>
         </div>
         <div className={classes.Bio}>
           <p>
