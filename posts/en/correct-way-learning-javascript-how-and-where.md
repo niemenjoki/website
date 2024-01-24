@@ -5,6 +5,7 @@ excerpt: 'It can be difficult to figure out how to get started with JavaScript. 
 tags: 'Programming,JavaScript,Learning'
 keywords: 'learn,javascript,resources,MDN,Mozilla,planning'
 language: 'en'
+i18n: 'https://niemenjoki.fi/blogi/julkaisu/oikea-tapa-oppia-javascript-miten-missa'
 ---
 
 There is no universally agreed way that could be called the correct one for everyone. People come from different backgrounds and different learning methods work for different people.
