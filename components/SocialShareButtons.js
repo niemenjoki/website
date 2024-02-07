@@ -26,12 +26,21 @@ export const sharelinks = [
   },
 ];
 
-const SocialShareButtons = ({ title = '', text = '', tags = '' }) => {
+const SocialShareButtons = ({
+  title = '',
+  text = '',
+  tags = '',
+  language = '',
+}) => {
   const router = useRouter();
   const currentPath = router.pathname.replace('[slug]', router.query.slug);
   return (
     <div className={classes.SocialShareButtons}>
-      <div>Share on social media:</div>
+      <div>
+        {language === 'fi'
+          ? 'Jaa sosiaalisessa mediassa:'
+          : 'Share on social media:'}
+      </div>
       <div>
         {sharelinks.map((sharelink) => {
           const href = sharelink.href

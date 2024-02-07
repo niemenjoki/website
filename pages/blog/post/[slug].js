@@ -26,7 +26,12 @@ const PostPage = ({ data, content }) => {
           dangerouslySetInnerHTML={{ __html: content }}
         ></div>
       </article>
-      <SocialShareButtons title={title} text={excerpt} tags={tags} />
+      <SocialShareButtons
+        title={title}
+        text={excerpt}
+        tags={tags}
+        language="en"
+      />
       <Advert language="en" />
     </Layout>
   );
