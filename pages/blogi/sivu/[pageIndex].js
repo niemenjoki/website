@@ -19,7 +19,6 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
         currentPage === 1 && [
           `https://niemenjoki.fi/blogi`,
           `https://niemenjoki.fi/`,
-          `https://niemenjoki.fi/blogi/sivu/${currentPage}`,
         ]
       }
       i18n="https://niemenjoki.fi/en"
