@@ -53,10 +53,10 @@ const Navbar = ({ language, i18n }) => {
             <li>
               <a
                 href={language === 'en' ? '/' : '/en'}
-                className={classes.NavButton}
+                className={classes.LanguageToggler}
                 onClick={(e) => updateLanguagePreference(e, language)}
               >
-                {language === 'en' ? 'FI' : 'EN'}
+                {language === 'en' ? 'suomeksi' : 'in English'}
               </a>
             </li>
             <li>

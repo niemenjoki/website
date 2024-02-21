@@ -39,14 +39,24 @@
   transition: left 400ms ease-in-out;
 }
 
-.NavButton {
-  font-size: 2rem;
-  width: 100vw;
+.NavButton,
+.LanguageToggler {
   cursor: pointer;
+  vertical-align: bottom;
+  margin: auto 0;
 }
 
-.NavButton:hover div {
+.NavButton:hover div,
+.LanguageToggler:hover div {
   opacity: 0.7;
+}
+
+.NavButton {
+  font-size: 2rem;
+}
+
+.LanguageToggler {
+  font-size: 1.5rem;
 }
 
 .Nav > span {
@@ -55,6 +65,10 @@
   top: 1rem;
   z-index: 100;
   transform: translateX(100vw);
+}
+
+.Nav > span > *:not(:last-child) {
+  margin-right: 5px;
 }
 
 .Nav.Open > span {
@@ -114,6 +128,9 @@
   .Divider svg {
     height: 100px;
   }
+  .LanguageToggler {
+    font-size: 2rem;
+  }
   .NavButton {
     font-size: 3rem;
   }
@@ -125,7 +142,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 845px) {
   .Divider svg {
     height: 150px;
   }
@@ -145,6 +162,7 @@
     flex-flow: row;
     height: 100%;
     justify-content: center;
+    align-items: end;
     padding-left: 15vw;
     gap: 3rem;
     transition: left 400ms ease-in-out;
@@ -152,7 +170,9 @@
 
   .NavButton {
     font-size: 1.25rem;
-    width: 100vw;
+  }
+  .LanguageToggler {
+    font-size: 1rem;
   }
   .Socials {
     display: none;
