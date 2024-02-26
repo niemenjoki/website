@@ -15,9 +15,9 @@ Lämpöpumpuista puhutaan nykypäivänä paljon ja uusia lämpöpumppuja asentav
 Ymmärtääksemme lämpöpumppujen toimintaa, on ensin ymmärrettävä hieman fysiikkaa. Älä säikähdä, yhtään laskukaavaa ei tarvitse osata. Riittää, että ymmärtää muutaman fysiikan periaatteen. Voit toki halutessasi syventyä lämpöpumppujen fysiikkaan tarkemminkin, esimerkiksi julkaisun alareunasta löytyvien linkkien avulla.
 
 1. **Kaasun painen, tilavuus ja lämpötila riippuvat toisistaan**
-   - a) Paineen pysyessä vakiona, tilavuus ja lämpötila ovat suoraan verrannollisia ([Gay-Lussacin laki [1]](#viittaukset)). Tilavuuden kasvaessa lämpötila kasvaa.
-   - b) Tilavuuden pysyessa vakiona, paine ja lämpötila ovat suoraan verrannollisia ([Charlesin laki [2]](#viittaukset)). Paineen kasvaessa lämpötila kasvaa.
-   - c) Lämpötilan pysyessä vakiona, tilavuus ja lämpötila ovat kääntäen verrannollisia ([Boylen laki [3]](#viittaukset)). Tilavuuden kasvaessa paine laskee.
+   - a) Paineen pysyessä vakiona, tilavuus ja lämpötila ovat suoraan verrannollisia eli tilavuuden kasvaessa lämpötila kasvaa ja sama toisin päin ([Gay-Lussacin laki [1]](#viittaukset)).
+   - b) Tilavuuden pysyessa vakiona, paine ja lämpötila ovat suoraan verrannollisia eli paineen kasvaessa lämpötila kasvaa ja sama toisin päin([Charlesin laki [2]](#viittaukset)).
+   - c) Lämpötilan pysyessä vakiona, tilavuus ja lämpötila ovat kääntäen verrannollisia eli tilavuuden kasvaessa paine pienenee ja sama toisin päin ([Boylen laki [3]](#viittaukset)).
 2. **Aineen olomuodon muutokset sitovat tai vapauttavat energiaa ([Olomuodon muutokset [4]](#viittaukset)).**
    - a) Sulaminen ja höyrystyminen sitovat energiaa ympäristöstään. Arkielämässä tämän ilmiön voi huomata esimerkiksi siitä, että suihkun jälkeen iholta höyrystyvä vesi jäähdyttää ihon pintaa.
    - b) Jähmettyminen ja tiivistyminen vapauttavat energiaa ympäristöönsä. Tätä on hankalampi huomata arkielämässä, mutta se kuitenkin pitää paikkansa.
@@ -27,7 +27,7 @@ Viittaan näihin asioihin myöhemmin tekstissä.
 
 ## Lämpöpumppujen energiatehokkuus
 
-Esimerkiksi öljylämmityksessä öljyn kemiallinen energia ja sähkölämmityksessä sähköenergia muuttuvat suoraan lämpöenergiaksi. Koska energiaa ei voida luoda tyhjästä (ks. kohta 3), tavanomaisilla lämmitysmenetelmillä ei voida koskaan saavuttaa yli 100 % hyötysuhdetta. Todellisuudessa lämpöä menee aina myös vähän hukkaan, joten hyötysuhde on yleensä noin 80-99 %.
+Esimerkiksi öljylämmityksessä öljyn kemiallinen energia ja sähkölämmityksessä sähköenergia muuttuvat suoraan lämpöenergiaksi. Koska energiaa ei voida luoda tyhjästä (ks. kohta 3), tavanomaisilla lämmitysmenetelmillä ei voida koskaan saavuttaa yli 100 % hyötysuhdetta. Todellisuudessa lämpöä menee aina myös vähän hukkaan, joten hyötysuhde on yleensä noin 80-99 %. Myös kaukolämpö tuotetaan pääasiassa polttamalla maakaasua, kivihiiltä, turvetta ja puuta, joten senkään hyötysuhde ei voi ylittää 100 % rajaa, vaikka se muuten onkin hyvä lämmitysmuoto.
 
 <aside>
    <h3>Hyötysuhde</h3>
@@ -40,7 +40,7 @@ Lämpöpumppu sen sijaan siirtää jo olemassa olevaa lämpöä paikasta toiseen
 
 ## Lämpöpumppujen toiminta
 
-Myös aineissa, joiden lämpötilan koemme arkielämässämme kylmiksi, on varastoitunutta lämpöenergiaa. Lämpöpumpuissa käytetään kylmäaineita, joiden ominaisuudet ovat sellaisia, että niiden olomuotoa on suhteellisen helppo muuttaa nesteen ja kaasun välillä niissä lämpötiloissa, joissa lämpöpumppua on tarkoitus käyttää. Käytettyjen kylmäaineiden kiehumispisteet riippuvat paineesta, jolloin niiden höyrystimistä ja tiivistymistä voidaan hallita altistamalla niitä erilaisille paineille.
+Myös aineissa, joiden lämpötilan koemme arkielämässämme kylmiksi, on varastoitunutta lämpöenergiaa. Lämpöpumpuissa käytetään kylmäaineita, joiden ominaisuudet ovat sellaisia, että niiden olomuotoa on suhteellisen helppo muuttaa nesteestä kaasuksi ja takaisin niissä lämpötiloissa, joissa lämpöpumppua on tarkoitus käyttää. Käytettyjen kylmäaineiden kiehumispisteet riippuvat paineesta, jolloin niiden höyrystymistä ja tiivistymistä voidaan hallita altistamalla niitä erilaisille paineille eri vaiheissa lämpöpumpun prosessia.
 
 <picture>
   <source srcset="/images/posts/kuinka-lampopumput-toimivat/lampopumppu_toimintakaavio.webp" type="image/webp" />
@@ -50,17 +50,19 @@ Myös aineissa, joiden lämpötilan koemme arkielämässämme kylmiksi, on varas
 
 <sup>Kuva 1: Lämpöpumpun toimintakaavio. &copy; Joonas Niemenjoki 2024 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fi)</sup>
 
-Lämpöpumput voivat käyttää lämmönlähteenään lähes mitä tahansa, tyypillisesti maaperää, ilmaa tai vesistöä. Jos lämmönlähteenä on ilma, sitä puhalletaan lämpöpumpun höyrystimen läpi ja muissa tapauksissa lämpö kerätään yleensä lämmönkeruunesteeseen, jota kierrätetään höyrystimen läpi.
+Lämpöpumput voivat käyttää lämmönlähteenään lähes mitä tahansa, tyypillisesti maaperään, ilmaan tai vesistöön varastoitunutta lämpöä. Jos lämmönlähteenä on ilma, sitä puhalletaan lämpöpumpun höyrystimen läpi ja muissa tapauksissa lämpö kerätään yleensä lämmönkeruunesteeseen, jota myös kierrätetään höyrystimen läpi.
 
-Höyrystimen läpi kuljetettu ilma tai lämmönkeruuneste luovuttaa lämpöä höyrystimen kierukassa kulkevalle kylmälle nestemäiselle kylmäaineelle ja saa sen kiehumaan eli muuttumaan kaasumaiseksi (ks. 2 a)
+Höyrystimen läpi kuljetettu ilma tai lämmönkeruuneste luovuttaa lämpöä höyrystimen kierukassa kulkevalle kylmälle nestemäiselle kylmäaineelle ja saa sen kiehumaan eli muuttumaan kaasumaiseksi (ks. 2 a).
 
 Tämän jälkeen kompressori puristaa kaasumaista kylmäainetta, jolloin se lämpenee voimakkaasti (ks. 1b).
 
-Seuraavaksi erittäin kuuma, puristettu kaasu virtaa lauhdutinkierukan läpi, jossa se tiivistyy ja luovuttaa lämpöä rakennukseen (ks. 2b), koska lauhduttimen läpi puhalletaan rakennuksen sisäilmaa tai kierrätetään lämmitysjärjestelmän lämmitysvettä. Kylmäaine on siis lämmennyt kompressorin paineen vaikutuksesta niin kuumaksi, että se on sisäilmaa tai lämmitysjärjestelmän nestettä kuumempaa.
+Seuraavaksi erittäin kuuma kaasumainen kylmäaine virtaa lauhdutinkierukan läpi. Lauhduttimen läpi puhalletaan rakennuksen sisäilmaa tai kierrätetään lämmitysjärjestelmän lämmitysvettä, jolloin kylmäaine tiivistyy ja luovuttaa lämpöä rakennukseen (ks. 2b), Kylmäaine on siis lämmennyt kompressorin paineen vaikutuksesta niin kuumaksi, että se on sisäilmaa tai lämmitysjärjestelmän nestettä kuumempaa ja näin ollen luonnostaan luovuttaa lämpönsä lämmitettävään kohteeseen.
 
 Lauhduttimesta kylmäaine kulkee paisuntaventtiilille, jossa sen paine laskee huomattavasti, mikä saa sen jäähtymään (ks. 1b).
 
 Jäähdytetty kylmäaine kulkee edelleen höyrystimeen keräämään lämpöä ja kierto alkaa uudestaan.
+
+Vaikka lämpöpumppujen fysiikkaa ymmärtää, tuntuu joskus lähes uskomattomalta, että voimme pumpata maaperästä esimerkiksi 6 asteista lämmönkeruunestettä lämpöpumpulle ja palauttaa sen takaisin maaperään 2 asteisena ja pelkästään tuon lämpötilamuutoksen avulla voimme lämmittää kokonaisia rakennuksia! Kyse ei kuitenkaan ole taikuudesta vaan jonkun keksimästä älykkäästä tekniikasta. Lämpöpumppujen avulla voimme todella hyödyntää luonnonvaroja älykkäästi ja kestävästi lämmityksen tarpeisiimme.
 
 ## Viittaukset
 
