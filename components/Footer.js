@@ -56,6 +56,15 @@ const Footer = ({ language }) => {
             >
               {language === 'en' ? 'licensed' : 'lisensoitu'}
             </a>
+            <div style={{ marginTop: '10px' }}>
+              <i>
+                <small>
+                  {language === 'en'
+                    ? 'The views and opinions expressed on this website are my own and do not represent the views or opinions of my employer or any other parties.'
+                    : 'Sivustolla esitetyt näkemykset ja mielipiteet ovat omiani eivätkä edusta työnantajani tai minkään muun sidosryhmän kantoja tai näkemyksiä.'}
+                </small>
+              </i>
+            </div>
           </div>
           <div></div>
         </div>
@@ -87,6 +96,15 @@ const Footer = ({ language }) => {
           >
             {language === 'en' ? 'licensed' : 'lisensoitu'}
           </a>
+        </div>
+        <div style={{ marginTop: '10px' }}>
+          <i>
+            <small>
+              {language === 'en'
+                ? 'The views and opinions expressed on this website are my own and do not represent the views or opinions of my employer or any other parties.'
+                : 'Sivustolla esitetyt näkemykset ja mielipiteet ovat omiani eivätkä edusta työnantajani tai minkään muun sidosryhmän kantoja tai näkemyksiä.'}
+            </small>
+          </i>
         </div>
       </div>
     </footer>
