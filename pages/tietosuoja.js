@@ -59,8 +59,8 @@ const PrivacyPage = () => {
         </p>
         <h2>LocalStorage</h2>
         <p>
-          Kun vaihdat valo- ja pimeätilojen tai suomen ja englannin kielen
-          välillä tällä verkkosivustolla, tallennamme mieltymyksesi selaimesi
+          Kun vaihdat vaaleaan tai tummaan tilaan tai suomen ja englannin kielen
+          välillä tällä verkkosivustolla, sivusto tallentaa mieltymyksesi selaimesi
           paikalliseen tallennustilaan (localStorage). Tällä tavoin voimme
           automaattisesti käyttää valitsemaasi teemaa ja kieltä seuraavalla
           sivuston käyntikerralla. Tämä tieto tallennetaan paikallisesti
