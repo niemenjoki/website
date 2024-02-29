@@ -30,7 +30,7 @@ const Search = ({ list, keys, placeholder, language }) => {
     const fuse = new Fuse(list, options);
     const results = fuse.search(pattern);
     const relevantResultData = results
-      .filter((result) => result.score < 0.8)
+      .filter((result) => result.score < 0.6)
       .slice(0, 3)
       .map((result) => result.item);
 
