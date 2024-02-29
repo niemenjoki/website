@@ -24,7 +24,7 @@ const AboutPage = () => {
         </div>
         <div className={classes.Bio}>
           <p>
-            Moi👋 Olen Joonas, suomalainen insinööri ja ohjelmoija. Olen
+            Moi👋 Olen Joonas, automaatioinsinööri ja ohjelmoija. Olen
             harjoitellut koodaamista noin vuoden 2019 alusta lähtien. Osaan
             erityisesti rakennusautomaation prosessien ohjelmointia sekä
             web-teknologioita kuten React, Node.js, Next.js, MondoDB ja Express.
@@ -39,7 +39,7 @@ const AboutPage = () => {
             myös osallistunut lämpöpumppujärjestelmien suunnitteluun ja
             ohjelmoinut järjestelmiä, joissa suurin osa lämpöpumpun toiminnasta
             on ohjattu kiinteistöautomaatiojärjestelmän avulla, mukaan lukien
-            toiminnallisuuksia kompressorien ohjaus lämpötilapoikkeamaan
+            toiminnallisuuksia, kuten kompressorien ohjaus lämpötilapoikkeamaan
             perustuvaan muuttuvan viiveen avulla, vuorotteluautomaatio ja
             vaihtoventtiilikytkentäisten järjestelmien käyntijärjestyksen
             määrittely.
