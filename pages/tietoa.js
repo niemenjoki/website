@@ -54,7 +54,7 @@ const AboutPage = () => {
             tarvitset jonkun koodaamaan haastavan prosessin
             kiinteistöautomaatiojärjestelmään. Autan mielelläni suoraan
             pikaisissa asioissa ja tarvittaessa välitän avunpyynnön eteenpäin
-            oikeille kaverille, jos asia vaatii isompaa panostusta ja
+            oikeille kavereille, jos asia vaatii isompaa panostusta ja
             työnantajani resursseja.
           </p>
         </div>
