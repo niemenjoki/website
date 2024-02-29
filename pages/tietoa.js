@@ -52,11 +52,9 @@ const AboutPage = () => {
           <p>
             Laita viestiä, jos tarvitset apua lämpöpumppuongelmissa tai
             tarvitset jonkun koodaamaan haastavan prosessin
-            kiinteistöautomaatiojärjestelmään. Laita viestiä, jos tarvitset apua
-            lämpöpumppuongelmissa tai tarvitset jonkun koodaamaan haastavan
-            prosessin kiinteistöautomaatiojärjestelmään. Autan mielelläni
-            suoraan pikaisissa asioissa ja tarvittaessa välitän avunpyynnön
-            eteenpäin oikeille kaverille, jos asia vaatii isompaa panostusta ja
+            kiinteistöautomaatiojärjestelmään. Autan mielelläni suoraan
+            pikaisissa asioissa ja tarvittaessa välitän avunpyynnön eteenpäin
+            oikeille kaverille, jos asia vaatii isompaa panostusta ja
             työnantajani resursseja.
           </p>
         </div>
