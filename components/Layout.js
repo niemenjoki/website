@@ -65,8 +65,8 @@ const Layout = ({
           content={`https://niemenjoki.fi${router?.asPath}`}
         />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+        <link rel="shortcut icon" href="/icons/favicon.ico" />
         <meta name="theme-color" content="#0e111b" />
       </Head>
       <Script
