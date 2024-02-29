@@ -50,9 +50,10 @@ const AboutPage = () => {
           <p>
             Feel free to reach out if you need help with heat pump issues or if
             you need someone to code a challenging process into a building
-            automation system. I'm happy to help directly with quick queries,
-            and if needed, I can pass on your request to the right person if it
-            requires a larger investment of time and resources from my employer.
+            automation system. I&apos;m happy to help directly with quick
+            queries, and if needed, I can pass on your request to the right
+            person if it requires a larger investment of time and resources from
+            my employer.
           </p>
         </div>
       </div>
