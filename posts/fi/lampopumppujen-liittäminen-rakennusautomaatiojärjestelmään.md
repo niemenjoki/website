@@ -1,5 +1,5 @@
 ---
-title: 'Lämpöpumppujen liittäminen rakennusautomaatiojärjestelmään'
+title: 'Lämpöpumppujen liittäminen rakennus&shy;automaatio&shy;järjestelmään'
 date: '9 March, 2024'
 excerpt: 'Lämpöpumppuja voidaan liittää rakennusautomaatiojärjestelmään lukuisilla eri tavoilla. Tässä julkaisussa käyn läpi erilaisten vaihtoehtojen etuja ja haittoja sekä mitä niiden yhteydessä kannattaa huomioida.'
 tags: 'Lämpöpumput,Tekniikka'
