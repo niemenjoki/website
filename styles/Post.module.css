@@ -5,6 +5,7 @@
 .Title {
   font-size: 22px;
   transition: color 0.1s ease-in-out;
+  overflow-wrap: break-word;
 }
 .Excerpt {
   margin: 1rem 0;
