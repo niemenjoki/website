@@ -2,8 +2,8 @@
 title: 'Kuinka lämpöpumput toimivat?'
 date: '26 February, 2024'
 excerpt: 'Lämpöpumpuista puhutaan nykypäivänä paljon ja uusia lämpöpumppuja asentavia yrityksiä ilmestyy koko ajan lisää. Suuri osa meistä on varmaan jo ymmärtänyt, että ne ovat taloudellinen ja ympäristöystävällinen lämmitysmuoto. Oletko kuitenkaan koskaan miettinyt, mikä lämpöpumpuista tekee niin ympäristöystävällisiä ja miten ne ylipäätään toimivat käytännössä? Tässä julkaisussa teen parhaani selittääkseni lämpöpumppujen toiminnan mahdollisimman helposti ymmärrettävällä tavalla.'
-tags: 'MaallikonKielellä,Fysiikka,Tekniikka'
-keywords: 'lämpöpumppu,lämmönsiirto,lämmitys,tekniikka,ympäristö'
+tags: 'Lämpöpumput,MaallikonKielellä,Fysiikka,Tekniikka'
+keywords: 'lämpöpumput, energiatehokkuus, fysiikka, kaasun paine, lämpötila, hyötysuhde, kylmäaine, toiminta, lämmön siirto, kompressori, lauhdutin, höyrystin, paisuntaventtiili, kestävä kehitys, ympäristöystävällisyys'
 language: 'fi'
 i18n: 'https://niemenjoki.fi/blog/post/how-heatpumps-work'
 ---
