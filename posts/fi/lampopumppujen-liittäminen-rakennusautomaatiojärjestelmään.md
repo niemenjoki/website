@@ -1,13 +1,13 @@
 ---
 title: 'Lämpöpumppujen liittäminen rakennusautomaatiojärjestelmään'
 date: '9 March, 2024'
-excerpt: 'Lämpöpumppuja voidaan liittää rakennusautomaatiojärjestelmään lukuisilla eri tavalla. Tässä julkaisussa käyn läpi erilaisten vaihtoehtojen etuja ja haittoja sekä mitä niiden yhteydessä pitää huomioida.'
+excerpt: 'Lämpöpumppuja voidaan liittää rakennusautomaatiojärjestelmään lukuisilla eri tavoilla. Tässä julkaisussa käyn läpi erilaisten vaihtoehtojen etuja ja haittoja sekä mitä niiden yhteydessä kannattaa huomioida.'
 tags: 'Lämpöpumput,Tekniikka'
 keywords: 'lämpöpumput, rakennusautomaatiojärjestelmä, modbus, ohjausjärjestelmät, väylätekniikka, sisäinen ohjaus, ulkoinen ohjaus, asetusarvot, automatisoitu lämmitys, kiertopumput, kompressorit, varaajat, lämmitysjärjestelmä, energiatehokkuus, ohjelmointi, hälytykset, käyttöönotto, hienosäätö, vianetsintä, suunnittelu'
 language: 'fi'
 ---
 
-Lämpöpumppuja voidaan liittää rakennusautomaatiojärjestelmään lukuisilla eri tavalla. Tässä julkaisussa käyn läpi erilaisten vaihtoehtojen etuja ja haittoja sekä mitä niiden yhteydessä pitää huomioida.
+Lämpöpumppuja voidaan liittää rakennusautomaatiojärjestelmään lukuisilla eri tavoilla. Tässä julkaisussa käyn läpi erilaisten vaihtoehtojen etuja ja haittoja sekä mitä niiden yhteydessä kannattaa huomioida.
 
 Eri vaihtoehdot voidaan karkeasti jakaa kolmeen tyyppiin:
 
@@ -35,7 +35,7 @@ Lisäksi käyttöönottovaiheessa lämpöpumppujen asetukset asetellaan parhaill
 
 ## Ulkoisten asetusarvojen kirjoitus
 
-Toisena vaihtoehtona on kirjoittaa lämpöpumpuille väylän kautta erilaisia ohjaukseen vaikuttavia arvoja. Sisäinen ohjelma tekee tällöin edelleen päätökset siitä, milloin ja kuinka tehokkaasti lämpöä tuotetaan, mutta ohjaus perustuu ylemmän tason automaatiojärjestelmästä syötettyihin asetuksiin.
+Toisena vaihtoehtona on kirjoittaa lämpöpumpuille väylän kautta erilaisia ohjaukseen vaikuttavia arvoja. Sisäinen ohjelma tekee tällöin edelleen päätökset siitä, milloin ja kuinka tehokkaasti lämpöä tuotetaan, mutta ohjaus perustuu rakennusautomaatiojärjestelmästä syötettyihin asetuksiin.
 
 Tämä on usein hyvä vaihtoehto, koska lämpöpumput saadaan tuottamaan lämpöä muun lämmitysjärjestelmän tarpeen mukaan, mutta suunnittelijan tai automaatiourakoitsijan ei silti tarvitse ymmärtää kovinkaan tarkkaan, miten kompressoreita, kiertopumppuja ja vaihtoventtiileitä kannattaa ohjata. Lisäksi useamman lämpöpumpun järjestelmässä sisäinen ohjelma pystyy huolehtimaan lämpöpumppujen vuorottelusta, jolloin niille kertyy pitkällä aikavälillä suurin piirtein yhtä paljon kulutusta.
 
@@ -45,12 +45,12 @@ Suosittelen tätä vaihtoehtoa useimmissa tapauksissa ja erityisesti silloin, ku
 
 Vaikka asetusarvoja kirjoittamalla saadaan usein tehtyä järjestelmiä, jotka toimivat hyvin, niissä voi silti kohteesta riippuen olla varaa hienosäädölle, jota ei pelkkiä asetusarvoja kirjoittamalla välttämättä saada tehtyä. Niimpä joskus paras ratkaisu on ohjata lämpöpumppuja suoraan rakennusautomaatiosta. Lämpöpumppujen sisäinen ohjelma huolehtii silloin pelkästään oman kylmäainepiirinsä turvallisuuteen liittyvästä automaatiosta eli käytännössä siitä, että lämpöpumpun sisäiset lämpötilat ja paineet pysyvät turvallisissa rajoissa. Useimmiten sisäisen ohjelman ohjattavaksi jätetään myös keruu- ja lauhdepumppujen ohjaus, mutta kompressorien käynnistyminen tapahtuu suoraan rakennusautomaatiojärjestelmän ohjaamana.
 
-Asetusarvo-ohjaus perustuu yleensä pelkkiin yksittäisiin mittauksiin, esimerkiksi käyttövesi- ja lämmitysvesivaraajien lämpötilaan. Ulkoisen ohjauksen etuna on se, että kaikki lämmitysjärjestelmästä löytyvä tieto on hyödynnettävissä lämpöpumppujen ohjauksessa ja mahdollisuudet erilaisille ohjaustavoille ovat rajattomat. Toinen etu on se, että kaikkia lämpöpumppujen ohjaukseen liittyviä toimintoja voidaan hallita yhden käyttöliittymän kautta sen sijaan, että osaa asetuksista pitäisi näpytellä lämpöpumpun käyttöpäätteen kautta.
+Asetusarvo-ohjaus perustuu yleensä pelkkiin yksittäisiin mittauksiin, esimerkiksi käyttövesi- ja lämmitysvesivaraajien lämpötilaan. Ulkoisen ohjauksen etuna on se, että kaikki lämmitysjärjestelmästä löytyvä tieto on hyödynnettävissä lämpöpumppujen ohjauksessa ja mahdollisuudet erilaisille ohjaustavoille ovat rajattomat. Toinen etu on se, että kaikkia lämpöpumppujen ohjaukseen liittyviä toimintoja voidaan hallita yhden käyttöliittymän kautta sen sijaan, että osa asetuksista pitäisi näpytellä lämpöpumpun käyttöpäätteen kautta.
 
-Lämpöpumppujen kompressorin käynnistäminen aiheuttaa aina virtapiikin, joka kuluttaa sitä ja liian usein toistuva käynnistyminen lyhentää niiden käyttöikää. Näin ollen kompressorien ohjaus on suunniteltava siten, että kompressorit käynnistyvät mahdollisimman harvoin.Samalla on kuitenkin pidettävä huolta, että verkostoissa on aina sopivasti lämpöä; Lämpöä pitää tietenkin olla aina tarpeeksi rakennuksen tarpeisiin, mutta toisaalta liika lämmittäminen lisää lämpöhäviöitä eli energiaa menee hukkaan. Sopivan tasapainon löytäminen näiden reunaehtojen sisällä vaatii suunnittelijalta että käyttöönottajalta paljon ammattitaitoa. Lisäksi on pidän tärkeänä, että erityisesti tällä tavoin tehtyä järjestelmää seurataan ja hienosäädetään aktiivisesti vielä jonkin aikaa käyttöönoton jälkeen.
+Lämpöpumppujen kompressorien käynnistäminen aiheuttaa aina virtapiikkejä, jotka kuluttavat niitä ja liian usein toistuva käynnistyminen lyhentää niiden käyttöikää. Näin ollen kompressorien ohjaus on suunniteltava siten, että kompressorit käynnistyvät mahdollisimman harvoin. Samalla on kuitenkin pidettävä huolta, että verkostoissa on aina sopivasti lämpöä; Lämpöä pitää tietenkin olla aina tarpeeksi rakennuksen tarpeisiin, mutta toisaalta liika lämmittäminen lisää lämpöhäviöitä eli energiaa menee hukkaan. Sopivan tasapainon löytäminen näiden reunaehtojen sisällä vaatii suunnittelijalta että käyttöönottajalta paljon ammattitaitoa. Lisäksi on pidän tärkeänä, että erityisesti tällä tavoin tehtyä järjestelmää seurataan ja hienosäädetään aktiivisesti vielä jonkin aikaa käyttöönoton jälkeen.
 
 Ammattitaitoisen suunnittelijan ja käyttöönottajan lisäksi ulkoisen ohjauksen toteutukseen tarvitaan myös vaativampaan ohjelmointiin kykenevä automaatiourakoitsija. Erityisesti lämpöpumppujen, lämmitettävien verkostojen ja vaihtoventtiilien määrän kasvaessa ohjelmointi muuttuu haastavaksi.
 
-On huomioitava, mikä lämpöpumppu voi lämmittää mitäkin verkostoa, pidettävä huolta vaihtoventtiilien kääntymisestä oikeaan suuntaan, järjesteltävä lämpöpumput verkostokohtaisesti käyntiajan mukaiseen järjestykseen ottaen huomioon mahdolliset vikatilanteet, joiden aikana osaa lämpöpumpuista ei saada käynnistettyä ja samalla pitää huolehtia siitä, ettei kompressorit pysähdy turhaan muutamaksi sekunniksi, kun yhtä verkostoa palvellut lämpöpumppu käännetään vaihtoventtiilin avulla palvelemaan toista verkostoa.
+On huomioitava, mikä lämpöpumppu voi lämmittää mitäkin verkostoa, pidettävä huolta vaihtoventtiilien kääntymisestä oikeaan suuntaan, järjesteltävä lämpöpumput verkostokohtaisesti käyntiajan mukaiseen käynnistysjärjestykseen ottaen huomioon mahdolliset vikatilanteet, joiden aikana osaa lämpöpumpuista ei saada käynnistettyä ja samalla pitää huolehtia siitä, ettei kompressorit pysähdy turhaan esimerkiksi muutamaksi sekunniksi silloin, kun yhtä verkostoa palvellut lämpöpumppu käännetään vaihtoventtiilin avulla palvelemaan toista verkostoa.
 
-Lämpöpumppuja voidaan ohjata monella tavalla ja eri vaihtoehdot tuovat mukanaan on erilaisia etuja ja haittoja, joita ohjaustavasta päättävien henkilöiden pitää arvioida kohdekohtaisesti. Kehotan kuitenkin välttämään pelkän lämpöpumpun sisäisen ohjelman käyttöä ja tuomaan vähintään osan lämpöpumppujen ohjauksesta rakennusautomaatiojärjestelmän perään.
+Lämpöpumppuja voidaan ohjata monella tavalla ja eri vaihtoehdot tuovat mukanaan on erilaisia etuja ja haittoja, joita ohjaustavasta päättävien henkilöiden pitää arvioida kohdekohtaisesti. Kehotan kuitenkin välttämään pelkän lämpöpumpun sisäisen ohjelman käyttöä ja tuomaan vähintään osan lämpöpumppujen ohjauslogiikasta rakennusautomaatiojärjestelmän perään.
