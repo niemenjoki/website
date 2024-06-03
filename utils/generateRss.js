@@ -79,9 +79,18 @@ const generateRSSFeed = (language, filename) => {
 
   fs.writeFile(path.join('public', filename), rssXml, (err) => {
     if (err) {
+      console.log(
+        '\x1b[31m',
+        `Failed to write RSS feed ${filename}`,
+        '\x1b[0m'
+      );
       console.log(err);
     } else {
-      console.log(`RSS feed ${filename} written successfully`);
+      console.log(
+        '\x1b[32m',
+        `RSS feed ${filename} written successfully`,
+        '\x1b[0m'
+      );
     }
   });
 };
