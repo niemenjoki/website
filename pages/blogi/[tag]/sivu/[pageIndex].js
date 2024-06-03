@@ -25,7 +25,7 @@ const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
         {tags
           .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
           .map((tag) => (
-            <Link href={`/blog/${tag.toLowerCase()}/page/1`} key={tag}>
+            <Link href={`/blogi/${tag.toLowerCase()}/sivu/1`} key={tag}>
               <a className={classes.Tag}>{tag}</a>
             </Link>
           ))}
