@@ -9,7 +9,6 @@ import Navbar from './Navbar';
 const Layout = ({
   title,
   description,
-  canonical,
   i18n,
   language,
   children,
@@ -40,12 +39,6 @@ const Layout = ({
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
         <title>{title}</title>
-        {canonical &&
-          canonical.map((canonicalUrl) => {
-            return (
-              <link key={canonicalUrl} rel="canonical" href={canonicalUrl} />
-            );
-          })}
         {i18n && (
           <link
             rel="alternate"

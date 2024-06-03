@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "rss": "node ./utils/generateRss.js",
-    "sitemap": "next-sitemap --config sitemap.config.js && node ./utils/fixSitemap.js",
+    "sitemap": "node ./utils/generateSitemap.js",
     "postbuild": "npm run rss && npm run sitemap",
     "start": "next start",
     "lint": "next lint",
@@ -30,8 +30,7 @@
   },
   "devDependencies": {
     "eslint": "8.20.0",
-    "eslint-config-next": "12.2.2",
-    "next-sitemap": "^3.1.11"
+    "eslint-config-next": "12.2.2"
   },
   "license": "MIT"
 }

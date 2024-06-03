@@ -15,12 +15,6 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
   return (
     <Layout
       title={'Blog | Joonas Niemenjoki'}
-      canonical={
-        currentPage === 1 && [
-          `https://niemenjoki.fi/blog`,
-          `https://niemenjoki.fi/en`,
-        ]
-      }
       i18n="https://niemenjoki.fi/"
       language="en"
     >
