@@ -25,7 +25,7 @@ const Footer = ({ language }) => {
                   href={
                     language === 'en'
                       ? '/projects/compress-create-react-app'
-                      : '"/projektit/compress-create-react-app"'
+                      : '/projektit/compress-create-react-app'
                   }
                 >
                   <a>- compress-create-react-app</a>
