@@ -3,7 +3,7 @@ title: 'Onko 5G vaarallista?'
 date: '30 September, 2022'
 excerpt: 'Epäilyt 5G verkon turvallisuudesta ovat herättäneet keskustelua ja huolestuneet ihmiset ovat keränneet tuhansia allekirjoituksia kansalaisaloitteisiin 5G verkon käyttöönoton pysäyttämiseksi'
 tags: 'MaallikonKielellä,Infrastruktuuri'
-keywords: 'MTA,Ruotsi,1G,Hz,taajuus,modulaatio,am,fm,kaistanleveys,radio,kommunikatio,teksti,viesti,internet,asioiden,data,langaton,4G,5G'
+keywords: 'matkapuhelinverkot, säteily, 2G, ionisoiva, DNA, terveyshaitat, ICNIRP, ominaisabsorptio, terveysvaikutukset, WHO, 5G, taajuudet, vaikutus, turvarajat, ihon lämpötila, kauhutarinat, uutispalvelut, tutkimukset, syöpä, lähteet'
 language: 'fi'
 ---
 

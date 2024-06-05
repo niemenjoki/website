@@ -3,7 +3,7 @@ title: 'Mikä on oikea tapa oppia JavaScriptiä? Miten ja missä voi oppia JS:n 
 date: 'January 24, 2024'
 excerpt: 'Voi olla hankala selvittää, miten JavaScriptiä voi opetella. Tässä julkaisussa teen parhaani auttaakseni tämän ongelman kanssa.'
 tags: 'Ohjelmointi,JavaScript,Oppiminen'
-keywords: 'oppia,javascript,resurssit,MDN,Mozilla,suunnittelu'
+keywords: 'javascript, oppiminen, ohjelmointikieli, syntaksi, MDN Web Docs, aloittelija, HTML, CSS, kurssit, YouTube, Udemy, Coursera, the Odin Project, freeCodeCamp, W3Schools, nettisivut, responsiiviset, koodin kirjoittaminen, hakukone, harjoitusprojektit, React, Vue, Angular, Svelte, Node.js, Express, REST, tietokannat, React Native, Electron, ohjelmoinnin oppiminen, projektien suunnittelu, Reddit'
 language: 'en'
 i18n: 'https://niemenjoki.fi/blog/post/correct-way-learning-javascript-how-and-where'
 ---

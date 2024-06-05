@@ -3,7 +3,7 @@ title: 'Mikä saa meidät uniseksi?'
 date: '28 September, 2022'
 excerpt: 'Me kaikki tarvitsemme unta ja kehomme kyllä varmasti kertoo sen meille, jos pysymme liian pitkään hereillä, mutta mikä oikein aiheuttaa väsymyksen tunteen?'
 tags: 'MaallikonKielellä,Biologia'
-keywords: 'uni,melatoniini,adenosiini,paine,sisäinen,kello,oreksiini,sykronoitu,kofeiini'
+keywords: 'uni, väsymys, kellonaika, elimistön sisäinen kello, unipaine, vuorokausirytmi, melatoniini, oreksiini, luonnonvalo, aikaeroväsymys, adenosiini, kofeiini, adenosiinireseptorit, nukahtaminen, hereillä, mukautuminen, matkustaminen, nukkuminen, unitutkija, matthew walker, why we sleep, berkeleyn yliopisto, kalifornia, neurotiede, psykologia, ted puhe, joe rogan experience'
 language: 'fi'
 i18n: 'https://niemenjoki.fi/blog/post/why-do-we-feel-sleepy'
 ---
