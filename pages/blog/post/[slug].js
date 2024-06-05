@@ -1,5 +1,6 @@
 import Advert from '@/components/Advert';
 import Layout from '@/components/Layout';
+import PostRecommendation from '@/components/PostRecommendation';
 import SocialShareButtons from '@/components/SocialShareButtons';
 import classes from '@/styles/PostPage.module.css';
 import extractFrontMatter from '@/utils/extractFrontMatter';
@@ -7,8 +8,9 @@ import fs from 'fs';
 import hljs from 'highlight.js';
 import { marked } from 'marked';
 import path from 'path';
+import getPostRecommendations from '@/utils/getPostRecommendations';
 
-const PostPage = ({ data, content }) => {
+const PostPage = ({ data, content, recommendedPosts }) => {
   const { title, date, tags, excerpt, i18n } = data;
   return (
     <Layout
@@ -33,6 +35,7 @@ const PostPage = ({ data, content }) => {
         language="en"
       />
       <Advert language="en" />
+      <PostRecommendation language="en" posts={recommendedPosts} />
     </Layout>
   );
 };
@@ -55,6 +58,13 @@ const getStaticProps = async ({ params: { slug } }) => {
   );
 
   const { data, content } = extractFrontMatter(markdownWithMeta);
+
+  const recommendedPosts = await getPostRecommendations({
+    self: slug,
+    keywords: data.keywords,
+    lang: 'en',
+  });
+
   marked.setOptions({
     highlight: function (code, lang) {
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
@@ -64,7 +74,7 @@ const getStaticProps = async ({ params: { slug } }) => {
   });
   const htmlContent = marked(content);
   return {
-    props: { data, content: htmlContent },
+    props: { data, content: htmlContent, recommendedPosts },
   };
 };
 
