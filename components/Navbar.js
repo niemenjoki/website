@@ -52,7 +52,13 @@ const Navbar = ({ language, i18n }) => {
           <ul className={classes.Drawer}>
             <li>
               <a
-                href={language === 'en' ? '/' : '/en'}
+                href={
+                  i18n
+                    ? new URL(i18n).pathname
+                    : language === 'en'
+                    ? '/'
+                    : '/en'
+                }
                 className={classes.LanguageToggler}
                 onClick={(e) => updateLanguagePreference(e, language)}
               >
