@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Link from 'next/link';
 
 import classes from '@/styles/Pagination.module.css';
@@ -15,35 +16,45 @@ const Pagination = ({ numPages, currentPage, language }) => {
     return <></>;
   }
   return (
-    <div className={classes.Pagination}>
-      <ul>
+    <>
+      <Head>
         {!isFirst && (
-          <li key={'previous'}>
-            <Link href={previousPage}>
-              <a className={classes.TextButton}>
-                {language === 'en' ? 'Previous' : 'Edellinen'}
-              </a>
-            </Link>
-          </li>
+          <link rel="prev" href={'https://niemejoki.fi' + previousPage} />
         )}
-        {Array.from({ length: numPages }, (_, i) => (
-          <li key={i}>
-            <Link href={`${languageSpecificBase}${i + 1}`}>
-              <a className={classes.NumberButton}>{i + 1}</a>
-            </Link>
-          </li>
-        ))}
         {!isLast && (
-          <li key={'next'}>
-            <Link href={nextPage}>
-              <a className={classes.TextButton}>
-                {language === 'en' ? 'Next' : 'Seuraava'}
-              </a>
-            </Link>
-          </li>
+          <link rel="next" href={'https://niemejoki.fi' + nextPage} />
         )}
-      </ul>
-    </div>
+      </Head>
+      <div className={classes.Pagination}>
+        <ul>
+          {!isFirst && (
+            <li key={'previous'}>
+              <Link href={previousPage}>
+                <a className={classes.TextButton}>
+                  {language === 'en' ? 'Previous' : 'Edellinen'}
+                </a>
+              </Link>
+            </li>
+          )}
+          {Array.from({ length: numPages }, (_, i) => (
+            <li key={i}>
+              <Link href={`${languageSpecificBase}${i + 1}`}>
+                <a className={classes.NumberButton}>{i + 1}</a>
+              </Link>
+            </li>
+          ))}
+          {!isLast && (
+            <li key={'next'}>
+              <Link href={nextPage}>
+                <a className={classes.TextButton}>
+                  {language === 'en' ? 'Next' : 'Seuraava'}
+                </a>
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div>
+    </>
   );
 };
 
