@@ -61,7 +61,7 @@ const getStaticProps = async ({ params: { slug } }) => {
 
   const recommendedPosts = await getPostRecommendations({
     self: slug,
-    keywords: data.keywords,
+    keywords: data.keywords + ',' + data.tags,
     lang: 'en',
   });
 
