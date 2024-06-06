@@ -3,7 +3,7 @@ title: 'How to make and publish your own npm package?'
 date: 'October 1, 2021'
 excerpt: 'If you have done any web development, you have probably used a ton of npm packages. In this tutorial, I will teach how you can create one of your own and publish it for other people to use.'
 tags: 'npm,Programming,JavaScript'
-keywords: 'development,error,handling,json,import,export'
+keywords: 'advice,bash,build,development,javascript,json,npm,script,web development,website'
 language: 'en'
 ---
 

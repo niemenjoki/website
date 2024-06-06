@@ -3,7 +3,7 @@ title: 'If atoms are mostly empty space, why do things look and feel solid?'
 date: 'October 20, 2021'
 excerpt: 'If most things around us are just empty space, why do we see or feel anything?'
 tags: 'InLaymansTerms,Physics'
-keywords: 'atom,pauli,exclusion,principle,electron,nucleus,energy'
+keywords: 'atom,electron,fundamentals,nucleus,science'
 language: 'en'
 ---
 

@@ -3,7 +3,7 @@ title: 'What is the difference between different cellular networks like 4G and 5
 date: 'November 1, 2021'
 excerpt: "It looks like more and more new generations of cellular networks are being created and deployed. What's the difference between them? Do we really need the new technologies?"
 tags: 'InLaymansTerms,Infrastructure'
-keywords: 'MTA,Sweden,1G,Hz,frequency,modulation,am,fm,bandwidth,radio,communication,text,message,internet,things,data,wireless,4G,5G'
+keywords: '1G,2G,3G,4G,5G,MTA,bandwidth,broadcast,communication,difference,engineering,frequency,internet,modulation,radiation,radio,science,wireless'
 language: 'en'
 i18n: 'https://niemenjoki.fi/blogi/julkaisu/miten-1G-2G-3G-4G-5G-eroavat'
 ---

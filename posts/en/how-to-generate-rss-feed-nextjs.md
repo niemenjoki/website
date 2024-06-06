@@ -2,8 +2,8 @@
 title: 'How to generate an RSS feed for static Next.js website?'
 date: 'October 5, 2021'
 excerpt: 'Create an RSS feed for your static Next.js website to allow users to subscribe to your amazing content'
-tags: 'NextJS,RSS'
-keywords: 'xml,static,website,automatically,database,build,script'
+tags: 'NextJS,RSS,JavaScript'
+keywords: 'advice,build,development,javascript,rss,script,web development,website,xml'
 language: 'en'
 ---
 

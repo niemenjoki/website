@@ -3,7 +3,7 @@ title: 'Miten eri verkkoteknologiat kuten 4G ja 5G eroavat toisistaan?'
 date: '1 October, 2022'
 excerpt: 'Yhä uudempia verkkoteknologioita jatkuvasti kehitetään ja otetaan käyttöön. Mitä eroa niiden välillä oikeastaan on ja onko uusille tekniikoille oikeasti tarvetta?'
 tags: 'MaallikonKielellä,Infrastruktuuri'
-keywords: 'analoginen verkko, puhelut, 0g, 1g, mta, mobiltelefonisystem a, ruotsi, 1956, autopuhelin, radiomasto, yhteys, norja, olt, offentlig landmobil telefoni, suomi, arp, autoradiopuhelin, analoginen viesti, kantoaalto, amplitudimodulaatio, taajuusmodulaatio, amplitudi, taajuus, kaistanleveys, käyttäjämäärä, radiokanavat, tv-kanavat, armeija, gps, masto, datasiirto, 2.4 kbps, 2g, digitaalinen verkko, tekstiviestit, nokia 5110, gprs, 2.5g, 9.6 kbps, 200 kbps, 3g, apple, iphone, pakettikytkentä, taajuusalue, hspa, 3.5g, 42 mbps, 4g, lte, long term evolution, ofdm, orthogonal frequency division multiplexing, hd-video, langaton verkko, millimetriaalto, esineiden internet, 5g, massive mimo, 1000 mbps, elektromagneettinen säteily, gammasäteily, ionisoiva säteily, syöpä, näkyvä valo, kattolamppu'
+keywords: 'analoginen verkko,0g,1g,2g,3g,4g,5g,mta,arp,modulaatio,taajuus,kaistanleveys,radio, datasiirto,digi,internet,säteily,ioni,valo'
 language: 'fi'
 i18n: 'https://niemenjoki.fi/blog/post/how-cellular-networks-like-5g-4g-are-different'
 ---

@@ -3,7 +3,7 @@ title: 'Mikä on ihmissilmän resoluutio?'
 date: '27 September, 2022'
 excerpt: 'Valokuvien ja kameroiden yhteydessä kuvan laatua kuvataan usein pikseleinä. Miten laadukasta kuvaa omat silmämme tuottavat?'
 tags: 'MaallikonKielellä,Biologia'
-keywords: 'resoluutio, pikselit, digitaalinen kuva, kamera, ihmisen näkö, värit, hämäränäkö, aivot, valon määrä, yksityiskohdat, etäisyys, näköaisti, näkökenttä, analogia, sokea alue, tarkkuus, xkcd, visuaaliset illuusiot, neonvärinen ympyrä, kulmaetäisyys, roger n. clark, kaariminuutti, 576 megapikseliä, verkkokalvo, näkösolut, näköhavainnot, ihmisen näköjärjestelmä, tarkka kuva'
+keywords: 'resoluutio,pikselit,digi,kamera,näkö,aivot,valo'
 language: 'fi'
 ---
 

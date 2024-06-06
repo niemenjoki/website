@@ -3,7 +3,7 @@ title: 'What is the correct way of learning JavaScript? How and where can I lear
 date: 'February 27, 2022'
 excerpt: 'It can be difficult to figure out how to get started with JavaScript. In this blogpost, I do my best to help with that problem'
 tags: 'Programming,JavaScript,Learning'
-keywords: 'learn,javascript,resources,MDN,Mozilla,planning'
+keywords: 'advice,Mozilla,development,education,fundamentals,javascript,planning,web development,website'
 language: 'en'
 i18n: 'https://niemenjoki.fi/blogi/julkaisu/oikea-tapa-oppia-javascript-miten-missa'
 ---

@@ -3,7 +3,7 @@ title: 'Lämpöpumppujen liittäminen rakennusautomaatiojärjestelmään'
 date: '9 March, 2024'
 excerpt: 'Lämpöpumppuja voidaan liittää rakennusautomaatiojärjestelmään lukuisilla eri tavoilla. Tässä julkaisussa käyn läpi erilaisten vaihtoehtojen etuja ja haittoja sekä mitä niiden yhteydessä kannattaa huomioida.'
 tags: 'Lämpöpumput,Tekniikka'
-keywords: 'lämpöpumput, rakennusautomaatio, lämpöpumpun ohjaus, sisäinen ohjelma, ulkoiset asetusarvot, kokonaan ulkoinen ohjaus, energiatehokkuus, hvac, järjestelmän suunnittelu, automaatiourakoitsija, käyttövesi, lämmitysvesivaraajat, kompressorit, kiertopumput, vaihtoventtiilit, lämpöpumpun toiminta, asetusarvojen muuttaminen, käyttöönottovaihe, suunnittelu, järjestelmän hienosäätö'
+keywords: 'automaatio,energiatehokkuus,fysiikka,kompressori,kylmäaine,käyttövesi,lauhdutin,lvi,lämmitysjärjestelmät,lämmönsiirto,lämpöpumpun toiminta,lämpöpumput,ohjaus,rakennusautomaatio,suunnittelu,säätö,uusiutuva energia,vaihtoventtiili,ympäristöystävällisyys,ohjelmointi,kehitys'
 language: 'fi'
 ---
 

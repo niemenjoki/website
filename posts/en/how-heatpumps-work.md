@@ -3,7 +3,7 @@ title: 'How do heatpumps work?'
 date: '26 February, 2024'
 excerpt: 'It is not easy to avoid hearing talk about heat pumps these days and new companies installing them are constantly emerging. Many of us have probably already understood that they are an economical and environmentally friendly heating method. However, have you ever thought about what makes heat pumps so good for the environment and how they actually work in practice? In this post, I will do my best to explain the operation of heat pumps in the most easily understandable way I can.'
 tags: 'InLaymansTerms,Physics,Engineering'
-keywords: 'heat,pump,transfer,heating,engineering,environment'
+keywords: 'heat,heating,heatpump,energy,engineering,power,science'
 language: 'en'
 i18n: 'https://niemenjoki.fi/blogi/julkaisu/kuinka-lampopumput-toimivat'
 ---

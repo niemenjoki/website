@@ -3,7 +3,7 @@ title: 'Miten fyysikot muistavat kaikki kaavat ja lait?'
 date: 'September 26, 2022'
 excerpt: 'Fysiikkaa opiskellessa voi tuntua hankalalta opetella ulkoa edes muutamia kaavoja. Miten ihmeessä fyysikot oppivat ne?'
 tags: 'Fysiikka,Oppiminen'
-keywords: 'fysiikot, kaavat, ymmärtäminen, periaatteet, opiskelu, lukio, kokeet, esimerkkilaskut, ongelmanratkaisu, vuorovaikutus, mekaniikka, voimat, painovoima, liike, tasapaino, kiihtyvä liike, ajatteluketju, ymmärtäminen, ratkaisu, oppiminen'
+keywords: 'opiskelu,lukio,ongelmanratkaisu,oppiminen'
 language: 'fi'
 i18n: 'https://niemenjoki.fi/blog/post/how-great-physicists-remember-all-equations-formulas'
 ---

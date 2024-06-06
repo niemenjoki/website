@@ -2,8 +2,8 @@
 title: 'How to compress your create-react-app and make it load faster?'
 date: 'September 16, 2021'
 excerpt: 'Decrease page load times and improve SEO in 10 minutes by setting up compression for your app built with create-react-app'
-tags: 'React'
-keywords: 'page,load,time,user,experience,performance,web,development,search,engine,seo,cra,brotli,gzip'
+tags: 'React,JavaScript'
+keywords: 'brotli,build,cra,development,gzip,javascript,json,performance,script,setup,web development,website'
 language: 'en'
 ---
 

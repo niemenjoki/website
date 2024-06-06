@@ -3,7 +3,7 @@ title: 'How to set up a Raspberry Pi headlessly after April 2022 update. No moni
 date: 'April 11, 2022'
 excerpt: "An update to the Raspberry Pi OS in April 2022 changed how you can setup your Raspberry Pi headlessly. Here's the whole process explained."
 tags: 'RaspberryPi'
-keywords: 'raspi,setup,software,computer,ssh,operating,system,debugging,microSD,hostname,locale'
+keywords: 'advice,apt,bash,development,headless,hostname,imager,microSD,setup,ssh'
 language: 'en'
 ---
 

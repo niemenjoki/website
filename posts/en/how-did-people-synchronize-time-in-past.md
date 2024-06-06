@@ -3,7 +3,7 @@ title: 'How did people synchronize time before modern technologies?'
 date: 'February 28, 2022'
 excerpt: 'Synchronizing time seems simple enough now that we have atomic clocks and internet, but how did we do it before we had these technologies?'
 tags: 'InLaymansTerms,History'
-keywords: 'universal,time,utc,gmt,zone,Britain,telegraph,Sandford,fleming,radio,broadcast,internet'
+keywords: 'communication,computer,GMT,internet,message,radio,science,utc,wireless'
 language: 'en'
 ---
 

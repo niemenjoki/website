@@ -3,7 +3,7 @@ title: 'Why do we feel sleepy?'
 date: 'February 23, 2022'
 excerpt: 'We all need sleep and our bodies will surely show that to us if we stay awake for too long, but what is it that actually makes us feel sleepy?'
 tags: 'InLaymansTerms,Biology'
-keywords: 'sleep,melatonin,adenosine,pressure,circadian,rhythm,orexin,syncronized,caffeine'
+keywords: 'adenosine,caffeine,circadian rhythm,energy,melatonin,orexin,science,sleep,'
 language: 'en'
 i18n: 'https://niemenjoki.fi/blogi/julkaisu/mika-saa-meidat-uniseksi'
 ---

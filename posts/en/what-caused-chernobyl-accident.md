@@ -3,7 +3,7 @@ title: 'What caused the Chernobyl 1986 nuclear accident?'
 date: 'June 17, 2022'
 excerpt: 'Most of us have heard of the Chernobyl accident but few people understand what caused it. In this blogpost, I do my best to explain it as simple as possible'
 tags: 'History,Physics,InLaymansTerms'
-keywords: 'nuclear,power,plant,catastrophe,incompetence,radon,uranium,xenon,poisoning,pit,atom,nucleus,radiation,fission,fissile'
+keywords: 'atom,catastrophe,energy,engineering,error,fissile,fission,heat,incompetence,nuclear,powerplant,radiation,radon,science,uranium,xenon'
 language: 'en'
 ---
 

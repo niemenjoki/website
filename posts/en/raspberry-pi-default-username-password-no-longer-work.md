@@ -3,7 +3,7 @@ title: 'Raspberry Pi default username/password no longer automatically work with
 date: 'April 11, 2022'
 excerpt: 'The Raspberry Pi foundation recently launched an update which caused a lot of headache for me personally. The fix is actually really simple and I explain everything on this blogpost'
 tags: 'RaspberryPi'
-keywords: 'setup,headless,official,imager,version,lite,bash,apt'
+keywords: 'advice,apt,bash,development,headless,hostname,imager,microSD,setup,ssh'
 language: 'en'
 ---
 
