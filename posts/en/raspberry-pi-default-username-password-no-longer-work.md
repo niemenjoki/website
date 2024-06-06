@@ -1,5 +1,5 @@
 ---
-title: 'Raspberry Pi default username/password no longer automatically work with the a fresh install of the latest OS. Here's how to set up your Pi with the latest OS'
+title: 'Raspberry Pi default username/password no longer automatically work with the a fresh install of the latest OS. Here is how to set up your Pi with the latest OS'
 date: 'April 11, 2022'
 excerpt: 'The Raspberry Pi foundation recently launched an update which caused a lot of headache for me personally. The fix is actually really simple and I explain everything on this blogpost'
 tags: 'RaspberryPi'
