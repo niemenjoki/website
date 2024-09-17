@@ -6,7 +6,7 @@ export const SOCIALS = [
   },
   {
     icon: 'twitter',
-    href: 'https://twitter.com/jnsjknn',
+    href: 'https://x.com/niemenjoki',
     ariaLabel: 'Twitter',
   },
   {

@@ -16,8 +16,8 @@
     "test-report": "jest --coverage && npx serve coverage/lcov-report/"
   },
   "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.1.1",
-    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "fuse.js": "^6.6.2",
     "highlight.js": "^11.6.0",

@@ -5,7 +5,7 @@ import {
   faInstagram,
   faFacebook,
   faWhatsapp,
-  faTwitter,
+  faXTwitter,
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
 import { faRss, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,7 @@ const Icon = ({ name, ...rest }) => {
     case 'quora':
       return <FontAwesomeIcon icon={faQuora} {...rest} />;
     case 'twitter':
-      return <FontAwesomeIcon icon={faTwitter} {...rest} />;
+      return <FontAwesomeIcon icon={faXTwitter} {...rest} />;
     case 'linkedin':
       return <FontAwesomeIcon icon={faLinkedin} {...rest} />;
     case 'facebook':
