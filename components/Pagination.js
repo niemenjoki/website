@@ -19,10 +19,10 @@ const Pagination = ({ numPages, currentPage, language }) => {
     <>
       <Head>
         {!isFirst && (
-          <link rel="prev" href={'https://niemejoki.fi' + previousPage} />
+          <link rel="prev" href={'https://niemenjoki.fi' + previousPage} />
         )}
         {!isLast && (
-          <link rel="next" href={'https://niemejoki.fi' + nextPage} />
+          <link rel="next" href={'https://niemenjoki.fi' + nextPage} />
         )}
       </Head>
       <div className={classes.Pagination}>
