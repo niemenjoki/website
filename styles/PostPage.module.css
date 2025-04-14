@@ -136,3 +136,9 @@
   color: var(--text-color);
   border-radius: 4px;
 }
+
+.ActiveTag {
+  background: var(--highlight-alt);
+  color: white;
+  font-weight: bold;
+}

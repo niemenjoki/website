@@ -26,6 +26,9 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
         language="en"
       />
       <div className={classes.Taglist}>
+        <Link href="/">
+          <a className={classes.Tag + ' ' + classes.ActiveTag}>All posts</a>
+        </Link>
         {tags
           .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
           .map((tag) => (
