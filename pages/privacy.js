@@ -17,7 +17,7 @@ const PrivacyPage = () => {
           </Link>
         </p>
         <p>
-          <em>Last updated: 22nd January 2024</em>
+          <em>Last updated: 14th April 2025</em>
         </p>
 
         <p>
@@ -38,6 +38,13 @@ const PrivacyPage = () => {
           Google AdSense and Google Analytics are used on this site to serve ads
           and analyze user behavior. These services may collect data such as IP
           addresses, browser type, browsing habits, and device information.
+          Google may process this data as an independent data controller and may
+          transfer it outside the EU/EEA. Such transfers are protected by
+          standard contractual clauses under the GDPR. Google Consent Mode is
+          used to ask for visitor consent before any non-essential cookies are
+          stored or accessed.
+        </p>
+        <p>
           Please refer to Google&apos;s privacy policies for more details on how
           they handle this data:{' '}
           <a

@@ -12,7 +12,7 @@ const PrivacyPage = () => {
       <div className={classes.PrivacyPage}>
         <h1>Tietosuojaseloste</h1>
         <p>
-          <em>Päivitetty: 22. tammikuuta 2024</em>
+          <em>Päivitetty: 14. huhtikuuta 2025</em>
         </p>
         <p>
           <Link href="/privacy">
@@ -22,7 +22,8 @@ const PrivacyPage = () => {
         <p>
           Tämä on Joonas Niemenjoen ylläpitämä henkilökohtainen verkkosivusto.
           Tässä tietosuojaselosteessa kerrotaan käytännöistä, jotka liittyvät
-          henkilötietojesi keräämiseen ja käyttöön tällä verkkosivustolla.
+          henkilötietojesi keräämiseen ja käyttöön tällä verkkosivustolla sekä
+          luovuttamiseen kolmansille osapuolille.
         </p>
         <h2>Tietojen kerääminen ja käyttö</h2>
         <p>
@@ -38,9 +39,16 @@ const PrivacyPage = () => {
           Tällä sivustolla käytetään Google AdSensea ja Google Analyticsia
           mainosten näyttämiseen ja käyttäjien käyttäytymisen analysointiin.
           Nämä palvelut voivat kerätä tietoja, kuten IP-osoitteet, selaintyyppi,
-          selaustottumukset ja laitetiedot. Lisätietoja siitä, miten nämä
-          palvelut käsittelevät tietojasi, löydät Googlen
-          tietosuojakäytännöistä:{' '}
+          selaustottumukset ja laitetiedot. Google voi käsitellä tietoja
+          itsenäisenä rekisterinpitäjänä ja siirtää niitä EU-/ETA-alueen
+          ulkopuolelle. Tietosiirrot suojataan GDPR:n mukaisesti
+          vakiosopimuslausekkeilla. Google Consent Mode -toimintoa käytetään
+          suostumuksen pyytämiseen ennen ei-välttämättömien evästeiden
+          tallentamista tai käyttämistä.
+        </p>
+        <p>
+          Lisätietoja siitä, miten nämä palvelut käsittelevät tietojasi, löydät
+          Googlen tietosuojakäytännöistä:{' '}
           <a
             href="https://support.google.com/adsense/topic/13821022?hl=fi"
             target="_blank"
@@ -48,7 +56,7 @@ const PrivacyPage = () => {
           >
             Google AdSensen tietosuojakäytännöt
           </a>{' '}
-          and{' '}
+          ja{' '}
           <a
             href="https://support.google.com/analytics/topic/2919631?hl=en"
             target="_blank"
@@ -60,11 +68,11 @@ const PrivacyPage = () => {
         <h2>LocalStorage</h2>
         <p>
           Kun vaihdat vaaleaan tai tummaan tilaan tai suomen ja englannin kielen
-          välillä tällä verkkosivustolla, sivusto tallentaa mieltymyksesi selaimesi
-          paikalliseen tallennustilaan (localStorage). Tällä tavoin voimme
-          automaattisesti käyttää valitsemaasi teemaa ja kieltä seuraavalla
-          sivuston käyntikerralla. Tämä tieto tallennetaan paikallisesti
-          laitteellesi eikä sitä siirretä minnekään.
+          välillä tällä verkkosivustolla, sivusto tallentaa mieltymyksesi
+          selaimesi paikalliseen tallennustilaan (localStorage). Tällä tavoin
+          voimme automaattisesti käyttää valitsemaasi teemaa ja kieltä
+          seuraavalla sivuston käyntikerralla. Tämä tieto tallennetaan
+          paikallisesti laitteellesi eikä sitä siirretä minnekään.
         </p>
         <h2>Evästeet</h2>
         <p>
