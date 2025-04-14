@@ -64,9 +64,7 @@ const getRssXml = (xmlItems, latestPostDate, language, filename) => {
     <channel>
       <title><![CDATA[ ${data.title[language]} ]]></title>
       <link>${data.link[language]}</link>
-      <atom:link href="${
-        data.link[language]
-      }/${filename}" rel="self" type="application/rss+xml" />
+      <atom:link href="https://www.niemenjoki.fi/${filename}" rel="self" type="application/rss+xml" />
       <description><![CDATA[ ${data.description[language]} ]]></description>
       <language>${language}</language>
       <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>
