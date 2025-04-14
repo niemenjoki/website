@@ -39,7 +39,7 @@ const getXmlItems = (blogPosts) => {
     .join('');
 };
 
-const getRssXml = (xmlItems, latestPostDate, language) => {
+const getRssXml = (xmlItems, latestPostDate, language, filename) => {
   const data = {
     title: {
       fi: 'Joonas Niemenjoen blogi',
@@ -62,20 +62,23 @@ const getRssXml = (xmlItems, latestPostDate, language) => {
     version="2.0"
   >
     <channel>
-        <title><![CDATA[ ${data.description[language]} ]]></title>
-        <link>${data.link[language]}</link>
-        <description><![CDATA[ ${data.description[language]} ]]></description>
-        <language>${language}</language>
-        <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>
-        ${xmlItems}
-    </channel>
+      <title><![CDATA[ ${data.title[language]} ]]></title>
+      <link>${data.link[language]}</link>
+      <atom:link href="${
+        data.link[language]
+      }/${filename}" rel="self" type="application/rss+xml" />
+      <description><![CDATA[ ${data.description[language]} ]]></description>
+      <language>${language}</language>
+      <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>
+      ${xmlItems}
+  </channel>
   </rss>`;
 };
 
 const generateRSSFeed = (language, filename) => {
   const postData = getAllPosts(language);
   const xmlItems = getXmlItems(postData);
-  const rssXml = getRssXml(xmlItems, postData[0].date, language);
+  const rssXml = getRssXml(xmlItems, postData[0].date, language, filename);
 
   fs.writeFile(path.join('public', filename), rssXml, (err) => {
     if (err) {
