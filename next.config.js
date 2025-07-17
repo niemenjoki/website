@@ -7,17 +7,14 @@ const nextConfig = {
   swcMinify: true,
 };
 
+const pwaConfig = {
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+};
+
 module.exports = withPlugins(
   [
-    [
-      withPWA,
-      {
-        pwa: {
-          dest: 'public',
-          disable: process.env.NODE_ENV === 'development',
-        },
-      },
-    ],
+    [withPWA, { pwa: pwaConfig }],
   ],
   nextConfig
 );
