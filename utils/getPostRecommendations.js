@@ -38,7 +38,7 @@ const getPostRecommendations = async ({ self, keywords, lang }) => {
     .filter((post) => post.commonKeywords >= MIN_COMMON_KEYWORDS)
     .sort((a, b) => b.commonKeywords - a.commonKeywords)
     .slice(0, MAX_RECOMMENDATIONS);
-  console.log(keywords.split(',').map((keyword) => keyword.trim()));
+
   return recommendations;
 };
 
