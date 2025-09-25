@@ -29,26 +29,25 @@ const Pagination = ({ numPages, currentPage, language }) => {
         <ul>
           {!isFirst && (
             <li key={'previous'}>
-              <Link href={previousPage}>
-                <a className={classes.TextButton}>
-                  {language === 'en' ? 'Previous' : 'Edellinen'}
-                </a>
+              <Link href={previousPage} className={classes.TextButton}>
+                {language === 'en' ? 'Previous' : 'Edellinen'}
               </Link>
             </li>
           )}
           {Array.from({ length: numPages }, (_, i) => (
             <li key={i}>
-              <Link href={`${languageSpecificBase}${i + 1}`}>
-                <a className={classes.NumberButton}>{i + 1}</a>
+              <Link
+                href={`${languageSpecificBase}${i + 1}`}
+                className={classes.NumberButton}
+              >
+                {i + 1}
               </Link>
             </li>
           ))}
           {!isLast && (
             <li key={'next'}>
-              <Link href={nextPage}>
-                <a className={classes.TextButton}>
-                  {language === 'en' ? 'Next' : 'Seuraava'}
-                </a>
+              <Link href={nextPage} className={classes.TextButton}>
+                {language === 'en' ? 'Next' : 'Seuraava'}
               </Link>
             </li>
           )}

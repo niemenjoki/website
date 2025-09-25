@@ -10,12 +10,12 @@ const Footer = ({ language }) => {
         <ul className={classes.Links}>
           <li>
             <Link href={language === 'en' ? '/blog' : '/blogi'}>
-              <a>{language === 'en' ? 'Blog' : 'Blogi'}</a>
+              {language === 'en' ? 'Blog' : 'Blogi'}
             </Link>
           </li>
           <li>
             <Link href={language === 'en' ? '/projects' : '/projektit'}>
-              <a>{language === 'en' ? 'Projects' : 'Projektit'}</a>
+              {language === 'en' ? 'Projects' : 'Projektit'}
             </Link>
           </li>
           <li>
@@ -28,19 +28,19 @@ const Footer = ({ language }) => {
                       : '/projektit/compress-create-react-app'
                   }
                 >
-                  <a>- compress-create-react-app</a>
+                - compress-create-react-app
                 </Link>
               </li>
             </ul>
           </li>
           <li>
             <Link href={language === 'en' ? '/about' : '/tietoa'}>
-              <a>{language === 'en' ? 'About' : 'Tietoa'}</a>
+              {language === 'en' ? 'About' : 'Tietoa'}
             </Link>
           </li>
           <li>
             <Link href={language === 'en' ? '/privacy' : '/tietosuoja'}>
-              <a>{language === 'en' ? 'Privacy' : 'Tietosuoja'}</a>
+              {language === 'en' ? 'Privacy' : 'Tietosuoja'}
             </Link>
           </li>
         </ul>

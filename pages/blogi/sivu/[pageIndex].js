@@ -26,14 +26,18 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
         language="fi"
       />
       <div className={classes.Taglist}>
-        <Link href="/">
-          <a className={classes.Tag + ' ' + classes.ActiveTag}>Kaikki</a>
+        <Link href="/" className={classes.Tag + ' ' + classes.ActiveTag}>
+          Kaikki
         </Link>
         {tags
           .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
           .map((tag) => (
-            <Link href={`/blogi/${tag.toLowerCase()}/sivu/1`} key={tag}>
-              <a className={classes.Tag}>{tag}</a>
+            <Link
+              href={`/blogi/${tag.toLowerCase()}/sivu/1`}
+              key={tag}
+              className={classes.Tag}
+            >
+              {tag}
             </Link>
           ))}
       </div>

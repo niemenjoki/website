@@ -22,22 +22,22 @@ const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
         language="en"
       />
       <div className={classes.Taglist}>
-        <Link href="/">
-          <a className={classes.Tag}>All posts</a>
+        <Link href="/" className={classes.Tag}>
+          All posts
         </Link>
         {tags
           .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
           .map((t) => {
             const isActive = t.toLowerCase() === tag.toLowerCase();
             return (
-              <Link href={`/blogi/${t.toLowerCase()}/sivu/1`} key={t}>
-                <a
-                  className={`${classes.Tag} ${
-                    isActive ? classes.ActiveTag : ''
-                  }`}
-                >
-                  {t}
-                </a>
+              <Link
+                href={`/blogi/${t.toLowerCase()}/sivu/1`}
+                key={t}
+                className={`${classes.Tag} ${
+                  isActive ? classes.ActiveTag : ''
+                }`}
+              >
+                {t}
               </Link>
             );
           })}

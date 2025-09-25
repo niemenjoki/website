@@ -13,7 +13,7 @@ const PrivacyPage = () => {
         <h1>Privacy Policy</h1>
         <p>
           <Link href="/tietosuoja">
-            <a>🇫🇮 Lue tämä tietosuojaseloste suomeksi</a>
+            🇫🇮 Lue tämä tietosuojaseloste suomeksi
           </Link>
         </p>
         <p>

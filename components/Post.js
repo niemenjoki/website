@@ -18,7 +18,7 @@ const Post = ({ post, compact = false, language }) => {
             post.slug
           }`}
         >
-          <a>{post.title}</a>
+          {post.title}
         </Link>
       </h2>
       <p className={classes.Excerpt}>{post.excerpt}</p>
@@ -28,8 +28,9 @@ const Post = ({ post, compact = false, language }) => {
             <Link
               href={`/${blogInLanguage}/${tag.toLowerCase()}/${pageInLanguage}/1`}
               key={tag}
+              className={classes.Tag}
             >
-              <a className={classes.Tag}>{tag}</a>
+              {tag}
             </Link>
           ))}
       </p>
@@ -38,21 +39,18 @@ const Post = ({ post, compact = false, language }) => {
           href={`/${post.altPath || `${blogInLanguage}/${postInLanguage}`}/${
             post.slug
           }`}
+          aria-label={`${language === 'en' ? 'Open post' : 'Avaa julkaisu'} ${
+            post.title
+          }`}
         >
-          <a
-            aria-label={`${language === 'en' ? 'Open post' : 'Avaa julkaisu'} ${
-              post.title
-            }`}
-          >
-            <h3>
-              {language === 'en' ? 'Read more' : 'Lue lisää'}{' '}
-              <span className={classes.Arrow}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </h3>
-          </a>
+          <h3>
+            {language === 'en' ? 'Read more' : 'Lue lisää'}{' '}
+            <span className={classes.Arrow}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </h3>
         </Link>
       )}
     </div>

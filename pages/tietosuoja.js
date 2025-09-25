@@ -15,9 +15,7 @@ const PrivacyPage = () => {
           <em>Päivitetty: 14. huhtikuuta 2025</em>
         </p>
         <p>
-          <Link href="/privacy">
-            <a>🇬🇧 Read this privacy policy in English</a>
-          </Link>
+          <Link href="/privacy">🇬🇧 Read this privacy policy in English</Link>
         </p>
         <p>
           Tämä on Joonas Niemenjoen ylläpitämä henkilökohtainen verkkosivusto.

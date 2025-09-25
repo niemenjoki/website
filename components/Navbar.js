@@ -70,8 +70,8 @@ const Navbar = ({ language, i18n }) => {
             </li>
             {navLinks.map((link) => (
               <li key={link.href} onClick={() => toggleIsOpen(false)}>
-                <Link href={link.href}>
-                  <a className={classes.NavButton}>{link.text}</a>
+                <Link href={link.href} className={classes.NavButton}>
+                  {link.text}
                 </Link>
               </li>
             ))}

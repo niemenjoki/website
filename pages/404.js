@@ -39,27 +39,24 @@ const NotFoundPage = () => {
           : 'Kokeile löytyisikö etsimäsi sivu täältä:'}
       </div>
       <div className={classNames.LinkWrapper}>
-        <Link href={language === 'en' ? '/blog' : '/blogi'}>
-          <a className="hover">
-            {language === 'en' ? 'Recent Blogposts' : 'Viimeisimmät julkaisut'}
-          </a>
+        <Link href={language === 'en' ? '/blog' : '/blogi'} className="hover">
+          {language === 'en' ? 'Recent Blogposts' : 'Viimeisimmät julkaisut'}
         </Link>
       </div>
       <div className={classNames.LinkWrapper}>
-        <Link href={language === 'en' ? '/projects' : '/projektit'}>
-          <a className="hover">
-            {language === 'en' ? 'Projects' : 'Projektit'}
-          </a>
-        </Link>
-      </div>
-      <div className={classNames.LinkWrapper}>
-        <a
-          href={language === 'en' ? '/' : '/en'}
+        <Link
+          href={language === 'en' ? '/projects' : '/projektit'}
           className="hover"
-          onClick={(e) => updateLanguagePreference(e, language)}
         >
-          {language === 'en' ? 'Finnish pages' : 'Englanninkieliset sivut'}
-        </a>
+          {language === 'en' ? 'Projects' : 'Projektit'}
+        </Link>
+      </div>
+      <div
+        className={classNames.LinkWrapper + ' hover'}
+        href={language === 'en' ? '/' : '/en'}
+        onClick={(e) => updateLanguagePreference(e, language)}
+      >
+        {language === 'en' ? 'Finnish pages' : 'Englanninkieliset sivut'}
       </div>
     </Layout>
   );
