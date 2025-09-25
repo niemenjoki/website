@@ -39,3 +39,11 @@ yarn-error.log*
 .vercel
 
 /data/notes/*
+
+# Ignore all generated images
+/public/images/posts/**/*-*.webp
+/public/images/posts/**/*-*.jpg
+/public/images/posts/**/*-*.avif
+
+# Keep the source PNGs
+!/public/images/posts/**/*.png
