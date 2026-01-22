@@ -1,0 +1,103 @@
+.Footer {
+  color: var(--text-color);
+  background: linear-gradient(var(--background-2), var(--background-1));
+  padding: 3rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.Inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.Columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.Columns h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.Columns ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.Columns li a {
+  color: var(--text-color);
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.Columns li a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.Socials {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 1.5em;
+}
+
+.Socials a:not(:first-child) {
+  margin: 0 0.25rem;
+}
+
+.Bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.Links {
+  margin-top: 0.25rem;
+}
+
+.Links a {
+  color: var(--text-color);
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.Links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+  .Columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .Columns {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .Bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+}

@@ -1,0 +1,79 @@
+.Toggler {
+  --duration: 300ms;
+  padding: 15px 15px;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: var(--duration);
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+}
+.Toggler:hover {
+  opacity: 0.7;
+}
+.Toggler.IsOpen:hover {
+  opacity: 0.7;
+}
+.Toggler.IsOpen .TogglerInner,
+.Toggler.IsOpen .TogglerInner::before,
+.Toggler.IsOpen .TogglerInner::after {
+  background-color: var(--text-color);
+}
+
+.TogglerBox {
+  width: 40px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+}
+
+.TogglerInner {
+  display: block;
+  top: 50%;
+  margin-top: -2px;
+  top: 2px;
+}
+.TogglerInner,
+.TogglerInner::before,
+.TogglerInner::after {
+  width: 40px;
+  height: 4px;
+  background-color: var(--text-color);
+  border-radius: 4px;
+  position: absolute;
+  transition-property: transform;
+  transition-duration: var(--duration);
+  transition-timing-function: ease;
+}
+.TogglerInner::before,
+.TogglerInner::after {
+  content: '';
+  display: block;
+}
+.TogglerInner::before {
+  top: 10px;
+  transition-property: transform, opacity;
+  transition-timing-function: ease;
+  transition-duration: 0.15s;
+}
+.TogglerInner::after {
+  bottom: -10px;
+  top: 20px;
+}
+
+.Toggler.IsOpen .TogglerInner {
+  transform: translate3d(0, 10px, 0) rotate(45deg);
+}
+.Toggler.IsOpen .TogglerInner::before {
+  transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);
+  opacity: 0;
+}
+.Toggler.IsOpen .TogglerInner::after {
+  transform: translate3d(0, -20px, 0) rotate(-90deg);
+}

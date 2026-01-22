@@ -40,10 +40,11 @@ yarn-error.log*
 
 /data/notes/*
 
-# Ignore all generated images
-/public/images/posts/**/*-*.webp
-/public/images/posts/**/*-*.jpg
-/public/images/posts/**/*-*.avif
+public/images/**/*.jpg
+public/images/**/*.jpeg
+public/images/**/*.png
+public/images/**/*.webp
+public/images/**/*.gif
 
-# Keep the source PNGs
-!/public/images/posts/**/*.png
+data/generated/
+

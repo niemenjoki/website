@@ -1,0 +1,21 @@
+.Oops {
+  font-size: 8em;
+  opacity: 0.1;
+  margin: 0;
+  max-width: 100%;
+}
+
+.NotFound {
+  font-size: 1.5em;
+}
+
+.Suggestion {
+  font-size: 1.5em;
+  margin: 3rem 0 1rem 0;
+}
+
+.LinkWrapper {
+  font-size: 1.2rem;
+  color: var(--highlight);
+  margin-bottom: 1rem;
+}

@@ -1,3 +1,5 @@
+import { SITE_URL } from './vars.mjs';
+
 export const SOCIALS = [
   {
     icon: 'github',
@@ -20,20 +22,8 @@ export const SOCIALS = [
     ariaLabel: 'Instagram',
   },
   {
-    icon: 'quora',
-    href: 'https://fi.quora.com/profile/Joonas-Niemenjoki',
-    ariaLabel: 'Quora',
-  },
-  {
-    onlyForLanguage: 'fi',
     icon: 'rss',
-    href: 'https://niemenjoki.fi/rss-fi.xml',
+    href: `${SITE_URL}/rss`,
     ariaLabel: 'RSS-Syöte',
-  },
-  {
-    onlyForLanguage: 'en',
-    icon: 'rss',
-    href: 'https://niemenjoki.fi/rss-en.xml',
-    ariaLabel: 'RSS ',
   },
 ];

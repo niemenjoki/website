@@ -6,7 +6,7 @@ The website's content is licensed under **Creative Commons Attribution 4.0 Inter
 
 ## The MIT License (MIT)
 
-Copyright © `2021` `Joonas Niemenjoki`
+Copyright © `2025` `Joonas Niemenjoki`
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

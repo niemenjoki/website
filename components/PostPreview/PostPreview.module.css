@@ -1,0 +1,65 @@
+.PostPreview {
+  margin: 1rem 0;
+  background: var(--background-3);
+  padding: 1rem 1rem;
+  border-radius: 9px;
+}
+
+.Title {
+  font-size: 22px;
+  transition: color 0.1s ease-in-out;
+  overflow-wrap: break-word;
+}
+.description {
+  margin: 1rem 0;
+  font-size: 1rem;
+}
+.Tags {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.Tag {
+  background: var(--highlight);
+  padding: 0.25rem 0.5rem;
+  color: var(--background-1);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.PostPreview:hover .Title {
+  color: var(--highlight);
+}
+
+.Arrow > span {
+  border: solid var(--highlight);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  opacity: 0;
+  transition: all 0.2s ease-out;
+  transition-delay: 0.3s;
+}
+
+.Arrow > span:nth-child(1) {
+  transform: rotate(-45deg);
+}
+
+.Arrow > span:nth-child(2) {
+  transform: translateX(-8px) rotate(-45deg);
+}
+
+.Arrow > span:nth-child(3) {
+  transform: translateX(-16px) rotate(-45deg);
+}
+
+.PostPreview:hover .Arrow > span {
+  opacity: 1;
+}
+
+.PostPreview:hover .Arrow > span:nth-child(2),
+.PostPreview:hover .Arrow > span:nth-child(3) {
+  transform: rotate(-45deg);
+}

@@ -1,0 +1,36 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://www.niemenjoki.fi/tietoa#aboutpage",
+      "url": "https://www.niemenjoki.fi/tietoa",
+      "name": "Tietoa niemenjokista",
+      "description": "Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta ja sitä sivuavista aiheista.",
+      "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
+      "about": { "@id": "https://www.niemenjoki.fi/#organization" },
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.niemenjoki.fi/#joonas",
+        "name": "Joonas Niemenjoki",
+        "url": "https://www.linkedin.com/in/joonasniemenjoki",
+        "affiliation": { "@id": "https://www.niemenjoki.fi/#organization" }
+      },
+      "publisher": { "@id": "https://www.niemenjoki.fi/#organization" },
+      "mainEntity": {
+        "@type": "Person",
+        "@id": "https://www.niemenjoki.fi/#joonas",
+        "name": "Joonas Niemenjoki",
+        "description": "Rakennusautomaation ohjelmoija",
+        "image": "https://www.niemenjoki.fi/images/portrait2024.avif",
+        "jobTitle": "Founder",
+        "worksFor": { "@id": "https://www.niemenjoki.fi/#organization" },
+        "sameAs": [
+          "https://www.linkedin.com/in/joonasniemenjoki",
+          "https://www.instagram.com/niemenjoki"
+        ]
+      },
+      "inLanguage": "fi"
+    }
+  ]
+}

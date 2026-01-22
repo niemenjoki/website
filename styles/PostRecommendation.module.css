@@ -1,9 +1,0 @@
-.PostRecommendation {
-  margin: 0;
-  margin-top: 2rem;
-  color: var(--text-color);
-}
-
-.PostRecommendation > h2 {
-  color: var(--highlight-alt);
-}

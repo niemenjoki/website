@@ -1,0 +1,26 @@
+.Taglist {
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 900px;
+}
+
+.Tag {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  background: var(--highlight);
+  padding: 0.25rem 0.5rem;
+  color: var(--background-1);
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.Tag:hover {
+  opacity: 0.8;
+}
+
+.ActiveTag {
+  background: var(--highlight-alt);
+  color: white;
+  font-weight: bold;
+}

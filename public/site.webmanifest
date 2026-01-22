@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Joonas Niemenjoki's blog",
-  "short_name": "Niemenjoki",
-  "description": "The blog of an engineer with a childlike curiosity focusing mostly on web development and occasionally random interesting facts",
+  "name": "Lieromaa",
+  "short_name": "lieromaa",
+  "description": "Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta multaa!",
   "icons": [
     {
       "src": "icons/android-chrome-192x192.png",
@@ -17,20 +17,6 @@
       "src": "icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Blog",
-      "url": "/blog"
-    },
-    {
-      "name": "Projects",
-      "url": "/projects"
-    },
-    {
-      "name": "About",
-      "url": "/about"
     }
   ]
 }

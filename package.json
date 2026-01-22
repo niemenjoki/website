@@ -3,33 +3,37 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "predev": "node lib/prebuild/index.mjs",
+    "prebuild": "node lib/prebuild/index.mjs",
+    "log:tags": "node lib/devHelpers/logAllTags.js",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
-    "rss": "node ./utils/generateRss.js",
-    "sitemap": "node ./utils/generateSitemap.js",
-    "postbuild": "npm run rss && npm run sitemap",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export",
-    "test": "jest -o -b",
-    "test-coverage": "jest --coverage",
-    "test-report": "jest --coverage && npx serve coverage/lcov-report/",
-    "prebuild": "node ./utils/generateImages.js"
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "fuse.js": "^6.6.2",
-    "highlight.js": "^11.6.0",
-    "marked": "^4.0.18",
-    "next": "^15.4.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.0",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "fuse.js": "^7.1.0",
+    "next": "^15.5.7",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "swiper": "^12.0.3"
   },
   "devDependencies": {
-    "eslint": "8.20.0",
-    "eslint-config-next": "12.2.2"
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "eslint": "^9.37.0",
+    "eslint-config-next": "^15.5.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "sharp": "^0.34.3"
   },
   "license": "MIT",
   "engines": {

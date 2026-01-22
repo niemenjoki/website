@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.niemenjoki.fi/projektit/lieromaa#webpage",
+      "url": "https://www.niemenjoki.fi/projektit/lieromaa",
+      "name": "Lieromaa-projekti",
+      "description": "Kuvaus Lieromaa-sivuprojektista, joka keskittyy vermikompostointiin ja kompostimatoihin.",
+      "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
+      "about": {
+        "@type": "Project",
+        "name": "Lieromaa",
+        "url": "https://www.lieromaa.fi/"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.niemenjoki.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "inLanguage": "fi"
+    }
+  ]
+}

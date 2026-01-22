@@ -1,0 +1,201 @@
+.Navbar {
+  background: linear-gradient(var(--background-1), var(--background-2));
+  color: var(--text-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Layout --- */
+.Inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  gap: 1rem;
+}
+
+.Left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.LogoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  gap: 0.5rem;
+}
+
+.Brand {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.Right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.Socials span a {
+  margin: 0 0.5rem 0 0;
+  font-size: 1.5rem;
+}
+
+/* --- Links --- */
+.Links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.Links a,
+.Dropdown > span {
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.Links a:hover,
+.Dropdown > span:hover {
+  opacity: 1;
+  color: var(--highlight);
+}
+
+/* --- Dropdowns --- */
+.Dropdown {
+  position: relative;
+}
+
+.DropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: -10%;
+  background: var(--background-2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.4rem;
+  min-width: 260px;
+  padding: 0.4rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.Dropdown span:first-child {
+  cursor: default;
+}
+
+.Dropdown:hover .DropdownMenu {
+  display: block;
+}
+
+.DropdownMenu li {
+  list-style: none;
+}
+
+.DropdownMenu li a {
+  display: block;
+  padding: 0.4rem 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.DropdownMenu li a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* --- Mobile menu overlay --- */
+.MobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(var(--background-2), var(--background-1));
+  transform: translateY(-100%);
+  transition: transform 0.35s ease-in-out;
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.MobileOpen {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.MobileContent {
+  padding: 5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.MobileSection h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.MobileSection ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.MobileSection a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.2rem;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.MobileSection li {
+  margin: 0.25rem 0;
+}
+
+.MobileSection a:hover {
+  opacity: 1;
+  color: var(--highlight);
+}
+
+/* --- Toggler visibility --- */
+.Toggler {
+  display: none;
+  z-index: 100;
+}
+
+@media (max-width: 900px) {
+  .Links {
+    display: none;
+  }
+
+  .Toggler {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) {
+  .MobileMenu {
+    display: none;
+  }
+}

@@ -1,0 +1,118 @@
+.PostPage h1 {
+  margin: 0.25rem 0;
+  font-size: 1.75rem;
+  overflow-wrap: break-word;
+}
+
+.Date {
+  margin: 0;
+  font-weight: lighter;
+}
+
+.Content p {
+  margin: 1.5rem 0;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+.Content ol,
+.Content ul {
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+  list-style-position: outside;
+}
+
+.Content ol li,
+.Content ul li {
+  margin: 0.5rem 0;
+}
+
+.Content em {
+  font-weight: lighter;
+}
+
+.Content h1,
+.Content h2,
+.Content h3,
+.Content h4,
+.Content h5,
+.Content h6 {
+  color: var(--highlight-alt);
+}
+
+.Content h2 {
+  font-size: 1.5em;
+  margin: 1.5rem 0;
+}
+
+.Content h3 {
+  font-size: 1.17em;
+  margin: 1.5rem 0;
+}
+
+.Content a {
+  color: var(--highlight-content-link);
+  transition: opacity 0.1s ease-in-out;
+}
+
+.Content a:hover {
+  opacity: 0.7;
+}
+
+.Content img {
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.AuthorBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--text-color);
+}
+
+.AuthorBox img {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.AuthorInfo h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.1rem;
+}
+
+.AuthorInfo p {
+  margin: 0.3rem 0;
+  line-height: 1.5;
+}
+
+.AuthorInfo a {
+  color: var(--highlight-content-link);
+  text-decoration: underline;
+}
+
+.AuthorHeading {
+  font-weight: bold;
+  margin: 0 0 0.3rem 0;
+}
+
+@media (max-width: 600px) {
+  .AuthorBox {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .AuthorBox img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.5rem;
+  }
+
+  .AuthorInfo {
+    width: 100%;
+  }
+}
