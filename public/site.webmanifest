@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Lieromaa",
+  "name": "Joonas Niemenjoki",
   "short_name": "lieromaa",
-  "description": "Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta multaa!",
+  "description": "Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta ja sitä sivuavista aiheista.",
   "icons": [
     {
       "src": "icons/android-chrome-192x192.png",
