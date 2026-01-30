@@ -1,0 +1,17 @@
+.AdBox {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--background-6);
+  border-radius: 6px;
+  background: var(--background-4);
+  overflow: visible;
+}
+
+.AdLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
