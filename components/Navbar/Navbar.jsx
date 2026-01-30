@@ -11,6 +11,7 @@ import classes from './Navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
   const toggleIsOpen = () => {
     setIsOpen((prev) => {
       const newState = !prev;
@@ -37,6 +38,7 @@ export default function Navbar() {
             <li>
               <SafeLink href="/blogi">Blogi</SafeLink>
             </li>
+
             <li className={classes.Dropdown}>
               <span>Projektit</span>
               <ul className={classes.DropdownMenu}>
@@ -52,20 +54,13 @@ export default function Navbar() {
             </li>
 
             <li>
-              <SafeLink href="/tietoa">Tietoa</SafeLink>
-            </li>
-            <li>
               <ThemeToggler style={{ fontSize: '24px' }} />
             </li>
           </ul>
 
           {/* Mobile toggler */}
           <span className={classes.Toggler}>
-            <Toggler
-              className={classes.Toggler}
-              drawerOpen={isOpen}
-              clicked={toggleIsOpen}
-            />
+            <Toggler drawerOpen={isOpen} clicked={toggleIsOpen} />
           </span>
         </div>
       </div>
@@ -78,12 +73,37 @@ export default function Navbar() {
           </div>
 
           <div className={classes.MobileSection}>
+            <h3>Blogi</h3>
             <ul>
               <li>
                 <SafeLink href="/blogi" onClick={toggleIsOpen}>
-                  Blogi
+                  Viimeisimmät julkaisut
                 </SafeLink>
               </li>
+            </ul>
+          </div>
+
+          <div className={classes.MobileSection}>
+            <h3>Projektit</h3>
+            <ul>
+              <li>
+                <SafeLink
+                  href="/projektit/compress-create-react-app"
+                  onClick={toggleIsOpen}
+                >
+                  compress-create-react-app
+                </SafeLink>
+              </li>
+              <li>
+                <SafeLink href="/projektit/lieromaa" onClick={toggleIsOpen}>
+                  Lieromaa
+                </SafeLink>
+              </li>
+            </ul>
+          </div>
+          <div className={classes.MobileSection}>
+            <h3>Muut sivut</h3>
+            <ul>
               <li>
                 <SafeLink href="/tietoa" onClick={toggleIsOpen}>
                   Tietoa sivustosta
@@ -93,9 +113,10 @@ export default function Navbar() {
                 <SafeLink href="/tietosuoja" onClick={toggleIsOpen}>
                   Tietosuoja
                 </SafeLink>
-              </li>
+              </li>{' '}
             </ul>
           </div>
+
           <div className={classes.MobileSection}>
             <h3>Seuraa</h3>
             <ul>
