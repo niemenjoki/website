@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import fs from 'fs';
 import path from 'path';
+import rehypePrettyCode from 'rehype-pretty-code';
 
 import Advert from '@/components/Advert/Advert';
 import InfoBox from '@/components/InfoBox/InfoBox';
@@ -18,6 +19,14 @@ import {
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './PostPage.module.css';
+
+const prettyCodeOptions = {
+  theme: {
+    dark: 'github-dark',
+    light: 'github-light',
+  },
+  keepBackground: false,
+};
 
 export const mdxComponents = {
   SafeLink,
@@ -70,8 +79,16 @@ export default async function PostPage({ params }) {
             : undefined}
         </div>
 
-        <div className={classes.Content + ' .md'}>
-          <MDXRemote source={mdxContent} components={mdxComponents} />
+        <div className={classes.Content + ' md'}>
+          <MDXRemote
+            source={mdxContent}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
+              },
+            }}
+          />
         </div>
 
         <div className={classes.AuthorBox}>
