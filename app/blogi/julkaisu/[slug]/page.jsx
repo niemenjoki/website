@@ -32,6 +32,7 @@ export const mdxComponents = {
   SafeLink,
   SafeImage,
   InfoBox,
+  Advert
 };
 
 export async function generateStaticParams() {
