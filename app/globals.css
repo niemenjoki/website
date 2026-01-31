@@ -207,6 +207,10 @@ a:hover:hover {
   letter-spacing: 0.5px;
 }
 
+.md aside > p {
+  margin: 0;
+}
+
 img {
   border-radius: 6px;
 }
