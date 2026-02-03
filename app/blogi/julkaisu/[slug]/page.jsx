@@ -6,6 +6,7 @@ import path from 'path';
 import rehypePrettyCode from 'rehype-pretty-code';
 
 import Advert from '@/components/Advert/Advert';
+import DhwPidSimulator from '@/components/DhwPidSimulator/DhwPidSimulator';
 import InfoBox from '@/components/InfoBox/InfoBox';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SafeImage from '@/components/SafeImage/SafeImage';
@@ -32,7 +33,8 @@ export const mdxComponents = {
   SafeLink,
   SafeImage,
   InfoBox,
-  Advert
+  Advert,
+  DhwPidSimulator,
 };
 
 export async function generateStaticParams() {
