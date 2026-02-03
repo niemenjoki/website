@@ -1,0 +1,49 @@
+.Graphic {
+  position: relative;
+  width: 600px;
+  height: 420px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 16px;
+}
+
+.Absolute {
+  position: absolute;
+}
+
+.PointValue {
+  font-size: 12px;
+  text-align: center;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  padding: 6px;
+  border: 1px solid #999;
+  width: 60px;
+  height: 20px;
+}
+
+.PointValue:hover {
+  opacity: 0.7 !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.Measurement {
+  color: #000000;
+  background: linear-gradient(-45deg, #00cc00 0%, #dfffd6 100%) !important;
+}
+
+.Setpoint {
+  color: #000000;
+  background: linear-gradient(-45deg, #cccc38 0%, #fffcd6 100%) !important;
+}
+
+.ControlSignal {
+  color: #000000;
+  background: linear-gradient(-45deg, #00cccc 0%, #d6ffff 100%) !important;
+}
+
+.OnOffControl {
+  color: #ffffff;
+  background: linear-gradient(-45deg, #333333 0%, #b3b3b3 100%);
+}
