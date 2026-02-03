@@ -97,7 +97,8 @@ export class PidController {
       this.derivativeTerm = 0.0;
     }
 
-    this.output = balance + this.proportionalTerm + this.integralTerm + this.derivativeTerm;
+    this.output =
+      balance + this.proportionalTerm + this.integralTerm + this.derivativeTerm;
 
     if (
       (this.output < 100.0 || error <= 0.0) &&
@@ -105,10 +106,12 @@ export class PidController {
       proportionalBand > 0.0 &&
       integrationTime > 0.0
     ) {
-      this.integralTerm += (error / proportionalBand) * (deltaSeconds / integrationTime) * 100.0;
+      this.integralTerm +=
+        (error / proportionalBand) * (deltaSeconds / integrationTime) * 100.0;
     }
 
-    this.output = balance + this.proportionalTerm + this.integralTerm + this.derivativeTerm;
+    this.output =
+      balance + this.proportionalTerm + this.integralTerm + this.derivativeTerm;
     if (this.output > 100.0) {
       this.output = 100.0;
     } else if (this.output < 0.0) {

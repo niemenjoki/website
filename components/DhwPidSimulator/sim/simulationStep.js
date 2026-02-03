@@ -12,7 +12,11 @@ const RETURN_SEGMENT_LENGTH_METERS = 10.0;
 const LOOP_TRANSPORT_DELAY_SECONDS = 60.0;
 const LOOP_SEGMENT_COUNT = Math.max(1, Math.round(LOOP_TRANSPORT_DELAY_SECONDS));
 const LOOP_VOLUME_LITERS =
-  Math.PI * (LOOP_DIAMETER_METERS / 2) * (LOOP_DIAMETER_METERS / 2) * LOOP_LENGTH_METERS * 1000.0;
+  Math.PI *
+  (LOOP_DIAMETER_METERS / 2) *
+  (LOOP_DIAMETER_METERS / 2) *
+  LOOP_LENGTH_METERS *
+  1000.0;
 const RETURN_SEGMENT_VOLUME_LITERS =
   Math.PI *
   (LOOP_DIAMETER_METERS / 2) *
@@ -58,7 +62,11 @@ function applySegmentHeatLoss(temperature, lossKwPerC, deltaSeconds, massKg) {
 }
 
 function applyRateLimit(targetValue, currentValue, ratePerSecond, deltaSeconds) {
-  if (!Number.isFinite(targetValue) || !Number.isFinite(currentValue) || deltaSeconds <= 0) {
+  if (
+    !Number.isFinite(targetValue) ||
+    !Number.isFinite(currentValue) ||
+    deltaSeconds <= 0
+  ) {
     return targetValue;
   }
   const maxDelta = Math.abs(ratePerSecond) * deltaSeconds;
@@ -95,7 +103,10 @@ export default function simulationStep(
   const tankMassKg = TANK_VOLUME_LITERS;
   const returnSegmentMassKg = RETURN_SEGMENT_VOLUME_LITERS;
 
-  const inletTemperatureFallback = toNumberOrFallback(simulationState.inletTemperature, 55.0);
+  const inletTemperatureFallback = toNumberOrFallback(
+    simulationState.inletTemperature,
+    55.0
+  );
   const loopSegmentTemperatures = Array.isArray(simulationState.loopSegmentTemperatures)
     ? normalizeSegmentArray(
         simulationState.loopSegmentTemperatures,
@@ -108,12 +119,21 @@ export default function simulationStep(
     inletTemperatureFallback
   );
   const outletTemperatureCurrent =
-    loopSegmentTemperatures[loopSegmentTemperatures.length - 1] ?? outletTemperatureFallback;
+    loopSegmentTemperatures[loopSegmentTemperatures.length - 1] ??
+    outletTemperatureFallback;
 
-  const tankTemperatureCurrent = toNumberOrFallback(simulationState.tankTemperature, 60.0);
-  const inletTemperatureCurrent = toNumberOrFallback(simulationState.inletTemperature, 55.0);
+  const tankTemperatureCurrent = toNumberOrFallback(
+    simulationState.tankTemperature,
+    60.0
+  );
+  const inletTemperatureCurrent = toNumberOrFallback(
+    simulationState.inletTemperature,
+    55.0
+  );
 
-  const tankEnergyKilojoulesCurrent = Number.isFinite(simulationState.tankEnergyKilojoules)
+  const tankEnergyKilojoulesCurrent = Number.isFinite(
+    simulationState.tankEnergyKilojoules
+  )
     ? simulationState.tankEnergyKilojoules
     : tankTemperatureCurrent * tankMassKg * WATER_SPECIFIC_HEAT_KJ_PER_KG_C;
   const returnSegmentEnergyKilojoulesCurrent = Number.isFinite(
@@ -175,11 +195,14 @@ export default function simulationStep(
   const hotWaterDemandFlow = domesticHotWaterEvents.advance(stepSeconds);
 
   const recirculationFlowLitersPerSecond = LOOP_FLOW_LITERS_PER_SECOND;
-  const totalReturnFlowLitersPerSecond = recirculationFlowLitersPerSecond + hotWaterDemandFlow;
+  const totalReturnFlowLitersPerSecond =
+    recirculationFlowLitersPerSecond + hotWaterDemandFlow;
   const tankFlowLitersPerSecond = hotWaterFraction * totalReturnFlowLitersPerSecond;
-  const returnFlowToValveLitersPerSecond = (1.0 - hotWaterFraction) * totalReturnFlowLitersPerSecond;
+  const returnFlowToValveLitersPerSecond =
+    (1.0 - hotWaterFraction) * totalReturnFlowLitersPerSecond;
   const returnSegmentTemperature =
-    returnSegmentEnergyKilojoulesCurrent / (returnSegmentMassKg * WATER_SPECIFIC_HEAT_KJ_PER_KG_C);
+    returnSegmentEnergyKilojoulesCurrent /
+    (returnSegmentMassKg * WATER_SPECIFIC_HEAT_KJ_PER_KG_C);
   const returnSegmentInletTemperature =
     totalReturnFlowLitersPerSecond > 0.0
       ? (recirculationFlowLitersPerSecond * outletTemperatureCurrent +
@@ -209,7 +232,8 @@ export default function simulationStep(
   }
 
   const returnSegmentTemperatureNext =
-    returnSegmentEnergyKilojoulesNext / (returnSegmentMassKg * WATER_SPECIFIC_HEAT_KJ_PER_KG_C);
+    returnSegmentEnergyKilojoulesNext /
+    (returnSegmentMassKg * WATER_SPECIFIC_HEAT_KJ_PER_KG_C);
   const mixedSupplyTemperature =
     hotWaterFraction * preValveTemperatureNext +
     (1.0 - hotWaterFraction) * returnSegmentTemperatureNext;
