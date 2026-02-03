@@ -1,10 +1,65 @@
+import fs from 'fs';
+import path from 'path';
+
 import safeLinks from '@/data/generated/safeRoutes.json';
 import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content/index.mjs';
 
 import { POSTS_PER_PAGE, SITE_URL } from '../data/vars.mjs';
 
+const APP_DIR = path.join(process.cwd(), 'app');
+
 const toISODate = (d) => new Date(d).toISOString().split('T')[0];
 const slugify = (s) => s.replaceAll(' ', '-').trim().toLowerCase();
+
+const isPageFile = (name) => name === 'page.jsx';
+const isDynamicRoute = (route) => /\[[^/]+\]/.test(route);
+
+const toRoute = (fullPath) => {
+  let route = fullPath.replace(APP_DIR, '').replace(/[/\\]page\.jsx$/, '');
+  route = route.replace(/\\/g, '/');
+  route = route.replace(/\/\([^/]+\)/g, '');
+  route = route.replace(/\/@[^/]+/g, '');
+  route = path.posix.normalize(route);
+  if (route === '' || route === '.') route = '/';
+  if (route !== '/' && route.endsWith('/')) route = route.slice(0, -1);
+  return route;
+};
+
+const getStaticPages = () => {
+  const pages = [];
+
+  const walk = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (entry.name.startsWith('@')) continue;
+        walk(full);
+        continue;
+      }
+
+      if (!isPageFile(entry.name)) continue;
+
+      const route = toRoute(full);
+      if (isDynamicRoute(route)) continue;
+
+      const { mtime } = fs.statSync(full);
+      pages.push({ route, lastModified: mtime });
+    }
+  };
+
+  walk(APP_DIR);
+
+  const deduped = new Map();
+  for (const page of pages) {
+    const prev = deduped.get(page.route);
+    if (!prev || page.lastModified > prev.lastModified) deduped.set(page.route, page);
+  }
+
+  return Array.from(deduped.values());
+};
 
 export const revalidate = 3600;
 
@@ -12,6 +67,7 @@ export default async function sitemap() {
   const urls = [];
   const posts = getAllContent();
   const postTags = getAllPostTags();
+  const staticPages = getStaticPages();
 
   const latest = (arr, field) =>
     arr.reduce((latest, item) => {
@@ -24,12 +80,17 @@ export default async function sitemap() {
   const add = (url, lastmod) => {
     urls.push({ url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
   };
+
+  const staticLastModified = (route, fallback) => {
+    if (route === '/' || route === '/blogi') return latestPost;
+    if (route === '/tietoa') return '2025-09-08';
+    return fallback ?? latestPost;
+  };
+
   // --- Static pages
-  [
-    ['/', latestPost],
-    ['/blogi', latestPost],
-    ['/tietoa', '2025-09-08'],
-  ].forEach(([url, lastmod]) => add(url, lastmod));
+  staticPages.forEach(({ route, lastModified }) =>
+    add(route, staticLastModified(route, lastModified))
+  );
 
   // --- Tag pages
   for (const tag of postTags) {
@@ -41,9 +102,9 @@ export default async function sitemap() {
   // --- Blog posts
   posts.forEach((p) => add(`/blogi/julkaisu/${p.slug}`, p.date));
 
-  // --- Paginated blog index
+  // --- Paginated blog index (include page 1)
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
-  for (let i = 2; i <= totalPages; i++) add(`/blogi/sivu/${i}`, latestPost);
+  for (let i = 1; i <= totalPages; i++) add(`/blogi/sivu/${i}`, latestPost);
 
   // --- Validate paths
   urls.forEach(({ url }) => {
