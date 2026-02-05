@@ -70,7 +70,7 @@ export default function DomesticHotWaterPidSimulator() {
     hotWaterDemandFlow,
   } = simulationState;
   const pidSettings = { proportionalBand, integrationTime, derivativeTime };
-  const inletDelaySeconds = inletDelayMode === 'far' ? 30 : 3;
+  const inletDelaySeconds = inletDelayMode === 'far' ? 60 : 3;
   const simulationSettings = { inletDelaySeconds };
 
   const setSimulationValue = (key) => (value) => {
@@ -140,8 +140,8 @@ export default function DomesticHotWaterPidSimulator() {
           onClick={() => setInletDelayMode((prev) => (prev === 'far' ? 'near' : 'far'))}
           style={{
             position: 'absolute',
-            left: 20,
-            top: 330,
+            left: 340,
+            top: 370,
             fontSize: 12,
             width: 230,
             fontWeight: 'bold',
@@ -176,7 +176,7 @@ export default function DomesticHotWaterPidSimulator() {
         <PointInput
           className={[classes.PointValue, classes.Measurement].join(' ')}
           left={328}
-          top={61}
+          top={71}
           value={formatValue(preValveTemperature, '°C')}
           onChange={setSimulationValue('preValveTemperature')}
           editable={false}
@@ -186,7 +186,7 @@ export default function DomesticHotWaterPidSimulator() {
         <PointInput
           className={[classes.PointValue, classes.Setpoint].join(' ')}
           left={468}
-          top={39}
+          top={49}
           value={formatValue(setpointTemperature, '°C')}
           onChange={setSimulationValue('setpointTemperature')}
           editable={true}
@@ -196,7 +196,7 @@ export default function DomesticHotWaterPidSimulator() {
         <PointInput
           className={[classes.PointValue, classes.Measurement].join(' ')}
           left={468}
-          top={61}
+          top={71}
           value={formatValue(inletTemperature, '°C')}
           onChange={setSimulationValue('inletTemperature')}
           editable={false}
@@ -206,7 +206,7 @@ export default function DomesticHotWaterPidSimulator() {
         <PointInput
           className={[classes.PointValue, classes.Measurement].join(' ')}
           left={468}
-          top={199}
+          top={209}
           value={formatValue(outletTemperature, '°C')}
           onChange={setSimulationValue('outletTemperature')}
           editable={false}
@@ -216,7 +216,7 @@ export default function DomesticHotWaterPidSimulator() {
         <PointInput
           className={[classes.PointValue, classes.ControlSignal].join(' ')}
           left={400}
-          top={45}
+          top={60}
           value={formatValue(valveCommand, '%')}
           onChange={setSimulationValue('valveCommand')}
           editable={false}
@@ -225,54 +225,33 @@ export default function DomesticHotWaterPidSimulator() {
         {/* Labels */}
         <Label text="Lämpöpumppu" left={47} top={229} />
         <Label text="Käyttövesivaraaja" left={198} top={285} />
-        <Label
-          text="Asetusarvoa ja säätimen viritysparametreja voi muokata, muut arvot päivittyy automaattisesti"
-          left={20}
-          top={355}
-        />
-        <Label
-          text="Simulaation käyttö on suositeltavaa tehdä tietokoneella. Simulaatiota ei ole tehty kännykällä muokattavaksi,"
-          left={20}
-          top={370}
-        />
-        <Label
-          text="vaikka se saattaakin useissa tapauksissa onnistua."
-          left={20}
-          top={380}
-        />
-        <Label
-          text="Yllä olevasta napista simuloidun menovesimittauksen voi siirtää kauas venttiilistä, jotta derivoinnin käytölle"
-          left={20}
-          top={395}
-        />
-        <Label text="on oikeasti tarvetta" left={20} top={405} />
 
         {/* PID tuning */}
-        <Label text="Suhdealue" left={340} top={260} />
+        <Label text="Suhdealue" left={340} top={280} />
         <PointInput
           className={[classes.PointValue, classes.OnOffControl].join(' ')}
           left={430}
-          top={255}
+          top={275}
           value={proportionalBand.toFixed(0)}
           onChange={setPidSettingValue(setProportionalBand)}
           editable={true}
         />
 
-        <Label text="Integrointiaika" left={340} top={290} />
+        <Label text="Integrointiaika" left={340} top={310} />
         <PointInput
           className={[classes.PointValue, classes.OnOffControl].join(' ')}
           left={430}
-          top={285}
+          top={305}
           value={integrationTime.toFixed(0)}
           onChange={setPidSettingValue(setIntegrationTime)}
           editable={true}
         />
 
-        <Label text="Derivointiaika" left={340} top={320} />
+        <Label text="Derivointiaika" left={340} top={340} />
         <PointInput
           className={[classes.PointValue, classes.OnOffControl].join(' ')}
           left={430}
-          top={315}
+          top={335}
           value={derivativeTime.toFixed(0)}
           onChange={setPidSettingValue(setDerivativeTime)}
           editable={true}

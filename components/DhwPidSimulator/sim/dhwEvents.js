@@ -3,15 +3,15 @@ const HAND_WASH_MAX_SECONDS = 30;
 const SHOWER_DURATION_SECONDS = 4 * 60;
 const CONTAINER_DURATION_SECONDS = 30;
 
-const HAND_WASH_FLOW_LITERS_PER_SECOND = 0.12;
-const SHOWER_FLOW_LITERS_PER_SECOND = 0.12;
-const CONTAINER_FLOW_LITERS_PER_SECOND = 0.3;
+const HAND_WASH_FLOW_LITERS_PER_SECOND = 0.1;
+const SHOWER_FLOW_LITERS_PER_SECOND = 0.1;
+const CONTAINER_FLOW_LITERS_PER_SECOND = 0.5;
 const FLOW_VARIATION_RATIO = 0.12;
 const FLOW_STEP_RATIO = 0.03;
 
 const HAND_WASH_MEAN_INTERVAL_SECONDS = 80;
 const SHOWER_MEAN_INTERVAL_SECONDS = 5 * 60;
-const CONTAINER_MEAN_INTERVAL_SECONDS = 3 * 60;
+const CONTAINER_MEAN_INTERVAL_SECONDS = 10 * 60;
 
 function randomRange(min, max) {
   return min + Math.random() * (max - min);
@@ -37,12 +37,6 @@ function shouldStartEvent(meanIntervalSeconds, deltaSeconds) {
 class DomesticHotWaterEvents {
   constructor() {
     this.activeEvents = [];
-    this.activeEvents.push({
-      type: 'handWash',
-      remainingSeconds: randomRange(HAND_WASH_MIN_SECONDS, HAND_WASH_MAX_SECONDS),
-      baseFlowLitersPerSecond: HAND_WASH_FLOW_LITERS_PER_SECOND,
-      flowLitersPerSecond: HAND_WASH_FLOW_LITERS_PER_SECOND,
-    });
   }
 
   advance(deltaSeconds) {
