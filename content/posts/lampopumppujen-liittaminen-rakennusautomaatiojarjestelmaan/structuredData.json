@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.niemenjoki.fi/blogi/lampopumppujen-liittaminen-rakennusautomaatiojarjestelmaan#blogpost",
+      "url": "https://www.niemenjoki.fi/blogi/lampopumppujen-liittaminen-rakennusautomaatiojarjestelmaan",
+      "headline": "Lämpöpumppujen liittäminen rakennusautomaatiojärjestelmään",
+      "description": "Lämpöpumppuja voidaan liittää rakennusautomaatioon usealla tavalla. Käyn läpi vaihtoehdot, niiden hyödyt ja riskit sekä suunnittelun kannalta olennaiset asiat.",
+      "datePublished": "2024-03-09T00:00:00+02:00",
+      "dateModified": "2024-03-09T00:00:00+02:00",
+      "inLanguage": "fi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.niemenjoki.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.niemenjoki.fi/#organization",
+        "name": "Joonas Niemenjoki"
+      },
+      "isPartOf": {
+        "@id": "https://www.niemenjoki.fi/#website"
+      },
+      "articleSection": "lämpöpumput",
+      "keywords": [
+        "lämpöpumput",
+        "rakennusautomaatio",
+        "ohjaus",
+        "lämmitysjärjestelmät",
+        "energiatehokkuus",
+        "lvi"
+      ]
+    }
+  ]
+}
