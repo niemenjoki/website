@@ -28,9 +28,9 @@ const LOOP_SEGMENT_VOLUME_LITERS = LOOP_MAIN_VOLUME_LITERS / LOOP_SEGMENT_COUNT;
 const LOOP_FLOW_LITERS_PER_SECOND = 0.5;
 const LOOP_HEAT_LOSS_KW_PER_CELSIUS = 0.2957;
 const AMBIENT_TEMPERATURE_C = 20.0;
-const DEFAULT_INLET_DELAY_SECONDS = 3.0;
 const COLD_WATER_TEMPERATURE_C = 7.0;
 const VALVE_RATE_LIMIT_PERCENT_PER_SECOND = 7.0;
+const INLET_DELAY_SECONDS = 3;
 
 function toNumberOrFallback(value, fallback) {
   if (Number.isFinite(value)) return value;
@@ -92,12 +92,7 @@ function buildSteadyStateLoopTemperatures(inletTemperature, segmentCount) {
   return segments;
 }
 
-export default function simulationStep(
-  simulationState,
-  deltaSeconds,
-  pidSettings = {},
-  simulationSettings = {}
-) {
+export default function simulationStep(simulationState, deltaSeconds, pidSettings = {}) {
   const stepSeconds = Number.isFinite(deltaSeconds) ? deltaSeconds : 0.0;
 
   const tankMassKg = TANK_VOLUME_LITERS;
@@ -166,7 +161,6 @@ export default function simulationStep(
   );
   const proportionalBand = toNumberOrFallback(pidSettings.proportionalBand, 0.0);
   const integrationTime = toNumberOrFallback(pidSettings.integrationTime, 0.0);
-  const derivativeTime = toNumberOrFallback(pidSettings.derivativeTime, 0.0);
 
   const pidOutput = pidController.step(
     {
@@ -174,7 +168,6 @@ export default function simulationStep(
       processValue: inletTemperatureCurrent,
       proportionalBand,
       integrationTime,
-      derivativeTime,
     },
     stepSeconds
   );
@@ -238,11 +231,7 @@ export default function simulationStep(
     hotWaterFraction * preValveTemperatureNext +
     (1.0 - hotWaterFraction) * returnSegmentTemperatureNext;
 
-  const inletDelaySeconds = toNumberOrFallback(
-    simulationSettings.inletDelaySeconds,
-    DEFAULT_INLET_DELAY_SECONDS
-  );
-  const delayStepCount = Math.max(1, Math.round(inletDelaySeconds));
+  const delayStepCount = Math.max(1, Math.round(INLET_DELAY_SECONDS));
   let inletDelayBuffer = normalizeDelayQueue(
     simulationState.inletDelayBuffer,
     delayStepCount,

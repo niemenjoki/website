@@ -56,8 +56,6 @@ export default function DomesticHotWaterPidSimulator() {
 
   const [proportionalBand, setProportionalBand] = useState(200);
   const [integrationTime, setIntegrationTime] = useState(0);
-  const [derivativeTime, setDerivativeTime] = useState(0);
-  const [inletDelayMode, setInletDelayMode] = useState('near');
 
   const {
     compressorState,
@@ -68,10 +66,9 @@ export default function DomesticHotWaterPidSimulator() {
     outletTemperature,
     valveCommand,
     hotWaterDemandFlow,
+    pidOutput,
   } = simulationState;
-  const pidSettings = { proportionalBand, integrationTime, derivativeTime };
-  const inletDelaySeconds = inletDelayMode === 'far' ? 60 : 3;
-  const simulationSettings = { inletDelaySeconds };
+  const pidSettings = { proportionalBand, integrationTime };
 
   const setSimulationValue = (key) => (value) => {
     setSimulationState((prev) => ({
@@ -86,7 +83,7 @@ export default function DomesticHotWaterPidSimulator() {
 
   const applySimulationStep = (updateFn = emptyUpdate) => {
     setSimulationState((prev) => {
-      const patch = updateFn(prev, pidSettings, simulationSettings);
+      const patch = updateFn(prev, pidSettings);
       if (!patch || typeof patch !== 'object') {
         return prev;
       }
@@ -97,13 +94,11 @@ export default function DomesticHotWaterPidSimulator() {
   useEffect(() => {
     const deltaSeconds = 1;
     const intervalId = setInterval(() => {
-      applySimulationStep((state) =>
-        simulationStep(state, deltaSeconds, pidSettings, simulationSettings)
-      );
+      applySimulationStep((state) => simulationStep(state, deltaSeconds, pidSettings));
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [proportionalBand, integrationTime, derivativeTime, inletDelayMode]);
+  }, [proportionalBand, integrationTime]);
 
   const compressorDisplayImage =
     compressorState === 1 ? compressorActiveImage : compressorImage;
@@ -135,26 +130,10 @@ export default function DomesticHotWaterPidSimulator() {
           left={440}
           top={150}
         />
-        <button
-          type="button"
-          onClick={() => setInletDelayMode((prev) => (prev === 'far' ? 'near' : 'far'))}
-          style={{
-            position: 'absolute',
-            left: 340,
-            top: 370,
-            fontSize: 12,
-            width: 230,
-            fontWeight: 'bold',
-            padding: '2px 6px',
-            borderRadius: 4,
-            border: '1px solid #333333',
-            background: '#f2f2f2',
-            cursor: 'pointer',
-          }}
-        >
-          Menovesianturi:{' '}
-          {inletDelayMode === 'far' ? 'Kaukana venttiilistä' : 'Lähellä venttiiliä'}
-        </button>
+        <Label text={`P:`} left={410} top={30} />
+        <Label text={`I:`} left={410} top={45} />
+        <Label text={`${(pidOutput?.p || 0).toFixed(2)}`} left={425} top={30} />
+        <Label text={`${(pidOutput?.i || 0).toFixed(2)}`} left={425} top={45} />
 
         {/* Devices */}
         <Img src={compressorDisplayImage} left={69} top={151} width={35} height={35} />
@@ -244,16 +223,6 @@ export default function DomesticHotWaterPidSimulator() {
           top={305}
           value={integrationTime.toFixed(0)}
           onChange={setPidSettingValue(setIntegrationTime)}
-          editable={true}
-        />
-
-        <Label text="Derivointiaika" left={340} top={340} />
-        <PointInput
-          className={[classes.PointValue, classes.OnOffControl].join(' ')}
-          left={430}
-          top={335}
-          value={derivativeTime.toFixed(0)}
-          onChange={setPidSettingValue(setDerivativeTime)}
           editable={true}
         />
       </div>
