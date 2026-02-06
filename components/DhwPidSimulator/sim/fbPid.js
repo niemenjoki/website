@@ -53,7 +53,7 @@ export class PidController {
       this.proportionalTerm = 0.0;
     }
 
-    const preOutput = this.proportionalTerm + this.integralTerm;
+    const preOutput = balance + this.proportionalTerm + this.integralTerm;
 
     if (
       ((preOutput < 100.0 && preOutput > 0.0) ||
