@@ -3,9 +3,9 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.niemenjoki.fi/blogi/kuinka-lampopumput-toimivat#blogpost",
-      "url": "https://www.niemenjoki.fi/blogi/kuinka-lampopumput-toimivat",
-      "headline": "Kuinka lämpöpumppu toimii – selitys maallikon kielellä",
+      "@id": "https://www.niemenjoki.fi/blogi/julkaisu/kuinka-lampopumput-toimivat#blogpost",
+      "url": "https://www.niemenjoki.fi/blogi/julkaisu/kuinka-lampopumput-toimivat",
+      "headline": "Kuinka lämpöpumppu toimii - selitys maallikon kielellä",
       "description": "Selitys lämpöpumpun toiminnasta ja energiatehokkuudesta maallikon kielellä.",
       "datePublished": "2024-02-26T00:00:00+02:00",
       "dateModified": "2024-02-26T00:00:00+02:00",

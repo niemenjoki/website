@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.niemenjoki.fi/blogi/lampopumppujen-liittaminen-rakennusautomaatiojarjestelmaan#blogpost",
-      "url": "https://www.niemenjoki.fi/blogi/lampopumppujen-liittaminen-rakennusautomaatiojarjestelmaan",
+      "@id": "https://www.niemenjoki.fi/blogi/julkaisu/lampopumppujen-liittaminen-rakennusautomaatiojarjestelmaan#blogpost",
+      "url": "https://www.niemenjoki.fi/blogi/julkaisu/lampopumppujen-liittaminen-rakennusautomaatiojarjestelmaan",
       "headline": "Lämpöpumppujen liittäminen rakennusautomaatiojärjestelmään",
       "description": "Lämpöpumppuja voidaan liittää rakennusautomaatioon usealla tavalla. Käyn läpi vaihtoehdot, niiden hyödyt ja riskit sekä suunnittelun kannalta olennaiset asiat.",
       "datePublished": "2024-03-09T00:00:00+02:00",
