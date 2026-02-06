@@ -1,7 +1,7 @@
 {
   "title": "Opi PID-säätimen toiminta ohjelmoimalla se kokonaan itse",
   "description": "Tässä julkaisussa selitetään, miten PID-säädin toimii käytännössä. Ohjelmoi mukana ja rakenna ymmärrys konkreettisten esimerkkien kautta.",
-  "date": "2026-02-02",
+  "date": "2026-02-06",
   "tags": ["ohjelmointi"],
   "keywords": [
     "pid-säädin",
