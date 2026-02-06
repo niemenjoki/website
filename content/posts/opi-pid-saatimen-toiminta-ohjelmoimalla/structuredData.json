@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.niemenjoki.fi/blogi/julkaisu/opi-pid-saatimen-toiminta-ohjelmoimalla#blogpost",
+      "url": "https://www.niemenjoki.fi/blogi/julkaisu/opi-pid-saatimen-toiminta-ohjelmoimalla",
+      "headline": "Opi PID-säätimen toiminta ohjelmoimalla se kokonaan itse",
+      "description": "Tässä julkaisussa selitetään, miten PID-säädin toimii käytännössä. Ohjelmoi mukana ja rakenna ymmärrys konkreettisten esimerkkien kautta.",
+      "datePublished": "2026-02-06T00:00:00+02:00",
+      "dateModified": "2026-02-06T00:00:00+02:00",
+      "inLanguage": "fi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.niemenjoki.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.niemenjoki.fi/#organization",
+        "name": "Joonas Niemenjoki"
+      },
+      "isPartOf": {
+        "@id": "https://www.niemenjoki.fi/#website"
+      },
+      "articleSection": "Rakennusautomaatio",
+      "keywords": [
+        "pid-säädin",
+        "säätötekniikka",
+        "rakennusautomaatio",
+        "automaatiojärjestelmät",
+        "iec 61131-3",
+        "structured text"
+      ]
+    }
+  ]
+}

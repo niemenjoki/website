@@ -1,0 +1,780 @@
+Olen törmännyt noin kuusivuotisen urani aikana rakennusautomaation parissa useisiin tilanteisiin, joissa on tullut ilmi, että useat alalla toimivat kokeneetkaan tekijät, jotka ovat virittäneet kymmeniä ellei satojakin säätimiä, eivät aina ymmärrä PID-säädinten toimintaa kunnolla.
+
+Tämä ei sinänsä ole yllättävää. Ainakin omissa insinööriopinnoissani PID-säätimien toimintaa yritettiin opettaa tarpeettoman monimutkaisten matemaattisten kaavojen ja sekavien MATLAB-simulaatioiden avulla ilman mitään kunnollista selitystä, miten säädin oikeasti toimii. Tilannetta ei yhtään helpota se, että puhutaan integroinnista ja derivoinnista, jotka jo termeinä kuumottaa monia opiskelijoita.
+
+Vaikka kirjaimet I ja D säätimen nimessä tulevat juurikin noista termeistä, käytännön tasolla PID-säätimen ymmärtäminen ei vaadi differentiaalilaskennan ymmärtämistä vaan kyseessä on loppujen lopuksi melko yksinkertainen asia.
+
+Tässä tekstissä yritän parhaani mukaan avata kyseisen säätimen toimintaa sellaisessa muodossa, että se olisi mahdollisimman helppo ymmärtää. Teksti on suunnattu ensisijaisesti teknisten alojen nykyisille ja tuleville ammattilaisille, joille PID-säätimen toiminta ei ole vielä kunnolla hahmottunut. Käyn läpi säätimen jokaisen komponentin yksi kerrallaan ja havainnollistan niitä koodiesimerkkien avulla. Luettuasi tämän tekstin ajatuksella läpi, sinulla pitäisi olla syvällisempi ymmärrys PID-säätimien toiminnasta ja niiden virittämisestäkin tulee intuitiivisempaa.
+
+## Sisällysluettelo
+
+- [Mikä PID-säädin on?](#mikä-pid-säädin-on)
+- [P-komponentti: nopea reaktio](#p-komponentti-nopea-reaktio)
+- [I-komponentti: jatkuvan virheen korjaus](#i-komponentti-jatkuvan-virheen-korjaus)
+- [D-komponentti: Nopeiden muutosten jarru](#d-komponentti-nopeiden-muutosten-jarru)
+- [PID-säätimen toiminnan parantaminen](#pid-säätimen-toiminnan-parantaminen)
+  - [Tuloksen rajaus halutulle välille](#tuloksen-rajaus-halutulle-välille)
+  - [Tasapainopiste](#tasapainopiste)
+  - [I-komponentin anti-windup](#i-komponentin-anti-windup)
+  - [D-komponentin häiriöherkkyys ja suodatus](#d-komponentin-häiriöherkkyys-ja-suodatus)
+  - [Ohjelmakierroksen pituuden huomiointi](#ohjelmakierroksen-pituuden-huomiointi)
+  - [Suhdealue, integrointiaika ja derivointiaika](#suhdealue-integrointiaika-ja-derivointiaika)
+- [PID-säätimen viritys](#pid-säätimen-viritys)
+  - [Aloita P-säätimestä](#aloita-p-säätimestä)
+  - [Lisää integrointi](#lisää-integrointi)
+  - [Harkitse derivointia kriittisesti](#harkitse-derivointia-kriittisesti)
+  - [Jos päädyt käyttämään derivointia](#jos-päädyt-käyttämään-derivointia)
+  - [Testaa toiminta](#testaa-toiminta)
+- [PI-säätimen viritysharjoitus](#pi-säätimen-viritysharjoitus)
+- [Valmiit koodit](#valmiit-koodit)
+
+## Mikä PID-säädin on?
+
+PID-säädin on koodinpätkä, joka pyrkii pitämään jonkin mittauksen mahdollisimman lähellä asetusarvoa säätämällä siihen vaikuttavaa laitetta. Lyhenteen kirjaimet tulee sanoista suhteellinen (proportional), integraali (integral) ja derivaatta (derivative).
+
+Esimerkiksi:
+
+- Lämmitysjärjestelmässä PID-säädin lisää tehoa, kun on kylmä ja vähentää sitä, kun on kuuma
+- Auton vakionopeudensäätimessä PID-säädin lisää moottorin tehoa ylämäessä ja vähentää sitä alamäessä, jotta nopeus pysyy halutussa arvossa
+
+PID-säädin perustuu kolmeen yksinkertaiseen komponenttiin, jotka yhdessä muodostavat yllättävän tehokkaan algoritmin, jota voidaan soveltaa monenlaisiin säätötilanteisiin eri toimialoilla.
+
+Seuraavaksi käyn kunkin komponentin läpi yksi kerrallaan.
+
+<InfoBox>
+  *Käytän koodiesimerkeissä IEC 61131-3 Structured Text -kielen syntaksia, mutta vastaavan
+  säätimen toteuttaminen onnistuu millä tahansa ohjelmointikielellä. Huomioi kuitenkin,
+  että automaatiojärjestelmissä koodi ajetaan oletusarvoisesti jatkuvasti toistuvana.
+  Monilla ohjelmointikielillä tämä jatkuva toisto on toteutettava erikseen, esimerkiksi
+  while true -silmukalla.*
+</InfoBox>
+
+## P-komponentti: nopea reaktio
+
+Säätimen P-komponentti reagoi nykyiseen säätövirheeseen, eli asetusarvon ja mittausarvon erotukseen sillä hetkellä, kun säätimen koodi suoritetaan. Jos lämpötila on 2 °C liian matala, P-komponentti nostaa säätöviestiä suhteessa virheeseen. Reaktion voimakkuus määräytyy vahvistuskertoimella **Kp**.
+
+Koodimuodossa yksinkertainen P-säädin voisi näyttää esimerkiksi tältä:
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+rVirhe  := rAsetusarvo - rMittaus;
+
+rP      := rVirhe * rKp;
+
+rTulos  := rP;
+```
+
+Esimerkki, kun säätövirhe on 2 °C:
+
+- Kp: 5 => 10 %
+- Kp: 10 => 20 %
+- Kp: 30 => 60 %
+
+P-komponentti yksinään tekee suuren osan säätötyöstä. Ongelmana on kuitenkin se, että kun virhe lähenee nollaa, myös P-komponentin arvo lähenee nollaa.
+
+Käytännössä lopputuloksena on säädin, joka säätää mittauksen lähelle asetusarvoa, mutta ei koskaan ihan saavuta sitä. P-komponentin tehtävä onkin reagoida nopeasti suureen säätövirheeseen ja tarkempi hienosäätö jätetään muille säätimen komponenteille.
+
+<figure>
+
+<SafeImage
+  src="/images/content/DhwPidSimulator/pid-eri-kp-arvot.avif"
+  alt="Esimerkkikaavio P-säätimen toiminnasta eri Kp arvoilla"
+  width={1200}
+  height={800}
+  sizes="(max-width: 600px) 100vw, 800px"
+  loading="lazy"
+  style={{ maxWidth: '100%', height: 'auto', display: 'inline-block' }}
+/>
+
+<figcaption>{`P-säätimen käyttäytyminen eri Kp arvoilla, kun asetusarvo muuttuu nopeasti. PV=mittaus, SP=asetusarvo. Kaavio luotu tekoälyllä.`}</figcaption>
+
+</figure>
+
+## I-komponentti: jatkuvan virheen korjaus
+
+I-komponentti reagoi siihen, kuinka kauan virhe on ollut olemassa. Jokaisella ohjelmakierroksella, I-komponentti lisää hetkellisen säätövirheen kumulatiiviseen virheeseen, jonka kasvaa niin kauan, kun virhe on olemassa. Reaktion nopeus määräytyy vahvistuskertoimella **Ki**.
+
+Muokataan aiemmasta P-säätimestä PI-säädin:
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+rVirhe  := rAsetusarvo - rMittaus;
+
+rP      := rVirhe * rKp;
+
+rI      := rI + (rVirhe * rKi);
+
+rTulos  := rP + rI;
+```
+
+I-komponentin tehtävä on pikkuhiljaa nostaa säätöviestiä, kunnes P-komponentin jättämä pysyvä virhe on paikattu ja mittaus pysyy vakaasti asetusarvossa.
+
+<figure>
+
+<SafeImage
+  src="/images/content/DhwPidSimulator/pid-eri-ki-arvot.avif"
+  alt="Esimerkkikaavio PI-säätimen toiminnasta eri Ki arvoilla"
+  width={1200}
+  height={800}
+  sizes="(max-width: 600px) 100vw, 800px"
+  loading="lazy"
+  style={{ maxWidth: '100%', height: 'auto', display: 'inline-block' }}
+/>
+
+<figcaption>{`PI-säätimen käyttäytyminen eri Ki arvoilla, kun asetusarvo muuttuu nopeasti. PV=mittaus, SP=asetusarvo. Kaavio luotu tekoälyllä.`}</figcaption>
+
+</figure>
+
+## D-komponentti: Nopeiden muutosten jarru
+
+PI-säädin riittää käytännössä useimpiin säätötilanteisiin, ainakin rakennusautomaation yhteydessä. Lähes aina, kun tulee mieleen käyttää D-komponenttia, varsinainen ongelma on jokin muu kuin D-komponentin puuttuminen, ainakin rakennusautomaation yhteydessä. Jotkut sanovatkin, että PID-säätimen D-kirjain tulee lauseesta "Do not use".
+
+Omat kokemukseni rakennusautomaation parissa ovat vahvistaneet tätä ajatusta. En ole kuuden vuoden rakennusautomaation parissa työskentelyn aikana käyttänyt D-komponenttia kertaakaan.
+
+D-komponenttia kuvataan usein _ennakoivaksi_, mutta tämä on harhaanjohtavaa. D-komponentti ei ennakoi ohjauksen vaikutuksia eikä “näe tulevaisuuteen”. Se reagoi ainoastaan mitattuun muutokseen. Jos mittaus reagoi hitaasti, myös derivointi reagoi myöhässä.
+
+D-komponentin todellinen tehtävä on toimia jarruna nopeille muutoksille. Se ei reagoi säätövirheeseen, vaan mittauksen muutosnopeuteen. Mitä nopeammin mitattu arvo muuttuu, sitä enemmän D-komponentti vastustaa muutosta, vaikka mittaus olisi vielä selvästi alle asetusarvon.
+
+Tästä syystä derivointiosa on hyödyllinen lähinnä nopeissa prosesseissa, joissa mittaus reagoi ohjaukseen lähes välittömästi. Tyypillisiä esimerkkejä ovat paine- ja virtaussäädöt, joissa derivointi vaimentaa huojuntaa ja mahdollistaa aggressiivisemman P-säädön ilman epävakautta.
+
+Sen sijaan hitaissa lämpötilasäädöissä, joissa mittauksen reagointi viivästyy kymmeniä sekunteja, derivointiosasta on harvoin hyötyä. Tällöin derivointi toimii lähinnä kohinan vahvistimena eikä tuo säätöön todellista ennakointia.
+
+Derivointikomponentin voimakkuus määritellään vahvistuskertoimella **Kd**, joka kertoo, kuinka herkästi säädin reagoi mittauksen muutosnopeuteen.
+
+Muokataan aiemmasta PI-säätimestä PID-säädin:
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+rVirhe          := rAsetusarvo - rMittaus;
+
+rP              := rVirhe * rKp;
+
+rI              := rI + (rVirhe * rKi);
+
+rD              := -(rMittaus - rMittausEdellinen) * rKd;
+
+rTulos          := rP + rI + rD;
+
+rMittausEdellinen := rMittaus;
+```
+
+Yhteenveto:
+
+- **P** poistaa suurimman osan virheestä nopeasti
+- **I** poistaa pitkäaikaisen pysyvän virheen
+- **D** jarruttaa liian nopeita muutoksia
+
+Ja lopputuloksena on säädin, jolla voi säätää todella monenlaisia prosesseja, kunhan vahvistuskertoimet Kp, Ki ja Kd viritetään oikean suuruisiksi. Kerron virittämisestä lisää tämän julkaisun lopussa.
+
+Yllä esitetty PID-säädin on niin sanottu oppikirjamalli, joka toimii periaatteessa oikein, mutta siihen liittyy käytännön tilanteita, joissa sen toiminta on vielä erittäin ongelmallista. Seuraavissa kappaleissa hienosäädetään säätimen koodia vaihe vaiheelta niin, että se käyttäytyy odotetulla tavalla myös todellisissa järjestelmissä.
+
+## PID-säätimen toiminnan parantaminen
+
+<Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+
+### Tuloksen rajaus halutulle välille
+
+Säätimen laskema tulos on vain numero, joka ei itsessään tarkoita mitään, mutta tosielämän säädettävät laitteet on tehty toimimaan tietyissä rajoissa. Esimerkiksi venttiili ei voi aueta yli 100 % eikä lämmitysteho voi olla negatiivinen.
+
+Aiemmin esitetyn koodin tulos voi kuitenkin kasvaa periaatteessa äärettömän suureksi tai pieneksi, joten se on rajattava aseteltaviin rajoihin:
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+rVirhe          := rAsetusarvo - rMittaus;
+
+rP              := rVirhe * rKp;
+
+rI              := rI + (rVirhe * rKi);
+
+rD              := -(rMittaus - rMittausEdellinen) * rKd;
+
+rTulos          := rP + rI + rD;
+
+IF rTulos > rMaksimiTulos THEN
+    rTulos := rMaksimiTulos;
+ELSIF rTulos < rMinimiTulos THEN
+    rTulos := rMinimiTulos;
+END_IF;
+
+rMittausEdellinen := rMittaus;
+```
+
+### Tasapainopiste
+
+Kun säädintä halutaan välillä pysäyttää ja käynnistää uudelleen, yllä olevan koodin mukaisen säätimen arvo lähtee kasvattamaan tulostaan nollasta ylöspäin, kun virhe kasvaa. Tämä on ongelmallista erityisesti, jos säädetään prosessia, jonka säätöarvo on normaalitilanteessa aina korkea.
+
+Usein onkin tarpeen määrittää niin sanottu tasapainopiste, jonka ympärillä säätimen tulos muuttuu. Usein tasapainopiste on hyvä asettaa esimerkiksi säädön minimi- ja maksiarvojen puoleen väliin, mutta myös muille tasapainopisteille on käyttötarkoituksensa.
+
+Itse määritän lämpöpumppujärjestelmän apuna toimivan sähkökattilan tehonsäädölle tasapainopisteeksi nollan, jotta sähkökattila lähtee tarvittaessa pikkuhiljaa kasvattamaan tehoaan nollasta. Toisaalta, jos saman sähkökattilan tehoa on tarvetta rajoittaa esimerkiksi liian suuren järjestelmän kokonaisvirran estämiseksi, asetan rajoitussäätimen tasapainopisteen 100 %:iin, jotta se ei säätimen käynnistyessä vaikuta sähkökattilaan, vaan alkaa laskemaan tehoa maksimista alaspäin vain tarvittaessa.
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+rVirhe          := rAsetusarvo - rMittaus;
+
+rP              := rVirhe * rKp;
+
+rI              := rI + (rVirhe * rKi);
+
+rD              := -(rMittaus - rMittausEdellinen) * rKd;
+
+rTulos          := rTasapainopiste + rP + rI + rD;
+
+IF rTulos > rMaksimiTulos THEN
+    rTulos := rMaksimiTulos;
+ELSIF rTulos < rMinimiTulos THEN
+    rTulos := rMinimiTulos;
+END_IF;
+
+rMittausEdellinen := rMittaus;
+```
+
+### I-komponentin anti-windup
+
+Vaikka yllä rajoitammekin säätimen tuloksen aseteltavien rajojen sisälle, pelkän I-komponentin arvoa ei rajoiteta ollenkaan. Jos säätimen tulos on maksimiarvossaan, eikä asetusarvoa silti saavuteta nopeasti, I-komponentti voi kasvaa valtavan suureksi. Kun asetusarvo myöhemmin saavutetaan, säätö jumittuu täydelle teholle, koska I-komponentilla menee pitkän aikaa ennen kuin sen arvo taas pienenee säätimelle määritettyjen minimi- ja maksimiarvon väliin.
+
+Tämän tilanteen estämiseksi I-komponentin päivitys pitää pysäyttää, kun säätimen tulos on jo minimi- tai maksimiarvossaan ja I-komponentin päivittäminen muuttaisi sitä edelleen yli rajojen.
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+rVirhe          := rAsetusarvo - rMittaus;
+
+rP              := rVirhe * rKp;
+
+rD              := -(rMittaus - rMittausEdellinen) * rKd;
+
+rEsitulos       := rTasapainopiste + rP + rI + rD; (* Käytetään edellisen kierroksen rI arvoa *)
+
+IF (rEsitulos < rMaksimiTulos AND rEsitulos > rMinimiTulos)
+OR (rEsitulos >= rMaksimiTulos AND rVirhe < 0.0)
+OR (rEsitulos <= rMinimiTulos AND rVirhe > 0.0) THEN
+    rI              := rI + (rVirhe * rKi);
+END_IF;
+
+rTulos          := rTasapainopiste + rP + rI + rD;
+
+IF rTulos > rMaksimiTulos THEN
+    rTulos := rMaksimiTulos;
+ELSIF rTulos < rMinimiTulos THEN
+    rTulos := rMinimiTulos;
+END_IF;
+
+rMittausEdellinen := rMittaus;
+```
+
+### D-komponentin häiriöherkkyys ja suodatus
+
+Yllä olevassa koodissa D-komponentti perustuu mittauksen nykyisen ja edellisen ohjelmakierroksen väliseen muutokseen, joka vielä kerrotaan vahvistuskertoimella. Tämä aiheuttaa sen, että antureiden mittausarvoissa luonnostaan esiintyvät, normaalitilanteissa merkityksettömät häiriöt siirtyvät suoraan ja vahvistettuina säätimen tulokseen ja lopputuloksena on levoton ja nykivä säätö, vaikka itse prosessi olisi rauhallinen.
+
+Yleisin ja käytännössä toimivin ratkaisu tähän ongelmaan on käyttää D-komponentin laskennassa suodatettua mittausarvoa raakamittauksen sijaan. Tällöin nopeat, satunnaiset mittauspiikit vaimenevat ennen derivointia, eikä säädin reagoi niihin tarpeettomasti.
+
+Käytännössä tämä tarkoittaa sitä, että mittauksesta lasketaan ensin esimerkiksi lyhyen aikavälin liukuva keskiarvo tai yksinkertainen alipäästösuodatin, ja vasta tämän suodatetun arvon muutos syötetään D-komponentille. Näin D-osa reagoi vain prosessin todellisiin muutoksiin, ei satunnaiseen mittauskohinaan.
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+rVirhe          := rAsetusarvo - rMittaus;
+
+rP              := rVirhe * rKp;
+
+fbLiukuvaKeskiarvo(in_rArvo:=rMittaus, in_iNaytteet:=5);
+
+rMittausKeskiarvo   := fbLiukuvaKeskiarvo.out_rKeskiarvo;
+
+rD              := -(rMittausKeskiarvo - rMittausKeskiarvoEdellinen) * rKd;
+
+rEsitulos       := rTasapainopiste + rP + rI + rD; (* Käytetään edellisen kierroksen rI arvoa *)
+
+IF (rEsitulos < rMaksimiTulos AND rEsitulos > rMinimiTulos)
+OR (rEsitulos >= rMaksimiTulos AND rVirhe < 0.0)
+OR (rEsitulos <= rMinimiTulos AND rVirhe > 0.0) THEN
+    rI              := rI + (rVirhe * rKi);
+END_IF;
+
+rTulos          := rTasapainopiste + rP + rI + rD;
+
+IF rTulos > rMaksimiTulos THEN
+    rTulos := rMaksimiTulos;
+ELSIF rTulos < rMinimiTulos THEN
+    rTulos := rMinimiTulos;
+END_IF;
+
+rMittausKeskiarvoEdellinen := rMittausKeskiarvo;
+```
+
+_Yllä käytetyn liukuvan keskiarvon koko funktiolohkon toteutus on tämän blogijulkaisun lopussa._
+
+### Ohjelmakierroksen pituuden huomiointi
+
+Rakennusautomaatiota ohjelmoidessa tulee harvoin mietittyä ohjelmakierrosten välissä kuluvaa aikaa. Usein ohjelma suoritetaan noin sekunnin välein, mutta kierrosaika ei ole vakio vaan vaihtelee ainakin joitain satoja millisekunteja. Useimmiten tällä ei juuri ole merkitystä, mutta PID-säädintä ohjelmoidessa sen merkitys korostuu.
+
+Ideaalinen I-komponentti ei perustu yksittäisiin näytteisiin, vaan _jatkuvaan_ virheen kertymiseen ajan kuluessa. Samoin derivaatan tarkoitus on kuvata muutoksen _nopeutta_, ei kahden arvon välistä eroa. Käytännön toteutuksissa tämä ei kuitenkaan ole mahdollista, mutta voimme simuloida sitä ottamalla huomioon kuinka paljon aikaa muutosten tapahtumiseen kuluu. Jos ohjelmakierrosten välinen aika vaihtelee, sama mittausmuutos voi tarkoittaa joko hidasta tai nopeaa prosessia, mutta ilman ajan huomiointia säädin ei pysty erottamaan näitä toisistaan.
+
+Ongelman ratkaisemiseksi on tarkasteltava todellista ohjelmakierrosten välillä kuluvaa aikaa ja skaalattava I- ja D-komponentteja sen perusteella.
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+IF NOT bAikaAlustettu THEN
+
+    (* Aikamuuttujien alustus ensimmäisellä ohjelmakierroksella *)
+    udiTicEdellinenMs   := SystemTime.SystemTic;
+	rDT                 := 0.0;
+    bAikaAlustettu      := TRUE;
+
+ELSE
+
+    (* Aikamuuttujien normaali määrittely ************************)
+
+    (* SystemTic on järjestemän käynnistyksestä kulunut aika millisekunteina *)
+    udiTicMs            := SystemTime.SystemTic;
+
+    (* Verrataan SystemTic arvoa tällä ja edellisellä ohjelmakierroksella *)
+    udiDTms             := udiTicMs - udiTicEdellinenMs;
+
+    (* Otetaan SystemTic arvo talteen seuraavaa ohjelmakierrosta varten *)
+    udiTicEdellinenMs   := udiTicMs;
+
+    (* Muutetaan arvo sekunteiksi REAL-tietotyyppiseen muuttujaan *)
+    rDT                 := UDINT_TO_REAL(udiDTms) / 1000.0;
+
+END_IF;
+
+rVirhe          := rAsetusarvo - rMittaus;
+
+rP              := rVirhe * rKp;
+
+fbLiukuvaKeskiarvo(in_rArvo:=rMittaus, in_iNaytteet:=5);
+
+rMittausKeskiarvo   := fbLiukuvaKeskiarvo.out_rKeskiarvo;
+
+IF rDT > 0.0 THEN
+
+    (* Nykyisen ja edellisen mittausarvon välillä on kulunut rDT sekuntia *)
+    rD := -(rMittausKeskiarvo - rMittausKeskiarvoEdellinen) / rDT * rKd;
+
+ELSE
+
+    rD := 0.0;
+
+END_IF;
+
+rEsitulos       := rTasapainopiste + rP + rI + rD; (* Käytetään edellisen kierroksen rI arvoa *)
+
+IF (rEsitulos < rMaksimiTulos AND rEsitulos > rMinimiTulos)
+OR (rEsitulos >= rMaksimiTulos AND rVirhe < 0.0)
+OR (rEsitulos <= rMinimiTulos AND rVirhe > 0.0) THEN
+
+    (* Virhe on ollut olemassa rDT sekuntia *)
+    rI := rI + (rVirhe * rKi * rDT);
+
+END_IF;
+
+rTulos          := rTasapainopiste + rP + rI + rD;
+
+IF rTulos > rMaksimiTulos THEN
+    rTulos := rMaksimiTulos;
+ELSIF rTulos < rMinimiTulos THEN
+    rTulos := rMinimiTulos;
+END_IF;
+
+rMittausKeskiarvoEdellinen := rMittausKeskiarvo;
+```
+
+Nyt säädin on jo käyttökelpoinen oikeissa toteutuksissa, eikä sen toiminta muutu arvaamattomasti vain siksi, että keskusyksikön kuorma muuttuu. Säätimeen voidaan kuitenkin tehdä vielä yksi muutos, joka tekee sen virittämisestä intuitiivisempaa.
+
+### Suhdealue, integrointiaika ja derivointiaika
+
+Yllä toteutettu säädin on toimiva ja noudattaa klassista oppikirjamallin PID-säätimen toimintaa. Säätimen viritys onnistuu vahvistuskertoimia Kp, Ki ja Kd muuttamalla.
+
+Vaikka vahvistuskertoimet ovat matemaattisesti toimivia, ne ovat käytännössä epäintuitiivisia. Ilman selkeää viitekehystä Kp-, Ki- ja Kd-arvot näyttävät helposti satunnaisilta numeroilta, joiden vaikutusta säätimen todelliseen käyttäytymiseen on vaikea arvioida etukäteen.
+
+Tästä syystä vahvistuskertoimien sijaan käytetään usein suhdealuetta, integrointiaikaa ja derivointiaikaa, joilla on sama käyttötarkoitus, mutta niiden avulla säätimen virittämisestä tulee intuitiivisempaa:
+
+- Suhdealue kertoo kuinka paljon virhettä tarvitaan, jotta P-komponentin arvo saavuttaa säätimen maksimiarvon: Esimerkiksi suhdealueella 10 P-komponentin arvo on maksimissaan (esim. 100 %), kun säätövirhe on 10.
+- Integrointiaika kertoo kuinka nopeasti I-komponentin arvo on sama kuin P-komponentin arvo, jos säätövirhe pysyy vakiona. Toisin sanoen, jos säätövirhe ei muutu, kestää integrointiajan verran, että I-komponentti muuttaa säätimen tuloksen kaksinkertaiseksi.
+- Derivointiaika kertoo, kuinka pitkälle D-komponentti "ennustaa" tulevan virheen arvon jarruttaessaan säätöä
+
+Vaikka koodista tulee hieman monimutkaisemman näköinen, itse säätimen toiminta ei itsessään muutu mitenkään. P-, I- ja D-komponentit toimivat edelleen samalla tavalla, mutta viritysparametreista saadaan intuitiivisemmat. Suhdealueen, integrointiajan ja derivointiajan avulla säätimen käyttäytymistä voidaan arvioida suoraan ajallisesta ja toiminnallisesta näkökulmasta ilman, että arvojen vaikutusta täytyy ensin kokeilla käytännössä.
+
+Tämä on erityisen hyödyllistä rakennusautomaatiossa ja muissa hitaissa prosesseissa, joissa säätimen virittäminen onnistuu lähes aina käsin virittämällä ja prosessia seuraamalla sen sijaan, että olisi tarvetta käyttää monimutkaisia viritysalgoritmeja.
+
+Seuraavassa koodissa aiempi PID-säädin on kirjoitettu uudelleen käyttäen suhdealuetta, integrointiaikaa ja derivointiaikaa. Itse säätöalgoritmi on sama, mutta parametrit on muunnettu muotoon, joka vastaa yleisesti automaatiojärjestelmissä käytettyjä asetusarvoja ja helpottaa säätimen virittämistä käytännössä.
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+IF NOT bAikaAlustettu THEN
+
+    (* Aikamuuttujien alustus ensimmäisellä ohjelmakierroksella *)
+    udiTicEdellinenMs   := SystemTime.SystemTic;
+	rDT                 := 0.0;
+    bAikaAlustettu      := TRUE;
+
+ELSE
+
+    (* Aikamuuttujien normaali määrittely ************************)
+
+    (* SystemTic on järjestemän käynnistyksestä kulunut aika millisekunteina *)
+    udiTicMs            := SystemTime.SystemTic;
+
+    (* Verrataan SystemTic arvoa tällä ja edellisellä ohjelmakierroksella *)
+    udiDTms             := udiTicMs - udiTicEdellinenMs;
+
+    (* Otetaan SystemTic arvo talteen seuraavaa ohjelmakierrosta varten *)
+    udiTicEdellinenMs   := udiTicMs;
+
+    (* Muutetaan arvo sekunteiksi REAL-tietotyyppiseen muuttujaan *)
+    rDT                 := UDINT_TO_REAL(udiDTms) / 1000.0;
+
+END_IF;
+
+rVirhe          := rAsetusarvo - rMittaus;
+
+IF rSuhdealue > 0.0 THEN
+    rP := (100.0 / rSuhdealue) * rVirhe;
+ELSE
+    rP := 0.0;
+END_IF;
+
+fbLiukuvaKeskiarvo(in_rArvo:=rMittaus, in_iNaytteet:=5);
+
+rMittausKeskiarvo   := fbLiukuvaKeskiarvo.out_rKeskiarvo;
+
+IF (rDT > 0.0)
+AND (rSuhdealue > 0.0)
+AND (rDerivointiAika > 0.0) THEN
+    rMuutosNopeus   := (rMittausKeskiarvo - rMittausKeskiarvoEdellinen) / rDT;
+    rD              := -rMuutosNopeus * (100.0 / in_rSuhdealue) * in_rDerivointiAika;
+ELSE
+    rD := 0.0;
+END_IF;
+
+rEsitulos := rTasapainopiste + rP + rI + rD; (* Käytetään edellisen kierroksen rI arvoa *)
+
+IF ((rEsitulos < rMaksimiTulos AND rEsitulos > rMinimiTulos)
+OR (rEsitulos >= rMaksimiTulos AND rVirhe < 0.0)
+OR (rEsitulos <= rMinimiTulos AND rVirhe > 0.0)) THEN
+
+    IF (rSuhdealue > 0.0) AND (rIntegrointiaika > 0.0) THEN
+
+        (* Virhe on ollut olemassa rDT sekuntia *)
+        rI := rI + (rVirhe / rSuhdealue) * (rDT / rIntegrointiaika) * 100.0;
+
+    END_IF;
+
+END_IF;
+
+rTulos := rTasapainopiste + rP + rI + rD;
+
+IF rTulos > rMaksimiTulos THEN
+    rTulos := rMaksimiTulos;
+ELSIF rTulos < rMinimiTulos THEN
+    rTulos := rMinimiTulos;
+END_IF;
+
+rMittausKeskiarvoEdellinen := rMittausKeskiarvo;
+```
+
+_Koko PID-säätimen ohjelma suoraan IEC 61131-3 Structured Text -ohjelmointiympäristössä käytettävässä funktiolohkomuodossa löytyy tämän blogijulkaisun lopusta._
+
+## PID-säätimen viritys
+
+Virittämistapoja on monia, ja erityisen haastavien prosessien virittämiseen kannattaakin harkita matemaattisia viritysmalleja, joissa viritysparametrit määritellään erilaisten laskentakaavojen perusteella.
+
+Usein virittäminen kuitenkin onnistuu hyvin myös kokeilemalla, kun sen toiminnan ymmärtää. Alla on esitetty yksi tapa virittää säädin.
+
+### Aloita P-säätimestä
+
+- Aseta integrointi ja derivointi pois päältä (tai Ti ja Td erittäin suuriksi)
+- Säädä suhdealuetta pienin askelin niin, että säädin reagoi selvästi mutta ei huoju
+- Jos mittaus ei pääse lähellekään asetusarvoa, pienennä suhdealuetta
+- Jos säätö huojuu edestakaisin, kasvata suhdealuetta
+
+Tässä vaiheessa riittää, että mittaus on "sinne päin" ilman huojuntaa.
+
+### Lisää integrointi
+
+- Aseta integrointiaika aluksi selvästi prosessin aikaskaalaa suuremmaksi
+- Pienennä integrointiaikaa vähitellen, kunnes pysyvä virhe poistuu. Kokeile muuttaa asetusarvoa ja tarkista, että pysyvä virhe poistuu kyseiselle prosessille riittävällä nopeudella.
+- Jos mittaus alkaa aaltoilla asetusarvon molemmin puolin, integrointiaika on liian pieni.
+
+### Harkitse derivointia kriittisesti
+
+Muista, että useimmissa tapauksissa PI-säädin on täysin riittävä. D-komponenttia kannattaa käyttää vain, jos järjestelmä reagoi säätöön selkeällä viiveellä. Jos edelleen tuntuu, että derivoinnille on tarvetta, harkitse vielä kerran.
+
+### Jos päädyt käyttämään derivointia
+
+- Varmista, että mittaus on mahdollisimman häiriötön tai että säädin suodattaa häiriöt pois mittauksesta
+- Aloita todella pienellä derivointiajalla ja kasvata sitä varovasti. Tavoite on vähentää yliohjauksia ilman, että säätö alkaa nykiä tai huojua.
+
+### Testaa toiminta
+
+Seuraa säätimen toimintaa eri tilanteissa:
+
+- asetusarvon muutokset
+- kuormituksen vaihtelut
+- käynnistys- ja pysäytystilanteet
+
+Hyvin viritetty säädin reagoi nopeasti mutta rauhallisesti, ilman turhaa huojuntaa.
+
+## PI-säätimen viritysharjoitus
+
+Alla on yksinkertaistettu simulaatio käyttöveden menolämpötilan säädöstä. Voit kokeilla viritää säätimen toimimaan mahdollisimman optimaalisesti. Päätin olla ottamatta tähän mukaan D-komponenttia, koska sen käyttö vastaavissa säädöissä on todella harvinaista.
+
+Voit muuttaa viritysparametreja ja asetusarvoa vapaasti. Muut arvot päivittyvät itsestään. Simulointi on tehty tietokoneella käytettäväksi, mutta se saattaa todennäköisesti toimii myös useimmilla puhelimilla.
+
+<DhwPidSimulator />
+
+## Valmiit koodit
+
+Alla on vielä tässä blogitekstissä kirjoitettu koodi, joka on muotoiltu suoraan IEC 61131-3 Structured Text -kieltä käyttävään säätimeen sopivaan muotoon funktiolohkoksi, sekä funktiolohko, joka laskee arvolle liukuvaa keskiarvoa derivointia varten.
+
+Liukuvan keskiarvon toteutus:
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+FUNCTION_BLOCK FB_LiukuvaKeskiarvo
+
+VAR_INPUT
+    in_rArvo      : REAL;
+    in_iNaytteet  : INT;   (* 1..15 *)
+END_VAR
+
+VAR
+    i           : INT;
+    j           : INT;
+    iNaytteet   : INT;
+    rSumma      : REAL;
+    arPuskuri   : ARRAY [1..15] OF REAL;
+    iMaara      : INT := 0;
+END_VAR
+
+VAR_OUTPUT
+    out_rKeskiarvo  : REAL;
+END_VAR
+
+IF in_iNaytteet < 1 THEN
+    iNaytteet := 1;
+ELSIF in_iNaytteet > 15 THEN
+    iNaytteet := 15;
+ELSE
+    iNaytteet := in_iNaytteet;
+END_IF;
+
+IF iMaara < iNaytteet THEN
+    iMaara := iMaara + 1;
+    FOR i := 1 TO iMaara BY 1 DO
+        arPuskuri[i] := in_rArvo;
+    END_FOR;
+ELSE
+
+    FOR i := iNaytteet TO 2 BY -1 DO
+    	j := i - 1;
+        arPuskuri[i] := arPuskuri[j];
+    END_FOR;
+
+    arPuskuri[1] := in_rArvo;
+END_IF;
+
+
+rSumma := 0.0;
+FOR i := 1 TO iMaara BY 1 DO
+    rSumma := rSumma + arPuskuri[i];
+END_FOR;
+
+out_rKeskiarvo := rSumma / INT_TO_REAL(iMaara);
+
+END_FUNCTION_BLOCK
+```
+
+Valmis PID-säätimen funktiolohko:
+
+```pascal
+(* IEC 61131-3 Structured Text *)
+
+FUNCTION_BLOCK FB_PID
+
+VAR_INPUT
+    in_bKayntilupa        : BOOL;
+    in_rAsetusarvo        : REAL;
+    in_rMittaus           : REAL;
+    in_rSuhdealue         : REAL;
+    in_rIntegrointiaika   : REAL;
+    in_rDerivointiAika    : REAL;
+    in_rTasapainopiste    : REAL;
+    in_rMinimiTulos       : REAL;   (* Fyysinen minimilähtö, yleensä 0.0 % *)
+    in_rMaksimiTulos      : REAL;   (* Fyysinen maksimilähtö, yleensä 100.0 % *)
+    in_rTulosLepotilassa  : REAL;   (* Säätimen lähtöarvo, kun säädin on pysäytetty *)
+END_VAR
+
+VAR_OUTPUT
+	out_rTulos : REAL;   (* Skaalattu ulostulo *)
+    out_rP     : REAL;   (* P-komponentti, [0.0, 100.0] *)
+    out_rI     : REAL;   (* I-komponentti, [0.0, 100.0] *)
+    out_rD     : REAL;   (* D-komponentti, [0.0, 100.0] *)
+END_VAR
+
+VAR
+	SystemTime			  : SystemTimeFB;
+
+    bAikaAlustettu        : BOOL;
+
+    udiTicMs              : UDINT;
+    udiTicEdellinenMs     : UDINT;
+    udiDTms               : UDINT;
+
+    rDT                   : REAL;
+
+    rVirhe                : REAL;
+
+    rP                    : REAL;
+    rI                    : REAL;
+    rD                    : REAL;
+
+    rMuutosNopeus         : REAL;
+
+    rTasapainopiste0_100  : REAL;
+
+    rEsitulos             : REAL;
+    rTulos                : REAL;
+    rSkaalattuTulos       : REAL;
+
+    rMittausKeskiarvo             : REAL;
+    rMittausKeskiarvoEdellinen    : REAL;
+
+    fbLiukuvaKeskiarvo    			: FB_LiukuvaKeskiarvo;
+END_VAR
+
+IF in_bKayntilupa THEN
+
+	SystemTime();
+
+	IF NOT bAikaAlustettu THEN
+
+	    (* Aikamuuttujien alustus ensimmäisellä käynnistyksellä sekä käyntiluvan muuttuessa FALSE => TRUE *)
+
+	    udiTicEdellinenMs   		:= SystemTime.SystemTic;
+		rDT                 		:= 0.0;
+		rMittausKeskiarvoEdellinen 	:= rMittausKeskiarvo;
+
+
+	    bAikaAlustettu      := TRUE;
+
+	ELSE
+
+	    (* Aikamuuttujien normaali määrittely ************************)
+
+	    (* SystemTic on järjestemän käynnistyksestä kulunut aika millisekunteina *)
+	    udiTicMs            := SystemTime.SystemTic;
+
+	    (* Verrataan SystemTic arvoa tällä ja edellisellä ohjelmakierroksella, ylivuodot huomioiden *)
+	    IF udiTicMs >= udiTicEdellinenMs THEN
+		    udiDTms := udiTicMs - udiTicEdellinenMs;
+		ELSE
+			(* UDINT arvo palautuu nollaksi yli "ylivuotaa", kun se saavuttaa  *)
+			(* maksimiarvonsa eli 16#FFFFFFFF tällä korjataan ylivuoto *)
+		    udiDTms := (16#FFFFFFFF - udiTicEdellinenMs) + udiTicMs + 1;
+		END_IF;
+
+
+	    (* Otetaan SystemTic arvo talteen seuraavaa ohjelmakierrosta varten *)
+	    udiTicEdellinenMs := udiTicMs;
+
+	    (* Muutetaan arvo sekunteiksi REAL-tietotyyppiseen muuttujaan *)
+	    rDT := UDINT_TO_REAL(udiDTms) / 1000.0;
+
+	    (* Estetään säätimen arvojen "räjähtäminen, jos CPU on jumittuu ja kierrosaika on valtava *)
+	    rDT := MIN(rDT, 5.0);
+
+	END_IF;
+
+	rVirhe          := in_rAsetusarvo - in_rMittaus;
+
+	IF in_rSuhdealue > 0.0 THEN
+	    rP := (100.0 / in_rSuhdealue) * rVirhe;
+	ELSE
+	    rP := 0.0;
+	END_IF;
+
+	fbLiukuvaKeskiarvo(in_rArvo:=in_rMittaus, in_iNaytteet:=5);*)
+
+	rMittausKeskiarvo   := fbLiukuvaKeskiarvo.out_rKeskiarvo;
+
+	IF (rDT > 0.0)
+	AND (in_rSuhdealue > 0.0)
+	AND (in_rDerivointiAika > 0.0) THEN
+
+	    rMuutosNopeus   := (rMittausKeskiarvo - rMittausKeskiarvoEdellinen) / rDT;
+
+	    (* Mittauksen kasvu pienentää ulostuloa *)
+	    rD              := -rMuutosNopeus * (100.0 / in_rSuhdealue) * in_rDerivointiAika;
+	ELSE
+	    rD := 0.0;
+	END_IF;
+
+	(* Tasapainopiste normalisoidaan sisäiseen 0–100 % avaruuteen *)
+	(* Toimii myös, jos ulostuloalue on käänteinen (esim. 100 -> 0) *)
+	IF in_rMaksimiTulos <> in_rMinimiTulos THEN
+		rTasapainopiste0_100 := (in_rTasapainopiste - in_rMinimiTulos) / (in_rMaksimiTulos - in_rMinimiTulos) * 100.0;
+	ELSE
+		rTasapainopiste0_100 := 0.0;
+	END_IF;
+
+	(* Käytetään edellisen kierroksen integraattoria *)
+	(* Tällä päätetään, sallitaanko integraattorin päivitys *)
+	rEsitulos := rTasapainopiste0_100 + rP + rI + rD;
+
+	IF ((rEsitulos < 100.0 AND rEsitulos > 0.0)
+	OR (rEsitulos >= 100.0 AND rVirhe < 0.0)
+	OR (rEsitulos <= 0.0 AND rVirhe > 0.0)) THEN
+
+	    IF (in_rSuhdealue > 0.0) AND (in_rIntegrointiaika > 0.0) THEN
+
+	        (* Virhe on ollut olemassa rDT sekuntia *)
+	        rI := rI + (rVirhe / in_rSuhdealue) * (rDT / in_rIntegrointiaika) * 100.0;
+
+	    END_IF;
+
+	END_IF;
+
+	rTulos := rTasapainopiste0_100 + rP + rI + rD;
+
+	IF rTulos > 100.0 THEN
+	    rTulos := 100.0;
+	ELSIF rTulos < 0.0 THEN
+	    rTulos := 0.0;
+	END_IF;
+
+	(* Sisäinen 0–100 % tulos skaalataan fyysiseen ulostuloalueeseen *)
+	IF in_rMaksimiTulos <> in_rMinimiTulos THEN
+		rSkaalattuTulos := in_rMinimiTulos + (rTulos / 100.0) * (in_rMaksimiTulos - in_rMinimiTulos);
+	ELSE
+		rSkaalattuTulos := in_rMinimiTulos;
+	END_IF;
+
+	rMittausKeskiarvoEdellinen := rMittausKeskiarvo;
+ELSE
+
+	bAikaAlustettu      		:= FALSE;
+    rSkaalattuTulos  			:= in_rTulosLepotilassa;
+    rP							:= 0.0;
+    rI      					:= 0.0;
+    rD							:= 0.0;
+    rMittausKeskiarvoEdellinen 	:= rMittausKeskiarvo;
+
+END_IF;
+
+out_rTulos 	:= rSkaalattuTulos;
+out_rP		:= rP;
+out_rI		:= rI;
+out_rD		:= rD;
+
+
+END_FUNCTION_BLOCK
+```
