@@ -132,9 +132,9 @@ export default function DomesticHotWaterPidSimulator() {
         <Img src={arrowRedDarkLeft} left={534} top={226} width={11} height={13} />
 
         <Label
-          text={`Käyttöveden kulutus: ${hotWaterDemandFlow.toFixed(1)} l/s`}
-          left={440}
-          top={150}
+          text={`Vedenkulutus: ${(hotWaterDemandFlow * 60).toFixed(1)} l/min`}
+          left={450}
+          top={160}
         />
         <Label text={`P:`} left={410} top={30} />
         <Label text={`I:`} left={410} top={45} />
