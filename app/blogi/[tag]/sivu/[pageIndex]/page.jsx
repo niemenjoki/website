@@ -55,11 +55,15 @@ export default async function BlogTagPage({ params }) {
     data['@graph'][1]['itemListElement'].push({
       '@type': 'ListItem',
       position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
-      url: `${SITE_URL}/blogi/${post.slug}`,
+      url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
     });
   });
 
-  const ldJSON = JSON.parse(JSON.stringify(data).replaceAll('[pageIndex]', pageIndex));
+  const ldJSON = JSON.parse(
+    JSON.stringify(data)
+      .replaceAll('[pageIndex]', pageIndex)
+      .replaceAll('[tag]', decodedTag)
+  );
 
   return (
     <>

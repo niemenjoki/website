@@ -3,16 +3,16 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#webpage",
-      "url": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]",
-      "name": "Blogi – (sivu [pageIndex])",
+      "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#webpage",
+      "url": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]",
+      "name": "Julkaisut avainsanalla [tag] (sivu [pageIndex])",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": { "@id": "https://www.niemenjoki.fi/#organization" },
       "inLanguage": "fi"
     },
     {
       "@type": "ItemList",
-      "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#itemlist",
+      "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#itemlist",
       "itemListElement": []
     }
   ]

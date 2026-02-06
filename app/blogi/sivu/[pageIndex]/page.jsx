@@ -42,11 +42,19 @@ export default async function BlogPage({ params }) {
     data['@graph'][1]['itemListElement'].push({
       '@type': 'ListItem',
       position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
-      url: `${SITE_URL}/blogi/${post.slug}`,
+      url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
     });
   });
 
   const ldJSON = JSON.parse(JSON.stringify(data).replaceAll('[pageIndex]', pageIndex));
+
+  if (pageIndexInt === 1) {
+    const canonicalUrl = `${SITE_URL}/blogi`;
+    ldJSON['@graph'][0]['@id'] = `${canonicalUrl}#webpage`;
+    ldJSON['@graph'][0]['url'] = canonicalUrl;
+    ldJSON['@graph'][0]['name'] = 'Blogi – Kaikki julkaisut';
+    ldJSON['@graph'][1]['@id'] = `${canonicalUrl}#itemlist`;
+  }
 
   return (
     <>
