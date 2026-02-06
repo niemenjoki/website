@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import compressorActiveImage from '@/public/images/content/DhwPidSimulator/Kompressori-aktiivinen.avif';
 import compressorImage from '@/public/images/content/DhwPidSimulator/Kompressori.avif';
@@ -68,7 +68,10 @@ export default function DomesticHotWaterPidSimulator() {
     hotWaterDemandFlow,
     pidOutput,
   } = simulationState;
-  const pidSettings = { proportionalBand, integrationTime };
+  const pidSettings = useMemo(
+    () => ({ proportionalBand, integrationTime }),
+    [proportionalBand, integrationTime],
+  );
 
   const setSimulationValue = (key) => (value) => {
     setSimulationState((prev) => ({
@@ -81,15 +84,18 @@ export default function DomesticHotWaterPidSimulator() {
     setter((prev) => parseNumberOrFallback(value, prev));
   };
 
-  const applySimulationStep = (updateFn = emptyUpdate) => {
-    setSimulationState((prev) => {
-      const patch = updateFn(prev, pidSettings);
-      if (!patch || typeof patch !== 'object') {
-        return prev;
-      }
-      return { ...prev, ...patch };
-    });
-  };
+  const applySimulationStep = useCallback(
+    (updateFn = emptyUpdate) => {
+      setSimulationState((prev) => {
+        const patch = updateFn(prev, pidSettings);
+        if (!patch || typeof patch !== 'object') {
+          return prev;
+        }
+        return { ...prev, ...patch };
+      });
+    },
+    [pidSettings],
+  );
 
   useEffect(() => {
     const deltaSeconds = 1;
@@ -98,7 +104,7 @@ export default function DomesticHotWaterPidSimulator() {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [proportionalBand, integrationTime]);
+  }, [applySimulationStep, pidSettings]);
 
   const compressorDisplayImage =
     compressorState === 1 ? compressorActiveImage : compressorImage;
