@@ -17,6 +17,7 @@ import {
   getContentMetadata,
   getPostRecommendations,
 } from '@/lib/content/index.mjs';
+import rehypeHeadingIds from '@/lib/mdx/rehypeHeadingIds.mjs';
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './PostPage.module.css';
@@ -88,7 +89,7 @@ export default async function PostPage({ params }) {
             components={mdxComponents}
             options={{
               mdxOptions: {
-                rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
+                rehypePlugins: [rehypeHeadingIds, [rehypePrettyCode, prettyCodeOptions]],
               },
             }}
           />
