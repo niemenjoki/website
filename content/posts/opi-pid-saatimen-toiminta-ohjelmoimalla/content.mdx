@@ -11,7 +11,7 @@ Tässä tekstissä yritän parhaani mukaan avata kyseisen säätimen toimintaa s
 - [Mikä PID-säädin on?](#mikä-pid-säädin-on)
 - [P-komponentti: nopea reaktio](#p-komponentti-nopea-reaktio)
 - [I-komponentti: jatkuvan virheen korjaus](#i-komponentti-jatkuvan-virheen-korjaus)
-- [D-komponentti: Nopeiden muutosten jarru](#d-komponentti-nopeiden-muutosten-jarru)
+- [D-komponentti: nopeiden muutosten jarru](#d-komponentti-nopeiden-muutosten-jarru)
 - [PID-säätimen toiminnan parantaminen](#pid-säätimen-toiminnan-parantaminen)
   - [Tuloksen rajaus halutulle välille](#tuloksen-rajaus-halutulle-välille)
   - [Tasapainopiste](#tasapainopiste)
@@ -127,7 +127,7 @@ I-komponentin tehtävä on pikkuhiljaa nostaa säätöviestiä, kunnes P-kompone
 
 </figure>
 
-## D-komponentti: Nopeiden muutosten jarru
+## D-komponentti: nopeiden muutosten jarru
 
 PI-säädin riittää käytännössä useimpiin säätötilanteisiin, ainakin rakennusautomaation yhteydessä. Lähes aina, kun tulee mieleen käyttää D-komponenttia, varsinainen ongelma on jokin muu kuin D-komponentin puuttuminen, ainakin rakennusautomaation yhteydessä. Jotkut sanovatkin, että PID-säätimen D-kirjain tulee lauseesta "Do not use".
 
@@ -173,7 +173,7 @@ Yllä esitetty PID-säädin on niin sanottu oppikirjamalli, joka toimii periaatt
 
 ## PID-säätimen toiminnan parantaminen
 
-<Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+<Advert adClient="ca-pub-5560402633923389" adSlot="2561407398" />
 
 ### Tuloksen rajaus halutulle välille
 
@@ -205,11 +205,16 @@ rMittausEdellinen := rMittaus;
 
 ### Tasapainopiste
 
-Kun säädintä halutaan välillä pysäyttää ja käynnistää uudelleen, yllä olevan koodin mukaisen säätimen arvo lähtee kasvattamaan tulostaan nollasta ylöspäin, kun virhe kasvaa. Tämä on ongelmallista erityisesti, jos säädetään prosessia, jonka säätöarvo on normaalitilanteessa aina korkea.
+Jos säädintä joudutaan välillä pysäyttämään ja käynnistämään uudelleen, yllä olevan koodin kaltainen toteutus alkaa kasvattaa tulostaan nollasta ylöspäin. Tämä on ongelmallista erityisesti prosesseissa, joissa säätöarvo on normaalitilanteessa valmiiksi korkea, koska silloin käynnistyksen jälkeen ohjaus "ryömii" kohti oikeaa tasoa turhan hitaasti.
 
-Usein onkin tarpeen määrittää niin sanottu tasapainopiste, jonka ympärillä säätimen tulos muuttuu. Usein tasapainopiste on hyvä asettaa esimerkiksi säädön minimi- ja maksiarvojen puoleen väliin, mutta myös muille tasapainopisteille on käyttötarkoituksensa.
+Siksi säätimelle on usein tarpeen määrittää tasapainopiste, eli lähtötaso, jonka ympärillä säätimen tulos elää. Tällöin säädin ei lähde aina nollasta, vaan tulos lähtee liikkeelle prosessille luontevasta arvosta ja P/I-komponentit tekevät siitä tarvittavat korjaukset.
 
-Itse määritän lämpöpumppujärjestelmän apuna toimivan sähkökattilan tehonsäädölle tasapainopisteeksi nollan, jotta sähkökattila lähtee tarvittaessa pikkuhiljaa kasvattamaan tehoaan nollasta. Toisaalta, jos saman sähkökattilan tehoa on tarvetta rajoittaa esimerkiksi liian suuren järjestelmän kokonaisvirran estämiseksi, asetan rajoitussäätimen tasapainopisteen 100 %:iin, jotta se ei säätimen käynnistyessä vaikuta sähkökattilaan, vaan alkaa laskemaan tehoa maksimista alaspäin vain tarvittaessa.
+Hyvä yleisvalinta tasapainopisteelle on asettaa se säätöalueen keskikohtaan eli minimin ja maksimin puoliväliin (esim. 50 %). Joissain tilanteissa tasapainopiste kannattaa kuitenkin asettaa tarkoituksella reunaan. Itse käytän tasapainopistettä, kun haluan säädön lähtevän nostamaan tehoa alarajasta tai leikkaamaan tehoa ylärajasta:
+
+- Kun sähkökattila toimii lämpöpumppujärjestelmän apuna ja haluan sen lisäävän tehoa tarvittaessa pehmeästi, asetan tasapainopisteen säätöalueen alarajaan (esim. 0 %). Tällöin ohjaus kasvaa nollasta ylöspäin vain tarpeen mukaan.
+- Kun on tarkoitus rajoittaa sähkökattilan tehoa (esim. estää liian suuri kokonaisvirta), asetan rajoitussäätimen tasapainopisteen säätöalueen ylärajaan (esim. 100 %). Näin säädin ei käynnistyessään pienennä tehoa, vaan alkaa leikata sitä alaspäin vain tarvittaessa.
+
+Esimerkiksi Fidelix-järjestelmän keskusyksiköt käyttävät oletuksena säätöalueen keskikohtaa tasapainopisteenä, jos sitä ei ole määritetty erikseen.
 
 ```pascal
 (* IEC 61131-3 Structured Text *)
@@ -530,6 +535,8 @@ Alla on yksinkertaistettu simulaatio käyttöveden menolämpötilan säädöstä
 Voit muuttaa viritysparametreja ja asetusarvoa vapaasti. Muut arvot päivittyvät itsestään. Simulointi on tehty tietokoneella käytettäväksi, mutta se saattaa todennäköisesti toimii myös useimmilla puhelimilla.
 
 <DhwPidSimulator />
+
+<Advert adClient="ca-pub-5560402633923389" adSlot="8210055981" />
 
 ## Valmiit koodit
 

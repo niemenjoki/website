@@ -9,18 +9,16 @@ import classes from './Advert.module.css';
 const Advert = ({ adClient, adSlot }) => {
   const pathname = usePathname();
   const adRef = useRef(null);
-  const [hasAd, setHasAd] = useState(false);
+  const [adStatus, setAdStatus] = useState('unknown');
+  const isEnabled =
+    process.env.NODE_ENV !== 'development' &&
+    adClient?.startsWith('ca-pub-') &&
+    Boolean(adSlot);
 
   useEffect(() => {
-    if (
-      process.env.NODE_ENV === 'development' ||
-      !adClient?.startsWith('ca-pub-') ||
-      !adSlot
-    ) {
-      return;
-    }
+    if (!isEnabled) return;
 
-    setHasAd(false);
+    setAdStatus('unknown');
 
     try {
       window.adsbygoogle = window.adsbygoogle || [];
@@ -39,12 +37,12 @@ const Advert = ({ adClient, adSlot }) => {
       const status = el?.getAttribute('data-ad-status');
 
       if (status === 'filled') {
-        setHasAd(true);
+        setAdStatus('filled');
         return;
       }
 
       if (status === 'unfilled') {
-        setHasAd(false);
+        setAdStatus('unfilled');
         return;
       }
 
@@ -59,13 +57,13 @@ const Advert = ({ adClient, adSlot }) => {
     return () => {
       cancelled = true;
     };
-  }, [pathname, adClient, adSlot]);
+  }, [pathname, adClient, adSlot, isEnabled]);
 
-  if (!hasAd) return null;
+  if (!isEnabled || adStatus === 'unfilled') return null;
 
   return (
     <div className={classes.AdBox} key={pathname}>
-      <div className={classes.AdLabel}>Mainos</div>
+      {adStatus === 'filled' && <div className={classes.AdLabel}>Mainos</div>}
 
       <ins
         ref={adRef}
