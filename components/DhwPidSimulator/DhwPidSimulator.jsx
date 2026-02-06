@@ -44,13 +44,13 @@ export default function DomesticHotWaterPidSimulator() {
      ========================= */
 
   const [simulationState, setSimulationState] = useState({
-    compressorState: 1,
-    tankTemperature: 62.8,
-    preValveTemperature: 63.3,
+    compressorState: 0,
+    tankTemperature: 58.5,
+    preValveTemperature: 59.5,
     setpointTemperature: 58.0,
-    inletTemperature: 48.6,
-    outletTemperature: 47.3,
-    valveCommand: 54.6,
+    inletTemperature: 58.6,
+    outletTemperature: 54.3,
+    valveCommand: 50.0,
     hotWaterDemandFlow: 0.0,
   });
 

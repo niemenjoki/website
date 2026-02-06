@@ -4,8 +4,8 @@ import { createPid } from './fbPid';
 const pidController = createPid();
 
 const WATER_SPECIFIC_HEAT_KJ_PER_KG_C = 4.186; // kJ/kg*C
-const HEAT_PUMP_POWER_KW = 100.0; // kJ/s
-const TANK_VOLUME_LITERS = 1000.0;
+const HEAT_PUMP_POWER_KW = 25.0; // kJ/s
+const TANK_VOLUME_LITERS = 500.0;
 const LOOP_DIAMETER_METERS = 0.042;
 const LOOP_LENGTH_METERS = 50.0;
 const RETURN_SEGMENT_LENGTH_METERS = 10.0;
@@ -141,7 +141,7 @@ export default function simulationStep(simulationState, deltaSeconds, pidSetting
     tankEnergyKilojoulesCurrent / (tankMassKg * WATER_SPECIFIC_HEAT_KJ_PER_KG_C);
 
   let compressorState = toNumberOrFallback(simulationState.compressorState, 0);
-  if (compressorState === 0 && tankTemperatureFromEnergy <= 59.0) {
+  if (compressorState === 0 && tankTemperatureFromEnergy <= 58.0) {
     compressorState = 1;
   } else if (compressorState === 1 && tankTemperatureFromEnergy >= 63.0) {
     compressorState = 0;
@@ -289,5 +289,6 @@ export default function simulationStep(simulationState, deltaSeconds, pidSetting
     loopSegmentTemperatures: nextLoopSegmentTemperatures,
     inletDelayBuffer,
     hotWaterDemandFlow,
+    pidOutput,
   };
 }
