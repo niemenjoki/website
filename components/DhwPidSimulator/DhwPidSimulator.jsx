@@ -70,7 +70,7 @@ export default function DomesticHotWaterPidSimulator() {
   } = simulationState;
   const pidSettings = useMemo(
     () => ({ proportionalBand, integrationTime }),
-    [proportionalBand, integrationTime],
+    [proportionalBand, integrationTime]
   );
 
   const setSimulationValue = (key) => (value) => {
@@ -94,7 +94,7 @@ export default function DomesticHotWaterPidSimulator() {
         return { ...prev, ...patch };
       });
     },
-    [pidSettings],
+    [pidSettings]
   );
 
   useEffect(() => {
