@@ -69,13 +69,10 @@ export default async function sitemap() {
   const postTags = getAllPostTags();
   const staticPages = getStaticPages();
 
-  const latest = (arr, field) =>
-    arr.reduce((latest, item) => {
-      const d = new Date(item[field]);
-      return d > latest ? d : latest;
-    }, new Date(0));
-
-  const latestPost = latest(posts, 'date');
+  const latestPost = posts.reduce((latest, post) => {
+    const d = new Date(post.updated || post.date);
+    return d > latest ? d : latest;
+  }, new Date(0));
 
   const add = (url, lastmod) => {
     urls.push({ url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
@@ -100,7 +97,7 @@ export default async function sitemap() {
   }
 
   // --- Blog posts
-  posts.forEach((p) => add(`/blogi/julkaisu/${p.slug}`, p.date));
+  posts.forEach((p) => add(`/blogi/julkaisu/${p.slug}`, p.updated || p.date));
 
   // --- Paginated blog index (include page 1)
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
