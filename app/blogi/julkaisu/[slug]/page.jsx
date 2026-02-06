@@ -124,7 +124,8 @@ export default async function PostPage({ params }) {
               >
                 LinkedIn
               </a>{' '}
-              • <SafeLink href="/tietoa">Lisätietoa</SafeLink>
+              • <SafeLink href="/tietoa">Lisätietoa</SafeLink> •{' '}
+              <SafeLink href="/blogi">Kaikki julkaisut</SafeLink>
             </p>
           </div>
         </div>
