@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import Advert from '@/components/Advert/Advert';
 
 import classes from './CompressCra.module.css';
@@ -23,10 +25,13 @@ export default function CompressCraProjectPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               src="https://img.shields.io/npm/v/compress-create-react-app.svg"
               alt="npm version"
               loading="lazy"
+              width={140}
+              height={20}
+              style={{ width: 'auto', height: '20px' }}
             />
           </a>
 
@@ -35,10 +40,13 @@ export default function CompressCraProjectPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               src="https://img.shields.io/npm/dm/compress-create-react-app.svg"
               alt="npm monthly downloads"
               loading="lazy"
+              width={80}
+              height={20}
+              style={{ width: 'auto', height: '20px' }}
             />
           </a>
         </div>
