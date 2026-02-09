@@ -12,6 +12,12 @@ import './globals.css';
 
 config.autoAddCss = false;
 
+export const metadata = {
+  verification: {
+    google: 'QnhqvG850vkdtc4C7pk0jp9JUDowtwf-vVks_iHQLWY',
+  },
+};
+
 const rubik = Rubik({
   subsets: ['latin'],
   weight: ['400', '700', '800'],
