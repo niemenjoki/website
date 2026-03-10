@@ -3,7 +3,12 @@
 import { useRef, useState } from 'react';
 
 import classes from './AlarmPageTool.module.css';
-import { buildOutputHtml, parsePointDatabase } from './alarmPageTool';
+import {
+  DEFAULT_LIMIT_NUMBERS,
+  LIMIT_OPTIONS,
+  buildOutputHtml,
+  parsePointDatabase,
+} from './alarmPageTool';
 
 export default function AlarmPageToolClient() {
   const [source, setSource] = useState('');
@@ -12,6 +17,7 @@ export default function AlarmPageToolClient() {
   const [summary, setSummary] = useState('');
   const [copied, setCopied] = useState(false);
   const [copyHint, setCopyHint] = useState('');
+  const [limitNumbers, setLimitNumbers] = useState(DEFAULT_LIMIT_NUMBERS);
   const outputRef = useRef(null);
 
   function selectOutput() {
@@ -32,14 +38,18 @@ export default function AlarmPageToolClient() {
     setCopyHint('');
 
     try {
-      const { rows, measurementCount } = parsePointDatabase(source);
+      const {
+        rows,
+        measurementCount,
+        limitNumbers: appliedLimitNumbers,
+      } = parsePointDatabase(source, limitNumbers);
 
       if (rows.length === 0) {
         setOutput('');
         setError('');
         setCopyHint('');
         setSummary(
-          `Kelvollisia rivejä ei löytynyt. Tarkistettuja mittauspisteitä: ${measurementCount}.`
+          `Kelvollisia rivejä ei löytynyt. Tarkistettuja mittauspisteitä: ${measurementCount}. Käytetyt limitit: ${appliedLimitNumbers.low}, ${appliedLimitNumbers.high}, ${appliedLimitNumbers.control}.`
         );
         return;
       }
@@ -48,7 +58,7 @@ export default function AlarmPageToolClient() {
       setError('');
       setCopyHint('');
       setSummary(
-        `Löytyi ${rows.length} tulostettavaa riviä ${measurementCount} mittauspisteestä.`
+        `Löytyi ${rows.length} tulostettavaa riviä ${measurementCount} mittauspisteestä. Käytetyt limitit: ${appliedLimitNumbers.low}, ${appliedLimitNumbers.high}, ${appliedLimitNumbers.control}.`
       );
     } catch (nextError) {
       setOutput('');
@@ -58,6 +68,13 @@ export default function AlarmPageToolClient() {
         nextError instanceof Error ? nextError.message : 'Jäsentäminen epäonnistui.'
       );
     }
+  }
+
+  function updateLimitNumber(field, value) {
+    setLimitNumbers((currentLimitNumbers) => ({
+      ...currentLimitNumbers,
+      [field]: Number(value),
+    }));
   }
 
   async function handleCopy() {
@@ -98,8 +115,56 @@ export default function AlarmPageToolClient() {
             Liitä FX-Editorista kopioitu pistekanta XML-muodossa. Työkalu huomioi vain
             mittauspisteet, joiden tunnus päättyy muotoon _M tai _FM ja joilla on
             vähintään yksi niihin liittyvä ARH- tai YRH-päätteinen rajahälytys tai
-            _C-päätteinen asetusarvo sekä SVH-päätteinen säätövikahälytys.
+            _C-päätteinen asetusarvo sekä SVH-päätteinen säätövikahälytys. Limitit voi
+            valita väliltä 1-8 ennen generointia.
           </p>
+
+          <div className={classes.LimitSettings}>
+            <label className={classes.Field}>
+              <span className={classes.FieldLabel}>Alaraja</span>
+              <select
+                className={classes.FieldSelect}
+                value={limitNumbers.low}
+                onChange={(event) => updateLimitNumber('low', event.target.value)}
+              >
+                {LIMIT_OPTIONS.map((limitNumber) => (
+                  <option key={`low-${limitNumber}`} value={limitNumber}>
+                    {limitNumber}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className={classes.Field}>
+              <span className={classes.FieldLabel}>Yläraja</span>
+              <select
+                className={classes.FieldSelect}
+                value={limitNumbers.high}
+                onChange={(event) => updateLimitNumber('high', event.target.value)}
+              >
+                {LIMIT_OPTIONS.map((limitNumber) => (
+                  <option key={`high-${limitNumber}`} value={limitNumber}>
+                    {limitNumber}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className={classes.Field}>
+              <span className={classes.FieldLabel}>Säätövika</span>
+              <select
+                className={classes.FieldSelect}
+                value={limitNumbers.control}
+                onChange={(event) => updateLimitNumber('control', event.target.value)}
+              >
+                {LIMIT_OPTIONS.map((limitNumber) => (
+                  <option key={`control-${limitNumber}`} value={limitNumber}>
+                    {limitNumber}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
 
           <textarea
             className={[classes.Textarea, classes.SourceTextarea].join(' ')}
@@ -162,9 +227,10 @@ export default function AlarmPageToolClient() {
             Pistetunnuksesta poistetaan ensimmäinen ja viimeinen osa, alaviivat korvataan
             väliviivoilla.
           </li>
-          <li>Alaraja käyttää limittiä 1</li>
-          <li>Yläraja käyttää limittiä 2</li>
-          <li>Säätövika käyttää limittiä 3</li>
+          <li>Alaraja käyttää limittiä {limitNumbers.low}</li>
+          <li>Yläraja käyttää limittiä {limitNumbers.high}</li>
+          <li>Säätövika käyttää limittiä {limitNumbers.control}</li>
+          <li>Säätöarvon piste käyttää edelleen tunnusta _C:2</li>
         </ul>
       </section>
     </div>

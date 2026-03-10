@@ -11,6 +11,28 @@ const CONTROL_ERROR_ALARM_LEFT = 897;
 const BASE_TOP = 291;
 const ROW_HEIGHT = 30;
 
+export const LIMIT_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8];
+
+export const DEFAULT_LIMIT_NUMBERS = {
+  low: 1,
+  high: 2,
+  control: 3,
+};
+
+function normalizeLimitNumber(value, fallback) {
+  const numericValue = Number(value);
+
+  return LIMIT_OPTIONS.includes(numericValue) ? numericValue : fallback;
+}
+
+function normalizeLimitNumbers(limitNumbers = {}) {
+  return {
+    low: normalizeLimitNumber(limitNumbers.low, DEFAULT_LIMIT_NUMBERS.low),
+    high: normalizeLimitNumber(limitNumbers.high, DEFAULT_LIMIT_NUMBERS.high),
+    control: normalizeLimitNumber(limitNumbers.control, DEFAULT_LIMIT_NUMBERS.control),
+  };
+}
+
 function escapeHtml(value) {
   return value
     .replaceAll('&', '&amp;')
@@ -93,10 +115,12 @@ function createAlarmButton({ id, left, top, pointId }) {
   return `<input id="${id}" style="position: absolute; left: ${left}px; top: ${top}px; width: 20px; height: 20px; background-color: rgb(240, 240, 240);" fdxuserlevel="0" fdxeditgroup="0" fdxgroupcode="" fdxpntid="${pointId}" fdxmanualenabled="1" fdxshowinfo="1" type="button" value="H" fdxtype="FdxBinaryPoint" fdxhideobject="0" fdxhidevalue="0" fdxfrontcolor="#FF0000" fdxbgcolor="#F0F0F0" fdxfixedvalue="" fdxtextshowvalue="0" class="AlarmBox" fdxhref="">`;
 }
 
-export function parsePointDatabase(input) {
+export function parsePointDatabase(input, limitNumbers = DEFAULT_LIMIT_NUMBERS) {
   if (!input.trim()) {
     throw new Error('Liitä ensin pistekannan XML-sisältö.');
   }
+
+  const normalizedLimitNumbers = normalizeLimitNumbers(limitNumbers);
 
   const parser = new DOMParser();
   const xmlDocument = parser.parseFromString(input, 'application/xml');
@@ -164,14 +188,14 @@ export function parsePointDatabase(input) {
         description: record.text,
         pointId: record.pointId,
         shortPointId: getShortPointId(record.pointId),
-        lowLimitPointId: `${record.pointId}:1`,
+        lowLimitPointId: `${record.pointId}:${normalizedLimitNumbers.low}`,
         lowAlarmId,
         hasLowLimit,
-        highLimitPointId: `${record.pointId}:2`,
+        highLimitPointId: `${record.pointId}:${normalizedLimitNumbers.high}`,
         highAlarmId,
         hasHighLimit,
         controlSetpointPointId: `${controlPointId}:2`,
-        controlLimitPointId: `${record.pointId}:3`,
+        controlLimitPointId: `${record.pointId}:${normalizedLimitNumbers.control}`,
         hasControlSetpoint,
         controlErrorAlarmId,
         hasControlError,
@@ -187,6 +211,7 @@ export function parsePointDatabase(input) {
   return {
     rows,
     measurementCount: measurementPoints.length,
+    limitNumbers: normalizedLimitNumbers,
   };
 }
 

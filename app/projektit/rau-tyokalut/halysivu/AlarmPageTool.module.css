@@ -48,6 +48,34 @@
   letter-spacing: 0.3px;
 }
 
+.LimitSettings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.Field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.FieldLabel {
+  font-weight: 600;
+}
+
+.FieldSelect {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background: var(--background-6);
+  color: var(--text-color);
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+}
+
 .Textarea {
   width: 100%;
   border: none;
@@ -63,6 +91,11 @@
 }
 
 .Textarea:focus {
+  outline: 2px solid var(--highlight);
+  outline-offset: 1px;
+}
+
+.FieldSelect:focus {
   outline: 2px solid var(--highlight);
   outline-offset: 1px;
 }
@@ -164,6 +197,10 @@
   .OutputHeader {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .LimitSettings {
+    grid-template-columns: 1fr;
   }
 
   .SourceTextarea,
