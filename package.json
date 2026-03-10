@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "predev": "node lib/prebuild/index.mjs",
+    "predev": "node lib/prebuild/index.mjs && npm run format",
     "prebuild": "node lib/prebuild/index.mjs",
     "log:tags": "node lib/devHelpers/logAllTags.js",
     "dev": "next dev -H 0.0.0.0",
