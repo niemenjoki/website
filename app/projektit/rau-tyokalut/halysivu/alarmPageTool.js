@@ -194,7 +194,7 @@ export function parsePointDatabase(input, limitNumbers = DEFAULT_LIMIT_NUMBERS) 
         highLimitPointId: `${record.pointId}:${normalizedLimitNumbers.high}`,
         highAlarmId,
         hasHighLimit,
-        controlSetpointPointId: `${controlPointId}:2`,
+        controlSetpointPointId: `${controlPointId}`,
         controlLimitPointId: `${record.pointId}:${normalizedLimitNumbers.control}`,
         hasControlSetpoint,
         controlErrorAlarmId,
