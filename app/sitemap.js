@@ -99,9 +99,9 @@ export default async function sitemap() {
   // --- Blog posts
   posts.forEach((p) => add(`/blogi/julkaisu/${p.slug}`, p.updated || p.date));
 
-  // --- Paginated blog index (include page 1)
+  // --- Paginated blog index
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
-  for (let i = 1; i <= totalPages; i++) add(`/blogi/sivu/${i}`, latestPost);
+  for (let i = 2; i <= totalPages; i++) add(`/blogi/sivu/${i}`, latestPost);
 
   // --- Validate paths
   urls.forEach(({ url }) => {
