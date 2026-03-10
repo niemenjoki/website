@@ -50,6 +50,9 @@ export default function Navbar() {
                 <li>
                   <SafeLink href="/projektit/lieromaa">Lieromaa</SafeLink>
                 </li>
+                <li>
+                  <SafeLink href="/projektit/rau-tyokalut">RAU työkalut</SafeLink>
+                </li>
               </ul>
             </li>
 
@@ -97,6 +100,11 @@ export default function Navbar() {
               <li>
                 <SafeLink href="/projektit/lieromaa" onClick={toggleIsOpen}>
                   Lieromaa
+                </SafeLink>
+              </li>
+              <li>
+                <SafeLink href="/projektit/rau-tyokalut" onClick={toggleIsOpen}>
+                  RAU työkalut
                 </SafeLink>
               </li>
             </ul>

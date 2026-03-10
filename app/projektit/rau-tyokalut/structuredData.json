@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut#webpage",
+      "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut",
+      "name": "RAU-työkalut",
+      "description": "RAU-työkalujen koontisivu rakennusautomaation apuvälineille.",
+      "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "RAU-työkalut",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.niemenjoki.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "inLanguage": "fi"
+    }
+  ]
+}

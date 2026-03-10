@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/halysivu#webpage",
+      "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/halysivu",
+      "name": "Hälysivu",
+      "description": "Työkalu, joka muuntaa projektieditorin pistekanta-XML:n kopioitavaksi HTML-koodiksi hälytysivua varten.",
+      "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Hälysivu",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.niemenjoki.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "inLanguage": "fi"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+.Page {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.Lead {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+.BackLink {
+  margin-bottom: 2rem;
+}
+
+.BackLink a {
+  color: var(--highlight);
+}
+
+.ToolShell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ToolGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Panel,
+.InfoPanel {
+  background: var(--background-3);
+  padding: 1rem;
+  border-radius: 9px;
+}
+
+.PanelTitle {
+  color: var(--highlight-alt);
+  font-size: 1.2rem;
+  margin-bottom: 0.65rem;
+}
+
+.PanelText {
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  letter-spacing: 0.3px;
+}
+
+.Textarea {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background: var(--background-6);
+  color: var(--text-color);
+  padding: 0.9rem;
+  resize: vertical;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.Textarea:focus {
+  outline: 2px solid var(--highlight);
+  outline-offset: 1px;
+}
+
+.SourceTextarea {
+  min-height: 20rem;
+}
+
+.OutputTextarea {
+  min-height: 20rem;
+}
+
+.Actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.OutputHeader {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.PrimaryButton,
+.SecondaryButton {
+  border: none;
+  border-radius: 4px;
+  padding: 0.65rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.PrimaryButton {
+  background: var(--highlight);
+  color: var(--background-1);
+}
+
+.SecondaryButton {
+  background: var(--background-6);
+  color: var(--text-color);
+}
+
+.PrimaryButton:hover,
+.SecondaryButton:hover {
+  opacity: 0.8;
+}
+
+.PrimaryButton:disabled,
+.SecondaryButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.StatusArea {
+  min-height: 2rem;
+  margin-top: 1rem;
+}
+
+.Summary,
+.Success,
+.Error,
+.Hint {
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+.Success {
+  color: var(--highlight);
+}
+
+.Error {
+  color: var(--highlight-alt);
+}
+
+.Hint {
+  opacity: 0.85;
+}
+
+.RuleList {
+  padding-left: 1.25rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+.RuleList li + li {
+  margin-top: 0.45rem;
+}
+
+@media (max-width: 700px) {
+  .Page {
+    margin: 1rem auto;
+  }
+
+  .OutputHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .SourceTextarea,
+  .OutputTextarea {
+    min-height: 18rem;
+  }
+}

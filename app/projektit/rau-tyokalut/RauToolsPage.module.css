@@ -1,0 +1,83 @@
+.Page {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.Lead {
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+.ToolCatalog {
+  display: grid;
+  gap: 1rem;
+}
+
+.ToolCard {
+  display: block;
+  background: var(--background-3);
+  padding: 1rem;
+  border-radius: 9px;
+}
+
+.ToolCard:hover .CardTitle {
+  color: var(--highlight);
+}
+
+.CardTitle {
+  color: var(--highlight-alt);
+  font-size: 22px;
+  margin-bottom: 0.35rem;
+  transition: color 0.1s ease-in-out;
+  overflow-wrap: break-word;
+}
+
+.CardDescription {
+  margin: 1rem 0;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+.CardMeta {
+  color: var(--highlight);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.Arrow > span {
+  border: solid var(--highlight);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  opacity: 0;
+  transition: all 0.2s ease-out;
+  transition-delay: 0.3s;
+}
+
+.Arrow > span:nth-child(1) {
+  transform: rotate(-45deg);
+}
+
+.Arrow > span:nth-child(2) {
+  transform: translateX(-8px) rotate(-45deg);
+}
+
+.Arrow > span:nth-child(3) {
+  transform: translateX(-16px) rotate(-45deg);
+}
+
+.ToolCard:hover .Arrow > span {
+  opacity: 1;
+}
+
+.ToolCard:hover .Arrow > span:nth-child(2),
+.ToolCard:hover .Arrow > span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 700px) {
+  .Page {
+    margin: 1rem auto;
+  }
+}

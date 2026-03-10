@@ -36,6 +36,9 @@ export default function Footer() {
               <li>
                 <SafeLink href="/projektit/lieromaa">Lieromaa</SafeLink>
               </li>
+              <li>
+                <SafeLink href="/projektit/rau-tyokalut">RAU työkalut</SafeLink>
+              </li>
             </ul>
           </div>
 
