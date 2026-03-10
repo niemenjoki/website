@@ -29,10 +29,10 @@ export default function ImageSlider({ images = [], maxWidth = '600px' }) {
             alt={img.alt || ''}
             width={img.width || 1200}
             height={img.height || 800}
-            sizes={img.sizes || '(max-width: 600px) 100vw, 800px'}
+            sizes={img.sizes || '(max-width: 800px) 100vw, 800px'}
             priority={img.priority || false}
             loading={img.loading || 'lazy'}
-            style={img.style || { maxWidth: '100%', height: 'auto' }}
+            style={img.style || { width: '100%', maxWidth: '800px', height: 'auto' }}
           />
         </SwiperSlide>
       ))}

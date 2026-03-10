@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Icon from '../Icon/Icon';
 import classes from './ThemeToggler.module.css';
 
-const ThemeToggler = ({ props }) => {
+const ThemeToggler = (props) => {
   const [isDarkMode, setDarkMode] = useState(false);
   useEffect(() => {
     const modeInStorage = localStorage.getItem('darkMode');
