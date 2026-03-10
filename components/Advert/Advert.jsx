@@ -19,16 +19,9 @@ const Advert = ({ adClient, adSlot }) => {
     if (!isEnabled) return;
 
     setAdStatus('unknown');
-
-    try {
-      window.adsbygoogle = window.adsbygoogle || [];
-      window.adsbygoogle.push({});
-    } catch (e) {
-      console.warn('AdSense push skipped:', e.message);
-    }
-
     let attempts = 0;
     let cancelled = false;
+    let adRequested = false;
 
     const checkStatus = () => {
       if (cancelled) return;
@@ -52,10 +45,34 @@ const Advert = ({ adClient, adSlot }) => {
       }
     };
 
-    setTimeout(checkStatus, 350);
+    const requestAd = () => {
+      if (
+        adRequested ||
+        window.__websiteAdSenseStatus !== 'ready' ||
+        !window.__websiteAdsConsentGranted
+      ) {
+        return;
+      }
+
+      adRequested = true;
+
+      try {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.push({});
+        setTimeout(checkStatus, 350);
+      } catch (e) {
+        console.warn('AdSense push skipped:', e.message);
+      }
+    };
+
+    requestAd();
+    window.addEventListener('website:adsense-ready', requestAd);
+    window.addEventListener('website:ads-consent-granted', requestAd);
 
     return () => {
       cancelled = true;
+      window.removeEventListener('website:adsense-ready', requestAd);
+      window.removeEventListener('website:ads-consent-granted', requestAd);
     };
   }, [pathname, adClient, adSlot, isEnabled]);
 

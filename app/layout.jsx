@@ -1,9 +1,9 @@
 import { Rubik } from 'next/font/google';
-import Script from 'next/script';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
+import AdSenseConsentGate from '@/components/AdSense/AdSenseConsentGate';
 import Analytics from '@/components/Analytics/Analytics';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
@@ -71,12 +71,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </div>
         <Analytics />
-        <Script
-          async
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5560402633923389"
-          crossOrigin="anonymous"
-        />
+        <AdSenseConsentGate />
       </body>
     </html>
   );
