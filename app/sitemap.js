@@ -29,15 +29,17 @@ export default async function sitemap() {
   };
 
   const staticLastModified = (route, fallback) => {
-    if (route === '/' || route === '/blogi') return latestPost;
+    if (route === '/blogi') return latestPost;
     if (route === '/tietoa') return '2025-09-08';
     return fallback ?? latestPost;
   };
 
   // --- Static pages
-  staticPages.forEach(({ route, lastModified }) =>
-    add(route, staticLastModified(route, lastModified))
-  );
+  staticPages
+    .filter(({ route }) => route !== '/')
+    .forEach(({ route, lastModified }) =>
+      add(route, staticLastModified(route, lastModified))
+    );
 
   // --- Tag pages
   for (const tag of postTags) {
