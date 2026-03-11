@@ -10,13 +10,28 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/madot',
-        destination: '/tuotteet/madot',
+        source: '/blog/post/compress-create-react-app-make-it-faster',
+        destination: '/projektit/compress-create-react-app',
         permanent: true,
       },
       {
-        source: '/madot-kampanja',
-        destination: '/tuotteet/madot-kampanja',
+        source: '/projects/compress-create-react-app',
+        destination: '/projektit/compress-create-react-app',
+        permanent: true,
+      },
+      {
+        source: '/blog/page/1',
+        destination: '/blogi',
+        permanent: true,
+      },
+      {
+        source: '/blog',
+        destination: '/blogi',
+        permanent: true,
+      },
+      {
+        source: '/en',
+        destination: '/',
         permanent: true,
       },
     ];
