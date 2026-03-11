@@ -3,7 +3,7 @@ import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 export default function generateMetadata() {
   const title = 'ST-muuttujat | RAU-työkalut | Joonas Niemenjoki';
   const description =
-    'RAU-työkalu, joka muuntaa IEC ST -koodin kopioitavaksi muuttujalistaksi prefixipohjaisella tyyppipäättelyllä.';
+    'RAU-työkalu, joka muuntaa koodin kopioitavaksi muuttujalistaksi etuliitepohjaisella tyyppipäättelyllä.';
   const canonicalUrl = '/projektit/rau-tyokalut/st-muuttujat';
 
   const customMetadata = {

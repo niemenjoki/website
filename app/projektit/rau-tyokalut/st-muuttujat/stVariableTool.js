@@ -560,7 +560,7 @@ export function buildVariableDeclarations(
   { ioPrefixes = DEFAULT_IO_PREFIXES, prefixRules = DEFAULT_PREFIX_RULES } = {}
 ) {
   if (!source.trim()) {
-    throw new Error('Liitä ensin IEC ST -koodi.');
+    throw new Error('Liitä ensin koodi.');
   }
 
   const normalizedIoPrefixes = normalizeIoPrefixes(ioPrefixes);

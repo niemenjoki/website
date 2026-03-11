@@ -6,7 +6,7 @@
       "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat#webpage",
       "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat",
       "name": "ST-muuttujat",
-      "description": "Työkalu, joka muuntaa IEC ST -koodin kopioitavaksi muuttujalistaksi.",
+      "description": "Työkalu, joka muuntaa koodin kopioitavaksi muuttujalistaksi.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": {
         "@type": "SoftwareApplication",

@@ -20,7 +20,7 @@ export default function StVariablesPage() {
       <div className={classes.Page}>
         <h1>ST-muuttujat</h1>
         <p className={classes.Lead}>
-          Tämä työkalu generoi muuttujien esittelylistan IEC ST -koodin perusteella.
+          Tämä työkalu generoi muuttujien esittelylistan koodin perusteella.
         </p>
         <p className={classes.BackLink}>
           <SafeLink href="/projektit/rau-tyokalut">Kaikki RAU-työkalut</SafeLink>

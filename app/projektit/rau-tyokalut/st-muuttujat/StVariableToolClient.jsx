@@ -175,7 +175,7 @@ export default function StVariableToolClient() {
         <section className={classes.Panel}>
           <h2 className={classes.PanelTitle}>Lähdekoodi</h2>
           <p className={classes.PanelText}>
-            Liitä IEC ST -koodi tähän. Työkalu kerää käytetyt tunnukset, sijoittaa
+            Liitä koodi tähän. Työkalu kerää käytetyt muuttujat, sijoittaa
             <code className={classes.InlineCode}> in_</code>-etuliitettä käyttävät
             muuttujat <code className={classes.InlineCode}>VAR_INPUT</code>-lohkoon,
             <code className={classes.InlineCode}> out_</code>-etuliitettä käyttävät
@@ -188,7 +188,7 @@ export default function StVariableToolClient() {
             className={[classes.Textarea, classes.SourceTextarea].join(' ')}
             value={source}
             onChange={(event) => setSource(event.target.value)}
-            placeholder="Liitä IEC ST -koodi tähän"
+            placeholder="Liitä koodi tähän"
             spellCheck={false}
           />
 
@@ -253,7 +253,7 @@ export default function StVariableToolClient() {
       <section className={classes.InfoPanel}>
         <div className={classes.SettingsHeader}>
           <div>
-            <h2 className={classes.PanelTitle}>Prefixiasetukset</h2>
+            <h2 className={classes.PanelTitle}>Etuliiteasetukset</h2>
             <p className={classes.PanelText}>
               Muokkaa etuliitteitä tarpeen mukaan. Taulukkomuuttujat päätellään
               automaattisesti muodosta{' '}
@@ -299,7 +299,7 @@ export default function StVariableToolClient() {
         <div className={classes.RuleListHeader}>
           <h3 className={classes.SubTitle}>Tietotyyppien etuliitteet</h3>
           <button className={classes.SecondaryButton} type="button" onClick={addRule}>
-            Lisää prefixi
+            Lisää etuliite
           </button>
         </div>
 
@@ -311,7 +311,7 @@ export default function StVariableToolClient() {
                 type="text"
                 value={rule.prefix}
                 onChange={(event) => updateRule(rule.id, 'prefix', event.target.value)}
-                placeholder="prefix"
+                placeholder="etuliite"
                 spellCheck={false}
               />
               <input
@@ -334,7 +334,7 @@ export default function StVariableToolClient() {
                 className={classes.IconButton}
                 type="button"
                 onClick={() => removeRule(rule.id)}
-                aria-label={`Poista prefixi ${rule.prefix || rule.type || rule.id}`}
+                aria-label={`Poista etuliite ${rule.prefix || rule.type || rule.id}`}
               >
                 Poista
               </button>
@@ -347,7 +347,7 @@ export default function StVariableToolClient() {
         <h2 className={classes.PanelTitle}>Huomiot</h2>
         <ul className={classes.NoteList}>
           <li>
-            Täysin isoilla kirjaimilla kirjoitetut tunnukset sijoitetaan VAR CONSTANT
+            Täysin isoilla kirjaimilla kirjoitetut muuttujat sijoitetaan VAR CONSTANT
             -lohkoon.
           </li>
           <li>

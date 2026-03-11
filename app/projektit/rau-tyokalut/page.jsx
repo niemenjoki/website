@@ -45,7 +45,26 @@ export default function RauToolsPage() {
           >
             <h2 className={classes.CardTitle}>ST-muuttujat</h2>
             <p className={classes.CardDescription}>
-              Generoi muuttujien esittelylistan IEC ST -koodin perusteella.
+              Generoi muuttujien esittelylistan koodin perusteella.
+            </p>
+            <p className={classes.CardMeta}>
+              Avaa työkalu{' '}
+              <span className={classes.Arrow}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </p>
+          </SafeLink>
+
+          <SafeLink
+            className={classes.ToolCard}
+            href="/projektit/rau-tyokalut/modbuslaitteet"
+          >
+            <h2 className={classes.CardTitle}>Modbus-laitteet</h2>
+            <p className={classes.CardDescription}>
+              Generoi Modbus-funktiolohkosta kaikki ja tarvittavat Modbuslaitteet
+              koodikommenttina sekä FX-Editoriin sopivassa XML-muodossa.
             </p>
             <p className={classes.CardMeta}>
               Avaa työkalu{' '}

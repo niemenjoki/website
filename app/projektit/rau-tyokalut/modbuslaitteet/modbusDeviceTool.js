@@ -865,7 +865,7 @@ export function buildModbusDeviceComment(
   { filterSource = '', port = 6, address = 1, ipAddress = '0.0.0.0', ipPort = 0 } = {}
 ) {
   if (!source.trim()) {
-    throw new Error('Liitä ensin IEC ST -koodi.');
+    throw new Error('Liitä ensin koodi.');
   }
 
   const cleanedSource = stripSource(source);

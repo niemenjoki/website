@@ -20,8 +20,8 @@ export default function AlarmPagePage() {
       <div className={classes.Page}>
         <h1>Hälysivu</h1>
         <p className={classes.Lead}>
-          Muuntaa FX-Editorista kopioidun pistekanta-XML:n kopioitavaksi HTML-koodiksi
-          hälytysivua varten.
+          Muuntaa FX-Editorista kopioidut pisteet kopioitavaksi HTML-koodiksi hälytysivua
+          varten.
         </p>
         <p className={classes.BackLink}>
           <SafeLink href="/projektit/rau-tyokalut">Kaikki RAU-työkalut</SafeLink>

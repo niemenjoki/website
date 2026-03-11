@@ -20,8 +20,8 @@ export default function ModbusDevicesPage() {
       <div className={classes.Page}>
         <h1>Modbus-laitteet</h1>
         <p className={classes.Lead}>
-          Muodostaa Modbus-IEC ST -funktiolohkosta Modbus-laitelistat sekä FX-Editoriin
-          sopivan XML:n. Kutsukoodin avulla saat erikseen sekä tarvittavat että kaikki
+          Muodostaa Modbus-funktiolohkosta Modbus-laitelistat sekä FX-Editoriin sopivan
+          XML:n. Kutsukoodin avulla saat erikseen sekä tarvittavat että kaikki
           Modbus-laitteet.
         </p>
         <p className={classes.BackLink}>

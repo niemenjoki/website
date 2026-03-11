@@ -112,7 +112,7 @@ export default function AlarmPageToolClient() {
         <section className={classes.Panel}>
           <h2 className={classes.PanelTitle}>Lähdedata</h2>
           <p className={classes.PanelText}>
-            Liitä FX-Editorista kopioitu pistekanta XML-muodossa. Työkalu huomioi vain
+            Liitä FX-Editorista kopioidut pisteet XML-muodossa. Työkalu huomioi vain
             mittauspisteet, joiden tunnus päättyy muotoon _M tai _FM ja joilla on
             vähintään yksi niihin liittyvä ARH- tai YRH-päätteinen rajahälytys tai
             _C-päätteinen asetusarvo sekä SVH-päätteinen säätövikahälytys. Limitit voi
