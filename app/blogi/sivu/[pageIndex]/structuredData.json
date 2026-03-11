@@ -5,7 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#webpage",
       "url": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]",
-      "name": "Blogi – Kaikki julkaisut (sivu [pageIndex])",
+      "name": "Rakennusautomaation käytännön blogi | Joonas Niemenjoki",
+      "description": "Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta, lämpöpumpuista ja niitä sivuavista teknisistä aiheista.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": { "@id": "https://www.niemenjoki.fi/#organization" },
       "inLanguage": "fi"

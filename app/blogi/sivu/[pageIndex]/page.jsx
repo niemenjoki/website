@@ -5,6 +5,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
+import { defaultMetadata } from '@/data/defaultMetadata';
 import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
 import {
   getAllContentSlugs,
@@ -41,10 +42,8 @@ export default async function BlogPage({ params }) {
   const data = JSON.parse(JSON.stringify(structuredData));
   data['@graph'][0]['@id'] = `${pageUrl}#webpage`;
   data['@graph'][0].url = pageUrl;
-  data['@graph'][0].name =
-    pageIndexInt === 1
-      ? 'Blogi – Kaikki julkaisut'
-      : `Blogi – Kaikki julkaisut (sivu ${pageIndexInt})`;
+  data['@graph'][0].name = defaultMetadata.title;
+  data['@graph'][0].description = defaultMetadata.description;
   data['@graph'][1]['@id'] = `${pageUrl}#itemlist`;
   data['@graph'][1]['itemListElement'] = [];
   posts.forEach((post, i) => {

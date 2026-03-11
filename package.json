@@ -6,6 +6,7 @@
     "predev": "node lib/prebuild/index.mjs && npm run format",
     "prebuild": "node lib/prebuild/index.mjs",
     "log:tags": "node lib/devHelpers/logAllTags.js",
+    "log:metadata": "node lib/devHelpers/logPageMetadata.mjs",
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",

@@ -5,8 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/projektit/lieromaa#webpage",
       "url": "https://www.niemenjoki.fi/projektit/lieromaa",
-      "name": "Lieromaa-projekti",
-      "description": "Kuvaus Lieromaa-sivuprojektista, joka keskittyy vermikompostointiin ja kompostimatoihin.",
+      "name": "Lieromaa-sivuprojekti | Joonas Niemenjoki projekti",
+      "description": "Lieromaa on sivuprojektini, joka keskittyy matokompostointiin, kompostimatoihin ja käytännönläheiseen kestävään arkeen.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": {
         "@type": "Project",

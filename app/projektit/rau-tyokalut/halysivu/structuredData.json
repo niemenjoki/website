@@ -5,8 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/halysivu#webpage",
       "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/halysivu",
-      "name": "Hälysivu",
-      "description": "Työkalu, joka muuntaa projektieditorin pistekanta-XML:n kopioitavaksi HTML-koodiksi hälytysivua varten.",
+      "name": "Hälysivu-työkalu | RAU-työkalut | Joonas Niemenjoki",
+      "description": "RAU-työkalu, joka muuntaa FX-Editorista kopioidun pistetietokannan helposti kopioitavaksi HTML-koodiksi hälytysivua varten.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": {
         "@type": "SoftwareApplication",

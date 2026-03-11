@@ -50,12 +50,14 @@ export default async function BlogTagPage({ params }) {
   const tagDisplay = decodedTag.replaceAll('-', ' ');
   const pagePath = `/blogi/${tag}/sivu/${pageIndexInt}`;
   const pageUrl = `${SITE_URL}${pagePath}`;
+  const metadataTitle = `Julkaisut avainsanalla ${tagDisplay} | Niemenjoki blogi`;
+  const metadataDescription = `Julkaisut avainsanalla ${tagDisplay}: Blogi käsittelee pääasiassa rakennusautomaatiota, lämpöpumppuja ja tekniikkaa.`;
 
   const ldJSON = JSON.parse(JSON.stringify(structuredData));
   ldJSON['@graph'][0]['@id'] = `${pageUrl}#webpage`;
   ldJSON['@graph'][0].url = pageUrl;
-  ldJSON['@graph'][0].name =
-    `Julkaisut avainsanalla ${tagDisplay} (sivu ${pageIndexInt})`;
+  ldJSON['@graph'][0].name = metadataTitle;
+  ldJSON['@graph'][0].description = metadataDescription;
   ldJSON['@graph'][1]['@id'] = `${pageUrl}#itemlist`;
   ldJSON['@graph'][1]['itemListElement'] = posts.map((post, i) => ({
     '@type': 'ListItem',

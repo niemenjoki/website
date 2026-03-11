@@ -34,7 +34,7 @@ const structuredData = {
       url: 'https://www.niemenjoki.fi',
       name: 'Joonas Niemenjoki',
       description:
-        'Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta ja sitä sivuavista aiheista.',
+        'Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta, lämpöpumpuista ja niitä sivuavista teknisistä aiheista.',
       publisher: {
         '@type': 'Organization',
         '@id': 'https://www.niemenjoki.fi/#organization',

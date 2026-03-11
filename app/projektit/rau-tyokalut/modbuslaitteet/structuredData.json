@@ -5,8 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/modbuslaitteet#webpage",
       "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/modbuslaitteet",
-      "name": "Modbus-laitteet",
-      "description": "Työkalu, joka muodostaa Modbus-funktiolohkosta kaikki ja tarvittavat Modbus-laitelistat sekä FX-Editor XML:n.",
+      "name": "Modbus-laitteet | RAU-työkalut | Joonas Niemenjoki",
+      "description": "RAU-työkalu, joka muodostaa Modbus-funktiolohkosta kaikki ja tarvittavat Modbus-laitelistat sekä FX-Editor XML:n.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": {
         "@type": "SoftwareApplication",

@@ -1,7 +1,7 @@
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default function generateMetadata() {
-  const title = 'Tietosuojaseloste | Joonas Niemenjoki';
+  const title = 'Tietosuojaseloste, evästeet ja rekisteritiedot | Niemenjoki';
   const description =
     'Lue, miten sivusto käsittelee henkilötietoja ja käyttää evästeitä. Sivulla kerrotaan tietosuojaperiaatteet ja käyttäjän oikeudet.';
   const canonicalUrl = '/tietosuoja';

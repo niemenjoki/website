@@ -5,8 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/tietosuoja#privacypolicy",
       "url": "https://www.niemenjoki.fi/tietosuoja",
-      "name": "Tietosuojaseloste – Joonas Niemenjoki",
-      "description": "niemenjoki.fi -sivuston tietosuojaseloste henkilötietojen käsittelystä, evästeiden käytöstä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics, Speed Insights).",
+      "name": "Tietosuojaseloste, evästeet ja rekisteritiedot | Niemenjoki",
+      "description": "Lue, miten sivusto käsittelee henkilötietoja ja käyttää evästeitä. Sivulla kerrotaan tietosuojaperiaatteet ja käyttäjän oikeudet.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": { "@id": "https://www.niemenjoki.fi/#organization" },
       "inLanguage": "fi"

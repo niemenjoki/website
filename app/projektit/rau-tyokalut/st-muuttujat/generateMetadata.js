@@ -1,9 +1,9 @@
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default function generateMetadata() {
-  const title = 'ST-muuttujat | RAU-työkalut | Joonas Niemenjoki';
+  const title = 'ST-muuttujat-työkalu | RAU-työkalut | Joonas Niemenjoki';
   const description =
-    'RAU-työkalu, joka muuntaa koodin kopioitavaksi muuttujalistaksi etuliitepohjaisella tyyppipäättelyllä.';
+    'RAU-työkalu, joka muuntaa koodin kopioitavaksi muuttujalistaksi ja tekee tyyppipäättelyn automaattisesti etuliitteiden perusteella.';
   const canonicalUrl = '/projektit/rau-tyokalut/st-muuttujat';
 
   const customMetadata = {

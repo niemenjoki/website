@@ -1,9 +1,9 @@
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default function generateMetadata() {
-  const title = 'RAU-työkalut | Joonas Niemenjoki';
+  const title = 'RAU-työkalut rakennusautomaatioon | Joonas Niemenjoki';
   const description =
-    'RAU-työkalujen koontisivu, josta löytyvät rakennusautomaation apuvälineet eri käyttötarkoituksiin.';
+    'RAU-työkalujen koontisivu, josta löytyvät rakennusautomaation käytännölliset aputyökalut eri käyttötarkoituksiin ja työvaiheisiin.';
   const canonicalUrl = '/projektit/rau-tyokalut';
 
   const customMetadata = {

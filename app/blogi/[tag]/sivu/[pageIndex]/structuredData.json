@@ -5,7 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#webpage",
       "url": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]",
-      "name": "Julkaisut avainsanalla [tag] (sivu [pageIndex])",
+      "name": "Julkaisut avainsanalla [tag] | Niemenjoki blogi",
+      "description": "Julkaisut avainsanalla [tag]: Blogi käsittelee pääasiassa rakennusautomaatiota, lämpöpumppuja ja tekniikkaa.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": { "@id": "https://www.niemenjoki.fi/#organization" },
       "inLanguage": "fi"

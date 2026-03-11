@@ -5,8 +5,8 @@
       "@type": "AboutPage",
       "@id": "https://www.niemenjoki.fi/tietoa#aboutpage",
       "url": "https://www.niemenjoki.fi/tietoa",
-      "name": "Tietoa niemenjokista",
-      "description": "Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta ja sitä sivuavista aiheista.",
+      "name": "Tietoa sivustosta ja sen ylläpitäjästä | Joonas Niemenjoki",
+      "description": "Kirjoitan käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta ja sitä sivuavista aiheista.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": { "@id": "https://www.niemenjoki.fi/#organization" },
       "author": {

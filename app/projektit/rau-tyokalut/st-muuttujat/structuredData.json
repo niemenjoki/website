@@ -5,8 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat#webpage",
       "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat",
-      "name": "ST-muuttujat",
-      "description": "Työkalu, joka muuntaa koodin kopioitavaksi muuttujalistaksi.",
+      "name": "ST-muuttujat-työkalu | RAU-työkalut | Joonas Niemenjoki",
+      "description": "RAU-työkalu, joka muuntaa koodin kopioitavaksi muuttujalistaksi ja tekee tyyppipäättelyn automaattisesti etuliitteiden perusteella.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": {
         "@type": "SoftwareApplication",

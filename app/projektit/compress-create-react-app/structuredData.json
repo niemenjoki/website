@@ -5,8 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/projektit/compress-create-react-app#webpage",
       "url": "https://www.niemenjoki.fi/projektit/compress-create-react-app",
-      "name": "compress-create-react-app",
-      "description": "Avoimen lähdekoodin React-työkalu, joka helpottaa verkkosivujen tiedostojen pakkaamista Create React App -ympäristössä.",
+      "name": "compress-create-react-app työkalu | Joonas Niemenjoki",
+      "description": "compress-create-react-app on React-kehittäjille tarkoitettu apuohjelma, joka helpottaa verkkosivujen tiedostojen pakkaamista Create React App -ympäristössä.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": {
         "@type": "SoftwareApplication",

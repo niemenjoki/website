@@ -5,8 +5,8 @@
       "@type": "WebPage",
       "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut#webpage",
       "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut",
-      "name": "RAU-työkalut",
-      "description": "RAU-työkalujen koontisivu rakennusautomaation apuvälineille.",
+      "name": "RAU-työkalut rakennusautomaatioon | Joonas Niemenjoki",
+      "description": "RAU-työkalujen koontisivu, josta löytyvät rakennusautomaation käytännölliset aputyökalut eri käyttötarkoituksiin ja työvaiheisiin.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": {
         "@type": "SoftwareApplication",

@@ -7,7 +7,7 @@ export default async function generateMetadata({ params }) {
   const tagName = tag.replaceAll('-', ' ');
   const decodedTag = decodeURIComponent(tagName);
 
-  const title = `Avainsana ${decodedTag} | Niemenjoki`;
+  const title = `Julkaisut avainsanalla ${decodedTag} | Niemenjoki blogi`;
   const description = `Julkaisut avainsanalla ${decodedTag}: Blogi käsittelee pääasiassa rakennusautomaatiota, lämpöpumppuja ja tekniikkaa.`;
   const pageURL = `/blogi/${tag}/sivu/${pageIndex}`;
 

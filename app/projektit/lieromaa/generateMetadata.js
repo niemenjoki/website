@@ -1,9 +1,9 @@
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default function generateMetadata() {
-  const title = 'Lieromaa-projekti | Joonas Niemenjoki';
+  const title = 'Lieromaa-sivuprojekti | Joonas Niemenjoki projekti';
   const description =
-    'Lieromaa on sivuprojektini, joka keskittyy vermikompostointiin, kompostimatoihin ja käytännönläheiseen kestävään arkeen.';
+    'Lieromaa on sivuprojektini, joka keskittyy matokompostointiin, kompostimatoihin ja käytännönläheiseen kestävään arkeen.';
   const canonicalUrl = '/projektit/lieromaa';
 
   const customMetadata = {
