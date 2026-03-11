@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/modbuslaitteet#webpage",
+      "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/modbuslaitteet",
+      "name": "Modbus-laitteet",
+      "description": "Työkalu, joka muodostaa IEC ST -Modbus-koodista kaikki ja tarvittavat Modbus-laitelistat sekä FX-Editor XML:n.",
+      "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Modbus-laitteet",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.niemenjoki.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "inLanguage": "fi"
+    }
+  ]
+}
