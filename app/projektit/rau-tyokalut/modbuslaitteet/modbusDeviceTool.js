@@ -164,42 +164,42 @@ function normalizeRegisterType(value) {
   const trimmed = value.trim();
   const numericValue = parseNumericLiteral(trimmed);
 
-  if (numericValue === 0) {
+  if (numericValue === 1) {
     return 'Coil';
   }
 
-  if (numericValue === 1) {
+  if (numericValue === 2) {
     return 'Discrete';
   }
 
   if (numericValue === 3) {
-    return 'Input';
+    return 'Holding';
   }
 
   if (numericValue === 4) {
-    return 'Holding';
-  }
-
-  const compact = trimmed.toUpperCase().replace(/[^A-Z0-9]/g, '');
-
-  if (compact.endsWith('COIL') || compact.endsWith('COILS')) {
-    return 'Coil';
-  }
-
-  if (
-    compact.endsWith('DISCRETE') ||
-    compact.endsWith('DISCRETES') ||
-    compact.includes('DISCRETEINPUT')
-  ) {
-    return 'Discrete';
-  }
-
-  if (compact.endsWith('INPUT') || compact.includes('INPUTREGISTER')) {
     return 'Input';
   }
 
-  if (compact.endsWith('HOLDING') || compact.includes('HOLDINGREGISTER')) {
+  if (numericValue !== null) {
+    return '';
+  }
+
+  const upperCaseValue = trimmed.toUpperCase();
+
+  if (upperCaseValue === 'COIL') {
+    return 'Coil';
+  }
+
+  if (upperCaseValue === 'DISCRETE') {
+    return 'Discrete';
+  }
+
+  if (upperCaseValue === 'HOLDING') {
     return 'Holding';
+  }
+
+  if (upperCaseValue === 'INPUT') {
+    return 'Input';
   }
 
   return '';
@@ -540,45 +540,10 @@ function inferCountForRegisterType(source, instanceName) {
   return Math.max(...registerIndices) + 1;
 }
 
-function inferRegisterTypeFromUsage(rawRegisterType, source, instanceName) {
-  if (parseNumericLiteral(rawRegisterType) !== 3) {
-    return '';
-  }
-
-  const statements = getStatementsForInstance(source, instanceName);
-  const hasHoldingFieldNames = statements.some((statement) =>
-    /\bid_[Ss]tring\s*:=\s*(sHoldreg_[A-Za-z0-9_]*|reg_4x[A-Za-z0-9_]*)\b/i.test(
-      statement
-    )
-  );
-  const hasHoldingUsage = statements.some((statement) =>
-    /\bholdingRegF\b/i.test(statement)
-  );
-  const hasInputUsage = statements.some((statement) =>
-    /\b(InputRegF|DoubleInputRegF|DoubleInputReg_Float)\b/i.test(statement)
-  );
-
-  if (hasHoldingFieldNames || hasHoldingUsage) {
-    return 'Holding';
-  }
-
-  if (hasInputUsage && !hasHoldingUsage) {
-    return 'Input';
-  }
-
-  return '';
-}
-
 function createDevice(call, source) {
   const startRegister = parseNumericLiteral(call.startRegisterRaw);
   const scopedSource = getScopedSource(source, call);
-  const inferredRegisterType = inferRegisterTypeFromUsage(
-    call.registerTypeRaw,
-    scopedSource,
-    call.instanceName
-  );
-  const registerType =
-    inferredRegisterType || normalizeRegisterType(call.registerTypeRaw);
+  const registerType = normalizeRegisterType(call.registerTypeRaw);
 
   if (startRegister === null) {
     return {
@@ -588,7 +553,7 @@ function createDevice(call, source) {
 
   if (!registerType) {
     return {
-      warning: `${call.instanceName}: RegisterType-arvoa "${call.registerTypeRaw}" ei tunnistettu.`,
+      warning: `${call.instanceName}: RegisterType-arvoa "${call.registerTypeRaw}" ei tunnistettu. Sallitut arvot ovat numerot 1-4 tai tekstit Coil, Discrete, Holding ja Input.`,
     };
   }
 
@@ -915,7 +880,9 @@ export function buildModbusDeviceComment(
   const dedupedDevices = sortDevices(dedupeDevices(devices));
 
   if (dedupedDevices.length === 0) {
-    throw new Error('Modbus-laitelistaa ei voitu muodostaa löydetyistä kutsuista.');
+    throw new Error(
+      warnings[0] ?? 'Modbus-laitelistaa ei voitu muodostaa löydetyistä kutsuista.'
+    );
   }
 
   const hasFilterSource = filterSource.trim().length > 0;
