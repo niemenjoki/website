@@ -217,6 +217,18 @@ function parseNamedArguments(argumentSource) {
   return namedArguments;
 }
 
+function getNamedArgumentValue(namedArguments, argumentName) {
+  const normalizedArgumentName = argumentName.toLowerCase();
+
+  for (const [key, value] of Object.entries(namedArguments)) {
+    if (key.toLowerCase() === normalizedArgumentName) {
+      return value;
+    }
+  }
+
+  return null;
+}
+
 function splitStatements(source) {
   return source
     .split(';')
@@ -279,15 +291,17 @@ function extractModbusCalls(source) {
   for (const callExpression of extractCallExpressions(source)) {
     const instanceName = callExpression.name;
     const namedArguments = parseNamedArguments(callExpression.argumentsSource);
+    const startRegisterRaw = getNamedArgumentValue(namedArguments, 'StartRegister');
+    const registerTypeRaw = getNamedArgumentValue(namedArguments, 'RegisterType');
 
-    if (!('StartRegister' in namedArguments) || !('RegisterType' in namedArguments)) {
+    if (startRegisterRaw === null || registerTypeRaw === null) {
       continue;
     }
 
     calls.push({
       instanceName,
-      startRegisterRaw: namedArguments.StartRegister,
-      registerTypeRaw: namedArguments.RegisterType,
+      startRegisterRaw,
+      registerTypeRaw,
       callStart: callExpression.start,
       callEnd: callExpression.end,
     });
