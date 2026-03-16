@@ -10,36 +10,36 @@ const APP_DIR = path.join(process.cwd(), 'app');
 
 const toISODate = (d) => new Date(d).toISOString().split('T')[0];
 const slugify = (s) => s.replaceAll(' ', '-').trim().toLowerCase();
-
-export const revalidate = 3600;
-
-export default async function sitemap() {
-  const urls = [];
-  const posts = getAllContent();
-  const postTags = getAllPostTags();
-  const staticPages = getStaticAppRoutes(APP_DIR);
-
-  const latestPost = posts.reduce((latest, post) => {
+const getLatestPostDate = (posts) =>
+  posts.reduce((latest, post) => {
     const d = new Date(post.updated || post.date);
     return d > latest ? d : latest;
   }, new Date(0));
 
+export const revalidate = 3600;
+
+export default async function sitemap() {
+  const posts = getAllContent();
+  const postTags = getAllPostTags();
+  const staticPages = getStaticAppRoutes(APP_DIR);
+  const urls = new Map();
+
+  const latestPost = getLatestPostDate(posts);
+
   const add = (url, lastmod) => {
-    urls.push({ url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
+    urls.set(url, { url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
   };
 
   const staticLastModified = (route, fallback) => {
-    if (route === '/blogi') return latestPost;
+    if (route === '/' || route === '/blogi') return latestPost;
     if (route === '/tietoa') return '2025-09-08';
     return fallback ?? latestPost;
   };
 
   // --- Static pages
-  staticPages
-    .filter(({ route }) => route !== '/')
-    .forEach(({ route, lastModified }) =>
-      add(route, staticLastModified(route, lastModified))
-    );
+  staticPages.forEach(({ route, lastModified }) =>
+    add(route, staticLastModified(route, lastModified))
+  );
 
   // --- Tag pages
   for (const tag of postTags) {
@@ -55,13 +55,15 @@ export default async function sitemap() {
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   for (let i = 2; i <= totalPages; i++) add(`/blogi/sivu/${i}`, latestPost);
 
+  const entries = Array.from(urls.values());
+
   // --- Validate paths
-  urls.forEach(({ url }) => {
+  entries.forEach(({ url }) => {
     const path = url.replace(SITE_URL, '');
     if (!safeLinks.includes(path)) {
       throw new Error(`Invalid url defined in sitemap: "${path}"`);
     }
   });
 
-  return urls.sort((a, b) => a.url.localeCompare(b.url, 'fi'));
+  return entries.sort((a, b) => a.url.localeCompare(b.url, 'fi'));
 }
