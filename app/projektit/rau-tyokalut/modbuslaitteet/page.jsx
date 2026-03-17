@@ -1,5 +1,7 @@
 import Advert from '@/components/Advert/Advert';
+import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import modbusDevicesImage from '@/public/images/content/projects/modbuslaitteet.avif';
 
 import classes from './ModbusDeviceTool.module.css';
 import ModbusDeviceToolClient from './ModbusDeviceToolClient';
@@ -19,6 +21,14 @@ export default function ModbusDevicesPage() {
 
       <div className={classes.Page}>
         <h1>Modbus-laitteet</h1>
+        <SafeImage
+          src={modbusDevicesImage}
+          alt="Kuvakaappaus Modbus-laitteet-työkalusta, jossa Modbus-koodista generoidaan laitelista ja FX-Editoriin sopiva näkymä"
+          placeholder="blur"
+          priority
+          sizes="(max-width: 980px) 100vw, 980px"
+          style={{ width: '100%', height: 'auto', marginBottom: '1.25rem' }}
+        />
         <p className={classes.Lead}>
           Muodostaa Modbus-funktiolohkosta Modbus-laitelistat sekä FX-Editoriin sopivan
           XML:n. Kutsukoodin avulla saat erikseen sekä tarvittavat että kaikki

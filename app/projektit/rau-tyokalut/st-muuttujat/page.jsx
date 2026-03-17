@@ -1,5 +1,7 @@
 import Advert from '@/components/Advert/Advert';
+import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import stVariablesImage from '@/public/images/content/projects/stmuuttujat.avif';
 
 import classes from './StVariableTool.module.css';
 import StVariableToolClient from './StVariableToolClient';
@@ -19,6 +21,14 @@ export default function StVariablesPage() {
 
       <div className={classes.Page}>
         <h1>ST-muuttujat</h1>
+        <SafeImage
+          src={stVariablesImage}
+          alt="Kuvakaappaus ST-muuttujat-työkalusta, jossa Structured Text -koodista generoidaan muuttujien esittelylista"
+          placeholder="blur"
+          priority
+          sizes="(max-width: 980px) 100vw, 980px"
+          style={{ width: '100%', height: 'auto', marginBottom: '1.25rem' }}
+        />
         <p className={classes.Lead}>
           Tämä työkalu generoi muuttujien esittelylistan koodin perusteella.
         </p>

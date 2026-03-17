@@ -6,14 +6,48 @@ import Image from 'next/image';
 
 import safePaths from '@/data/generated/safeImagePaths.json';
 
-function isSafeSrc(src) {
-  let srcToCheck = src;
-  if (src.startsWith('/_next/static/media/')) {
-    const fileName = src.split('/').pop(); // "e.g. portrait2024.13bbda2f.avif"
-    const [name, , ext] = fileName.split('.');
-    srcToCheck = `/images/${name}.${ext}`;
+function resolveImportedStaticPath(src) {
+  const fileName = src.split('/').pop();
+
+  if (!fileName) {
+    return null;
   }
-  return safePaths.includes(srcToCheck);
+
+  const extensionSeparator = fileName.lastIndexOf('.');
+  if (extensionSeparator === -1) {
+    return null;
+  }
+
+  const ext = fileName.slice(extensionSeparator + 1);
+  const nameAndHash = fileName.slice(0, extensionSeparator);
+  const hashSeparator = nameAndHash.lastIndexOf('.');
+
+  if (hashSeparator === -1) {
+    return null;
+  }
+
+  const baseName = nameAndHash.slice(0, hashSeparator);
+  const matchingPaths = safePaths.filter((path) => path.endsWith(`/${baseName}.${ext}`));
+
+  if (matchingPaths.length !== 1) {
+    return null;
+  }
+
+  return matchingPaths[0];
+}
+
+function isSafeSrc(src) {
+  if (src.startsWith('/_next/static/media/')) {
+    const resolvedPath = resolveImportedStaticPath(src);
+
+    if (!resolvedPath) {
+      return false;
+    }
+
+    return safePaths.includes(resolvedPath);
+  }
+
+  return safePaths.includes(src);
 }
 
 export default function SafeImage({ src, alt, ...props }) {

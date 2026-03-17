@@ -1,5 +1,7 @@
 import Advert from '@/components/Advert/Advert';
+import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import alarmPageImage from '@/public/images/content/projects/halytystyokalu.avif';
 
 import classes from './AlarmPageTool.module.css';
 import AlarmPageToolClient from './AlarmPageToolClient';
@@ -19,6 +21,14 @@ export default function AlarmPagePage() {
 
       <div className={classes.Page}>
         <h1>Hälytystyökalu</h1>
+        <SafeImage
+          src={alarmPageImage}
+          alt="Kuvakaappaus Hälytystyökalusta, jossa pistelistasta muodostetaan hälytyssivu ja IEC-koodi"
+          placeholder="blur"
+          priority
+          sizes="(max-width: 900px) 100vw, 900px"
+          style={{ width: '100%', height: 'auto', marginBottom: '1.25rem' }}
+        />
         <p className={classes.Lead}>
           Muuntaa FX-Editorista kopioidut pisteet hälytyssivun grafiikkakuvaksi ja generoi
           IEC koodin samassa muodossa kuin FX-Editorin template manager.
