@@ -200,6 +200,14 @@ function getGroupName(description) {
   return description.split(',')[0]?.trim() ?? '';
 }
 
+function capitalizeFirstCharacter(value) {
+  if (!value) {
+    return value;
+  }
+
+  return value.charAt(0).toLocaleUpperCase('fi-FI') + value.slice(1);
+}
+
 function getGroupedDescription(description) {
   const parts = description
     .split(',')
@@ -210,7 +218,7 @@ function getGroupedDescription(description) {
     return description;
   }
 
-  return parts.slice(1).join(', ');
+  return capitalizeFirstCharacter(parts.slice(1).join(', '));
 }
 
 function sortText(left, right) {
