@@ -10,6 +10,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/projektit/rau-tyokalut/halysivu',
+        destination: '/projektit/rau-tyokalut/halytystyokalu',
+        permanent: true,
+      },
+      {
         source: '/blog/post/compress-create-react-app-make-it-faster',
         destination: '/projektit/compress-create-react-app',
         permanent: true,

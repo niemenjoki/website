@@ -23,11 +23,14 @@ export default function RauToolsPage() {
           tarkoitettu lähtökohtaisesti Fidelix-järjestelmien käyttäjille.
         </p>
         <div className={classes.ToolCatalog}>
-          <SafeLink className={classes.ToolCard} href="/projektit/rau-tyokalut/halysivu">
-            <h2 className={classes.CardTitle}>Hälysivu</h2>
+          <SafeLink
+            className={classes.ToolCard}
+            href="/projektit/rau-tyokalut/halytystyokalu"
+          >
+            <h2 className={classes.CardTitle}>Hälytystyökalu</h2>
             <p className={classes.CardDescription}>
-              Muuntaa FX-Editorista kopioidun pistekanta-XML:n kopioitavaksi HTML-koodiksi
-              hälytysivua varten.
+              Muuntaa FX-Editorista kopioidut pisteet hälytyssivun grafiikkakuvaksi ja
+              generoi IEC koodin samassa muodossa kuin FX-Editorin template manager.
             </p>
             <p className={classes.CardMeta}>
               Avaa työkalu{' '}

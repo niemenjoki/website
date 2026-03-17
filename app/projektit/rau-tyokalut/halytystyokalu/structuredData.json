@@ -3,14 +3,14 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/halysivu#webpage",
-      "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/halysivu",
-      "name": "Hälysivu-työkalu | RAU-työkalut | Joonas Niemenjoki",
-      "description": "RAU-työkalu, joka muuntaa FX-Editorista kopioidun pistetietokannan helposti kopioitavaksi HTML-koodiksi hälytysivua varten.",
+      "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/halytystyokalu#webpage",
+      "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/halytystyokalu",
+      "name": "Hälytystyökalu hälytyssivulle | RAU-työkalut | Joonas",
+      "description": "Muuntaa FX-Editorista kopioidut pisteet hälytyssivun grafiikkakuvaksi ja generoi IEC koodin samassa muodossa kuin FX-Editorin template manager.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
       "about": {
         "@type": "SoftwareApplication",
-        "name": "Hälysivu",
+        "name": "Hälytystyökalu",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any"
       },

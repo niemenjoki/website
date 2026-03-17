@@ -23,12 +23,6 @@
   gap: 1.5rem;
 }
 
-.ToolGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .Panel,
 .InfoPanel {
   background: var(--background-3);
@@ -48,6 +42,13 @@
   letter-spacing: 0.3px;
 }
 
+.SettingsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
 .LimitSettings {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -65,15 +66,48 @@
   font-weight: 600;
 }
 
+.TextInput,
 .FieldSelect {
   width: 100%;
-  border: none;
+  border: 1px solid rgba(127, 127, 127, 0.35);
   border-radius: 4px;
   outline: none;
   background: var(--background-6);
   color: var(--text-color);
   padding: 0.7rem 0.8rem;
   font: inherit;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+  cursor: text;
+}
+
+.CheckboxField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.CheckboxSpacer {
+  visibility: hidden;
+  font-weight: 600;
+  user-select: none;
+}
+
+.CheckboxRow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 2.75rem;
+  font-weight: 600;
+}
+
+.Checkbox {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
 }
 
 .Textarea {
@@ -90,14 +124,12 @@
   line-height: 1.5;
 }
 
+.TextInput:focus,
+.FieldSelect:focus,
 .Textarea:focus {
   outline: 2px solid var(--highlight);
   outline-offset: 1px;
-}
-
-.FieldSelect:focus {
-  outline: 2px solid var(--highlight);
-  outline-offset: 1px;
+  border-color: var(--highlight);
 }
 
 .SourceTextarea {
@@ -105,7 +137,7 @@
 }
 
 .OutputTextarea {
-  min-height: 20rem;
+  min-height: 22rem;
 }
 
 .Actions {
@@ -115,12 +147,27 @@
   flex-wrap: wrap;
 }
 
-.OutputHeader {
-  display: flex;
+.OutputGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  justify-content: space-between;
-  align-items: flex-start;
+}
+
+.OutputPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.OutputHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
   margin-bottom: 1rem;
+}
+
+.OutputHeaderText {
+  min-height: 4.8rem;
 }
 
 .PrimaryButton,
@@ -162,7 +209,8 @@
 .Summary,
 .Success,
 .Error,
-.Hint {
+.Hint,
+.WarningText {
   line-height: 1.6;
   letter-spacing: 0.3px;
 }
@@ -171,12 +219,38 @@
   color: var(--highlight);
 }
 
-.Error {
+.Error,
+.WarningText {
   color: var(--highlight-alt);
 }
 
 .Hint {
   opacity: 0.85;
+}
+
+.GroupReviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.GroupReviewRow {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 0.9rem;
+  border-radius: 8px;
+  background: var(--background-6);
+  border: 1px solid rgba(127, 127, 127, 0.25);
+}
+
+.GroupReviewRow .TextInput {
+  background: var(--background-1);
+  box-shadow: inset 0 0 0 1px rgba(127, 127, 127, 0.12);
+}
+
+.GroupReviewRow .TextInput:focus {
+  box-shadow: inset 0 0 0 1px var(--highlight);
 }
 
 .RuleList {
@@ -194,13 +268,19 @@
     margin: 1rem auto;
   }
 
-  .OutputHeader {
-    flex-direction: column;
-    align-items: stretch;
+  .SettingsGrid,
+  .LimitSettings,
+  .OutputGrid,
+  .GroupReviewRow {
+    grid-template-columns: 1fr;
   }
 
-  .LimitSettings {
+  .OutputHeader {
     grid-template-columns: 1fr;
+  }
+
+  .OutputHeaderText {
+    min-height: 0;
   }
 
   .SourceTextarea,

@@ -1,10 +1,10 @@
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default function generateMetadata() {
-  const title = 'Hälysivu-työkalu | RAU-työkalut | Joonas Niemenjoki';
+  const title = 'Hälytystyökalu hälytyssivulle | RAU-työkalut | Joonas';
   const description =
-    'RAU-työkalu, joka muuntaa FX-Editorista kopioidun pistetietokannan helposti kopioitavaksi HTML-koodiksi hälytysivua varten.';
-  const canonicalUrl = '/projektit/rau-tyokalut/halysivu';
+    'Muuntaa FX-Editorista kopioidut pisteet hälytyssivun grafiikkakuvaksi ja generoi IEC koodin samassa muodossa kuin FX-Editorin template manager.';
+  const canonicalUrl = '/projektit/rau-tyokalut/halytystyokalu';
 
   const customMetadata = {
     title,

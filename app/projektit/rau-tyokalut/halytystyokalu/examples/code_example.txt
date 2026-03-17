@@ -1,0 +1,69 @@
+VAR
+    Verkosto_101_halytykset : FxFB_Rajahalytykset_V021;
+    Verkosto_102_halytykset : FxFB_Rajahalytykset_V021;
+    Verkosto_103_halytykset : FxFB_Rajahalytykset_V021;
+    Verkosto_201_halytykset : FxFB_Rajahalytykset_V021;
+END_VAR
+
+(* Kaukolämpö 100 *)
+Verkosto_100_halytykset.in_iIndikointipiste := GetDigitalPointF('');
+Verkosto_100_halytykset.in_bSallitaanko_SVH_esto := true;
+Verkosto_100_halytykset.in_iSaatavanAnturinIndexi := 1;
+Verkosto_100_halytykset.in_rUlkolampotila := GetAnalogPointF('');
+Verkosto_100_halytykset.in_rSVH_rajan_nosto := 5.0;
+Verkosto_100_halytykset.in_iEstopiste1 := GetDigitalPointF('');
+Verkosto_100_halytykset.in_sMittaus[1] := '100_TE41_M';
+Verkosto_100_halytykset.in_sMittaus[2] := '100_TE42_M';
+Verkosto_100_halytykset();
+
+(* Lämmitysverkosto 101 *)
+Verkosto_101_halytykset.in_iIndikointipiste := GetDigitalPointF('');
+Verkosto_101_halytykset.in_bSallitaanko_SVH_esto := true;
+Verkosto_101_halytykset.in_iSaatavanAnturinIndexi := 1;
+Verkosto_101_halytykset.in_rUlkolampotila := GetAnalogPointF('');
+Verkosto_101_halytykset.in_rSVH_rajan_nosto := 5.0;
+Verkosto_101_halytykset.in_iEstopiste1 := GetDigitalPointF('');
+Verkosto_101_halytykset.in_sMittaus[1] := '101_TE41_M';
+Verkosto_101_halytykset.in_sMittaus[2] := '101_TE42_M';
+Verkosto_101_halytykset.in_sMittaus[3] := '101_PDIE01_M';
+Verkosto_101_halytykset.in_sMittaus[4] := '101_PE42_M';
+Verkosto_101_halytykset();
+    
+
+(* IV-Lämmitysverkosto 102 *)
+Verkosto_102_halytykset.in_iIndikointipiste := GetDigitalPointF('');
+Verkosto_102_halytykset.in_bSallitaanko_SVH_esto := true;
+Verkosto_102_halytykset.in_iSaatavanAnturinIndexi := 1;
+Verkosto_102_halytykset.in_rUlkolampotila := GetAnalogPointF('');
+Verkosto_102_halytykset.in_rSVH_rajan_nosto := 5.0;
+Verkosto_102_halytykset.in_iEstopiste1 := GetDigitalPointF('');
+Verkosto_102_halytykset.in_sMittaus[1] := '102_TE41_M';
+Verkosto_102_halytykset.in_sMittaus[2] := '102_TE42_M';
+Verkosto_102_halytykset.in_sMittaus[3] := '102_PDIE01_M';
+Verkosto_102_halytykset.in_sMittaus[4] := '102_PE42_M';
+Verkosto_102_halytykset();
+    
+
+(* Lämmitysverkosto 103 *)
+Verkosto_103_halytykset.in_iIndikointipiste := GetDigitalPointF('');
+Verkosto_103_halytykset.in_bSallitaanko_SVH_esto := true;
+Verkosto_103_halytykset.in_iSaatavanAnturinIndexi := 1;
+Verkosto_103_halytykset.in_rUlkolampotila := GetAnalogPointF('');
+Verkosto_103_halytykset.in_rSVH_rajan_nosto := 5.0;
+Verkosto_103_halytykset.in_iEstopiste1 := GetDigitalPointF('');
+Verkosto_103_halytykset.in_sMittaus[1] := '103_TE41_M';
+Verkosto_103_halytykset.in_sMittaus[2] := '103_TE42_M';
+Verkosto_103_halytykset.in_sMittaus[3] := '103_PDIE01_M';
+Verkosto_103_halytykset.in_sMittaus[4] := '103_PE42_M';
+Verkosto_103_halytykset();
+    
+
+(* Käyttövesi 201 *)
+Verkosto_201_halytykset.in_iIndikointipiste := GetDigitalPointF('');
+Verkosto_201_halytykset.in_bSallitaanko_SVH_esto := true;
+Verkosto_201_halytykset.in_iSaatavanAnturinIndexi := 1;
+Verkosto_201_halytykset.in_rUlkolampotila := GetAnalogPointF('');
+Verkosto_201_halytykset.in_rSVH_rajan_nosto := 0.0;
+Verkosto_201_halytykset.in_sMittaus[1] := '201_TE31_M';
+Verkosto_201_halytykset.in_sMittaus[2] := '201_TE32_M';
+Verkosto_201_halytykset();

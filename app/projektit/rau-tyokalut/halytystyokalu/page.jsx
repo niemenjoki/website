@@ -18,10 +18,10 @@ export default function AlarmPagePage() {
       />
 
       <div className={classes.Page}>
-        <h1>Hälysivu</h1>
+        <h1>Hälytystyökalu</h1>
         <p className={classes.Lead}>
-          Muuntaa FX-Editorista kopioidut pisteet kopioitavaksi HTML-koodiksi hälytysivua
-          varten.
+          Muuntaa FX-Editorista kopioidut pisteet hälytyssivun grafiikkakuvaksi ja generoi
+          IEC koodin samassa muodossa kuin FX-Editorin template manager.
         </p>
         <p className={classes.BackLink}>
           <SafeLink href="/projektit/rau-tyokalut">Kaikki RAU-työkalut</SafeLink>
