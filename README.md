@@ -178,4 +178,4 @@ The idea of publishing Fidelix-oriented helper tools here was partly inspired by
 
 ## License
 
-MIT. See [LICENSE.md](./LICENSE.md).
+The source code is licensed under MIT, while the website content is licensed separately under Creative Commons. See [LICENSE.md](./LICENSE.md) for details.
