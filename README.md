@@ -174,6 +174,8 @@ The site content and UI are primarily in Finnish, even though parts of the codeb
 
 This project is intentionally a bit over-engineered in places. That is partly the point: the site is both a publishing platform and a way for me to learn, test ideas, and refine patterns I care about.
 
+The idea of publishing Fidelix-oriented helper tools here was partly inspired by [Jani Kauppila's site](https://janikauppila.fi), although the tools and code are different.
+
 ## License
 
 MIT. See [LICENSE.md](./LICENSE.md).
