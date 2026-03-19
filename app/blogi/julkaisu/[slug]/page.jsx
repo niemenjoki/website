@@ -95,6 +95,7 @@ export default async function PostPage({ params }) {
             source={mdxContent}
             components={mdxComponents}
             options={{
+              blockJS: false,
               mdxOptions: {
                 rehypePlugins: [rehypeHeadingIds, [rehypePrettyCode, prettyCodeOptions]],
               },
