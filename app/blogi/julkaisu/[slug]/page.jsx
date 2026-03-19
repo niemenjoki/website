@@ -6,6 +6,7 @@ import path from 'path';
 import rehypePrettyCode from 'rehype-pretty-code';
 
 import Advert from '@/components/Advert/Advert';
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import DhwPidSimulator from '@/components/DhwPidSimulator/DhwPidSimulator';
 import InfoBox from '@/components/InfoBox/InfoBox';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
@@ -64,6 +65,11 @@ export default async function PostPage({ params }) {
   });
 
   const { structuredData } = data;
+  const breadcrumbItems = [
+    { name: 'Etusivu', href: '/' },
+    { name: 'Blogi', href: '/blogi' },
+    { name: data.title },
+  ];
 
   return (
     <>
@@ -75,6 +81,7 @@ export default async function PostPage({ params }) {
       />
 
       <article className={classes.PostPage}>
+        <Breadcrumbs items={breadcrumbItems} />
         <h1>{data.title}</h1>
         <div className={classes.Date}>
           Julkaistu: {new Date(data.date).toLocaleDateString('fi-FI')}

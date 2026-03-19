@@ -23,21 +23,22 @@ export default function Breadcrumbs({ items = [] }) {
 
   const separatorStyle = { margin: '0 0.3rem', opacity: 0.6 };
 
-  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
   return (
     <nav style={containerStyle} aria-label="Breadcrumb">
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
         return (
-          <React.Fragment key={index}>
+          <React.Fragment key={item.href || item.name || index}>
             {item.href && !isLast ? (
               <Link href={item.href} style={linkStyle}>
-                {capitalize(item.name)}
+                {item.name}
               </Link>
             ) : (
-              <span style={{ fontWeight: isLast ? 600 : 400 }}>
-                {capitalize(item.name)}
+              <span
+                style={{ fontWeight: isLast ? 600 : 400 }}
+                aria-current={isLast ? 'page' : undefined}
+              >
+                {item.name}
               </span>
             )}
             {!isLast && <span style={separatorStyle}>›</span>}

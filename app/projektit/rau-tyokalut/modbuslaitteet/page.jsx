@@ -1,4 +1,5 @@
 import Advert from '@/components/Advert/Advert';
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import modbusDevicesImage from '@/public/images/content/projects/modbuslaitteet.avif';
@@ -20,6 +21,13 @@ export default function ModbusDevicesPage() {
       />
 
       <div className={classes.Page}>
+        <Breadcrumbs
+          items={[
+            { name: 'Etusivu', href: '/' },
+            { name: 'RAU-työkalut', href: '/projektit/rau-tyokalut' },
+            { name: 'Modbus-laitteet' },
+          ]}
+        />
         <h1>Modbus-laitteet</h1>
         <SafeImage
           src={modbusDevicesImage}

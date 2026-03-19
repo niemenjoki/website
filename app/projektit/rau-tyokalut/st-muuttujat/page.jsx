@@ -1,4 +1,5 @@
 import Advert from '@/components/Advert/Advert';
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import stVariablesImage from '@/public/images/content/projects/stmuuttujat.avif';
@@ -20,6 +21,13 @@ export default function StVariablesPage() {
       />
 
       <div className={classes.Page}>
+        <Breadcrumbs
+          items={[
+            { name: 'Etusivu', href: '/' },
+            { name: 'RAU-työkalut', href: '/projektit/rau-tyokalut' },
+            { name: 'ST-muuttujat' },
+          ]}
+        />
         <h1>ST-muuttujat</h1>
         <SafeImage
           src={stVariablesImage}

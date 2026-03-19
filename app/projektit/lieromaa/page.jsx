@@ -1,4 +1,5 @@
 import Advert from '@/components/Advert/Advert';
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import wormsOnHandImage from '@/public/images/kompostimadot_kammenella.avif';
 
@@ -18,6 +19,7 @@ export default function LieromaaProjectPage() {
       />
 
       <div className={classes.ProjectPage}>
+        <Breadcrumbs items={[{ name: 'Etusivu', href: '/' }, { name: 'Lieromaa' }]} />
         <h1>Lieromaa</h1>
         <SafeImage
           src={wormsOnHandImage}

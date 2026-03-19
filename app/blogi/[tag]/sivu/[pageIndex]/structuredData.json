@@ -2,18 +2,30 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#webpage",
+      "@type": "CollectionPage",
+      "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#collectionpage",
       "url": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]",
       "name": "Julkaisut avainsanalla [tag] | Niemenjoki blogi",
       "description": "Julkaisut avainsanalla [tag]: Blogi käsittelee pääasiassa rakennusautomaatiota, lämpöpumppuja ja tekniikkaa.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
-      "about": { "@id": "https://www.niemenjoki.fi/#organization" },
+      "mainEntity": {
+        "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#itemlist"
+      },
+      "breadcrumb": {
+        "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#breadcrumb"
+      },
       "inLanguage": "fi"
     },
     {
       "@type": "ItemList",
       "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#itemlist",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "numberOfItems": 0,
+      "itemListElement": []
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.niemenjoki.fi/blogi/[tag]/sivu/[pageIndex]#breadcrumb",
       "itemListElement": []
     }
   ]

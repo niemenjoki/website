@@ -2,24 +2,41 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat#webpage",
+      "@type": "ItemPage",
+      "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat#itempage",
       "url": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat",
       "name": "ST-muuttujat-työkalu | RAU-työkalut | Joonas Niemenjoki",
       "description": "RAU-työkalu, joka muuntaa koodin kopioitavaksi muuttujalistaksi ja tekee tyyppipäättelyn automaattisesti etuliitteiden perusteella.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "ST-muuttujat",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Any"
+      "breadcrumb": {
+        "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat#breadcrumb"
       },
-      "author": {
-        "@type": "Person",
-        "@id": "https://www.niemenjoki.fi/#joonas",
-        "name": "Joonas Niemenjoki"
-      },
+      "primaryImageOfPage": "https://www.niemenjoki.fi/images/content/projects/stmuuttujat.avif",
+      "author": { "@id": "https://www.niemenjoki.fi/#joonas" },
       "inLanguage": "fi"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.niemenjoki.fi/projektit/rau-tyokalut/st-muuttujat#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.niemenjoki.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "RAU-työkalut",
+          "item": "https://www.niemenjoki.fi/projektit/rau-tyokalut"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "ST-muuttujat"
+        }
+      ]
     }
   ]
 }

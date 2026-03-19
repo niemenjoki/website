@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import Advert from '@/components/Advert/Advert';
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 
 import classes from './CompressCra.module.css';
 import structuredData from './structuredData.json';
@@ -18,6 +19,9 @@ export default function CompressCraProjectPage() {
       />
 
       <div className={classes.ProjectPage}>
+        <Breadcrumbs
+          items={[{ name: 'Etusivu', href: '/' }, { name: 'compress-create-react-app' }]}
+        />
         <h1>compress-create-react-app</h1>
         <div className={classes.Badges}>
           <a

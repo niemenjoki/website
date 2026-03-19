@@ -2,37 +2,31 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#webpage",
+      "@type": "CollectionPage",
+      "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#collectionpage",
       "url": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]",
       "name": "Rakennusautomaation käytännön blogi | Joonas Niemenjoki",
       "description": "Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta, lämpöpumpuista ja niitä sivuavista teknisistä aiheista.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
-      "about": { "@id": "https://www.niemenjoki.fi/#organization" },
+      "mainEntity": {
+        "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#itemlist"
+      },
+      "breadcrumb": {
+        "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#breadcrumb"
+      },
       "inLanguage": "fi"
     },
     {
       "@type": "ItemList",
       "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#itemlist",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "numberOfItems": 0,
       "itemListElement": []
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.niemenjoki.fi/#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Etusivu",
-          "item": "https://www.niemenjoki.fi/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Blogi",
-          "item": "https://www.niemenjoki.fi/blogi"
-        }
-      ]
+      "@id": "https://www.niemenjoki.fi/blogi/sivu/[pageIndex]#breadcrumb",
+      "itemListElement": []
     }
   ]
 }

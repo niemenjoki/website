@@ -1,4 +1,5 @@
 import Advert from '@/components/Advert/Advert';
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './RauToolsPage.module.css';
@@ -17,6 +18,7 @@ export default function RauToolsPage() {
       />
 
       <div className={classes.Page}>
+        <Breadcrumbs items={[{ name: 'Etusivu', href: '/' }, { name: 'RAU-työkalut' }]} />
         <h1>RAU-työkalut</h1>
         <p className={classes.Lead}>
           Tähän osioon kokoan rakennusautomaation sekalaisia aputyökaluja. Työkalut on

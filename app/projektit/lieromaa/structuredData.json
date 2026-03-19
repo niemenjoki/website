@@ -2,23 +2,43 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://www.niemenjoki.fi/projektit/lieromaa#webpage",
+      "@type": "ItemPage",
+      "@id": "https://www.niemenjoki.fi/projektit/lieromaa#itempage",
       "url": "https://www.niemenjoki.fi/projektit/lieromaa",
       "name": "Lieromaa-sivuprojekti | Joonas Niemenjoki projekti",
       "description": "Lieromaa on sivuprojektini, joka keskittyy matokompostointiin, kompostimatoihin ja käytännönläheiseen kestävään arkeen.",
       "isPartOf": { "@id": "https://www.niemenjoki.fi/#website" },
-      "about": {
-        "@type": "Project",
-        "name": "Lieromaa",
-        "url": "https://www.lieromaa.fi/"
-      },
-      "author": {
-        "@type": "Person",
-        "@id": "https://www.niemenjoki.fi/#joonas",
-        "name": "Joonas Niemenjoki"
-      },
+      "mainEntity": { "@id": "https://www.niemenjoki.fi/projektit/lieromaa#project" },
+      "breadcrumb": { "@id": "https://www.niemenjoki.fi/projektit/lieromaa#breadcrumb" },
+      "primaryImageOfPage": "https://www.niemenjoki.fi/images/kompostimadot_kammenella.avif",
+      "author": { "@id": "https://www.niemenjoki.fi/#joonas" },
       "inLanguage": "fi"
+    },
+    {
+      "@type": "Project",
+      "@id": "https://www.niemenjoki.fi/projektit/lieromaa#project",
+      "name": "Lieromaa",
+      "description": "Lieromaa on sivuprojekti, jossa julkaisen sisältöä matokompostoinnista, autan alkuun ja myyn kompostimatoja.",
+      "url": "https://www.lieromaa.fi/",
+      "creator": { "@id": "https://www.niemenjoki.fi/#joonas" },
+      "image": "https://www.niemenjoki.fi/images/kompostimadot_kammenella.avif"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.niemenjoki.fi/projektit/lieromaa#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.niemenjoki.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Lieromaa"
+        }
+      ]
     }
   ]
 }
