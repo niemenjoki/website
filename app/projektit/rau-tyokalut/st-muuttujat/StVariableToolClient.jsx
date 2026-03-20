@@ -354,8 +354,8 @@ export default function StVariableToolClient() {
             Taulukoille luodaan oletuksena muoto ARRAY[] OF TYYPPI. Lisää pituus käsin.
           </li>
           <li>
-            fb-etuliite tuottaa oletuksena tyypin FB_. Korvaa se oikealla FB-nimellä
-            käsin.
+            fb-etuliite tuottaa oletuksena tyypin KIRJOITA_TAHAN. Korvaa se oikealla
+            FB-nimellä käsin.
           </li>
           <li>
             Funktiokutsut, tyyppimuunnokset ja FB-jäsenten nimet pyritään ohittamaan

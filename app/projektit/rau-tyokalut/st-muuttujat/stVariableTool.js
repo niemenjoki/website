@@ -76,6 +76,7 @@ const BLOCK_LABELS = {
 };
 
 const UNKNOWN_TYPE = 'TYPE_HERE';
+const MANUAL_TYPE_PLACEHOLDER = 'KIRJOITA_TAHAN';
 
 export const DEFAULT_IO_PREFIXES = {
   input: 'in_',
@@ -97,7 +98,12 @@ export const DEFAULT_PREFIX_RULES = [
   { id: 's', prefix: 's', type: 'STRING(30)', kind: 'value' },
   { id: 'lr', prefix: 'lr', type: 'LREAL', kind: 'value' },
   { id: 't', prefix: 't', type: 'TIME', kind: 'value' },
-  { id: 'fb', prefix: 'fb', type: 'FB_', kind: 'functionBlock' },
+  {
+    id: 'fb',
+    prefix: 'fb',
+    type: MANUAL_TYPE_PLACEHOLDER,
+    kind: 'functionBlock',
+  },
   { id: 'ton', prefix: 'ton', type: 'TON', kind: 'functionBlock' },
   { id: 'tof', prefix: 'tof', type: 'TOF', kind: 'functionBlock' },
   {
@@ -500,16 +506,18 @@ function createDeclaration(name, ioPrefixes, sortedRules, inferredTypes) {
           isArray: false,
         }
       : null);
+  const fallbackType = block === 'constant' ? MANUAL_TYPE_PLACEHOLDER : UNKNOWN_TYPE;
 
   return {
     block,
     name,
-    type: resolvedType?.type ?? UNKNOWN_TYPE,
+    type: resolvedType?.type ?? fallbackType,
     kind: resolvedType?.kind ?? 'unknown',
     isArray: resolvedType?.isArray ?? false,
     needsManualType: !resolvedType,
     needsManualFunctionBlockName:
-      resolvedType?.kind === 'functionBlock' && resolvedType.type.endsWith('_'),
+      resolvedType?.kind === 'functionBlock' &&
+      (resolvedType.type.endsWith('_') || resolvedType.type === MANUAL_TYPE_PLACEHOLDER),
   };
 }
 

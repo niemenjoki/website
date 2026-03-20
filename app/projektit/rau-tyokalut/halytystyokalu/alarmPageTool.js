@@ -135,6 +135,10 @@ function normalizeSystemPrefix(prefix = '') {
   return String(prefix).trim();
 }
 
+function getOutdoorTemperaturePointId(systemPrefix) {
+  return systemPrefix ? `${systemPrefix}_100_TE00_M` : '100_TE00_M';
+}
+
 function removeSystemPrefix(pointId, systemPrefix) {
   if (!systemPrefix) {
     return pointId;
@@ -355,7 +359,8 @@ function createRecord(node, systemPrefix) {
     return null;
   }
 
-  const pointId = removeSystemPrefix(originalPointId, systemPrefix);
+  const pointId = originalPointId;
+  const groupingPointId = removeSystemPrefix(originalPointId, systemPrefix);
 
   if (!pointId) {
     return null;
@@ -366,6 +371,7 @@ function createRecord(node, systemPrefix) {
     nodeName: node.tagName,
     originalPointId,
     pointId,
+    groupingPointId,
     text: decodePointText(getDirectChildText(baseNode, 'STxt')),
     convTab: decodePointText(getDirectChildText(node, 'SConvTab')),
     limits: node.tagName === 'NAI' ? getMeasurementLimits({ node }) : {},
@@ -818,9 +824,10 @@ function getCodeGroupLabel(group, groupedCode) {
   return `${name} ${group.id}`;
 }
 
-function buildCodeOutput(finalGroups, groupedCode) {
+function buildCodeOutput(finalGroups, groupedCode, systemPrefix = '') {
   const declarations = [];
   const blocks = [];
+  const outdoorTemperaturePointId = getOutdoorTemperaturePointId(systemPrefix);
 
   finalGroups.forEach((group) => {
     const groupBlocks = [];
@@ -847,7 +854,7 @@ function buildCodeOutput(finalGroups, groupedCode) {
         `${variableName}.in_iIndikointipiste := GetDigitalPointF('');`,
         `${variableName}.in_bSallitaanko_SVH_esto := true;`,
         `${variableName}.in_iSaatavanAnturinIndexi := 1;`,
-        `${variableName}.in_rUlkolampotila := GetAnalogPointF('');`,
+        `${variableName}.in_rUlkolampotila := GetAnalogPointF('${outdoorTemperaturePointId}');`,
         `${variableName}.in_rSVH_rajan_nosto := 5.0;`,
         `${variableName}.in_iEstopiste1 := GetDigitalPointF('');`,
       ];
@@ -936,8 +943,12 @@ export function parsePointDatabase(input, options = {}) {
         description: measurementRecord.text,
         groupedDescription: getGroupedDescription(measurementRecord.text),
         pointId: measurementRecord.pointId,
-        shortPointId: getShortPointId(measurementRecord.pointId),
-        groupId: getGroupId(measurementRecord.pointId),
+        shortPointId: getShortPointId(
+          measurementRecord.groupingPointId || measurementRecord.pointId
+        ),
+        groupId: getGroupId(
+          measurementRecord.groupingPointId || measurementRecord.pointId
+        ),
         groupName: getGroupName(measurementRecord.text),
         setpointPointId: recordsById.has(setpointPointId) ? setpointPointId : '',
         conversionPointId: recordsById.has(conversionPointId) ? conversionPointId : '',
@@ -990,7 +1001,7 @@ export function buildOutputs(parsedData, options = {}) {
     html: options.groupHtml
       ? createGroupedHtml(finalGroups)
       : createNonGroupedHtml(parsedData.rows),
-    code: buildCodeOutput(finalGroups, options.groupHtml),
+    code: buildCodeOutput(finalGroups, options.groupHtml, parsedData.systemPrefix),
     finalGroups,
   };
 }
