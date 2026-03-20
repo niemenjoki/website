@@ -185,7 +185,7 @@ export default function WormCalculatorClient({ recommendedPosts }) {
       </div>
 
       <SocialShareButtons title={title} text={description} tags={['matokomposti']} />
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
       <PostRecommendation
         posts={recommendedPosts}
         customTitle="Aiheeseen liittyviä blogijulkaisuja"

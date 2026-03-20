@@ -1,26 +1,6 @@
-import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
+import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
+import { lieromaaProjectPage } from '@/lib/site/pageRecords.mjs';
 
 export default function generateMetadata() {
-  const title = 'Lieromaa-sivuprojekti | Joonas Niemenjoki projekti';
-  const description =
-    'Lieromaa on sivuprojektini, joka keskittyy matokompostointiin, kompostimatoihin ja käytännönläheiseen kestävään arkeen.';
-  const canonicalUrl = '/projektit/lieromaa';
-
-  const customMetadata = {
-    title,
-    description,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-    },
-    twitter: {
-      card: 'summary',
-      title,
-      description,
-    },
-  };
-
-  return withDefaultMetadata(customMetadata);
+  return createPageMetadata(lieromaaProjectPage.metadata);
 }

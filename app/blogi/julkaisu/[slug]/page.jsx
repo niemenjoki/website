@@ -1,27 +1,23 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 
-import fs from 'fs';
-import path from 'path';
 import rehypePrettyCode from 'rehype-pretty-code';
 
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import DhwPidSimulator from '@/components/DhwPidSimulator/DhwPidSimulator';
 import InfoBox from '@/components/InfoBox/InfoBox';
+import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import {
   getAllContentSlugs,
+  getContentMdxSource,
   getContentMetadata,
   getPostRecommendations,
 } from '@/lib/content/index.mjs';
 import rehypeHeadingIds from '@/lib/mdx/rehypeHeadingIds.mjs';
-import portrait from '@/public/images/portrait2024.avif';
-
-import classes from './PostPage.module.css';
 
 const prettyCodeOptions = {
   theme: {
@@ -56,8 +52,7 @@ export default async function PostPage({ params }) {
   } catch {
     notFound();
   }
-  const mdxPath = path.join(process.cwd(), 'content', 'posts', slug, 'content.mdx');
-  const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
+  const mdxContent = getContentMdxSource(slug);
 
   const recommendedPosts = await getPostRecommendations({
     self: slug,
@@ -73,74 +68,29 @@ export default async function PostPage({ params }) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+      <MdxArticlePage
+        structuredData={structuredData}
+        title={data.title}
+        dateContent={
+          <>
+            Julkaistu: {new Date(data.date).toLocaleDateString('fi-FI')}
+            {data.updated
+              ? ` (Päivitetty: ${new Date(data.updated).toLocaleDateString('fi-FI')})`
+              : undefined}
+          </>
+        }
+        source={mdxContent}
+        components={mdxComponents}
+        mdxOptions={{
+          mdxOptions: {
+            rehypePlugins: [rehypeHeadingIds, [rehypePrettyCode, prettyCodeOptions]],
+          },
         }}
+        preTitle={<Breadcrumbs items={breadcrumbItems} />}
       />
 
-      <article className={classes.PostPage}>
-        <Breadcrumbs items={breadcrumbItems} />
-        <h1>{data.title}</h1>
-        <div className={classes.Date}>
-          Julkaistu: {new Date(data.date).toLocaleDateString('fi-FI')}
-          {data.updated
-            ? ` (Päivitetty: ${new Date(data.updated).toLocaleDateString('fi-FI')})`
-            : undefined}
-        </div>
-
-        <div className={classes.Content + ' md'}>
-          <MDXRemote
-            source={mdxContent}
-            components={mdxComponents}
-            options={{
-              blockJS: false,
-              mdxOptions: {
-                rehypePlugins: [rehypeHeadingIds, [rehypePrettyCode, prettyCodeOptions]],
-              },
-            }}
-          />
-        </div>
-
-        <div className={classes.AuthorBox}>
-          <SafeImage
-            src={portrait}
-            alt="Valokuva Joonas Niemenjoesta"
-            width={90}
-            height={90}
-            placeholder="blur"
-          />
-          <div className={classes.AuthorInfo}>
-            <p className={classes.AuthorHeading}>
-              <strong>Kirjoittaja:</strong> Joonas Niemenjoki
-            </p>
-            <p>
-              Olen rakennusautomaation ohjelmoija. Työskentelee erityisesti
-              lämpöpumppujärjestelmien ja niiden ohjauslogiikan parissa. Työni keskittyy
-              järjestelmien toimintaan, energiatehokkuuteen ja käytettävyyteen.
-            </p>
-            <p>
-              Kirjoitan käytännön kokemuksiin perustuvia havaintoja ja vinkkejä
-              rakennusautomaatiosta ja sitä sivuavista aiheista.
-            </p>
-            <p>
-              <a
-                href="https://www.linkedin.com/in/joonasniemenjoki/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>{' '}
-              • <SafeLink href="/tietoa">Lisätietoa</SafeLink> •{' '}
-              <SafeLink href="/blogi">Kaikki julkaisut</SafeLink>
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <SocialShareButtons title={data.title} text={data.description} tags={data.tags} />
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <SocialShareButtons title={data.title} tags={data.tags} />
+      <Advert />
       <PostRecommendation posts={recommendedPosts} />
     </>
   );

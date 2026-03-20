@@ -2,15 +2,26 @@ import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { rauToolsPage, rauToolsStVariablesPage } from '@/lib/site/pageRecords.mjs';
+import { createProjectStructuredData } from '@/lib/structuredData/createProjectStructuredData';
 import stVariablesImage from '@/public/images/content/projects/stmuuttujat.avif';
 
 import classes from './StVariableTool.module.css';
 import StVariableToolClient from './StVariableToolClient';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default function StVariablesPage() {
+  const breadcrumbItems = [
+    { name: 'Etusivu', href: '/' },
+    { name: rauToolsPage.shortLabel, href: rauToolsPage.canonicalUrl },
+    { name: rauToolsStVariablesPage.shortLabel },
+  ];
+  const structuredData = createProjectStructuredData({
+    page: rauToolsStVariablesPage,
+    breadcrumbItems,
+  });
+
   return (
     <>
       <script
@@ -21,14 +32,8 @@ export default function StVariablesPage() {
       />
 
       <div className={classes.Page}>
-        <Breadcrumbs
-          items={[
-            { name: 'Etusivu', href: '/' },
-            { name: 'RAU-työkalut', href: '/projektit/rau-tyokalut' },
-            { name: 'ST-muuttujat' },
-          ]}
-        />
-        <h1>ST-muuttujat</h1>
+        <Breadcrumbs items={breadcrumbItems} />
+        <h1>{rauToolsStVariablesPage.shortLabel}</h1>
         <SafeImage
           src={stVariablesImage}
           alt="Kuvakaappaus ST-muuttujat-työkalusta, jossa Structured Text -koodista generoidaan muuttujien esittelylista"
@@ -38,16 +43,16 @@ export default function StVariablesPage() {
           style={{ width: '100%', height: 'auto', marginBottom: '1.25rem' }}
         />
         <p className={classes.Lead}>
-          Tämä työkalu generoi muuttujien esittelylistan koodin perusteella.
+          {rauToolsStVariablesPage.lead ?? rauToolsStVariablesPage.description}
         </p>
         <p className={classes.BackLink}>
-          <SafeLink href="/projektit/rau-tyokalut">Kaikki RAU-työkalut</SafeLink>
+          <SafeLink href={rauToolsPage.canonicalUrl}>Kaikki RAU-työkalut</SafeLink>
         </p>
 
         <StVariableToolClient />
       </div>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

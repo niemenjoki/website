@@ -7,16 +7,15 @@ import AdSenseConsentGate from '@/components/AdSense/AdSenseConsentGate';
 import Analytics from '@/components/Analytics/Analytics';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
+import { ADSENSE_ENABLED } from '@/data/site/adsense';
+import { getSiteNavigation } from '@/lib/siteStructure.mjs';
+import { createSiteStructuredData } from '@/lib/structuredData/createSiteStructuredData';
 
 import './globals.css';
 
 config.autoAddCss = false;
 
-export const metadata = {
-  verification: {
-    google: 'QnhqvG850vkdtc4C7pk0jp9JUDowtwf-vVks_iHQLWY',
-  },
-};
+export { defaultMetadata as metadata } from '@/data/site/defaultMetadata';
 
 const rubik = Rubik({
   subsets: ['latin'],
@@ -25,36 +24,10 @@ const rubik = Rubik({
   display: 'swap',
 });
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      '@id': 'https://www.niemenjoki.fi/#website',
-      url: 'https://www.niemenjoki.fi',
-      name: 'Joonas Niemenjoki',
-      description:
-        'Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta, lämpöpumpuista ja niitä sivuavista teknisistä aiheista.',
-      publisher: { '@id': 'https://www.niemenjoki.fi/#joonas' },
-      inLanguage: 'fi',
-    },
-    {
-      '@type': 'Person',
-      '@id': 'https://www.niemenjoki.fi/#joonas',
-      name: 'Joonas Niemenjoki',
-      url: 'https://www.niemenjoki.fi/tietoa',
-      description: 'Rakennusautomaation ohjelmoija',
-      jobTitle: 'Rakennusautomaation ohjelmoija',
-      sameAs: [
-        'https://www.linkedin.com/in/joonasniemenjoki',
-        'https://www.instagram.com/niemenjoki',
-      ],
-      image: 'https://www.niemenjoki.fi/images/portrait2024.avif',
-    },
-  ],
-};
-
 export default function RootLayout({ children }) {
+  const navigation = getSiteNavigation();
+  const structuredData = createSiteStructuredData();
+
   return (
     <html lang="fi" className={rubik.variable}>
       <body>
@@ -65,12 +38,12 @@ export default function RootLayout({ children }) {
           }}
         />
         <div className="container">
-          <Navbar />
+          <Navbar navigation={navigation} />
           <main>{children}</main>
-          <Footer />
+          <Footer navigation={navigation} />
         </div>
         <Analytics />
-        <AdSenseConsentGate />
+        {ADSENSE_ENABLED ? <AdSenseConsentGate /> : null}
       </body>
     </html>
   );

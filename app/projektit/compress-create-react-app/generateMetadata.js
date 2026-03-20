@@ -1,26 +1,6 @@
-import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
+import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
+import { compressCreateReactAppPage } from '@/lib/site/pageRecords.mjs';
 
 export default function generateMetadata() {
-  const title = 'compress-create-react-app työkalu | Joonas Niemenjoki';
-  const description =
-    'compress-create-react-app on React-kehittäjille tarkoitettu apuohjelma, joka helpottaa verkkosivujen tiedostojen pakkaamista Create React App -ympäristössä.';
-  const canonicalUrl = '/projektit/compress-create-react-app';
-
-  const customMetadata = {
-    title,
-    description,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-    },
-    twitter: {
-      card: 'summary',
-      title,
-      description,
-    },
-  };
-
-  return withDefaultMetadata(customMetadata);
+  return createPageMetadata(compressCreateReactAppPage.metadata);
 }

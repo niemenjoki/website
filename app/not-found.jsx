@@ -1,5 +1,6 @@
 import ClientNotFoundPage from '@/components/NotFoundClient/NotFoundClient';
 import { getAllContent } from '@/lib/content/index.mjs';
+import { getSearchableSitePages } from '@/lib/siteStructure.mjs';
 
 export const metadata = {
   title: 'Hakemaasi sivua ei löytynyt | Joonas Niemenjoki blogi',
@@ -10,6 +11,7 @@ export const metadata = {
 
 export default async function NotFound() {
   const posts = getAllContent();
+  const sitePages = getSearchableSitePages({ context: 'notFound' });
 
-  return <ClientNotFoundPage content={[...posts]} />;
+  return <ClientNotFoundPage content={[...sitePages, ...posts]} />;
 }

@@ -9,7 +9,30 @@ import SafeLink from '../SafeLink/SafeLink';
 import Socials from '../Socials/Socials.jsx';
 import classes from './Navbar.module.css';
 
-export default function Navbar() {
+function renderDesktopItem(item) {
+  if (item.kind === 'menu') {
+    return (
+      <li key={item.label} className={classes.Dropdown}>
+        <span>{item.label}</span>
+        <ul className={classes.DropdownMenu}>
+          {item.items.map((link) => (
+            <li key={link.href}>
+              <SafeLink href={link.href}>{link.label}</SafeLink>
+            </li>
+          ))}
+        </ul>
+      </li>
+    );
+  }
+
+  return (
+    <li key={item.href}>
+      <SafeLink href={item.href}>{item.label}</SafeLink>
+    </li>
+  );
+}
+
+export default function Navbar({ navigation }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleIsOpen = () => {
@@ -35,27 +58,7 @@ export default function Navbar() {
         {/* RIGHT */}
         <div className={classes.Right}>
           <ul className={classes.Links}>
-            <li>
-              <SafeLink href="/blogi">Blogi</SafeLink>
-            </li>
-
-            <li className={classes.Dropdown}>
-              <span>Projektit</span>
-              <ul className={classes.DropdownMenu}>
-                <li>
-                  <SafeLink href="/projektit/compress-create-react-app">
-                    compress-create-react-app
-                  </SafeLink>
-                </li>
-                <li>
-                  <SafeLink href="/projektit/lieromaa">Lieromaa</SafeLink>
-                </li>
-                <li>
-                  <SafeLink href="/projektit/rau-tyokalut">RAU työkalut</SafeLink>
-                </li>
-              </ul>
-            </li>
-
+            {navigation.desktopItems.map((item) => renderDesktopItem(item))}
             <li>
               <ThemeToggler style={{ fontSize: '24px' }} />
             </li>
@@ -75,55 +78,23 @@ export default function Navbar() {
             <ThemeToggler style={{ fontSize: '26px' }} />
           </div>
 
-          <div className={classes.MobileSection}>
-            <h3>Blogi</h3>
-            <ul>
-              <li>
-                <SafeLink href="/blogi" onClick={toggleIsOpen}>
-                  Viimeisimmät julkaisut
-                </SafeLink>
-              </li>
-            </ul>
-          </div>
-
-          <div className={classes.MobileSection}>
-            <h3>Projektit</h3>
-            <ul>
-              <li>
-                <SafeLink
-                  href="/projektit/compress-create-react-app"
-                  onClick={toggleIsOpen}
-                >
-                  compress-create-react-app
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/projektit/lieromaa" onClick={toggleIsOpen}>
-                  Lieromaa
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/projektit/rau-tyokalut" onClick={toggleIsOpen}>
-                  RAU työkalut
-                </SafeLink>
-              </li>
-            </ul>
-          </div>
-          <div className={classes.MobileSection}>
-            <h3>Muut sivut</h3>
-            <ul>
-              <li>
-                <SafeLink href="/tietoa" onClick={toggleIsOpen}>
-                  Tietoa sivustosta
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tietosuoja" onClick={toggleIsOpen}>
-                  Tietosuoja
-                </SafeLink>
-              </li>{' '}
-            </ul>
-          </div>
+          {navigation.mobileSections.map((section, sectionIndex) => (
+            <div
+              key={section.heading ?? `mobile-section-${sectionIndex}`}
+              className={classes.MobileSection}
+            >
+              {section.heading ? <h3>{section.heading}</h3> : null}
+              <ul>
+                {section.items.map((link) => (
+                  <li key={link.href}>
+                    <SafeLink href={link.href} onClick={toggleIsOpen}>
+                      {link.label}
+                    </SafeLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           <div className={classes.MobileSection}>
             <h3>Seuraa</h3>

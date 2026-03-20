@@ -1,13 +1,28 @@
 import Advert from '@/components/Advert/Advert';
 import SafeImage from '@/components/SafeImage/SafeImage';
+import { SITE_AUTHOR } from '@/data/site/author';
+import { AUTHOR_ID } from '@/data/site/schema.mjs';
+import { aboutPage } from '@/lib/site/pageRecords.mjs';
+import { createPageStructuredData } from '@/lib/structuredData/createPageStructuredData';
+import { createAuthorStructuredDataNode } from '@/lib/structuredData/createSiteStructuredData';
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './Tietoa.module.css';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default function AboutPage() {
+  const structuredData = createPageStructuredData({
+    pageUrl: aboutPage.pageUrl,
+    pageName: aboutPage.title,
+    description: aboutPage.description,
+    pageType: aboutPage.pageType,
+    pageIdSuffix: aboutPage.pageIdSuffix,
+    mainEntity: { '@id': AUTHOR_ID },
+    primaryImageOfPage: aboutPage.imageUrl,
+    extraGraph: [createAuthorStructuredDataNode()],
+  });
+
   return (
     <>
       <script
@@ -21,13 +36,13 @@ export default function AboutPage() {
         <div className={classes.Info}>
           <SafeImage
             src={portrait}
-            alt="Valokuva Joonas Niemenjoesta"
+            alt={SITE_AUTHOR.portraitAlt}
             placeholder="blur"
             width={200}
             height={200}
             priority
           />
-          <h1>Joonas Niemenjoki</h1>
+          <h1>{SITE_AUTHOR.name}</h1>
         </div>
 
         <div className={classes.Bio}>
@@ -78,7 +93,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

@@ -2,15 +2,26 @@ import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { rauToolsModbusDevicesPage, rauToolsPage } from '@/lib/site/pageRecords.mjs';
+import { createProjectStructuredData } from '@/lib/structuredData/createProjectStructuredData';
 import modbusDevicesImage from '@/public/images/content/projects/modbuslaitteet.avif';
 
 import classes from './ModbusDeviceTool.module.css';
 import ModbusDeviceToolClient from './ModbusDeviceToolClient';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default function ModbusDevicesPage() {
+  const breadcrumbItems = [
+    { name: 'Etusivu', href: '/' },
+    { name: rauToolsPage.shortLabel, href: rauToolsPage.canonicalUrl },
+    { name: rauToolsModbusDevicesPage.shortLabel },
+  ];
+  const structuredData = createProjectStructuredData({
+    page: rauToolsModbusDevicesPage,
+    breadcrumbItems,
+  });
+
   return (
     <>
       <script
@@ -21,14 +32,8 @@ export default function ModbusDevicesPage() {
       />
 
       <div className={classes.Page}>
-        <Breadcrumbs
-          items={[
-            { name: 'Etusivu', href: '/' },
-            { name: 'RAU-työkalut', href: '/projektit/rau-tyokalut' },
-            { name: 'Modbus-laitteet' },
-          ]}
-        />
-        <h1>Modbus-laitteet</h1>
+        <Breadcrumbs items={breadcrumbItems} />
+        <h1>{rauToolsModbusDevicesPage.shortLabel}</h1>
         <SafeImage
           src={modbusDevicesImage}
           alt="Kuvakaappaus Modbus-laitteet-työkalusta, jossa Modbus-koodista generoidaan laitelista ja FX-Editoriin sopiva näkymä"
@@ -38,18 +43,16 @@ export default function ModbusDevicesPage() {
           style={{ width: '100%', height: 'auto', marginBottom: '1.25rem' }}
         />
         <p className={classes.Lead}>
-          Muodostaa Modbus-funktiolohkosta Modbus-laitelistat sekä FX-Editoriin sopivan
-          XML:n. Kutsukoodin avulla saat erikseen sekä tarvittavat että kaikki
-          Modbus-laitteet.
+          {rauToolsModbusDevicesPage.lead ?? rauToolsModbusDevicesPage.description}
         </p>
         <p className={classes.BackLink}>
-          <SafeLink href="/projektit/rau-tyokalut">Kaikki RAU-työkalut</SafeLink>
+          <SafeLink href={rauToolsPage.canonicalUrl}>Kaikki RAU-työkalut</SafeLink>
         </p>
 
         <ModbusDeviceToolClient />
       </div>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

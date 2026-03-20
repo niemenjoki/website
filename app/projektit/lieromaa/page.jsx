@@ -1,14 +1,24 @@
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
+import { lieromaaProjectPage } from '@/lib/site/pageRecords.mjs';
+import { createProjectStructuredData } from '@/lib/structuredData/createProjectStructuredData';
 import wormsOnHandImage from '@/public/images/kompostimadot_kammenella.avif';
 
 import classes from './Lieromaa.module.css';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default function LieromaaProjectPage() {
+  const breadcrumbItems = [
+    { name: 'Etusivu', href: '/' },
+    { name: lieromaaProjectPage.shortLabel },
+  ];
+  const structuredData = createProjectStructuredData({
+    page: lieromaaProjectPage,
+    breadcrumbItems,
+  });
+
   return (
     <>
       <script
@@ -19,8 +29,8 @@ export default function LieromaaProjectPage() {
       />
 
       <div className={classes.ProjectPage}>
-        <Breadcrumbs items={[{ name: 'Etusivu', href: '/' }, { name: 'Lieromaa' }]} />
-        <h1>Lieromaa</h1>
+        <Breadcrumbs items={breadcrumbItems} />
+        <h1>{lieromaaProjectPage.shortLabel}</h1>
         <SafeImage
           src={wormsOnHandImage}
           alt="Valokuva Joonas Niemenjoesta"
@@ -61,7 +71,7 @@ export default function LieromaaProjectPage() {
         </p>
       </div>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

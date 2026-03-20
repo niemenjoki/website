@@ -1,4 +1,5 @@
-import { SOCIALS } from '../../data/socials';
+import { SOCIALS } from '@/data/site/socials';
+
 import Icon from '../Icon/Icon';
 
 const Socials = () => {

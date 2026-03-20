@@ -2,15 +2,26 @@ import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { rauToolsAlarmPage, rauToolsPage } from '@/lib/site/pageRecords.mjs';
+import { createProjectStructuredData } from '@/lib/structuredData/createProjectStructuredData';
 import alarmPageImage from '@/public/images/content/projects/halytystyokalu.avif';
 
 import classes from './AlarmPageTool.module.css';
 import AlarmPageToolClient from './AlarmPageToolClient';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default function AlarmPagePage() {
+  const breadcrumbItems = [
+    { name: 'Etusivu', href: '/' },
+    { name: rauToolsPage.shortLabel, href: rauToolsPage.canonicalUrl },
+    { name: rauToolsAlarmPage.shortLabel },
+  ];
+  const structuredData = createProjectStructuredData({
+    page: rauToolsAlarmPage,
+    breadcrumbItems,
+  });
+
   return (
     <>
       <script
@@ -21,14 +32,8 @@ export default function AlarmPagePage() {
       />
 
       <div className={classes.Page}>
-        <Breadcrumbs
-          items={[
-            { name: 'Etusivu', href: '/' },
-            { name: 'RAU-työkalut', href: '/projektit/rau-tyokalut' },
-            { name: 'Hälytystyökalu' },
-          ]}
-        />
-        <h1>Hälytystyökalu</h1>
+        <Breadcrumbs items={breadcrumbItems} />
+        <h1>{rauToolsAlarmPage.shortLabel}</h1>
         <SafeImage
           src={alarmPageImage}
           alt="Kuvakaappaus Hälytystyökalusta, jossa pistelistasta muodostetaan hälytyssivu ja IEC-koodi"
@@ -38,17 +43,16 @@ export default function AlarmPagePage() {
           style={{ width: '100%', height: 'auto', marginBottom: '1.25rem' }}
         />
         <p className={classes.Lead}>
-          Muuntaa FX-Editorista kopioidut pisteet hälytyssivun grafiikkakuvaksi ja generoi
-          IEC koodin samassa muodossa kuin FX-Editorin template manager.
+          {rauToolsAlarmPage.lead ?? rauToolsAlarmPage.description}
         </p>
         <p className={classes.BackLink}>
-          <SafeLink href="/projektit/rau-tyokalut">Kaikki RAU-työkalut</SafeLink>
+          <SafeLink href={rauToolsPage.canonicalUrl}>Kaikki RAU-työkalut</SafeLink>
         </p>
 
         <AlarmPageToolClient />
       </div>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

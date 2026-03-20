@@ -2,6 +2,7 @@
   "name": "website",
   "version": "2.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "predev": "node lib/prebuild/index.mjs && npm run format",
     "prebuild": "node lib/prebuild/index.mjs",

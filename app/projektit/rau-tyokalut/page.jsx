@@ -1,13 +1,33 @@
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { rauToolPages, rauToolsPage } from '@/lib/site/pageRecords.mjs';
+import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
 import classes from './RauToolsPage.module.css';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default function RauToolsPage() {
+  const breadcrumbItems = [
+    { name: 'Etusivu', href: '/' },
+    { name: rauToolsPage.shortLabel },
+  ];
+  const structuredData = createCollectionStructuredData({
+    pageUrl: rauToolsPage.pageUrl,
+    pageName: rauToolsPage.title,
+    description: rauToolsPage.description,
+    itemListName: rauToolsPage.mainEntityName,
+    itemListElement: rauToolPages.map((page, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: page.shortLabel,
+      url: page.pageUrl,
+    })),
+    breadcrumbItems,
+    includeAuthor: true,
+  });
+
   return (
     <>
       <script
@@ -18,72 +38,37 @@ export default function RauToolsPage() {
       />
 
       <div className={classes.Page}>
-        <Breadcrumbs items={[{ name: 'Etusivu', href: '/' }, { name: 'RAU-työkalut' }]} />
-        <h1>RAU-työkalut</h1>
+        <Breadcrumbs items={breadcrumbItems} />
+        <h1>{rauToolsPage.shortLabel}</h1>
         <p className={classes.Lead}>
           Tähän osioon kokoan rakennusautomaation sekalaisia aputyökaluja. Työkalut on
           tarkoitettu lähtökohtaisesti Fidelix-järjestelmien käyttäjille.
         </p>
         <div className={classes.ToolCatalog}>
-          <SafeLink
-            className={classes.ToolCard}
-            href="/projektit/rau-tyokalut/halytystyokalu"
-          >
-            <h2 className={classes.CardTitle}>Hälytystyökalu</h2>
-            <p className={classes.CardDescription}>
-              Muuntaa FX-Editorista kopioidut pisteet hälytyssivun grafiikkakuvaksi ja
-              generoi IEC koodin samassa muodossa kuin FX-Editorin template manager.
-            </p>
-            <p className={classes.CardMeta}>
-              Avaa työkalu{' '}
-              <span className={classes.Arrow}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </p>
-          </SafeLink>
-
-          <SafeLink
-            className={classes.ToolCard}
-            href="/projektit/rau-tyokalut/st-muuttujat"
-          >
-            <h2 className={classes.CardTitle}>ST-muuttujat</h2>
-            <p className={classes.CardDescription}>
-              Generoi muuttujien esittelylistan koodin perusteella.
-            </p>
-            <p className={classes.CardMeta}>
-              Avaa työkalu{' '}
-              <span className={classes.Arrow}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </p>
-          </SafeLink>
-
-          <SafeLink
-            className={classes.ToolCard}
-            href="/projektit/rau-tyokalut/modbuslaitteet"
-          >
-            <h2 className={classes.CardTitle}>Modbus-laitteet</h2>
-            <p className={classes.CardDescription}>
-              Generoi Modbus-funktiolohkosta kaikki ja tarvittavat Modbuslaitteet
-              koodikommenttina sekä FX-Editoriin sopivassa XML-muodossa.
-            </p>
-            <p className={classes.CardMeta}>
-              Avaa työkalu{' '}
-              <span className={classes.Arrow}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </p>
-          </SafeLink>
+          {rauToolPages.map((page) => (
+            <SafeLink
+              className={classes.ToolCard}
+              href={page.canonicalUrl}
+              key={page.pageId}
+            >
+              <h2 className={classes.CardTitle}>{page.shortLabel}</h2>
+              <p className={classes.CardDescription}>
+                {page.cardDescription ?? page.description}
+              </p>
+              <p className={classes.CardMeta}>
+                Avaa työkalu{' '}
+                <span className={classes.Arrow}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              </p>
+            </SafeLink>
+          ))}
         </div>
       </div>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

@@ -1,15 +1,25 @@
 import path from 'path';
 
-import safeLinks from '@/data/generated/safeRoutes.json';
-import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content/index.mjs';
+import safeLinks from '@/generated/site/safeRoutes.json';
+import {
+  getAllContent,
+  getAllPostTags,
+  getPostsByTag,
+  slugifyTag,
+} from '@/lib/content/index.mjs';
 import { getStaticAppRoutes } from '@/lib/routes/getStaticAppRoutes.mjs';
+import {
+  blogIndexPage,
+  getPageLastModified,
+  homePage,
+  staticSitePages,
+} from '@/lib/site/pageRecords.mjs';
 
-import { POSTS_PER_PAGE, SITE_URL } from '../data/vars.mjs';
+import { POSTS_PER_PAGE, SITE_URL } from '../data/site/constants.mjs';
 
 const APP_DIR = path.join(process.cwd(), 'app');
 
 const toISODate = (d) => new Date(d).toISOString().split('T')[0];
-const slugify = (s) => s.replaceAll(' ', '-').trim().toLowerCase();
 const getLatestPostDate = (posts) =>
   posts.reduce((latest, post) => {
     const d = new Date(post.updated || post.date);
@@ -23,6 +33,9 @@ export default async function sitemap() {
   const postTags = getAllPostTags();
   const staticPages = getStaticAppRoutes(APP_DIR);
   const urls = new Map();
+  const staticRouteMap = new Map(
+    staticPages.map(({ route, lastModified }) => [route, lastModified])
+  );
 
   const latestPost = getLatestPostDate(posts);
 
@@ -31,19 +44,27 @@ export default async function sitemap() {
   };
 
   const staticLastModified = (route, fallback) => {
-    if (route === '/' || route === '/blogi') return latestPost;
-    if (route === '/tietoa') return '2025-09-08';
+    if (route === homePage.canonicalUrl || route === blogIndexPage.canonicalUrl) {
+      return latestPost;
+    }
+
     return fallback ?? latestPost;
   };
 
   // --- Static pages
-  staticPages.forEach(({ route, lastModified }) =>
-    add(route, staticLastModified(route, lastModified))
+  staticSitePages.forEach((page) =>
+    add(
+      page.canonicalUrl,
+      staticLastModified(
+        page.canonicalUrl,
+        getPageLastModified(page) ?? staticRouteMap.get(page.canonicalUrl)
+      )
+    )
   );
 
   // --- Tag pages
   for (const tag of postTags) {
-    const slug = slugify(tag);
+    const slug = slugifyTag(tag);
     const { numPages } = getPostsByTag(slug, 1, POSTS_PER_PAGE);
     for (let i = 1; i <= numPages; i++) add(`/blogi/${slug}/sivu/${i}`, latestPost);
   }

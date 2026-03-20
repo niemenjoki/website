@@ -1,4 +1,4 @@
-import { SITE_URL } from './vars.mjs';
+import { SITE_URL } from './constants.mjs';
 
 export const SOCIALS = [
   {

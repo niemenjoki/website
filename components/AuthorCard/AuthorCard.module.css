@@ -1,0 +1,47 @@
+.AuthorBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--text-color);
+}
+
+.AuthorBox img {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.AuthorInfo p {
+  margin: 0.3rem 0;
+  line-height: 1.5;
+}
+
+.AuthorInfo a {
+  color: var(--highlight-content-link);
+  text-decoration: underline;
+}
+
+.AuthorHeading {
+  font-weight: bold;
+  margin: 0 0 0.3rem 0;
+}
+
+@media (max-width: 600px) {
+  .AuthorBox {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .AuthorBox img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.5rem;
+  }
+
+  .AuthorInfo {
+    width: 100%;
+  }
+}

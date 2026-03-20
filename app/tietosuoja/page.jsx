@@ -1,9 +1,19 @@
+import { privacyPolicyPage } from '@/lib/site/pageRecords.mjs';
+import { createPageStructuredData } from '@/lib/structuredData/createPageStructuredData';
+
 import classes from './Tietosuoja.module.css';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default function PrivacyPage() {
+  const structuredData = createPageStructuredData({
+    pageUrl: privacyPolicyPage.pageUrl,
+    pageName: privacyPolicyPage.title,
+    description: privacyPolicyPage.description,
+    pageType: privacyPolicyPage.pageType,
+    pageIdSuffix: privacyPolicyPage.pageIdSuffix,
+  });
+
   return (
     <>
       <script
@@ -16,7 +26,14 @@ export default function PrivacyPage() {
       <div className={classes.PrivacyPage}>
         <h1>Tietosuojaseloste</h1>
         <p>
-          <em>Päivitetty: 20. tammikuuta 2026</em>
+          <em>
+            Päivitetty:{' '}
+            {new Date(privacyPolicyPage.updatedAt).toLocaleDateString('fi-FI', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </em>
         </p>
 
         <p>

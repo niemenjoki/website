@@ -4,16 +4,25 @@ import { useEffect, useRef, useState } from 'react';
 
 import { usePathname } from 'next/navigation';
 
+import {
+  ADSENSE_CLIENT,
+  ADSENSE_DEFAULT_SLOT,
+  ADSENSE_ENABLED,
+} from '@/data/site/adsense';
+
 import classes from './Advert.module.css';
 
 const Advert = ({ adClient, adSlot }) => {
   const pathname = usePathname();
   const adRef = useRef(null);
   const [adStatus, setAdStatus] = useState('unknown');
+  const resolvedAdClient = adClient ?? ADSENSE_CLIENT;
+  const resolvedAdSlot = adSlot ?? ADSENSE_DEFAULT_SLOT;
   const isEnabled =
+    ADSENSE_ENABLED &&
     process.env.NODE_ENV !== 'development' &&
-    adClient?.startsWith('ca-pub-') &&
-    Boolean(adSlot);
+    resolvedAdClient?.startsWith('ca-pub-') &&
+    Boolean(resolvedAdSlot);
 
   useEffect(() => {
     if (!isEnabled) return;
@@ -74,7 +83,7 @@ const Advert = ({ adClient, adSlot }) => {
       window.removeEventListener('website:adsense-ready', requestAd);
       window.removeEventListener('website:ads-consent-granted', requestAd);
     };
-  }, [pathname, adClient, adSlot, isEnabled]);
+  }, [pathname, resolvedAdClient, resolvedAdSlot, isEnabled]);
 
   if (!isEnabled || adStatus === 'unfilled') return null;
 
@@ -86,8 +95,8 @@ const Advert = ({ adClient, adSlot }) => {
         ref={adRef}
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client={adClient}
-        data-ad-slot={adSlot}
+        data-ad-client={resolvedAdClient}
+        data-ad-slot={resolvedAdSlot}
         data-ad-format="auto"
         data-full-width-responsive="true"
       />

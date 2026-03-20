@@ -2,12 +2,16 @@
 
 import SafeLink from '@/components/SafeLink/SafeLink';
 import Socials from '@/components/Socials/Socials';
-import { LICENSE_URL, REPO_URL } from '@/data/vars.mjs';
+import {
+  LICENSE_URL,
+  REPO_URL,
+  SITE_COPYRIGHT_START_YEAR,
+} from '@/data/site/constants.mjs';
 
 import classes from './Footer.module.css';
 
-export default function Footer() {
-  const startYear = 2025;
+export default function Footer({ navigation }) {
+  const startYear = SITE_COPYRIGHT_START_YEAR;
   const currentYear = new Date().getFullYear();
   const yearRange =
     currentYear === startYear ? `${startYear}` : `${startYear}–${currentYear}`;
@@ -16,43 +20,18 @@ export default function Footer() {
     <footer className={classes.Footer}>
       <div className={classes.Inner}>
         <div className={classes.Columns}>
-          <div>
-            <h3>Blogi</h3>
-            <ul>
-              <li>
-                <SafeLink href="/blogi">Viimeisimmät julkaisut</SafeLink>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>Projektit</h3>
-            <ul>
-              <li>
-                <SafeLink href="/projektit/compress-create-react-app">
-                  compress-create-react-app
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/projektit/lieromaa">Lieromaa</SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/projektit/rau-tyokalut">RAU työkalut</SafeLink>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>Muut sivut</h3>
-            <ul>
-              <li>
-                <SafeLink href="/tietoa">Tietoa sivustosta</SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tietosuoja">Tietosuoja</SafeLink>
-              </li>
-            </ul>
-          </div>
+          {navigation.footerColumns.map((column) => (
+            <div key={column.heading}>
+              <h3>{column.heading}</h3>
+              <ul>
+                {column.items.map((link) => (
+                  <li key={link.href}>
+                    <SafeLink href={link.href}>{link.label}</SafeLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           <div className={classes.Socials}>
             <h3>Seuraa</h3>

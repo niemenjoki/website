@@ -46,5 +46,5 @@ public/images/**/*.png
 public/images/**/*.webp
 public/images/**/*.gif
 
-data/generated/
+generated/
 

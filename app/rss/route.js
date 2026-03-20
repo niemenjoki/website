@@ -1,6 +1,6 @@
+import { SITE_AUTHOR } from '@/data/site/author';
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/data/site/constants.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
-
-import { SITE_URL } from '../../data/vars.mjs';
 
 export const revalidate = 3600;
 
@@ -19,7 +19,7 @@ export async function GET() {
         <guid>${SITE_URL}/blogi/julkaisu/${post.slug}</guid>
         <pubDate>${new Date(post.date).toUTCString()}</pubDate>
         <description><![CDATA[ ${post.description} ]]></description>
-        <dc:creator>Joonas Niemenjoki</dc:creator>
+        <dc:creator>${SITE_AUTHOR.name}</dc:creator>
       </item>`
     )
     .join('');
@@ -32,10 +32,10 @@ export async function GET() {
     version="2.0"
   >
     <channel>
-      <title><![CDATA[ Joonas Niemenjoki ]]></title>
+      <title><![CDATA[ ${SITE_NAME} ]]></title>
       <link>${SITE_URL}</link>
       <atom:link href="${SITE_URL}/rss" rel="self" type="application/rss+xml" />
-      <description><![CDATA[ Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta ja sitä sivuavista aiheista. ]]></description>
+      <description><![CDATA[ ${SITE_DESCRIPTION} ]]></description>
       <language>fi</language>
       <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>
       ${xmlItems}

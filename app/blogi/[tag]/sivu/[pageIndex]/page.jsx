@@ -6,11 +6,21 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
-import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content/index.mjs';
+import {
+  BLOG_SEARCH_PLACEHOLDER,
+  POSTS_PER_PAGE,
+  SITE_URL,
+} from '@/data/site/constants.mjs';
+import {
+  getAllContent,
+  getAllPostTags,
+  getBlogTagPageData,
+  getPostsByTag,
+  slugifyTag,
+} from '@/lib/content/index.mjs';
+import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
 import classes from './TagPage.module.css';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -19,7 +29,7 @@ export async function generateStaticParams() {
   const groupedPosts = {};
 
   allPosts.forEach((post) => {
-    const tags = post.tags.map((t) => t.trim().toLowerCase().replaceAll(' ', '-'));
+    const tags = post.tags.map((tag) => slugifyTag(tag));
     tags.forEach((tag) => {
       if (!groupedPosts[tag]) groupedPosts[tag] = [];
       groupedPosts[tag].push(post.slug);
@@ -39,75 +49,46 @@ export async function generateStaticParams() {
 
 export default async function BlogTagPage({ params }) {
   const { pageIndex, tag } = await params;
-
-  const decodedTag = decodeURIComponent(tag);
-  const pageIndexInt = parseInt(pageIndex) || 1;
-  const { posts, numPages } = getPostsByTag(decodedTag, pageIndexInt, POSTS_PER_PAGE);
+  const { pageIndexInt, pageUrl, pageName, description, breadcrumbItems, tagName } =
+    getBlogTagPageData({
+      tag,
+      pageIndex,
+    });
+  const { posts, numPages } = getPostsByTag(tag, pageIndexInt, POSTS_PER_PAGE);
   if (posts.length === 0) {
     notFound();
   }
   const allTags = getAllPostTags();
-
-  const tagDisplay = decodedTag.replaceAll('-', ' ');
-  const pagePath = `/blogi/${tag}/sivu/${pageIndexInt}`;
-  const pageUrl = `${SITE_URL}${pagePath}`;
-  const metadataTitle = `Julkaisut avainsanalla ${tagDisplay} | Niemenjoki blogi`;
-  const metadataDescription = `Julkaisut avainsanalla ${tagDisplay}: Blogi käsittelee pääasiassa rakennusautomaatiota, lämpöpumppuja ja tekniikkaa.`;
-  const breadcrumbItems =
-    pageIndexInt === 1
-      ? [
-          { name: 'Etusivu', href: '/' },
-          { name: 'Blogi', href: '/blogi' },
-          { name: tagDisplay },
-        ]
-      : [
-          { name: 'Etusivu', href: '/' },
-          { name: 'Blogi', href: '/blogi' },
-          { name: tagDisplay, href: `/blogi/${tag}/sivu/1` },
-          { name: `Sivu ${pageIndexInt}` },
-        ];
-
-  const ldJSON = JSON.parse(JSON.stringify(structuredData));
-  ldJSON['@graph'][0]['@id'] = `${pageUrl}#collectionpage`;
-  ldJSON['@graph'][0].url = pageUrl;
-  ldJSON['@graph'][0].name = metadataTitle;
-  ldJSON['@graph'][0].description = metadataDescription;
-  ldJSON['@graph'][0].mainEntity['@id'] = `${pageUrl}#itemlist`;
-  ldJSON['@graph'][0].breadcrumb['@id'] = `${pageUrl}#breadcrumb`;
-  ldJSON['@graph'][1]['@id'] = `${pageUrl}#itemlist`;
-  ldJSON['@graph'][1].numberOfItems = posts.length;
-  ldJSON['@graph'][1]['itemListElement'] = posts.map((post, i) => ({
-    '@type': 'ListItem',
-    position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
-    name: post.title,
-    url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
-  }));
-  ldJSON['@graph'][2]['@id'] = `${pageUrl}#breadcrumb`;
-  ldJSON['@graph'][2]['itemListElement'] = breadcrumbItems.map((item, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: item.name,
-    ...(item.href && index !== breadcrumbItems.length - 1
-      ? { item: `${SITE_URL}${item.href}` }
-      : {}),
-  }));
+  const structuredData = createCollectionStructuredData({
+    pageUrl,
+    pageName,
+    description,
+    itemListElement: posts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: (pageIndexInt - 1) * POSTS_PER_PAGE + (index + 1),
+      name: post.title,
+      url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
+    })),
+    itemListOrder: 'https://schema.org/ItemListOrderDescending',
+    breadcrumbItems,
+  });
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(ldJSON).replace(/</g, '\\u003c'),
+          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <h1>Julkaisut avainsanalla "{tagDisplay}"</h1>
+      <h1>Julkaisut avainsanalla "{tagName}"</h1>
 
       <SearchPosts
         list={posts}
         keys={['title', 'description', 'keywords', 'tags']}
-        placeholder="Etsi julkaisun nimellä tai avainsanalla.."
+        placeholder={BLOG_SEARCH_PLACEHOLDER}
       />
 
       <div className={classes.Taglist}>
@@ -115,13 +96,11 @@ export default async function BlogTagPage({ params }) {
           Kaikki
         </SafeLink>
         {allTags.map((t) => {
-          const isActive =
-            t.toLowerCase().replaceAll(' ', '-') ===
-            decodedTag.toLowerCase().replaceAll(' ', '-');
+          const isActive = slugifyTag(t) === slugifyTag(tag);
           return (
             <SafeLink
               key={t}
-              href={`/blogi/${t.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
+              href={`/blogi/${slugifyTag(t)}/sivu/1`}
               className={`${classes.Tag} ${isActive ? classes.ActiveTag : ''}`}
             >
               {t}
@@ -139,7 +118,7 @@ export default async function BlogTagPage({ params }) {
         currentPage={pageIndexInt}
         basePath={`/blogi/${tag}`}
       />
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

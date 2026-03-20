@@ -2,13 +2,23 @@ import Image from 'next/image';
 
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
+import { compressCreateReactAppPage } from '@/lib/site/pageRecords.mjs';
+import { createProjectStructuredData } from '@/lib/structuredData/createProjectStructuredData';
 
 import classes from './CompressCra.module.css';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default function CompressCraProjectPage() {
+  const breadcrumbItems = [
+    { name: 'Etusivu', href: '/' },
+    { name: compressCreateReactAppPage.shortLabel },
+  ];
+  const structuredData = createProjectStructuredData({
+    page: compressCreateReactAppPage,
+    breadcrumbItems,
+  });
+
   return (
     <>
       <script
@@ -19,10 +29,8 @@ export default function CompressCraProjectPage() {
       />
 
       <div className={classes.ProjectPage}>
-        <Breadcrumbs
-          items={[{ name: 'Etusivu', href: '/' }, { name: 'compress-create-react-app' }]}
-        />
-        <h1>compress-create-react-app</h1>
+        <Breadcrumbs items={breadcrumbItems} />
+        <h1>{compressCreateReactAppPage.shortLabel}</h1>
         <div className={classes.Badges}>
           <a
             href="https://www.npmjs.com/package/compress-create-react-app"
@@ -95,7 +103,7 @@ export default function CompressCraProjectPage() {
         </p>
       </div>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

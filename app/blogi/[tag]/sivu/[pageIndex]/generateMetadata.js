@@ -1,39 +1,34 @@
-import { POSTS_PER_PAGE } from '@/data/vars.mjs';
-import { getPostsByTag } from '@/lib/content/index.mjs';
-import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
+import { POSTS_PER_PAGE } from '@/data/site/constants.mjs';
+import { getBlogTagPageData, getPostsByTag } from '@/lib/content/index.mjs';
+import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
 
 export default async function generateMetadata({ params }) {
   const { tag, pageIndex } = await params;
-  const tagName = tag.replaceAll('-', ' ');
-  const decodedTag = decodeURIComponent(tagName);
-
-  const title = `Julkaisut avainsanalla ${decodedTag} | Niemenjoki blogi`;
-  const description = `Julkaisut avainsanalla ${decodedTag}: Blogi käsittelee pääasiassa rakennusautomaatiota, lämpöpumppuja ja tekniikkaa.`;
-  const pageURL = `/blogi/${tag}/sivu/${pageIndex}`;
-
-  const pageIndexInt = parseInt(pageIndex, 10);
+  const { pageIndexInt, pagePath, title, description } = getBlogTagPageData({
+    tag,
+    pageIndex,
+  });
 
   const { numPages } = getPostsByTag(decodeURIComponent(tag), pageIndex, POSTS_PER_PAGE);
 
   const isFirst = pageIndexInt === 1;
   const isLast = pageIndexInt === numPages;
 
-  const customMetadata = {
+  const metadata = createPageMetadata({
     title,
     description,
-    alternates: {
-      canonical: pageURL,
-    },
+    canonicalUrl: pagePath,
     openGraph: {
       title,
       description,
-      url: pageURL,
+      url: pagePath,
     },
-    pagination: {
-      ...(isFirst ? {} : { previous: `/blogi/${tag}/sivu/${pageIndexInt - 1}` }),
-      ...(isLast ? {} : { next: `/blogi/${tag}/sivu/${pageIndexInt + 1}` }),
-    },
+  });
+
+  metadata.pagination = {
+    ...(isFirst ? {} : { previous: `/blogi/${tag}/sivu/${pageIndexInt - 1}` }),
+    ...(isLast ? {} : { next: `/blogi/${tag}/sivu/${pageIndexInt + 1}` }),
   };
 
-  return withDefaultMetadata(customMetadata);
+  return metadata;
 }
