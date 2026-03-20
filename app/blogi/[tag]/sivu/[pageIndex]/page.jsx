@@ -49,12 +49,13 @@ export async function generateStaticParams() {
 
 export default async function BlogTagPage({ params }) {
   const { pageIndex, tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
   const { pageIndexInt, pageUrl, pageName, description, breadcrumbItems, tagName } =
     getBlogTagPageData({
       tag,
       pageIndex,
     });
-  const { posts, numPages } = getPostsByTag(tag, pageIndexInt, POSTS_PER_PAGE);
+  const { posts, numPages } = getPostsByTag(decodedTag, pageIndexInt, POSTS_PER_PAGE);
   if (posts.length === 0) {
     notFound();
   }
@@ -96,7 +97,7 @@ export default async function BlogTagPage({ params }) {
           Kaikki
         </SafeLink>
         {allTags.map((t) => {
-          const isActive = slugifyTag(t) === slugifyTag(tag);
+          const isActive = slugifyTag(t) === slugifyTag(decodedTag);
           return (
             <SafeLink
               key={t}
