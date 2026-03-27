@@ -3,6 +3,13 @@
   margin: 2rem auto;
 }
 
+.SmallPrint {
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
 .Lead {
   margin-bottom: 0.75rem;
   line-height: 1.7;

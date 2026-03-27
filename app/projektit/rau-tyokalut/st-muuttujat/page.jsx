@@ -32,6 +32,9 @@ export default function StVariablesPage() {
       />
 
       <div className={classes.Page}>
+        <p className={classes.SmallPrint}>
+          Virheilmoitukset ja parannusehdotukset: joonas.niemenjoki@gmail.com
+        </p>
         <Breadcrumbs items={breadcrumbItems} />
         <h1>{rauToolsStVariablesPage.shortLabel}</h1>
         <SafeImage

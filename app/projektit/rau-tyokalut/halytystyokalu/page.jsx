@@ -32,6 +32,9 @@ export default function AlarmPagePage() {
       />
 
       <div className={classes.Page}>
+        <p className={classes.SmallPrint}>
+          Virheilmoitukset ja parannusehdotukset: joonas.niemenjoki@gmail.com
+        </p>
         <Breadcrumbs items={breadcrumbItems} />
         <h1>{rauToolsAlarmPage.shortLabel}</h1>
         <SafeImage
