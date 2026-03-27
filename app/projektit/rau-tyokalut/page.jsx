@@ -51,7 +51,10 @@ export default function RauToolsPage() {
               href={page.canonicalUrl}
               key={page.pageId}
             >
-              <h2 className={classes.CardTitle}>{page.shortLabel}</h2>
+              <div className={classes.CardHeading}>
+                <h2 className={classes.CardTitle}>{page.shortLabel}</h2>
+                {page.isBeta ? <span className={classes.BetaBadge}>beta</span> : null}
+              </div>
               <p className={classes.CardDescription}>
                 {page.cardDescription ?? page.description}
               </p>

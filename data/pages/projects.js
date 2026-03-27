@@ -122,6 +122,27 @@ export const projectPageDefinitions = {
       tags: ['rau-työkalut', 'rakennusautomaatio'],
     },
   },
+  rauToolsModbusInterface: {
+    canonicalUrl: '/projektit/rau-tyokalut/modbusrajapinta',
+    pageType: 'ItemPage',
+    pageIdSuffix: '#itempage',
+    isBeta: true,
+    pageName: 'Modbus-rajapinta | RAU-työkalut | Joonas Niemenjoki',
+    title: 'Modbus-rajapinta | RAU-työkalut | Joonas Niemenjoki',
+    description:
+      'RAU-työkalu, joka generoi annetuista Modbus-rekistereistä Fidelixiin sopivan funktiolohkon, ohjelmakutsun ja apufunktiolistan.',
+    shortLabel: 'Modbus-rajapinta',
+    lead: 'Generoi annetuista Modbus-rekistereistä Fidelix-järjestelmään sopivan funktiolohkon, ohjelmakutsun ja käytettyjen apufunktioiden listan.',
+    cardDescription:
+      'Luo Modbus-rekistereistä Fidelixiin sopivan funktiolohkon, ohjelmakutsun ja apufunktiolistan.',
+    parentCanonicalUrl: '/projektit/rau-tyokalut',
+    parentPageName: 'RAU-työkalut',
+    search: {
+      contexts: ['notFound'],
+      keywords: ['modbus-rajapinta', 'modbus', 'fidelix', 'iec', 'structured text'],
+      tags: ['rau-työkalut', 'rakennusautomaatio'],
+    },
+  },
   rauToolsStVariables: {
     canonicalUrl: '/projektit/rau-tyokalut/st-muuttujat',
     pageType: 'ItemPage',
@@ -153,4 +174,5 @@ export const rauToolOrder = [
   'rauToolsAlarmPage',
   'rauToolsStVariables',
   'rauToolsModbusDevices',
+  'rauToolsModbusInterface',
 ];

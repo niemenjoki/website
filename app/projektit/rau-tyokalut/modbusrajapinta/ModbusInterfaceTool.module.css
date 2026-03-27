@@ -1,0 +1,339 @@
+.Page {
+  max-width: 980px;
+  margin: 2rem auto;
+}
+
+.TitleRow {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.BetaBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--highlight) 18%, transparent);
+  color: var(--highlight);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.SmallPrint {
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.Lead {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+.BackLink {
+  margin-bottom: 2rem;
+}
+
+.BackLink a {
+  color: var(--highlight);
+}
+
+.ToolShell {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Panel {
+  background: var(--background-3);
+  padding: 1rem;
+  border-radius: 9px;
+}
+
+.PanelTitle {
+  color: var(--highlight-alt);
+  font-size: 1.2rem;
+  margin-bottom: 0.65rem;
+}
+
+.SubTitle {
+  color: var(--highlight-alt);
+  font-size: 1rem;
+  margin-bottom: 0.65rem;
+}
+
+.PanelText {
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  letter-spacing: 0.3px;
+}
+
+.FieldGrid,
+.RegisterGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.RegisterList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.RegisterCard,
+.InfoBox,
+.BehaviorCard,
+.RadioCard {
+  background: var(--background-6);
+  border-radius: 7px;
+}
+
+.RegisterCard {
+  padding: 1rem;
+}
+
+.RegisterHeader {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.RegisterTitle,
+.SectionTitle,
+.BehaviorTitle {
+  margin: 0;
+}
+
+.RegisterTitle,
+.SectionTitle {
+  color: var(--highlight-alt);
+}
+
+.BehaviorTitle {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.BehaviorText {
+  margin-top: 0.35rem;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.Field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.FieldLabel {
+  font-weight: 600;
+}
+
+.Input,
+.Textarea {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  background: var(--background-2);
+  color: var(--text-color);
+  padding: 0.75rem 0.9rem;
+  font: inherit;
+}
+
+.Textarea {
+  resize: vertical;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.Input:focus,
+.Textarea:focus,
+.RadioInput:focus {
+  outline: 2px solid var(--highlight);
+  outline-offset: 1px;
+}
+
+.Input:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.HelpText {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.82;
+}
+
+.CompactHelp {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  opacity: 0.84;
+}
+
+.CompactHelpText {
+  margin: 0;
+}
+
+.CompactHelpText + .CompactHelpText {
+  margin-top: 0.55rem;
+}
+
+.Actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.PrimaryButton,
+.SecondaryButton,
+.RemoveButton {
+  border: none;
+  border-radius: 4px;
+  padding: 0.65rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.PrimaryButton {
+  background: var(--highlight);
+  color: var(--background-1);
+}
+
+.SecondaryButton,
+.RemoveButton {
+  background: var(--background-6);
+  color: var(--text-color);
+}
+
+.PrimaryButton:hover,
+.SecondaryButton:hover,
+.RemoveButton:hover {
+  opacity: 0.8;
+}
+
+.PrimaryButton:disabled,
+.SecondaryButton:disabled,
+.RemoveButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.OutputStack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.SimpleRadioGroup {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.SimpleRadioLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 7px;
+  background: var(--background-6);
+  cursor: pointer;
+}
+
+.RadioInput {
+  margin: 0;
+}
+
+.NoteList,
+.WarningList {
+  padding-left: 1.25rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+.NoteList li + li,
+.WarningList li + li {
+  margin-top: 0.45rem;
+}
+
+.AccentLink {
+  color: var(--highlight);
+}
+
+.OutputHeader,
+.SectionHeader {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.OutputBlock {
+  padding-top: 0.25rem;
+}
+
+.SectionHeader {
+  margin-bottom: 0.75rem;
+}
+
+.OutputTextarea {
+  min-height: 14rem;
+}
+
+.StatusArea {
+  min-height: 2rem;
+  margin-top: 1rem;
+}
+
+.Summary,
+.Success,
+.Error,
+.Hint {
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+.Success {
+  color: var(--highlight);
+}
+
+.Error {
+  color: var(--highlight-alt);
+}
+
+.Hint,
+.EmptyState {
+  opacity: 0.85;
+}
+
+@media (max-width: 700px) {
+  .Page {
+    margin: 1rem auto;
+  }
+
+  .RegisterHeader,
+  .OutputHeader,
+  .SectionHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .OutputTextarea {
+    min-height: 18rem;
+  }
+}
