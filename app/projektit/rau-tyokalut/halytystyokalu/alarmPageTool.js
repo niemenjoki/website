@@ -105,7 +105,9 @@ const NON_GROUPED_LAYOUT = {
 
 const CODE_FB_TYPE = 'FxFB_Rajahalytykset_V021';
 const CODE_MEASUREMENTS_PER_BLOCK = 15;
-const GROUP_ID_REGEX = /^[A-Za-z0-9]+$/;
+const GROUP_ID_REGEX = /^[A-Za-z0-9_-]+$/;
+const GROUP_ID_ERROR_MESSAGE =
+  'Ryhmätunnuksessa sallitaan kirjaimet A-Z, numerot 0-9, väliviiva (-) ja alaviiva (_).';
 
 export const LIMIT_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -115,7 +117,7 @@ export const DEFAULT_LIMIT_NUMBERS = {
   control: 3,
 };
 
-export { GROUP_ID_REGEX };
+export { GROUP_ID_ERROR_MESSAGE, GROUP_ID_REGEX };
 
 function normalizeLimitNumber(value, fallback) {
   const numericValue = Number(value);
@@ -410,7 +412,7 @@ function validateGroupEdits(groupEdits) {
     }
 
     if (!GROUP_ID_REGEX.test(nextId)) {
-      throw new Error('Ryhmätunnuksessa sallitaan vain kirjaimet A-Z ja numerot 0-9.');
+      throw new Error(GROUP_ID_ERROR_MESSAGE);
     }
 
     editMap.set(groupEdit.sourceId, {
@@ -800,8 +802,10 @@ function createNonGroupedHtml(rows) {
 
 function getGroupedCodeVariableName(groupId, blockIndex) {
   const suffix = blockIndex === 0 ? '' : String(blockIndex + 1);
+  // Escape separators so code identifiers stay valid and distinct for A-B vs A_B.
+  const normalizedGroupId = groupId.replaceAll('_', '__').replaceAll('-', '_D');
 
-  return `Verkosto_${groupId}_halytykset${suffix}`;
+  return `Verkosto_${normalizedGroupId}_halytykset${suffix}`;
 }
 
 function getUngroupedCodeVariableName(blockIndex) {

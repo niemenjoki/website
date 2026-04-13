@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import classes from './AlarmPageTool.module.css';
 import {
   DEFAULT_LIMIT_NUMBERS,
+  GROUP_ID_ERROR_MESSAGE,
   GROUP_ID_REGEX,
   LIMIT_OPTIONS,
   buildOutputs,
@@ -165,11 +166,11 @@ export default function AlarmPageToolClient() {
 
     if (field === 'id') {
       if (value !== '' && !GROUP_ID_REGEX.test(value)) {
-        setError('Ryhmätunnuksessa sallitaan vain kirjaimet A-Z ja numerot 0-9.');
+        setError(GROUP_ID_ERROR_MESSAGE);
         return;
       }
 
-      if (error === 'Ryhmätunnuksessa sallitaan vain kirjaimet A-Z ja numerot 0-9.') {
+      if (error === GROUP_ID_ERROR_MESSAGE) {
         setError('');
       }
     }
