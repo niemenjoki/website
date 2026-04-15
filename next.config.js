@@ -10,8 +10,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/projektit/rau-tyokalut/halysivu',
-        destination: '/projektit/rau-tyokalut/halytystyokalu',
+        source: '/projektit/rau-tyokalut/:path+',
+        destination: '/projektit/rau-tyokalut',
         permanent: true,
       },
       {

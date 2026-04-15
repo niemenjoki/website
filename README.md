@@ -2,7 +2,7 @@
 
 Source code for [niemenjoki.fi](https://www.niemenjoki.fi), my personal website and technical playground.
 
-The site is primarily a Finnish-language blog about building automation, heat pumps, control logic, and adjacent practical engineering topics. It also includes project pages, a small collection of browser-based tools, and a few interactive elements embedded directly into content.
+The site is primarily a Finnish-language blog about building automation, heat pumps, control logic, and adjacent practical engineering topics. It also includes project pages and a few interactive elements embedded directly into content.
 
 This is a solo project. I am not actively looking for contributors, but the repository is public for anyone interested in how the site is built.
 
@@ -10,7 +10,6 @@ This is a solo project. I am not actively looking for contributors, but the repo
 
 - MDX-based blog posts under `/blogi`
 - Project pages under `/projektit`
-- Interactive building automation tools under `/projektit/rau-tyokalut`
 - Structured metadata and JSON-LD for pages and posts
 - Automatically generated `sitemap.xml` and RSS feed
 - Guard rails for internal links and image paths
@@ -162,7 +161,6 @@ public/             Static assets
 ## Notable sections of the site
 
 - `/blogi` for published posts
-- `/projektit/rau-tyokalut` for Fidelix-oriented building automation tools
 - `/projektit/compress-create-react-app` for the `compress-create-react-app` project page
 - `/projektit/lieromaa` for the Lieromaa side project page
 - `/tietoa` for the about page
@@ -174,7 +172,7 @@ The site content and UI are primarily in Finnish, even though parts of the codeb
 
 This project is intentionally a bit over-engineered in places. That is partly the point: the site is both a publishing platform and a way for me to learn, test ideas, and refine patterns I care about.
 
-The idea of publishing Fidelix-oriented helper tools here was partly inspired by [Jani Kauppila's site](https://janikauppila.fi), although the tools and code are different.
+The site has included experimental building-automation helpers over time, and some of those ideas were partly inspired by [Jani Kauppila's site](https://janikauppila.fi), although the implementation and scope are different.
 
 ## License
 
