@@ -1,5 +1,4 @@
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
-import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './RauToolsPage.module.css';
 
@@ -7,6 +6,10 @@ export const metadata = {
   title: 'RAU-tyokalut on poistettu | Joonas Niemenjoki',
   description:
     'RAU-tyokalut on poistettu pysyvästi julkiselta sivustolta, ja vanhat työkalulinkit ohjataan tälle sivulle.',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RauToolsRemovedPage() {

@@ -68,8 +68,4 @@ export const projectPageDefinitions = {
   },
 };
 
-export const primaryProjectOrder = [
-  'compressCreateReactApp',
-  'lieromaa',
-  'rauToolsNotice',
-];
+export const primaryProjectOrder = ['compressCreateReactApp', 'lieromaa'];
