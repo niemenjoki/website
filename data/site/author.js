@@ -13,7 +13,7 @@ export const SITE_AUTHOR = {
     'https://www.instagram.com/niemenjoki.dev',
   ],
   bio: [
-    'Olen rakennusautomaation ohjelmoija. Työskentelee erityisesti lämpöpumppujärjestelmien ja niiden ohjauslogiikan parissa. Työni keskittyy järjestelmien toimintaan, energiatehokkuuteen ja käytettävyyteen.',
+    'Olen rakennusautomaation ohjelmoija. Työskentelen erityisesti lämpöpumppujärjestelmien ja niiden ohjauslogiikan parissa. Työni keskittyy järjestelmien toimintaan, energiatehokkuuteen ja käytettävyyteen.',
     'Kirjoitan käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta ja sitä sivuavista aiheista.',
   ],
 };
