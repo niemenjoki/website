@@ -1,0 +1,24 @@
+{
+  "title": "Lämpöpumppujen kompressorien vuorottelu käyntituntien mukaan",
+  "description": "Kiinteä käyntijärjestys kasaa käynnistykset vuorollaan yhdelle kompressorille. Näin vuorottelun voi tehdä toisin: logiikka, simulaatio ja malliteksti.",
+  "date": "2026-10-15",
+  "tags": ["lämpöpumput", "ohjelmointi"],
+  "keywords": [
+    "lämpöpumput",
+    "kompressori",
+    "kompressorien vuorottelu",
+    "lämpöpumppujen vuorottelu",
+    "lämpöpumppujen ohjaus",
+    "käyntijärjestys",
+    "käynnistysjärjestys",
+    "käyntiaika",
+    "käynnistykset",
+    "rajakompressori",
+    "minimikäyntiaika",
+    "minimilepoaika",
+    "toimintaselostus",
+    "simulaatio",
+    "rakennusautomaatio"
+  ],
+  "language": "fi"
+}

@@ -211,6 +211,47 @@ a:hover:hover {
   margin: 0;
 }
 
+.md aside > p + p {
+  margin-top: 0.75rem;
+}
+
+.md .table-wrapper {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.md .table-wrapper table {
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.md .table-wrapper th,
+.md .table-wrapper td {
+  padding: 0.4rem 0.75rem;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--background-5);
+}
+
+.md .table-wrapper th {
+  color: var(--highlight-alt);
+  font-weight: 500;
+  border-bottom: 2px solid var(--background-6);
+}
+
+/* Käynnissä oleva kompressori taulukossa: pallo ja kevyt tausta */
+.md .table-wrapper td.kay {
+  background: var(--background-4);
+  font-weight: 600;
+}
+
+.md .table-wrapper td.kay::before {
+  content: '●';
+  color: var(--highlight);
+  margin-right: 0.35em;
+}
+
 img {
   border-radius: 6px;
 }

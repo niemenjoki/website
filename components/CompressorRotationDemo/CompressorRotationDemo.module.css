@@ -1,0 +1,321 @@
+.Demo {
+  border: 2px solid var(--background-5);
+  border-radius: 8px;
+  background: var(--background-2);
+  padding: 1rem;
+  margin: 1.5rem 0 2rem;
+  font-size: 0.9rem;
+}
+
+.Header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.Clock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.Request strong {
+  color: var(--highlight-alt);
+  font-size: 1.1em;
+}
+
+.Buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.Demo button {
+  min-width: 6.5rem;
+  font: inherit;
+  color: var(--text-color);
+  background: var(--background-4);
+  border: 1px solid var(--background-6);
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+}
+
+.Demo button:hover {
+  opacity: 0.8;
+}
+
+.RequestWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.RequestLabel {
+  flex: 0 0 auto;
+  width: 4.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.RequestChart {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 48px;
+  background: var(--background-3);
+  border-radius: 4px;
+}
+
+.GridLine {
+  stroke: var(--background-5);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.RequestLine {
+  fill: none;
+  stroke: var(--highlight-alt);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.Panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .Panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.Panel {
+  min-width: 0;
+  background: var(--background-1);
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.Demo .PanelTitle {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--highlight);
+}
+
+.Demo .PanelDescription {
+  margin: 0 0 0.6rem;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  opacity: 0.8;
+}
+
+.TimelineWrapper {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.TimelineLabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  line-height: 14px;
+  padding-bottom: 6px;
+}
+
+.Timeline {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 80px;
+}
+
+.TimelineTrack {
+  fill: var(--background-3);
+}
+
+.TimelineRunning {
+  fill: var(--highlight);
+}
+
+.AxisLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin: 0.1rem 0 0.6rem 1.2rem;
+}
+
+/* Kiinteä taulukkoasettelu: muuttuvat luvut eivät muuta sarakkeiden leveyttä. */
+.Table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.TableWide th:nth-child(1) {
+  width: 11%;
+}
+.TableWide th:nth-child(2) {
+  width: 18%;
+}
+.TableWide th:nth-child(3) {
+  width: 25%;
+}
+.TableWide th:nth-child(4) {
+  width: 24%;
+}
+.TableWide th:nth-child(5) {
+  width: 22%;
+}
+
+.TableNarrow th:nth-child(1) {
+  width: 14%;
+}
+.TableNarrow th:nth-child(2) {
+  width: 22%;
+}
+.TableNarrow th:nth-child(3) {
+  width: 34%;
+}
+.TableNarrow th:nth-child(4) {
+  width: 30%;
+}
+
+.Table th,
+.Table td {
+  padding: 0.25rem 0.2rem;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid var(--background-4);
+}
+
+.Table th {
+  font-weight: 500;
+  opacity: 0.8;
+  white-space: normal;
+  hyphens: manual;
+  vertical-align: bottom;
+  line-height: 1.2;
+}
+
+.Demo .Number {
+  text-align: right;
+}
+
+.Name {
+  font-weight: 600;
+}
+
+.Status {
+  display: inline-block;
+  min-width: 2.6em;
+  padding: 0 0.3rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.StatusRunning {
+  border-color: var(--highlight);
+  font-weight: 600;
+}
+
+.StatusStopped {
+  background: var(--background-4);
+  opacity: 0.8;
+}
+
+.Comparison {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.Comparison caption {
+  text-align: left;
+  font-weight: 600;
+  padding-bottom: 0.3rem;
+}
+
+.Comparison th,
+.Comparison td {
+  padding: 0.25rem 0.4rem;
+  text-align: left;
+  border-bottom: 1px solid var(--background-4);
+}
+
+.Comparison thead th {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.Comparison tbody th {
+  font-weight: 400;
+}
+
+.Comparison td {
+  width: 6.5rem;
+  font-weight: 600;
+}
+
+.VisuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .Demo {
+    padding: 0.6rem;
+  }
+
+  .Panel {
+    padding: 0.5rem;
+  }
+
+  .Table {
+    font-size: 0.7rem;
+  }
+
+  .Table th,
+  .Table td {
+    padding: 0.2rem 0.1rem;
+  }
+
+  .Status {
+    padding: 0 0.15rem;
+  }
+
+  .Comparison {
+    font-size: 0.78rem;
+  }
+
+  .Comparison td {
+    width: 4.5rem;
+  }
+}
+
+.Demo .Legend {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  opacity: 0.8;
+}
