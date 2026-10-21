@@ -29,7 +29,7 @@ function normalizePathname(pathname) {
   return decodedPathname;
 }
 
-export function middleware(request) {
+export function proxy(request) {
   const pathname = normalizePathname(request.nextUrl.pathname);
 
   if (!GONE_PATHS.has(pathname)) {
