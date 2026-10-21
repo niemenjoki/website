@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
+import InfoBox from '@/components/InfoBox/InfoBox';
 import { compressCreateReactAppPage } from '@/lib/site/pageRecords.mjs';
 import { createProjectStructuredData } from '@/lib/structuredData/createProjectStructuredData';
 
@@ -62,6 +63,14 @@ export default function CompressCraProjectPage() {
             />
           </a>
         </div>
+        <InfoBox>
+          <p>
+            <strong>Projektia ei enää ylläpidetä.</strong> Create React App on
+            vanhentunut, joten myös compress-create-react-app on merkitty npm:ssä
+            vanhentuneeksi. Viimeisin versio on 1.4.6 (29.7.2026). Uusissa projekteissa
+            kannattaa käyttää tuettua rakennustyökalua.
+          </p>
+        </InfoBox>
         <p>
           compress-create-react-app on React-kehittäjille tarkoitettu apuohjelma, jota
           käytetään Create React App -ympäristön kanssa. Create React App helpottaa
@@ -85,9 +94,9 @@ export default function CompressCraProjectPage() {
         </p>
 
         <p>
-          Työkalu on julkaistu avoimena lähdekoodina ja on tarkoitettu käytettäväksi
-          olemassa olevien Create React App -projektien lisänä silloin, kun sivuston
-          suorituskykyä halutaan parantaa vaivattomasti.
+          Työkalu on julkaistu avoimena lähdekoodina MIT-lisenssillä. Se on tarkoitettu
+          käytettäväksi olemassa olevien Create React App -projektien lisänä silloin, kun
+          sivuston suorituskykyä halutaan parantaa vaivattomasti.
         </p>
 
         <p>

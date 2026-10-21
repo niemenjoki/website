@@ -6,7 +6,8 @@ export const projectPageDefinitions = {
     pageName: 'compress-create-react-app työkalu | Joonas Niemenjoki',
     title: 'compress-create-react-app työkalu | Joonas Niemenjoki',
     description:
-      'compress-create-react-app on React-kehittäjille tarkoitettu apuohjelma, joka helpottaa verkkosivujen tiedostojen pakkaamista Create React App -ympäristössä.',
+      'compress-create-react-app pakkaa Create React App -sivustojen tiedostot valmiiksi palvelinta varten. Projekti on vanhentunut, eikä sitä enää ylläpidetä.',
+    updatedAt: '2026-10-21',
     navigationLabel: 'compress-create-react-app',
     shortLabel: 'compress-create-react-app',
     search: {
@@ -20,8 +21,10 @@ export const projectPageDefinitions = {
         '@type': 'SoftwareSourceCode',
         name: 'compress-create-react-app',
         description:
-          'Avoimen lähdekoodin työkalu Create React App -projektien tiedostojen pakkaamiseen.',
+          'Avoimen lähdekoodin työkalu Create React App -projektien tiedostojen pakkaamiseen. Ei enää ylläpidetä.',
         url: 'https://www.npmjs.com/package/compress-create-react-app',
+        license: 'https://opensource.org/licenses/MIT',
+        creativeWorkStatus: 'Deprecated',
         codeRepository: 'https://github.com/niemenjoki/compress-create-react-app',
       },
     },
