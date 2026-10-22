@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 import { usePathname } from 'next/navigation';
 
@@ -8,15 +8,17 @@ import Fuse from 'fuse.js';
 
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import useHydrated from '@/hooks/useHydrated';
 
 import classes from './NotFoundClient.module.css';
 
 export default function ClientNotFoundPage({ content }) {
   const pathname = usePathname();
-  const [results, setResults] = useState([]);
+  const hydrated = useHydrated();
 
-  useEffect(() => {
-    if (!pathname || !content?.length) return;
+  // Suggestions are computed in the browser only: the 404 page is prerendered without the real pathname.
+  const results = useMemo(() => {
+    if (!hydrated || !pathname || !content?.length) return [];
 
     const fuse = new Fuse(content, {
       includeScore: true,
@@ -33,14 +35,12 @@ export default function ClientNotFoundPage({ content }) {
     });
 
     const query = pathname.replace(/^\//, '');
-    const matches = fuse
+    return fuse
       .search(query)
       .filter((r) => r.score < 0.6)
       .slice(0, 3)
       .map((r) => r.item);
-
-    setResults(matches);
-  }, [pathname, content]);
+  }, [hydrated, pathname, content]);
 
   return (
     <>

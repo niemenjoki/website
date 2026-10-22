@@ -1,23 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 
 import Icon from '../Icon/Icon';
 import classes from './ThemeToggler.module.css';
 
+// Theme preference: localStorage 'darkMode', otherwise the system setting. Light on the server and during hydration.
+const listeners = new Set();
+const subscribe = (listener) => {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+};
+const getSnapshot = () => {
+  const modeInStorage = localStorage.getItem('darkMode');
+  if (modeInStorage) return JSON.parse(modeInStorage);
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
+const getServerSnapshot = () => false;
+
 const ThemeToggler = (props) => {
-  const [isDarkMode, setDarkMode] = useState(false);
+  const isDarkMode = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
   useEffect(() => {
-    const modeInStorage = localStorage.getItem('darkMode');
-    if (modeInStorage) {
-      setDarkMode(JSON.parse(modeInStorage));
-    } else {
-      setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
-    }
     document.body.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
 
   const handleClick = () => {
     localStorage.setItem('darkMode', JSON.stringify(!isDarkMode));
-    setDarkMode(!isDarkMode);
+    listeners.forEach((listener) => listener());
   };
 
   return (

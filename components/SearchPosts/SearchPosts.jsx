@@ -1,7 +1,7 @@
 'use client';
 
 // ✅ necessary in the App Router
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import useDebounce from '@/hooks/useDebounce';
 import useToggle from '@/hooks/useToggle';
@@ -9,18 +9,23 @@ import useToggle from '@/hooks/useToggle';
 import Post from '../PostPreview/PostPreview.jsx';
 import classes from './SearchPosts.module.css';
 
+const toArray = (value) => (Array.isArray(value) ? value : value.split(','));
+
 const Search = ({ list, keys, placeholder }) => {
-  list = [...list].map((post) => {
-    if (!Array.isArray(post.tags)) post.tags = post.tags.split(',');
-    if (!Array.isArray(post.keywords)) post.keywords = post.keywords.split(',');
-    return post;
-  });
+  // Copies, so that the props are not mutated.
+  const posts = useMemo(
+    () =>
+      list.map((post) => ({
+        ...post,
+        tags: toArray(post.tags),
+        keywords: toArray(post.keywords),
+      })),
+    [list]
+  );
 
   const [searchTerm, updateSearchTerm] = useState('');
   const [searchResults, updateSearchResults] = useState([]);
   const [searchResultsShown, toggleSearchResultsShown] = useToggle(false);
-
-  useDebounce(() => search(searchTerm), 700, [searchTerm]);
 
   const search = async (pattern) => {
     if (!pattern || pattern.trim().length < 3) {
@@ -30,7 +35,7 @@ const Search = ({ list, keys, placeholder }) => {
     }
 
     const { default: Fuse } = await import('fuse.js');
-    const fuse = new Fuse(list, {
+    const fuse = new Fuse(posts, {
       includeScore: true,
       threshold: 0.4,
       ignoreLocation: true,
@@ -48,6 +53,8 @@ const Search = ({ list, keys, placeholder }) => {
     updateSearchResults(relevantResultData);
     toggleSearchResultsShown(true);
   };
+
+  useDebounce(() => search(searchTerm), 700, [searchTerm]);
 
   const handleInput = (e) => {
     updateSearchTerm(e.target.value);

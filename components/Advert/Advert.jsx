@@ -15,7 +15,6 @@ import classes from './Advert.module.css';
 const Advert = ({ adClient, adSlot }) => {
   const pathname = usePathname();
   const adRef = useRef(null);
-  const [adStatus, setAdStatus] = useState('unknown');
   const resolvedAdClient = adClient ?? ADSENSE_CLIENT;
   const resolvedAdSlot = adSlot ?? ADSENSE_DEFAULT_SLOT;
   const isEnabled =
@@ -24,10 +23,15 @@ const Advert = ({ adClient, adSlot }) => {
     resolvedAdClient?.startsWith('ca-pub-') &&
     Boolean(resolvedAdSlot);
 
+  // The status belongs to one ad request (page and slot). A new page starts from 'unknown' without an effect.
+  const adKey = `${pathname}|${resolvedAdClient}|${resolvedAdSlot}`;
+  const [adResult, setAdResult] = useState({ key: null, status: 'unknown' });
+  const adStatus = adResult.key === adKey ? adResult.status : 'unknown';
+
   useEffect(() => {
     if (!isEnabled) return;
 
-    setAdStatus('unknown');
+    const setAdStatus = (status) => setAdResult({ key: adKey, status });
     let attempts = 0;
     let cancelled = false;
     let adRequested = false;
@@ -83,7 +87,7 @@ const Advert = ({ adClient, adSlot }) => {
       window.removeEventListener('website:adsense-ready', requestAd);
       window.removeEventListener('website:ads-consent-granted', requestAd);
     };
-  }, [pathname, resolvedAdClient, resolvedAdSlot, isEnabled]);
+  }, [adKey, isEnabled]);
 
   if (!isEnabled || adStatus === 'unfilled') return null;
 

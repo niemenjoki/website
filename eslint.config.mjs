@@ -10,10 +10,18 @@ const eslintConfig = [
       'react/no-unescaped-entities': 'off',
       'react/display-name': 'off',
       'import/order': 'off',
-      // React Hooks 7 rules added in eslint-config-next 16. Existing code is reported as warnings until fixed.
+      // React Hooks 7 rules added in eslint-config-next 16.
+      'react-hooks/set-state-in-effect': 'error',
+      'react-hooks/refs': 'error',
+      'react-hooks/immutability': 'error',
+    },
+  },
+  {
+    // Draft demo: fixed together with the draft post before it is published.
+    files: ['components/CompressorRotationDemo/**'],
+    rules: {
       'react-hooks/set-state-in-effect': 'warn',
       'react-hooks/refs': 'warn',
-      'react-hooks/immutability': 'warn',
     },
   },
 ];

@@ -1,24 +1,32 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 
 import classes from './PasswordGate.module.css';
 
 // Ei tietoturvaa: estää vain vahingossa eksymisen luonnossivulle.
 const STORAGE_KEY = 'passwordGateUnlocked';
 
+const subscribe = () => () => {};
+
+const readStorage = (password) => {
+  try {
+    return sessionStorage.getItem(STORAGE_KEY) === password ? 'unlocked' : 'locked';
+  } catch {
+    return 'locked';
+  }
+};
+
 export default function PasswordGate({ password, children }) {
-  const [unlocked, setUnlocked] = useState(false);
-  const [checked, setChecked] = useState(false);
+  // 'unknown' on the server and during hydration, then the sessionStorage state.
+  const stored = useSyncExternalStore(
+    subscribe,
+    () => readStorage(password),
+    () => 'unknown'
+  );
+  const [unlockedNow, setUnlockedNow] = useState(false);
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    try {
-      setUnlocked(sessionStorage.getItem(STORAGE_KEY) === password);
-    } catch {}
-    setChecked(true);
-  }, [password]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,17 +34,17 @@ export default function PasswordGate({ password, children }) {
       try {
         sessionStorage.setItem(STORAGE_KEY, password);
       } catch {}
-      setUnlocked(true);
+      setUnlockedNow(true);
     } else {
       setError(true);
     }
   };
 
-  if (unlocked) {
+  if (unlockedNow || stored === 'unlocked') {
     return children;
   }
 
-  if (!checked) {
+  if (stored === 'unknown') {
     return null;
   }
 
