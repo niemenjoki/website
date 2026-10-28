@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import classes from './CompressorRotationDemo.module.css';
 import {
@@ -37,7 +37,7 @@ function formatNumber(value, fractionDigits = 1) {
 }
 
 function formatDuration(minutes) {
-  if (minutes === null) return '–';
+  if (minutes === null) return '-';
   const rounded = Math.round(minutes);
   return `${Math.floor(rounded / 60)}:${String(rounded % 60).padStart(2, '0')}`;
 }
@@ -47,6 +47,22 @@ function formatSimTime(minute) {
   const hours = Math.floor((minute % 1440) / 60);
   const minutes = minute % 60;
   return `vrk ${day}, klo ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+}
+
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
+function subscribeReducedMotion(callback) {
+  const query = window.matchMedia?.(REDUCED_MOTION_QUERY);
+  query?.addEventListener('change', callback);
+  return () => query?.removeEventListener('change', callback);
+}
+
+function getReducedMotion() {
+  return window.matchMedia?.(REDUCED_MOTION_QUERY).matches ?? false;
+}
+
+function getServerReducedMotion() {
+  return false;
 }
 
 function createWarmWorld() {
@@ -269,30 +285,21 @@ function ComparisonTable({ dynamicStats, fixedStats }) {
    ========================= */
 
 export default function CompressorRotationDemo() {
-  const worldRef = useRef(null);
   const containerRef = useRef(null);
+  const [world, setWorld] = useState(createWarmWorld);
   const [, setFrame] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [userPaused, setUserPaused] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
-
-  if (worldRef.current === null) {
-    worldRef.current = createWarmWorld();
-  }
-
-  const rerender = useCallback(() => setFrame((frame) => frame + 1), []);
-
-  useEffect(() => {
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
-      setIsPaused(true);
-    }
-  }, []);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    getServerReducedMotion
+  );
+  const isPaused = userPaused ?? prefersReducedMotion;
 
   useEffect(() => {
     const element = containerRef.current;
-    if (!element || typeof IntersectionObserver === 'undefined') {
-      setIsVisible(true);
-      return undefined;
-    }
+    if (!element) return undefined;
     const observer = new IntersectionObserver(([entry]) =>
       setIsVisible(entry.isIntersecting)
     );
@@ -303,18 +310,13 @@ export default function CompressorRotationDemo() {
   useEffect(() => {
     if (isPaused || !isVisible) return undefined;
     const timer = setInterval(() => {
-      for (let i = 0; i < MINUTES_PER_TICK; i++) stepWorld(worldRef.current);
-      rerender();
+      for (let i = 0; i < MINUTES_PER_TICK; i++) stepWorld(world);
+      setFrame((frame) => frame + 1);
     }, TICK_MS);
     return () => clearInterval(timer);
-  }, [isPaused, isVisible, rerender]);
+  }, [isPaused, isVisible, world]);
 
-  const handleRestart = () => {
-    worldRef.current = createWarmWorld();
-    rerender();
-  };
-
-  const world = worldRef.current;
+  const handleRestart = () => setWorld(createWarmWorld());
 
   return (
     <div className={classes.Demo} ref={containerRef}>
@@ -326,7 +328,7 @@ export default function CompressorRotationDemo() {
           </span>
         </div>
         <div className={classes.Buttons}>
-          <button type="button" onClick={() => setIsPaused((paused) => !paused)}>
+          <button type="button" onClick={() => setUserPaused(!isPaused)}>
             {isPaused ? 'Jatka' : 'Pysäytä'}
           </button>
           <button type="button" onClick={handleRestart}>
@@ -336,7 +338,7 @@ export default function CompressorRotationDemo() {
       </div>
 
       <div className={classes.RequestWrapper}>
-        <span className={classes.RequestLabel}>Pyynti 0–4</span>
+        <span className={classes.RequestLabel}>Pyynti 0-4</span>
         <RequestChart requestHistory={world.requestHistory} />
       </div>
 
