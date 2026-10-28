@@ -6,30 +6,6 @@ Vaikka kirjaimet I ja D säätimen nimessä tulevat juurikin noista termeistä, 
 
 Tässä tekstissä yritän parhaani mukaan avata kyseisen säätimen toimintaa sellaisessa muodossa, että se olisi mahdollisimman helppo ymmärtää. Teksti on suunnattu ensisijaisesti teknisten alojen nykyisille ja tuleville ammattilaisille, joille PID-säätimen toiminta ei ole vielä kunnolla hahmottunut. Käyn läpi säätimen jokaisen komponentin yksi kerrallaan ja havainnollistan niitä koodiesimerkkien avulla. Luettuasi tämän tekstin ajatuksella läpi, sinulla pitäisi olla syvällisempi ymmärrys PID-säätimien toiminnasta ja niiden virittämisestäkin tulee intuitiivisempaa.
 
-## Sisällysluettelo
-
-- [Mikä PID-säädin on?](#mikä-pid-säädin-on)
-- [Missä PID-säädintä käytetään?](#missä-pid-säädintä-käytetään)
-- [P-komponentti: nopea reaktio](#p-komponentti-nopea-reaktio)
-- [I-komponentti: jatkuvan virheen korjaus](#i-komponentti-jatkuvan-virheen-korjaus)
-- [D-komponentti: nopeiden muutosten jarru](#d-komponentti-nopeiden-muutosten-jarru)
-- [PID-säätimen toiminnan parantaminen](#pid-säätimen-toiminnan-parantaminen)
-  - [Tuloksen rajaus halutulle välille](#tuloksen-rajaus-halutulle-välille)
-  - [Tasapainopiste](#tasapainopiste)
-  - [I-komponentin anti-windup](#i-komponentin-anti-windup)
-  - [D-komponentin häiriöherkkyys ja suodatus](#d-komponentin-häiriöherkkyys-ja-suodatus)
-  - [Ohjelmakierroksen pituuden huomiointi](#ohjelmakierroksen-pituuden-huomiointi)
-  - [Suhdealue, integrointiaika ja derivointiaika](#suhdealue-integrointiaika-ja-derivointiaika)
-- [PID-säätimen viritys](#pid-säätimen-viritys)
-  - [Aloita P-säätimestä](#aloita-p-säätimestä)
-  - [Lisää integrointi](#lisää-integrointi)
-  - [Harkitse derivointia kriittisesti](#harkitse-derivointia-kriittisesti)
-  - [Jos päädyt käyttämään derivointia](#jos-päädyt-käyttämään-derivointia)
-  - [Testaa toiminta](#testaa-toiminta)
-- [PI-säätimen viritysharjoitus](#pi-säätimen-viritysharjoitus)
-- [Yhteenveto](#yhteenveto)
-- [Valmiit koodit](#valmiit-koodit)
-
 ## Mikä PID-säädin on?
 
 PID-säädin on koodinpätkä, joka pyrkii pitämään jonkin mittauksen mahdollisimman lähellä asetusarvoa säätämällä siihen vaikuttavaa laitetta. Lyhenteen kirjaimet tulevat sanoista suhteellinen (proportional), integraali (integral) ja derivaatta (derivative).
