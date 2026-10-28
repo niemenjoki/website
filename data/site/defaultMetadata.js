@@ -49,5 +49,4 @@ export const defaultMetadata = {
     icon: '/icons/favicon.ico',
     apple: SITE_AUTHOR.portraitPath,
   },
-  manifest: '/site.webmanifest',
 };

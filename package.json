@@ -12,6 +12,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint app components lib",
+    "verify": "npm run format:check && npm run lint && npm run build",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
