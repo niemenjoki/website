@@ -1,26 +1,8 @@
-Kun lämpöpumppuja ohjataan suoraan rakennusautomaatiosta, ohjelman pitää hoitaa myös kompressorien vuorottelu eli päättää, mikä kompressori käynnistyy ja mikä pysähtyy. Tehontarve ilmaistaan yleensä portaina: "nyt tarvitaan kolme kompressoria". Pyynti ei kuitenkaan kerro, mitkä kompressoreista käynnistetään.
+Lämpöpumppujen kompressorien vuorottelulogiikka jää usein ohjelmoijan suunniteltavaksi. Lopputulos on kiinni siitä, miten hyvin ohjelmoija tuntee lämpöpumppujen ohjauksen periaatteet, ja tulos vaihtelee paljon.
 
-Yksi yleinen vaihtoehto on käyttää kiinteää käyntijärjestystä, jota vaihdetaan ajastetusti. Se toimii, mutta siinä on yksi sitkeä heikkous: kun tehontarve asettuu kahden portaan väliin, sama kompressori käynnistyy ja pysähtyy koko vaihtojakson ajan, kun muut käyvät yhtäjaksoisesti tai seisovat. Käynnistykset kasautuvat vuorollaan yhdelle kompressorille. Pitkällä aikavälillä käyntiajat ja käynnistysmäärät tasoittuvat, joten ongelma ei näy käynnistyskertoja ja käyntiaikoja tutkimalla.
+Jos vuorottelu on kuvattu suunnitelmissa, käyntijärjestys lasketaan yleensä ajoittain uudelleen käyntiaikojen mukaan, ja se vaihtuu esimerkiksi kerran viikossa. Se on jo kelpo ratkaisu ja tasaa käyntiaikoja pitkällä aikavälillä hyvin. Siinäkin on varaa optimoinnille, eikä toteutuksen silti tarvitse olla monimutkainen.
 
-Tässä tekstissä avaan tavan, jolla olen ratkaissut tämän useissa lämpöpumppukohteissa. Ratkaisun ydin on, että käyntitunteja verrataan aina, kun kompressori pitää käynnistää tai pysäyttää, eikä ajastetusti. Silloin käynnistykset jakautuvat ajallisesti tasaisesti kaikille kompressoreille, ja pyynnin vaihdellessa jokainen käy ja lepää vuorotellen. Käyviä kompressoreita ei silti vaihdeta turhaan. Toteutan vertailun vääristetyn käyntiajan avulla. Se on yksinkertainen tapa, johon on helppo lisätä kaikki käyntijärjestykseen vaikuttavat tekijät.
-
-## Sisällysluettelo
-
-- [Kenelle tämä teksti on](#kenelle-tämä-teksti-on)
-- [Ongelma: tarve on noin 2,5 kompressoria](#ongelma-tarve-on-noin-25-kompressoria)
-- [Kiinteä järjestys ja ajastettu vaihto](#kiinteä-järjestys-ja-ajastettu-vaihto)
-- [Perusajatus: käyntitunnit verrataan jokaisella muutoksella](#perusajatus-käyntitunnit-verrataan-jokaisella-muutoksella)
-- [Esimerkki askel askeleelta](#esimerkki-askel-askeleelta)
-- [Käynnistykset jakautuvat tasaisesti](#käynnistykset-jakautuvat-tasaisesti)
-- [Toteutus: vääristetty käyntiaika](#toteutus-vääristetty-käyntiaika)
-  - [Minimiajat ja vika](#minimiajat-ja-vika)
-  - [Käynnin vääristys on vaihtamisen hinta](#käynnin-vääristys-on-vaihtamisen-hinta)
-- [Havainnollistus](#havainnollistus)
-- [Kahden vuoden simulaatio](#kahden-vuoden-simulaatio)
-- [Rajoitteet](#rajoitteet)
-- [Suunnittelijalle: kirjoita vuorottelu auki](#suunnittelijalle-kirjoita-vuorottelu-auki)
-  - [Malliteksti toimintaselostukseen](#malliteksti-toimintaselostukseen)
-- [Yhteenveto](#yhteenveto)
+Tässä tekstissä esittelen tavan, jolla olen itse toteuttanut vuorottelun useissa kohteissa. Siinä käyntiaikoja ei vertailla ajastetusti vaan aina, kun jokin kompressori pitää käynnistää tai pysäyttää. Koko logiikka on yksi summa ja yksi lajittelu, ja samaan lajitteluun mahtuvat myös viat ja minimiajat ilman erillisiä poikkeuksia. Samalla käynnistykset jakautuvat tasaisesti kaikille kompressoreille, eikä mikään kompressori seiso viikkoja käyttämättä. Hyvin toteutetulla pyynnillä ero kiinteään järjestykseen ei ole kompressorien kulumisen kannalta suuri, mutta kun viikkojen yhtäjaksoiset käynnit ja seisokit saa pois näin helposti, en näe syytä jättää niitä. Jos olet suunnittelija, tekstin lopusta löytyy myös malliteksti, jolla vuorottelun voi kuvata toimintaselostuksessa.
 
 ## Kenelle tämä teksti on
 
@@ -36,7 +18,7 @@ Vuorottelun lähtökohtana olevan tehontarpeen muodostaminen on erillinen aihe, 
 
 Kuvitellaan järjestelmä, jossa on neljä on/off-kompressoria ja hetkellinen lämmitystehon tarve vastaa noin 2,5 kompressorin tuottoa. Tehopyynti vaihtelee silloin kahden ja kolmen kompressorin välillä. Kolmella kompressorilla varaajan lämpötila nousee ja pyynti laskee, kahdella lämpötila laskee ja pyynti nousee.
 
-Kiinteällä järjestyksellä K1, K2, K3, K4 tilanne näyttää tältä, kun pyynti muuttuu 1–3 tunnin välein:
+Kiinteällä järjestyksellä K1, K2, K3, K4 tilanne näyttää tältä, kun pyynti muuttuu 1-3 tunnin välein:
 
 <div className="table-wrapper">
   <table>
@@ -53,7 +35,7 @@ Kiinteällä järjestyksellä K1, K2, K3, K4 tilanne näyttää tältä, kun pyy
         <td>0 h</td>
         <td>2</td>
         <td>K1, K2</td>
-        <td>–</td>
+        <td>-</td>
       </tr>
       <tr>
         <td>3 h</td>
@@ -109,7 +91,7 @@ Kiinteällä järjestyksellä K1, K2, K3, K4 tilanne näyttää tältä, kun pyy
 
 K1 ja K2 käyvät koko ajan. K4 ei käy ollenkaan. K3 on **rajakompressori**: se käynnistyy ja pysähtyy pyynnin mukana, ja sen jokainen käyntijakso kestää vain sen ajan, jonka pyynti pysyy ylemmällä portaalla.
 
-Kun pyynti on toteutettu oikein, rajakompressorin jaksot kestävät tyypillisesti puolesta tunnista pariin tuntiin. Yksittäinen jakso ei siis ole kompressorille ongelma, eikä tilanne ole muutaman minuutin on/off-ohjailua eli varsinaista pätkäkäyntiä. Ongelma on kuitenkin se, että käynnistykset kasautuvat liikaa yhdelle kompressorille. Rajakompressori voi käynnistyä kymmeniä kertoja viikossa samalla, kun järjestyksen alkupään kompressorit ovat yhtäjaksoisesti käynnissä ja loppupään kompressorit seisovat viikon paikallaan. Käynnistykset kuluttavat kompressoria, joten rajakompressorille kertyy eniten kulumista, vaikka sen käyntitunnit eivät ole suurimmat.
+Kun pyynti on toteutettu oikein, rajakompressorin jaksot kestävät tyypillisesti puolesta tunnista pariin tuntiin. Yksittäinen jakso ei siis ole kompressorille ongelma, eikä tilanne ole muutaman minuutin on/off-ohjailua eli varsinaista pätkäkäyntiä. Ongelma on kuitenkin se, että käynnistykset kasautuvat liikaa yhdelle kompressorille. Rajakompressori voi käynnistyä kymmeniä kertoja viikossa samalla, kun järjestyksen alkupään kompressorit ovat yhtäjaksoisesti käynnissä ja loppupään kompressorit seisovat viikon paikallaan. Seisovan kompressorin vika taas huomataan vasta, kun sitä tarvitaan, pahimmillaan kovalla pakkasella.
 
 ## Kiinteä järjestys ja ajastettu vaihto
 
@@ -156,7 +138,7 @@ Otetaan sama tilanne kuin aiemmin: samat neljä kompressoria ja sama pyynnin vai
         <td className="kay">1 001</td>
         <td>1 002</td>
         <td>1 003</td>
-        <td>–</td>
+        <td>-</td>
       </tr>
       <tr>
         <td>3 h</td>
@@ -244,13 +226,13 @@ Esimerkin aikana jokainen kompressori on pysähtynyt kerran, ja rajakompressorin
 
 ## Käynnistykset jakautuvat tasaisesti
 
-Esimerkistä näkyy, miksi tätä logiikkaa kannattaa käyttää. Kiinteällä järjestyksellä K3 ottaa kaikki käynnistykset ja käy joka kerta tunnin. Kun käyntitunteja verrataan jokaisella muutoksella, K3 käynnistyy hetkellä 3 h ja pysähtyy vasta hetkellä 9 h, ja K4 käy hetkestä 5 h hetkeen 11 h. Käyntijakso kestää, kunnes kompressorista on tullut käyvistä eniten ajanut, ja kun käyntiajat ovat lähellä toisiaan, siihen kuluu useampi pyynnin heilahdus. Sama koskee lepojaksoja: pysäytetty kompressori käynnistyy uudelleen vasta, kun siitä on tullut pysäytetyistä vähiten ajanut.
+Esimerkistä näkyy, miksi tätä logiikkaa kannattaa käyttää. Kiinteällä järjestyksellä K3 ottaa kaikki käynnistykset ja käy joka kerta tunnin. Kun käyntitunteja verrataan jokaisella muutoksella, K3 käynnistyy hetkellä 3 h ja pysähtyy vasta hetkellä 9 h, ja K4 käy hetkestä 5 h hetkeen 11 h. Käyntijakso kestää, kunnes kompressorista on tullut käyvistä eniten ajanut, ja kun käyntiajat ovat lähellä toisiaan, siihen kuluu useampi pyynnin muutos. Sama koskee lepojaksoja: pysäytetty kompressori käynnistyy uudelleen vasta, kun siitä on tullut pysäytetyistä vähiten ajanut.
 
 Normaalitilanteessa käynnistyksiä tulee koko järjestelmässä yhtä paljon kuin kiinteällä järjestyksellä, koska ne määräytyvät pyynnistä. Ero on siinä, miten ne jakautuvat. Kiinteässä järjestyksessä osa kompressoreista käy yhtäjaksoisesti koko vaihtojakson, osa seisoo ja rajakompressori ottaa käynnistykset. Kun vertailu tehdään jokaisella muutoksella, kaikki kompressorit käyvät ja lepäävät vuorotellen, ja käynnistykset jakautuvat tasaisesti viikosta toiseen.
 
-Tasainen jakautuminen syntyy siitä, että rajakompressorin rooli kiertää jokaisella pyynnin muutoksella. Samankaltaisen jakautumisen saa aikaan myös kiinteällä järjestyksellä, joka lajitellaan käyntituntien mukaan hyvin tiheästi, tai niin sanotulla FIFO-periaatteella. FIFO ei kuitenkaan vertaa käyntitunteja, vaan käynnistää pisimpään pysähdyksissä olleen ja pysäyttää pisimpään yhtäjaksoisesti käyneen kompressorin. Se jakaa käynnistykset tasaisesti, mutta ei pidä kokonaiskäyntiaikoja lähellä toisiaan.
+Tasainen jakautuminen syntyy siitä, että rajakompressorin rooli kiertää jokaisella pyynnin muutoksella. Samankaltaisen jakautumisen saa aikaan myös niin sanotulla FIFO-periaatteella. FIFO ei kuitenkaan vertaa käyntitunteja, vaan käynnistää pisimpään pysähdyksissä olleen ja pysäyttää pisimpään yhtäjaksoisesti käyneen kompressorin. Se jakaa käynnistykset tasaisesti, mutta ei pidä kokonaiskäyntiaikoja lähellä toisiaan.
 
-Ajatus käynnistää vähiten ajanut ja pysäyttää eniten ajanut ei ole oma keksintöni, vaan se pohjautuu varmasti tunnettuihin periaatteisiin. Oma osuuteni on toteutustapa, jota käsittelen seuraavaksi. Kehitin sen aikanaan itse, enkä ole nähnyt sitä kohteiden suunnitelmissa.
+Ajatus käynnistää vähiten ajanut ja pysäyttää eniten ajanut ei ole oma keksintöni, ja vastaavaa on varmasti käytetty muuallakin. Oma osuuteni on toteutustapa, jota käsittelen seuraavaksi. Kehitin sen aikanaan itse, enkä ole nähnyt sitä kohteiden suunnitelmissa.
 
 ## Toteutus: vääristetty käyntiaika
 
@@ -297,8 +279,10 @@ Jokaiselle kompressorille lasketaan siis **vääristetty käyntiaika**: todellin
   kirjoitettu samassa yksikössä kuin käyntiaika, jotta kaikki voidaan laskea yhteen ja
   järjestää yhdellä kertaa. Tärkeintä on suuruusjärjestys: vika voittaa minimiajat,
   minimiajat voittavat käynnin vääristyksen, ja käynnin vääristys voittaa normaalit
-  käyntiaikaerot. Tämä pätee, kun kukin vääristys on selvästi suurempi kuin kompressorien
-  todellisten käyntiaikojen erot.*
+  käyntiaikaerot. Vian ja minimiaikojen vääristysten pitää olla selvästi suurempia kuin
+  kompressorien todellisten käyntiaikojen erot. Käynnin vääristyksen ylittyminen on
+  tarkoituksellista, ks. [Käynnin vääristys on vaihtamisen
+  hinta](#käynnin-vääristys-on-vaihtamisen-hinta).*
 </InfoBox>
 
 Koko logiikka on siis yksi summa ja yksi lajittelu. Tässä on vääristysten varsinainen etu: niihin on helppo ohjelmoida mitä tahansa, mikä vaikuttaa käyntijärjestykseen. Uusi sääntö ei vaadi uutta haaraa ohjelmaan tai uutta poikkeusta käynnistyslogiikkaan, vaan uuden termin summaan. Esimerkiksi:
@@ -327,7 +311,7 @@ Normaalitilanteessa tällä ei ole merkitystä, koska käyntiajat pysyvät lähe
 
 ## Havainnollistus
 
-Alla oleva havainnollistus ajaa samaa logiikkaa jatkuvasti. Mukana on neljä samanlaista kompressoria, ja pyynti muuttuu 30–120 minuutin välein yhden portaan kerrallaan, enimmäkseen portaiden 2 ja 3 välillä. Vierekkäin (puhelimella allekkain) on kaksi ohjaustapaa: vääristettyyn käyntiaikaan perustuva järjestys ja kiinteä järjestys. Kiinteä järjestys on toteutettu niin, että johtava kompressori vaihtuu viikon välein eikä vaihto pysäytä käyviä kompressoreita. Molemmat saavat täsmälleen saman pyynnin.
+Alla oleva havainnollistus ajaa samaa logiikkaa jatkuvasti. Mukana on neljä samanlaista kompressoria, ja pyynti muuttuu 30-120 minuutin välein yhden portaan kerrallaan, enimmäkseen portaiden 2 ja 3 välillä. Vierekkäin (puhelimella allekkain) on kaksi ohjaustapaa: vääristettyyn käyntiaikaan perustuva järjestys ja kiinteä järjestys. Kiinteä järjestys on toteutettu niin, että johtava kompressori vaihtuu viikon välein eikä vaihto pysäytä käyviä kompressoreita. Molemmat saavat täsmälleen saman pyynnin.
 
 Simulaatio on ajettu valmiiksi puolentoista vuorokauden verran, joten aikajanoilla ja tilastoissa on heti dataa. Simuloitu tunti kestää sekunnin.
 
@@ -354,8 +338,8 @@ Lyhyt havainnollistus näyttää ilmiön, mutta ei kerro, miltä tilanne näytt�
     <thead>
       <tr>
         <th></th>
-        <th>Kiinteä, 168 h</th>
-        <th>Kiinteä, 24 h</th>
+        <th>Kiinteä, 168 h</th>
+        <th>Kiinteä, 24 h</th>
         <th>Vertailu jokaisella muutoksella</th>
       </tr>
     </thead>
@@ -396,9 +380,11 @@ Lyhyt havainnollistus näyttää ilmiön, mutta ei kerro, miltä tilanne näytt�
 
 Kokonaisluvut ovat kaikilla samat. Käynnistyksiä tulee yhtä monta, ja käyntiaika käynnistystä kohden on kaikilla noin 6,3 h, koska se määräytyy kuormasta eikä vuorottelusta. Ero näkyy vasta, kun katsotaan, miten käynnistykset jakautuvat ajallisesti. Viikon välein vaihdetulla järjestyksellä sama kompressori käynnistyi pahimmillaan 58 kertaa viikon aikana, ja pisin seisokki kesti 42 vuorokautta. Kun käyntitunteja verrattiin jokaisella muutoksella, vastaavat luvut olivat 23 käynnistystä ja 4 vuorokautta.
 
-Vuorokauden välein vaihdettu järjestys lyhentää seisokkeja, mutta käynti- ja lepojaksot jäävät yhtä lyhyiksi kuin viikon vaihtovälillä, koska rajakompressori on sama koko vuorokauden. Kun kiinteä järjestys lajiteltiin käyntituntien mukaan tunnin välein, tulos oli käytännössä sama kuin vertailulla jokaisella muutoksella. Ratkaisevaa on siis se, kuinka usein käyntitunteja verrataan, eikä se, millä tekniikalla vertailu tehdään.
+Vuorokauden välein vaihdettu järjestys lyhentää seisokkeja, mutta käynti- ja lepojaksot jäävät yhtä lyhyiksi kuin viikon vaihtovälillä, koska rajakompressori on sama koko vuorokauden.
 
 Ero on suurin, kun tarve on puolentoista ja kolmen ja puolen kompressorin välillä. Kesällä, kun pyynti vaihtelee nollan ja yhden välillä, käynnistyksiä tulee yhtä paljon kaikilla ohjaustavoilla, ja vertailu jokaisella muutoksella vain jakaa ne tasan kaikille kompressoreille. Jaksojen pituudet riippuvat myös varaajasta: pienemmällä varaajalla jaksot lyhenevät kaikilla ohjaustavoilla, mutta mediaanien suhde pysyi kaikilla kokeilluilla varaajan koilla noin kolminkertaisena.
+
+Hyvinkin toteutetussa järjestelmässä pyynti voi silloin tällöin käydä hetken ylemmällä tai alemmalla portaalla. Kokeilin tätä lisäämällä samaan simulaatioon 10 minuutin heilahduksen noin kolmen vuorokauden välein ja 3 minuutin heilahduksen noin viiden vuorokauden välein. Minimikäyntiajan takia alle 15 minuutin käyntejä ei syntynyt millään ohjaustavalla. Alle 30 minuutin käyntejä tuli kahdessa vuodessa kiinteällä järjestyksellä noin 240 ja vertailulla jokaisella muutoksella noin 110, ja käynnistyksiä oli kaikilla yhtä monta. Kiinteässä järjestyksessä heilahdus osuu aina rajakompressoriin, vertailussa se kohdistuu yleensä muuhun kuin juuri käynnistyneeseen tai pysähtyneeseen kompressoriin. Kun heilahduksia tuli useampi peräkkäin, minimiajat ohjasivat valintaa, ja vertailulla käynnistyksiä tuli noin 5 % enemmän kuin kiinteällä järjestyksellä.
 
 ## Rajoitteet
 
@@ -420,7 +406,7 @@ Kompressorien vuorottelu pitäisi ratkaista suunnitelmissa eikä jättää ohjel
 
 Lauseet eivät ole vääriä. Ne kertovat tavoitteen mutta jättävät ohjauksen toiminnan kuvaamatta. Auki jää kaikki olennainen: missä järjestyksessä kompressorit käynnistyvät, milloin järjestys vaihtuu, mitä tehdään vikatilanteessa, miten minimikäynti- ja lepoajat huomioidaan ja mitä tapahtuu, kun tehontarve vaihtelee kahden portaan välillä.
 
-Ohjaus ratkaisee, miten käynnistykset jakautuvat kompressorien kesken ajallisesti, ja se vaikuttaa suoraan kompressorien käyttöikään. Kun toimintaa ei ole kuvattu, ohjelmoija joutuu käytännössä suunnittelemaan sen itse, vaikka vastuu järjestelmän toiminnasta on edelleen suunnittelijalla. Jos järjestelmä ei sitten toimi odotetusti, on vaikea sanoa, onko vika suunnitelmassa vai toteutuksessa, kun suunnitelma ei kerro, miten järjestelmän pitäisi toimia. Lisäksi lopputulos riippuu ohjelmoijan osaamisesta, ja lämpöpumppujen ohjauksen osaamistaso vaihtelee automaatiourakoitsijoiden välillä paljon.
+Ohjaus ratkaisee, miten käynnistykset jakautuvat kompressorien kesken ajallisesti ja miten järjestelmä toimii vikatilanteissa. Kun toimintaa ei ole kuvattu, ohjelmoija joutuu käytännössä suunnittelemaan sen itse, vaikka vastuu järjestelmän toiminnasta on edelleen suunnittelijalla. Jos järjestelmä ei sitten toimi odotetusti, on vaikea sanoa, onko vika suunnitelmassa vai toteutuksessa, kun suunnitelma ei kerro, miten järjestelmän pitäisi toimia. Lisäksi lopputulos riippuu ohjelmoijan osaamisesta, ja lämpöpumppujen ohjauksen osaamistaso vaihtelee automaatiourakoitsijoiden välillä paljon.
 
 ### Malliteksti toimintaselostukseen
 
@@ -431,7 +417,7 @@ Suunnittelijan ei tarvitse kirjoittaa ohjelmakoodia, mutta toiminta pitää kuva
 
 Lämmityksen pyynti on jaettu tehoportaisiin, joita on yhtä monta kuin kompressoreita. Pyynnin kasvaessa käynnistetään käytettävissä olevista pysäytetyistä kompressoreista se, jonka käyntiaika on pienin. Pyynnin pienentyessä pysäytetään käyvistä kompressoreista se, jonka käyntiaika on suurin. Käyntijärjestystä ei vaihdeta ajastetusti. Käyvä kompressori vaihdetaan pysäytettyyn vain pyynnin muuttuessa ja vain, jos niiden käyntiaikojen ero ylittää asetusarvon (esim. 500 h).
 
-Kompressorien minimikäyntiaika (esim. 15 min) ja minimilepoaika (esim. 10 min) huomioidaan käyntijärjestyksessä. Pysäytettäväksi ei valita kompressoria, jonka minimikäyntiaika on kesken. Käynnistettäväksi valitaan ensisijaisesti kompressori, jonka minimilepoaika on päättynyt. Jos kaikkien pysäytettyjen kompressorien minimilepoaika on kesken, käynnistys viivästyy, kunnes valitun kompressorin lepoaika päättyy.
+Kompressorien minimikäyntiaika (esim. 15 min) ja minimilepoaika (esim. 10 min) huomioidaan käyntijärjestyksessä. Pysäytettäväksi ei valita kompressoria, jonka minimikäyntiaika on kesken. Jos kaikkien käyvien kompressorien minimikäyntiaika on kesken, pysäytys viivästyy, kunnes valitun kompressorin minimikäyntiaika päättyy. Käynnistettäväksi valitaan ensisijaisesti kompressori, jonka minimilepoaika on päättynyt. Jos kaikkien pysäytettyjen kompressorien minimilepoaika on kesken, käynnistys viivästyy, kunnes valitun kompressorin lepoaika päättyy.
 
 Jos lämpöpumppu on väylähäiriötilassa, A-luokan hälytyksessä tai käsiohjauksella pysäytetty, sen kompressorit siirtyvät käyntijärjestyksen loppupäähän, ja tilalle käynnistetään seuraava käytettävissä oleva kompressori. Pyynti rajoitetaan enintään käytettävissä olevien kompressorien määrään (esim. viisi kompressoria, joista yksi vikatilassa, jolloin pyynti on enintään 4).
 
@@ -453,5 +439,7 @@ Logiikan ydin on kaksi asiaa:
 Vääristetty käyntiaika on yksi tapa toteuttaa tämä. Sen etu on joustavuus: kaikki käyntijärjestykseen vaikuttava muutetaan tunneiksi ja lasketaan yhteen, uusi sääntö on uusi termi summaan, ja vääristysten arvoja voi muuttaa käyttöliittymästä koskematta koodiin.
 
 Käynnistyksiä ei tule yhtään vähemmän, mutta ne eivät kasaudu yhdelle kompressorille, ja pyynnin vaihdellessa jokainen kompressori käy ja lepää vuorotellen. Edellytyksenä on, että kompressorit ovat samantehoisia ja lämpöpumput on kytketty rinnakkain.
+
+Simulaation perusteella kompressoreita tämä ei hyvin toteutetulla pyynnillä juuri säästä, eikä viikon yhtäjaksoinen käynti tai seisokki välttämättä haittaa mitään. Minusta järjestelmä on silti viimeistellympi, kun jokainen kompressori käy ja lepää vuorollaan. Kun sen saa aikaan yhdellä lajittelulla, se on vaivan arvoista.
 
 Ja jos olet suunnittelija: "tasaten käyntitunnit" ei ole ohjaustapa vaan toive. Kirjoita vuorottelu toimintaselostukseen auki.
