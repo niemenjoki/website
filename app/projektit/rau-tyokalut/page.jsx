@@ -3,9 +3,9 @@ import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import classes from './RauToolsPage.module.css';
 
 export const metadata = {
-  title: 'RAU-tyokalut on poistettu | Joonas Niemenjoki',
+  title: 'RAU-työkalut on poistettu | Joonas Niemenjoki',
   description:
-    'RAU-tyokalut on poistettu pysyvästi julkiselta sivustolta, ja vanhat työkalulinkit ohjataan tälle sivulle.',
+    'RAU-työkalut on poistettu pysyvästi julkiselta sivustolta, ja vanhat työkalulinkit ohjataan tälle sivulle.',
   robots: {
     index: false,
     follow: false,
@@ -13,12 +13,12 @@ export const metadata = {
 };
 
 export default function RauToolsRemovedPage() {
-  const breadcrumbItems = [{ name: 'Etusivu', href: '/' }, { name: 'RAU-tyokalut' }];
+  const breadcrumbItems = [{ name: 'Etusivu', href: '/' }, { name: 'RAU-työkalut' }];
 
   return (
     <div className={classes.Page}>
       <Breadcrumbs items={breadcrumbItems} />
-      <h1>RAU-tyokalut on poistettu</h1>
+      <h1>RAU-työkalut on poistettu</h1>
       <div className={classes.RemovedBox}>
         <p className={classes.Lead}>
           RAU-työkalut on poistettu tältä sivustolta työnantajan pyynnöstä.

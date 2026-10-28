@@ -9,7 +9,7 @@ export const legalPageDefinitions = {
       'Lue, miten sivusto käsittelee henkilötietoja ja käyttää evästeitä. Sivulla kerrotaan tietosuojaperiaatteet ja käyttäjän oikeudet.',
     navigationLabel: 'Tietosuoja',
     shortLabel: 'Tietosuoja',
-    updatedAt: '2026-01-20',
+    updatedAt: '2026-10-28',
     search: {
       contexts: ['notFound'],
       keywords: ['tietosuoja', 'tietosuojaseloste', 'evästeet', 'henkilötiedot'],

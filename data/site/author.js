@@ -9,7 +9,7 @@ export const SITE_AUTHOR = {
   sameAs: [
     'https://www.github.com/niemenjoki',
     'https://x.com/niemenjoki',
-    'https://fi.linkedin.com/in/joonasniemenjoki',
+    'https://www.linkedin.com/in/joonasniemenjoki/',
     'https://www.instagram.com/niemenjoki.dev',
   ],
   bio: [

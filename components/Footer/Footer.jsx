@@ -14,7 +14,7 @@ export default function Footer({ navigation }) {
   const startYear = SITE_COPYRIGHT_START_YEAR;
   const currentYear = new Date().getFullYear();
   const yearRange =
-    currentYear === startYear ? `${startYear}` : `${startYear}–${currentYear}`;
+    currentYear === startYear ? `${startYear}` : `${startYear}-${currentYear}`;
 
   return (
     <footer className={classes.Footer}>

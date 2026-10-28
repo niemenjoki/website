@@ -1,8 +1,8 @@
 {
-  "title": "Kuinka lämpöpumppu toimii - selitys maallikon kielellä",
+  "title": "Lämpöpumpun toimintaperiaate selitettynä maallikon kielellä",
   "description": "Tässä julkaisussa selitetään, miten lämpöpumppu toimii käytännössä: perusfysiikka, energiatehokkuus ja syy siihen, miksi lämpöpumput ovat ympäristöystävällisiä.",
   "date": "2024-02-26",
-  "updated": "2026-01-22",
+  "updated": "2026-10-28",
   "tags": ["lämpöpumput"],
   "keywords": [
     "lämpöpumppu",
@@ -13,7 +13,12 @@
     "kylmäaine",
     "lämmitysjärjestelmät",
     "rakennusautomaatio",
-    "uusiutuva energia"
+    "uusiutuva energia",
+    "maalämpö",
+    "ilma-vesilämpöpumppu",
+    "cop",
+    "scop",
+    "lämpöpumpun toimintaperiaate"
   ],
   "language": "fi"
 }

@@ -11,7 +11,7 @@ export const BLOG_SEARCH_PLACEHOLDER = 'Etsi julkaisun nimellä tai avainsanalla
 export const REPO_URL = 'https://github.com/niemenjoki/website';
 export const LICENSE_URL = 'https://github.com/niemenjoki/website/blob/master/LICENSE.md';
 export const GOOGLE_SITE_VERIFICATION = 'QnhqvG850vkdtc4C7pk0jp9JUDowtwf-vVks_iHQLWY';
-export const SITE_COPYRIGHT_START_YEAR = 2025;
+export const SITE_COPYRIGHT_START_YEAR = 2024;
 export const CONTENT_TYPES = {
   POST: 'POST',
 };

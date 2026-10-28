@@ -1,6 +1,6 @@
-Olen törmännyt noin kuusivuotisen urani aikana rakennusautomaation parissa useisiin tilanteisiin, joissa on tullut ilmi, että useat alalla toimivat kokeneetkaan tekijät, jotka ovat virittäneet kymmeniä ellei satojakin säätimiä, eivät aina ymmärrä PID-säädinten toimintaa kunnolla.
+Olen työskennellyt rakennusautomaation parissa vuodesta 2021 ja törmännyt sinä aikana useisiin tilanteisiin, joissa on tullut ilmi, että useat alalla toimivat kokeneetkaan tekijät, jotka ovat virittäneet kymmeniä ellei satojakin säätimiä, eivät aina ymmärrä PID-säädinten toimintaa kunnolla.
 
-Tämä ei sinänsä ole yllättävää. Ainakin omissa insinööriopinnoissani PID-säätimien toimintaa yritettiin opettaa tarpeettoman monimutkaisten matemaattisten kaavojen ja sekavien MATLAB-simulaatioiden avulla ilman mitään kunnollista selitystä, miten säädin oikeasti toimii. Tilannetta ei yhtään helpota se, että puhutaan integroinnista ja derivoinnista, jotka jo termeinä kuumottaa monia opiskelijoita.
+Tämä ei sinänsä ole yllättävää. Ainakin omissa insinööriopinnoissani PID-säätimien toimintaa yritettiin opettaa tarpeettoman monimutkaisten matemaattisten kaavojen ja sekavien MATLAB-simulaatioiden avulla ilman mitään kunnollista selitystä, miten säädin oikeasti toimii. Tilannetta ei yhtään helpota se, että puhutaan integroinnista ja derivoinnista, jotka jo termeinä kuumottavat monia opiskelijoita.
 
 Vaikka kirjaimet I ja D säätimen nimessä tulevat juurikin noista termeistä, käytännön tasolla PID-säätimen ymmärtäminen ei vaadi differentiaalilaskennan ymmärtämistä vaan kyseessä on loppujen lopuksi melko yksinkertainen asia.
 
@@ -9,6 +9,7 @@ Tässä tekstissä yritän parhaani mukaan avata kyseisen säätimen toimintaa s
 ## Sisällysluettelo
 
 - [Mikä PID-säädin on?](#mikä-pid-säädin-on)
+- [Missä PID-säädintä käytetään?](#missä-pid-säädintä-käytetään)
 - [P-komponentti: nopea reaktio](#p-komponentti-nopea-reaktio)
 - [I-komponentti: jatkuvan virheen korjaus](#i-komponentti-jatkuvan-virheen-korjaus)
 - [D-komponentti: nopeiden muutosten jarru](#d-komponentti-nopeiden-muutosten-jarru)
@@ -26,11 +27,12 @@ Tässä tekstissä yritän parhaani mukaan avata kyseisen säätimen toimintaa s
   - [Jos päädyt käyttämään derivointia](#jos-päädyt-käyttämään-derivointia)
   - [Testaa toiminta](#testaa-toiminta)
 - [PI-säätimen viritysharjoitus](#pi-säätimen-viritysharjoitus)
+- [Yhteenveto](#yhteenveto)
 - [Valmiit koodit](#valmiit-koodit)
 
 ## Mikä PID-säädin on?
 
-PID-säädin on koodinpätkä, joka pyrkii pitämään jonkin mittauksen mahdollisimman lähellä asetusarvoa säätämällä siihen vaikuttavaa laitetta. Lyhenteen kirjaimet tulee sanoista suhteellinen (proportional), integraali (integral) ja derivaatta (derivative).
+PID-säädin on koodinpätkä, joka pyrkii pitämään jonkin mittauksen mahdollisimman lähellä asetusarvoa säätämällä siihen vaikuttavaa laitetta. Lyhenteen kirjaimet tulevat sanoista suhteellinen (proportional), integraali (integral) ja derivaatta (derivative).
 
 Esimerkiksi:
 
@@ -39,6 +41,36 @@ Esimerkiksi:
 
 PID-säädin perustuu kolmeen yksinkertaiseen komponenttiin, jotka yhdessä muodostavat yllättävän tehokkaan algoritmin, jota voidaan soveltaa monenlaisiin säätötilanteisiin eri toimialoilla.
 
+## Missä PID-säädintä käytetään?
+
+PID-säädin on yleisin säätöalgoritmi kaikkialla, missä jokin mittaus pitää pitää asetusarvossa säätämällä siihen vaikuttavaa laitetta. Rakennusautomaatiossa tyypillisiä käyttökohteita ovat esimerkiksi:
+
+- lämmitysverkoston menoveden lämpötila, jota säädetään sekoitusventtiilillä
+- käyttöveden lämpötila, jota säädetään lämmönsiirtimen venttiilillä
+- ilmanvaihtokoneen tuloilman lämpötila, jota säädetään lämmityspatterin venttiilillä tai lämmöntalteenotolla
+- kanavapaine tai paine-ero, jota säädetään puhaltimen kierrosnopeudella
+- huonelämpötila, jota säädetään patteriventtiilillä tai jäähdytyspalkin venttiilillä
+
+Muualla PID-säätimiä käytetään esimerkiksi teollisuuden prosesseissa, moottorien ja pumppujen nopeussäädössä sekä robotiikassa.
+
+Kaikissa näissä säädin toimii samalla periaatteella. Ero on prosessin nopeudessa: paine reagoi ohjaukseen sekunneissa, menoveden lämpötila minuuteissa ja huonelämpötila jopa tunneissa. Siksi samat viritysarvot eivät käy kaikkiin kohteisiin.
+
+<figure>
+
+<SafeImage
+  src="/images/content/pid-saatimen-rakenne.avif"
+  alt="PID-säätimen rakennekaavio: asetusarvo, virhe, P-, I- ja D-osa, toimilaite, prosessi ja mittaus"
+  width={1200}
+  height={500}
+  sizes="(max-width: 600px) 100vw, 800px"
+  loading="lazy"
+  style={{ maxWidth: '100%', height: 'auto', display: 'inline-block' }}
+/>
+
+<figcaption>{`PID-säätimen rakenne: säädin vertaa mittausta asetusarvoon, laskee P-, I- ja D-osan ja ohjaa niiden summalla toimilaitetta. © Joonas Niemenjoki 2026, CC BY-NC-SA 4.0`}</figcaption>
+
+</figure>
+
 Seuraavaksi käyn kunkin komponentin läpi yksi kerrallaan.
 
 <InfoBox>
@@ -46,7 +78,9 @@ Seuraavaksi käyn kunkin komponentin läpi yksi kerrallaan.
   säätimen toteuttaminen onnistuu millä tahansa ohjelmointikielellä. Huomioi kuitenkin,
   että automaatiojärjestelmissä koodi ajetaan oletusarvoisesti jatkuvasti toistuvana.
   Monilla ohjelmointikielillä tämä jatkuva toisto on toteutettava erikseen, esimerkiksi
-  while true -silmukalla.*
+  while true -silmukalla. Myöhemmin esimerkeissä ajan mittaamiseen käytetty SystemTimeFB
+  on järjestelmäkohtainen. Muissa järjestelmissä kulunut aika saadaan alustan omalla
+  funktiolla tai ajastimella.*
 </InfoBox>
 
 ## P-komponentti: nopea reaktio
@@ -93,7 +127,7 @@ Käytännössä lopputuloksena on säädin, joka säätää mittauksen lähelle 
 
 ## I-komponentti: jatkuvan virheen korjaus
 
-I-komponentti reagoi siihen, kuinka kauan virhe on ollut olemassa. Jokaisella ohjelmakierroksella, I-komponentti lisää hetkellisen säätövirheen kumulatiiviseen virheeseen, jonka kasvaa niin kauan, kun virhe on olemassa. Reaktion nopeus määräytyy vahvistuskertoimella **Ki**.
+I-komponentti reagoi siihen, kuinka kauan virhe on ollut olemassa. Jokaisella ohjelmakierroksella I-komponentti lisää hetkellisen säätövirheen kumulatiiviseen virheeseen, joka kasvaa niin kauan kuin virhe on olemassa. Reaktion nopeus määräytyy vahvistuskertoimella **Ki**.
 
 Muokataan aiemmasta P-säätimestä PI-säädin:
 
@@ -131,7 +165,7 @@ I-komponentin tehtävä on pikkuhiljaa nostaa säätöviestiä, kunnes P-kompone
 
 PI-säädin riittää käytännössä useimpiin säätötilanteisiin. Lähes aina, kun tulee mieleen käyttää D-komponenttia, varsinainen ongelma on jokin muu kuin D-komponentin puuttuminen, ainakin rakennusautomaation yhteydessä. Jotkut sanovatkin, että PID-säätimen D-kirjain tulee lauseesta "Do not use".
 
-Omat kokemukseni rakennusautomaation parissa ovat vahvistaneet tätä ajatusta. En ole kuuden vuoden alalla työskentelyn aikana käyttänyt D-komponenttia kertaakaan.
+Omat kokemukseni rakennusautomaation parissa ovat vahvistaneet tätä ajatusta. En ole vuonna 2021 alkaneen urani aikana käyttänyt D-komponenttia kertaakaan.
 
 D-komponenttia kuvataan usein _ennakoivaksi_, mutta tämä on harhaanjohtavaa. D-komponentti ei ennakoi ohjauksen vaikutuksia eikä “näe tulevaisuuteen”. Se reagoi ainoastaan mitattuun muutokseen. Jos mittaus reagoi hitaasti, myös derivointi reagoi myöhässä.
 
@@ -336,7 +370,7 @@ ELSE
 
     (* Aikamuuttujien normaali määrittely ************************)
 
-    (* SystemTic on järjestemän käynnistyksestä kulunut aika millisekunteina *)
+    (* SystemTic on järjestelmän käynnistyksestä kulunut aika millisekunteina *)
     udiTicMs            := SystemTime.SystemTic;
 
     (* Verrataan SystemTic arvoa tällä ja edellisellä ohjelmakierroksella *)
@@ -402,7 +436,7 @@ Vaikka vahvistuskertoimet ovat matemaattisesti toimivia, ne ovat käytännössä
 Tästä syystä vahvistuskertoimien sijaan käytetään usein suhdealuetta, integrointiaikaa ja derivointiaikaa, joilla on sama käyttötarkoitus, mutta niiden avulla säätimen virittämisestä tulee intuitiivisempaa:
 
 - Suhdealue kertoo kuinka paljon virhettä tarvitaan, jotta P-komponentin arvo saavuttaa säätimen maksimiarvon: Esimerkiksi suhdealueella 10 P-komponentin arvo on maksimissaan (esim. 100 %), kun säätövirhe on 10.
-- Integrointiaika kertoo kuinka nopeasti I-komponentin arvo on sama kuin P-komponentin arvo, jos säätövirhe pysyy vakiona. Toisin sanoen, jos säätövirhe ei muutu, kestää integrointiajan verran, että I-komponentti muuttaa säätimen tuloksen kaksinkertaiseksi.
+- Integrointiaika kertoo, kuinka nopeasti I-komponentin arvo kasvaa P-komponentin suuruiseksi, jos säätövirhe pysyy vakiona. Toisin sanoen, jos säätövirhe ei muutu, I-komponentti on integrointiajan kuluttua kaksinkertaistanut virheen aiheuttaman korjauksen.
 - Derivointiaika kertoo, kuinka pitkälle D-komponentti "ennustaa" tulevan virheen arvon jarruttaessaan säätöä
 
 Vaikka koodista tulee hieman monimutkaisemman näköinen, itse säätimen toiminta ei itsessään muutu mitenkään. P-, I- ja D-komponentit toimivat edelleen samalla tavalla, mutta viritysparametreista saadaan intuitiivisemmat. Suhdealueen, integrointiajan ja derivointiajan avulla säätimen käyttäytymistä voidaan arvioida suoraan ajallisesta ja toiminnallisesta näkökulmasta ilman, että arvojen vaikutusta täytyy ensin kokeilla käytännössä.
@@ -425,7 +459,7 @@ ELSE
 
     (* Aikamuuttujien normaali määrittely ************************)
 
-    (* SystemTic on järjestemän käynnistyksestä kulunut aika millisekunteina *)
+    (* SystemTic on järjestelmän käynnistyksestä kulunut aika millisekunteina *)
     udiTicMs            := SystemTime.SystemTic;
 
     (* Verrataan SystemTic arvoa tällä ja edellisellä ohjelmakierroksella *)
@@ -455,7 +489,7 @@ IF (rDT > 0.0)
 AND (rSuhdealue > 0.0)
 AND (rDerivointiAika > 0.0) THEN
     rMuutosNopeus   := (rMittausKeskiarvo - rMittausKeskiarvoEdellinen) / rDT;
-    rD              := -rMuutosNopeus * (100.0 / in_rSuhdealue) * in_rDerivointiAika;
+    rD              := -rMuutosNopeus * (100.0 / rSuhdealue) * rDerivointiAika;
 ELSE
     rD := 0.0;
 END_IF;
@@ -496,7 +530,7 @@ Usein virittäminen kuitenkin onnistuu hyvin myös kokeilemalla, kun sen toiminn
 
 ### Aloita P-säätimestä
 
-- Aseta integrointi ja derivointi pois päältä (tai Ti ja Td erittäin suuriksi)
+- Aseta integrointi ja derivointi pois päältä. Tämän julkaisun säätimessä se tapahtuu asettamalla integrointiaika ja derivointiaika nollaan. Jos järjestelmäsi ei salli nollaa integrointiajaksi, aseta se hyvin suureksi. Derivointiaikaa ei aseteta suureksi, koska suuri derivointiaika tekee D-komponentista voimakkaan.
 - Säädä suhdealuetta pienin askelin niin, että säädin reagoi selvästi mutta ei huoju
 - Jos mittaus ei pääse lähellekään asetusarvoa, pienennä suhdealuetta
 - Jos säätö huojuu edestakaisin, kasvata suhdealuetta
@@ -511,7 +545,7 @@ Tässä vaiheessa riittää, että mittaus on "sinne päin" ilman huojuntaa.
 
 ### Harkitse derivointia kriittisesti
 
-Muista, että useimmissa tapauksissa PI-säädin on täysin riittävä. D-komponenttia kannattaa käyttää vain, jos järjestelmä reagoi säätöön selkeällä viiveellä. Jos edelleen tuntuu, että derivoinnille on tarvetta, harkitse vielä kerran.
+Muista, että useimmissa tapauksissa PI-säädin on täysin riittävä. D-komponentista on hyötyä lähinnä nopeissa prosesseissa, joissa mittaus on häiriötön eikä PI-säädöllä saada riittävän nopeaa vastetta ilman huojuntaa. Jos edelleen tuntuu, että derivoinnille on tarvetta, harkitse vielä kerran.
 
 ### Jos päädyt käyttämään derivointia
 
@@ -530,13 +564,21 @@ Hyvin viritetty säädin reagoi nopeasti mutta rauhallisesti, ilman turhaa huoju
 
 ## PI-säätimen viritysharjoitus
 
-Alla on yksinkertaistettu simulaatio käyttöveden menolämpötilan säädöstä. Voit kokeilla viritää säätimen toimimaan mahdollisimman optimaalisesti. Päätin olla ottamatta tähän mukaan D-komponenttia, koska sen käyttö vastaavissa säädöissä on todella harvinaista.
+Alla on yksinkertaistettu simulaatio käyttöveden menolämpötilan säädöstä. Voit kokeilla virittää säätimen toimimaan mahdollisimman optimaalisesti. Päätin olla ottamatta tähän mukaan D-komponenttia, koska sen käyttö vastaavissa säädöissä on todella harvinaista.
 
-Voit muuttaa viritysparametreja ja asetusarvoa vapaasti. Muut arvot päivittyvät itsestään. Simulointi on tehty tietokoneella käytettäväksi, mutta se saattaa todennäköisesti toimii myös useimmilla puhelimilla.
+Voit muuttaa viritysparametreja ja asetusarvoa vapaasti. Muut arvot päivittyvät itsestään. Simulointi on tehty tietokoneella käytettäväksi, mutta se toimii todennäköisesti myös useimmilla puhelimilla.
 
 <DhwPidSimulator />
 
 <Advert adClient="ca-pub-5560402633923389" adSlot="8210055981" />
+
+## Yhteenveto
+
+PID-säädin on kolmen yksinkertaisen osan summa. P-komponentti reagoi nykyiseen virheeseen, I-komponentti poistaa pysyvän virheen ja D-komponentti jarruttaa nopeita muutoksia. Rakennusautomaatiossa PI-säädin riittää lähes aina.
+
+Oppikirjamallista saa käytännössä toimivan, kun siihen lisää tuloksen rajauksen, tasapainopisteen, anti-windupin ja ohjelmakierroksen pituuden huomioinnin. Suhdealue, integrointiaika ja derivointiaika tekevät virittämisestä intuitiivisempaa kuin pelkät vahvistuskertoimet.
+
+Jos säädät lämpöpumppujärjestelmää, lue myös <SafeLink href="/blogi/julkaisu/lampopumppujen-liittaminen-rakennusautomaatiojarjestelmaan">Lämpöpumppujen liittäminen rakennusautomaatiojärjestelmään</SafeLink>.
 
 ## Valmiit koodit
 
@@ -622,9 +664,9 @@ END_VAR
 
 VAR_OUTPUT
 	out_rTulos : REAL;   (* Skaalattu ulostulo *)
-    out_rP     : REAL;   (* P-komponentti, [0.0, 100.0] *)
-    out_rI     : REAL;   (* I-komponentti, [0.0, 100.0] *)
-    out_rD     : REAL;   (* D-komponentti, [0.0, 100.0] *)
+    out_rP     : REAL;   (* P-komponentti, [-100.0, 100.0] *)
+    out_rI     : REAL;   (* I-komponentti, [-100.0, 100.0] *)
+    out_rD     : REAL;   (* D-komponentti, [-100.0, 100.0] *)
 END_VAR
 
 VAR
@@ -677,15 +719,15 @@ IF in_bKayntilupa THEN
 
 	    (* Aikamuuttujien normaali määrittely ************************)
 
-	    (* SystemTic on järjestemän käynnistyksestä kulunut aika millisekunteina *)
+	    (* SystemTic on järjestelmän käynnistyksestä kulunut aika millisekunteina *)
 	    udiTicMs            := SystemTime.SystemTic;
 
 	    (* Verrataan SystemTic arvoa tällä ja edellisellä ohjelmakierroksella, ylivuodot huomioiden *)
 	    IF udiTicMs >= udiTicEdellinenMs THEN
 		    udiDTms := udiTicMs - udiTicEdellinenMs;
 		ELSE
-			(* UDINT arvo palautuu nollaksi yli "ylivuotaa", kun se saavuttaa  *)
-			(* maksimiarvonsa eli 16#FFFFFFFF tällä korjataan ylivuoto *)
+			(* UDINT-arvo palautuu nollaan eli ylivuotaa, kun se saavuttaa *)
+			(* maksimiarvonsa 16#FFFFFFFF. Tällä korjataan ylivuoto. *)
 		    udiDTms := (16#FFFFFFFF - udiTicEdellinenMs) + udiTicMs + 1;
 		END_IF;
 
@@ -696,7 +738,7 @@ IF in_bKayntilupa THEN
 	    (* Muutetaan arvo sekunteiksi REAL-tietotyyppiseen muuttujaan *)
 	    rDT := UDINT_TO_REAL(udiDTms) / 1000.0;
 
-	    (* Estetään säätimen arvojen "räjähtäminen, jos CPU on jumittuu ja kierrosaika on valtava *)
+	    (* Estetään säätimen arvojen "räjähtäminen", jos CPU jumittuu ja kierrosaika on valtava *)
 	    rDT := MIN(rDT, 5.0);
 
 	END_IF;
@@ -709,7 +751,7 @@ IF in_bKayntilupa THEN
 	    rP := 0.0;
 	END_IF;
 
-	fbLiukuvaKeskiarvo(in_rArvo:=in_rMittaus, in_iNaytteet:=5);*)
+	fbLiukuvaKeskiarvo(in_rArvo:=in_rMittaus, in_iNaytteet:=5);
 
 	rMittausKeskiarvo   := fbLiukuvaKeskiarvo.out_rKeskiarvo;
 
@@ -725,7 +767,7 @@ IF in_bKayntilupa THEN
 	    rD := 0.0;
 	END_IF;
 
-	(* Tasapainopiste normalisoidaan sisäiseen 0–100 % avaruuteen *)
+	(* Tasapainopiste normalisoidaan sisäiseen 0-100 % avaruuteen *)
 	(* Toimii myös, jos ulostuloalue on käänteinen (esim. 100 -> 0) *)
 	IF in_rMaksimiTulos <> in_rMinimiTulos THEN
 		rTasapainopiste0_100 := (in_rTasapainopiste - in_rMinimiTulos) / (in_rMaksimiTulos - in_rMinimiTulos) * 100.0;
@@ -758,7 +800,7 @@ IF in_bKayntilupa THEN
 	    rTulos := 0.0;
 	END_IF;
 
-	(* Sisäinen 0–100 % tulos skaalataan fyysiseen ulostuloalueeseen *)
+	(* Sisäinen 0-100 % tulos skaalataan fyysiseen ulostuloalueeseen *)
 	IF in_rMaksimiTulos <> in_rMinimiTulos THEN
 		rSkaalattuTulos := in_rMinimiTulos + (rTulos / 100.0) * (in_rMaksimiTulos - in_rMinimiTulos);
 	ELSE

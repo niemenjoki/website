@@ -18,7 +18,7 @@ Lämpöpumppu ei tuota lämpöä. Se siirtää jo olemassa olevaa lämpöenergia
 
 Ulkona, maaperässä ja vesistöissä on lämpöä silloinkin, kun ne tuntuvat kylmiltä. Lämpöpumppu ottaa tätä lämpöä talteen ja siirtää sen rakennuksen lämmitysjärjestelmään.
 
-Sähköä käytetään olemassa olevan lämmön siirtämiseen - ei varsinaisen lämmön tuottamiseen.
+Sähkö pyörittää tätä siirtoa. Se muuttuu lopulta itsekin lämmöksi, mutta suurin osa lämmöstä tulee ympäristöstä.
 
 ## Hiukan fysiikkaa
 
@@ -41,6 +41,12 @@ Juuri tämä tekee kylmäaineesta lämpöpumpun sydämen.
 Jos sähkölämmitin kuluttaa 1 kWh sähköä, se tuottaa noin 1 kWh lämpöä. Hyötysuhde on käytännössä 100 %.
 
 Lämpöpumppu toimii eri logiikalla. Se käyttää esimerkiksi 1 kWh sähköä ja siirtää 2-5 kWh lämpöenergiaa ympäristöstä rakennukseen.
+
+Tätä suhdetta kutsutaan lämpökertoimeksi eli COP-luvuksi (coefficient of performance). Jos lämpöpumppu tuottaa 3 kWh lämpöä 1 kWh:n sähköllä, sen COP on 3.
+
+COP ei ole laitteen vakioarvo. Se riippuu siitä, kuinka paljon lämpötilaa pitää nostaa. Mitä kylmempi lämmönlähde ja mitä kuumempaa vettä tarvitaan, sitä enemmän kompressori joutuu tekemään työtä ja sitä pienempi COP on. Siksi sama lämpöpumppu on tehokkaampi lattialämmityksessä kuin käyttöveden lämmityksessä, ja ilmalämpöpumpun COP laskee pakkasella.
+
+Esitteissä näkyy usein myös SCOP-luku (seasonal COP). Se on koko lämmityskauden keskiarvo standardin mukaisissa olosuhteissa. Todellinen vuosihyötysuhde riippuu kohteesta.
 
 ## Miten lämpöpumpun kierto toimii käytännössä?
 
@@ -84,13 +90,24 @@ Lauhduttimen jälkeen nestemäinen kylmäaine johdetaan paisuntaventtiilin läpi
 
 Näin kylmäaine on valmis ottamaan vastaan uutta lämpöä höyrystimessä ja kierto jatkuu.
 
+## Mistä lämpöpumppu ottaa lämmön?
+
+Toimintaperiaate on kaikissa lämpöpumpuissa sama. Ero on siinä, mistä lämpö otetaan ja mihin se luovutetaan.
+
+- **Maalämpöpumppu** ottaa lämmön porakaivosta tai maahan kaivetusta keruuputkistosta. Keruuputkistossa kiertää jäätymätön neste, joka lämpenee maassa muutaman asteen lämpötilaan ympäri vuoden. Tasaisen lämmönlähteen ansiosta maalämpöpumpun COP pysyy hyvänä myös pakkasella.
+- **Ilma-vesilämpöpumppu** ottaa lämmön ulkoilmasta ja lämmittää vesikiertoista lämmitysjärjestelmää ja käyttövettä. Sen teho ja COP laskevat, kun ulkoilma kylmenee.
+- **Ilmalämpöpumppu** ottaa lämmön ulkoilmasta ja puhaltaa sen suoraan sisäilmaan. Sillä ei yleensä lämmitetä vettä.
+- **Poistoilmalämpöpumppu** ottaa lämmön rakennuksesta poistuvasta ilmasta, jonka lämpö muuten menisi hukkaan.
+
+Isoissa kiinteistöissä lämpöpumppuja on usein useita rinnakkain, ja rakennusautomaatio ohjaa niitä muun lämmitysjärjestelmän tarpeen mukaan. Käyttöveden lämpötilan säätöä voit kokeilla simulaattorilla julkaisussa <SafeLink href="/blogi/julkaisu/opi-pid-saatimen-toiminta-ohjelmoimalla">PID-säädin käytännössä: toiminta, viritys ja valmis koodi</SafeLink>.
+
 ## Lämpöpumppu on järkevä tapa lämmittää
 
 Rakennuksen lämmitystarve on tietty määrä energiaa, joka on saatava sisätiloihin joka tapauksessa. Ero lämmitysjärjestelmien välillä syntyy siitä, miten tämä energia hankitaan.
 
 Lämpöpumpussa suurin osa lämmitysenergiasta ei synny lämmityslaitteessa, vaan on jo valmiiksi olemassa ympäristössä. Järjestelmän tehtävä on siirtää tämä energia rakennukseen.
 
-Kompressorin käyttämä sähkö ei muutu suoraan lämmöksi, vaan sitä käytetään lämmön siirtämiseen. Tämän seurauksena yhdellä kilowattitunnilla sähköä voidaan siirtää useampi kilowattitunti lämpöenergiaa rakennukseen.
+Kompressorin käyttämä sähkö pyörittää lämmön siirtoa ja päätyy itsekin lämmöksi rakennukseen. Suurin osa lämmöstä tulee kuitenkin ympäristöstä, ja siksi yhdellä kilowattitunnilla sähköä saadaan rakennukseen useampi kilowattitunti lämpöä.
 
 Käytännössä tämä tarkoittaa:
 

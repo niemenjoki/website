@@ -33,7 +33,7 @@ export default function LieromaaProjectPage() {
         <h1>{lieromaaProjectPage.shortLabel}</h1>
         <SafeImage
           src={wormsOnHandImage}
-          alt="Valokuva Joonas Niemenjoesta"
+          alt="Valokuva kompostimadoista kädellä"
           placeholder="blur"
           style={{ width: '100%', maxWidth: '600px', height: 'auto' }}
           priority

@@ -111,10 +111,12 @@ export default function PrivacyPage() {
         <h2>Vercel Analytics ja Speed Insights</h2>
         <p>
           Sivustolla käytetään myös Vercel Analyticsia ja Speed Insights -palvelua
-          sivuston käytön ja suorituskyvyn seuraamiseen. Kerätty tieto on tilastollista ja
-          anonymisoitua eikä sisällä henkilökohtaisesti tunnistettavia tietoja. Tietoja,
-          kuten reitti, URL, verkkonopeus, selain, laite, maa, käyttöjärjestelmä ja Web
-          Vitals -metriikit, käytetään aggregoidusti. Näiden palveluiden avulla voidaan
+          sivuston käytön ja suorituskyvyn seuraamiseen. Palvelut eivät käytä evästeitä.
+          Vercelin mukaan käynnin yhteydessä käsitellään teknisiä tietoja, kuten
+          IP-osoitetta, mutta niitä ei tallenneta, ja tallennettu tieto on koostettua
+          tilastotietoa, josta yksittäistä kävijää ei voi tunnistaa. Tietoja, kuten
+          reitti, URL, verkkonopeus, selain, laite, maa, käyttöjärjestelmä ja Web Vitals
+          -metriikit, käytetään aggregoidusti. Näiden palveluiden avulla voidaan
           esimerkiksi seurata kävijämäärää ja kehittää sivuston käytettävyyttä.
           Vierailijaistunnot hylätään 24 tunnin jälkeen, ja aggregoidut tiedot säilytetään
           Vercelin käytäntöjen mukaisesti, tyypillisesti 30-90 päivää suunnitelmasta
@@ -163,7 +165,7 @@ export default function PrivacyPage() {
         <h2>Tietojen vastaanottajat</h2>
         <p>
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
-          palveluissa kuvatulla tavalla (Google, Vercel). Emme luovuta tietoja muille
+          palveluissa kuvatulla tavalla (Google, Vercel). En luovuta tietoja muille
           osapuolille ilman suostumustasi.
         </p>
 

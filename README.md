@@ -17,7 +17,7 @@ This is a solo project. I am not actively looking for contributors, but the repo
 
 ## Tech stack
 
-- Next.js 15 App Router
+- Next.js 16 App Router (built with webpack)
 - React 19
 - MDX via `next-mdx-remote`
 - `rehype-pretty-code` + `shiki` for code blocks
@@ -66,14 +66,15 @@ No environment variables are required for local development in the current setup
 
 ## Content model
 
-Blog posts live in `content/posts/<slug>/` and are split into three files:
+Blog posts live in `content/posts/<slug>/` and consist of two files:
 
 ```text
 content/posts/example-post/
   content.mdx
   data.json
-  structuredData.json
 ```
+
+Structured data (JSON-LD) is generated from `data.json` at build time.
 
 ### `data.json`
 
@@ -96,10 +97,6 @@ Post bodies are written in MDX. The post renderer exposes a few custom component
 - `InfoBox`
 - `Advert`
 - `DhwPidSimulator`
-
-### `structuredData.json`
-
-Each post has a separate JSON-LD payload used for search-friendly structured data.
 
 ## Project-specific architecture
 

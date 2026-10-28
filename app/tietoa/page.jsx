@@ -53,7 +53,7 @@ export default function AboutPage() {
             Ohjelmoin, viritän ja korjaan järjestelmiä, jotka vaikuttavat ihmisten arkeen
             usein huomaamatta: sisälämpötilaan, energiankulutukseen ja järjestelmien
             pitkäikäisyyteen. Minua kiinnostaa ennen kaikkea se, miten asiat toimivat
-            oikeissa rakennuksissa – ei vain paperilla tai suunnitelmissa.
+            oikeissa rakennuksissa, ei vain paperilla tai suunnitelmissa.
           </p>
 
           <h2>Työni ydin</h2>

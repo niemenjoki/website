@@ -31,6 +31,7 @@ export const projectPageDefinitions = {
   },
   lieromaa: {
     canonicalUrl: '/projektit/lieromaa',
+    updatedAt: '2026-03-20',
     pageType: 'ItemPage',
     pageIdSuffix: '#itempage',
     pageName: 'Lieromaa-sivuprojekti | Joonas Niemenjoki projekti',
@@ -62,12 +63,12 @@ export const projectPageDefinitions = {
   },
   rauToolsNotice: {
     canonicalUrl: '/projektit/rau-tyokalut',
-    pageName: 'RAU-tyokalut poistettu julkiselta sivustolta | Joonas',
-    title: 'RAU-tyokalut poistettu julkiselta sivustolta | Joonas',
+    pageName: 'RAU-työkalut poistettu julkiselta sivustolta | Joonas',
+    title: 'RAU-työkalut poistettu julkiselta sivustolta | Joonas',
     description:
-      'RAU-tyokalut on poistettu julkiselta sivustolta. Talla sivulla kerrotaan poistosta, ja vanhat työkalulinkit ohjataan pysyvasti tanne.',
-    navigationLabel: 'RAU tyokalut',
-    shortLabel: 'RAU-tyokalut',
+      'RAU-työkalut on poistettu julkiselta sivustolta. Tällä sivulla kerrotaan poistosta, ja vanhat työkalulinkit ohjataan pysyvästi tänne.',
+    navigationLabel: 'RAU-työkalut',
+    shortLabel: 'RAU-työkalut',
   },
 };
 
