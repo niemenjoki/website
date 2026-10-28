@@ -1,0 +1,421 @@
+.MobileRoot {
+  --mobile-dock-height: 5.2rem;
+  --mobile-substrate: var(--dock-surface, var(--nav-substrate));
+  display: contents;
+}
+
+.TopRegion {
+  position: sticky;
+  z-index: var(--z-navigation, 300);
+  top: 0;
+  border-bottom: 1px solid var(--line-color, var(--background-5));
+  background: color-mix(in srgb, var(--background-1) 94%, transparent);
+  box-shadow: 0 0.4rem 1.2rem color-mix(in srgb, var(--text-color) 8%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.TopBar {
+  display: flex;
+  min-height: 3.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem max(0.8rem, env(safe-area-inset-left)) 0.45rem
+    max(0.8rem, env(safe-area-inset-right));
+}
+
+.BrandLink {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.55rem;
+  color: inherit;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.BrandLink:hover {
+  opacity: 1;
+}
+
+.TopActions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.ActionButton {
+  display: inline-flex;
+  width: 2.65rem;
+  height: 2.65rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ActionButton[aria-expanded='true'] {
+  border-color: color-mix(in srgb, var(--nav-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--nav-accent) 12%, transparent);
+  color: var(--highlight-alt);
+}
+
+.ActionIcon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.Dock {
+  --navigation-ground: var(--mobile-substrate);
+  position: fixed;
+  z-index: var(--z-navigation, 300);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: calc(var(--mobile-dock-height) + env(safe-area-inset-bottom));
+  min-height: calc(var(--mobile-dock-height) + env(safe-area-inset-bottom));
+  padding: 0 max(0.3rem, env(safe-area-inset-right)) 0
+    max(0.3rem, env(safe-area-inset-left));
+  border-top: 1px solid color-mix(in srgb, var(--nav-accent) 28%, transparent);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 24%,
+      var(--dock-grid) 24% 25%,
+      transparent 25% 74%,
+      var(--dock-grid) 74% 75%,
+      transparent 75%
+    ),
+    var(--mobile-substrate);
+  color: var(--dock-text);
+  box-shadow: 0 -0.8rem 2rem var(--shadow-color);
+}
+
+.Dock > ul {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  grid-template-columns: repeat(var(--mobile-navigation-count), minmax(0, 1fr));
+  gap: 0.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Dock li {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.DockLink {
+  --navigation-ground: var(--mobile-substrate);
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.4rem 0.12rem calc(1.15rem + env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 0.7rem;
+  color: var(--dock-muted);
+  text-align: center;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.DockLink[aria-current='page'] {
+  background: color-mix(in srgb, var(--nav-accent) 10%, transparent);
+  color: var(--dock-text);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nav-accent) 32%, transparent);
+}
+
+.DockButton {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.DockButton[aria-expanded='true'] {
+  background: color-mix(in srgb, var(--nav-accent) 15%, transparent);
+  color: var(--dock-text);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nav-accent) 52%, transparent);
+}
+
+.DockIcon {
+  position: relative;
+  z-index: 10;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 auto;
+}
+
+.DockLink[aria-current='page'] .DockIcon {
+  color: var(--nav-accent, #9cda6b);
+}
+
+.DockLabel {
+  position: relative;
+  z-index: 10;
+  display: block;
+  max-width: 100%;
+  font-size: clamp(0.72rem, 2.7vw, 0.78rem);
+  font-weight: 750;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.Dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-color);
+}
+
+.Dialog::backdrop {
+  background: var(--scrim-color);
+  backdrop-filter: blur(3px);
+}
+
+.DialogPanel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--line-color, var(--background-5));
+  border-bottom: 0;
+  border-radius: 1rem 1rem 0 0;
+  background:
+    linear-gradient(var(--technical-grid, transparent) 1px, transparent 1px),
+    var(--surface-elevated, var(--background-2));
+  background-size:
+    24px 24px,
+    auto;
+  box-shadow: 0 -1.2rem 3rem var(--shadow-color);
+}
+
+.SearchPanel {
+  top: max(0.75rem, env(safe-area-inset-top));
+  max-height: calc(100% - max(0.75rem, env(safe-area-inset-top)));
+  padding: 1rem max(1rem, env(safe-area-inset-right))
+    calc(1.25rem + env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+}
+
+.MorePanel {
+  bottom: calc(var(--mobile-dock-height) + env(safe-area-inset-bottom));
+  max-height: min(
+    calc(
+      100dvh - var(--mobile-dock-height) - env(safe-area-inset-bottom) -
+        max(0.75rem, env(safe-area-inset-top))
+    ),
+    42rem
+  );
+  padding: 0 max(1rem, env(safe-area-inset-right)) 1.15rem
+    max(1rem, env(safe-area-inset-left));
+}
+
+.DialogHeader {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0 0.8rem;
+  border-bottom: 1px solid var(--line-color, var(--background-5));
+  background: var(--surface-elevated, var(--background-2));
+}
+
+.DialogHeader h2 {
+  margin: 0;
+  color: var(--highlight-alt);
+  font-size: 1.35rem;
+  letter-spacing: -0.025em;
+}
+
+.MoreDescription {
+  margin: 0.25rem 0 0;
+  color: var(--text-muted, var(--text-color));
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.CloseButton {
+  display: inline-flex;
+  min-height: 2.5rem;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--line-color, var(--background-5));
+  border-radius: 0.5rem;
+  background: var(--background-2);
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.CloseIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.SecondarySections {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.SecondarySections section {
+  min-width: 0;
+}
+
+.SecondarySections h3 {
+  margin: 0 0 0.5rem;
+  color: var(--highlight-alt);
+  font-size: 0.82rem;
+  letter-spacing: 0.035em;
+}
+
+.SecondarySections ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.SecondarySections a {
+  display: flex;
+  min-height: 2.65rem;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.55rem 0.15rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--line-color) 70%, transparent);
+  color: inherit;
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.SettingsSection {
+  padding-top: 0.15rem;
+}
+
+.SettingRow,
+.SettingButton {
+  display: flex;
+  width: 100%;
+  min-height: 2.65rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.35rem 0.15rem;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--line-color) 70%, transparent);
+  background: transparent;
+  color: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.SettingButton {
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.SettingMessage {
+  display: block;
+  margin: 0.55rem 0;
+  padding: 0.55rem;
+  border-left: 3px solid var(--highlight-alt);
+  color: var(--text-muted, var(--text-color));
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.MobileRoot :is(a, button, input):focus-visible {
+  outline: 3px solid var(--highlight-alt);
+  outline-offset: 3px;
+}
+
+@media (min-width: 600px) {
+  .TopBar {
+    padding-right: 1.4rem;
+    padding-left: 1.4rem;
+  }
+
+  .DialogPanel {
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: auto;
+    width: min(31rem, calc(100% - 2rem));
+    border-bottom: 1px solid var(--line-color, var(--background-5));
+    border-radius: 1rem;
+  }
+
+  .MorePanel {
+    bottom: calc(var(--mobile-dock-height) + env(safe-area-inset-bottom) + 1rem);
+    max-height: min(
+      calc(100dvh - var(--mobile-dock-height) - env(safe-area-inset-bottom) - 2rem),
+      42rem
+    );
+  }
+
+  .SearchPanel {
+    top: max(1rem, env(safe-area-inset-top));
+    max-height: calc(100% - 2rem);
+  }
+}
+
+@media (min-width: 961px) {
+  .MobileRoot {
+    display: none;
+  }
+}
+
+@media (max-width: 370px) {
+  .TopBar {
+    padding-right: 0.45rem;
+    padding-left: 0.55rem;
+  }
+
+  .BrandLink {
+    gap: 0.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .MobileRoot *,
+  .MobileRoot *::before,
+  .MobileRoot *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

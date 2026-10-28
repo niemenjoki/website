@@ -1,4 +1,7 @@
+/* Rakenne ja tyylit Lieromaan mukaan, värit Niemenjoki.fi:n omat (sävy 226). */
 :root {
+  color-scheme: light;
+
   /* DARK MODE */
   --dark-1: #0e111b; /*hue 226 */
   --dark-2: #151a28;
@@ -12,6 +15,7 @@
   --overlay-dark: hsla(226deg, 32%, 8%, 0%);
   --overlay-final-dark: hsla(226deg, 32%, 8%, 95%);
   --code-background-dark: var(--dark-3);
+  --code-default-dark: #dcdee5;
   --highlight-content-link-dark: #799dff;
 
   /* LIGHT MODE */
@@ -26,10 +30,12 @@
   --orange: #ad4b00;
   --overlay-initial-light: hsla(226deg, 32%, 92%, 0%);
   --overlay-final-light: hsla(226deg, 32%, 92%, 90%);
+  --code-background-light: #f4f5f8;
+  --code-default-light: #1c2236;
   --highlight-content-link-light: #0032bb;
 }
 
-body {
+:root {
   --background-1: var(--light-1);
   --background-2: var(--light-2);
   --background-3: var(--light-3);
@@ -39,12 +45,38 @@ body {
   --text-color: var(--text);
   --highlight: var(--blue);
   --highlight-alt: var(--orange);
+  --text-on-accent: hsl(0, 0%, 100%);
   --overlay-color-initial: var(--overlay-initial-light);
   --overlay-color-final: var(--overlay-final-light);
+  --code-background: var(--code-background-light);
+  --code-default: var(--code-default-light);
   --highlight-content-link: var(--highlight-content-link-light);
+  --surface-elevated: #f4f5f8;
+  --surface-strong: #ffffff;
+  --surface-inverse: var(--dark-1);
+  --inverse-text: #ffffff;
+  --text-muted: #4a5068;
+  --line-color: #c4c8d4;
+  --nav-accent: #2f5fe0;
+  --dock-surface: #f4f5f8;
+  --dock-text: var(--dark-1);
+  --dock-muted: #4a5068;
+  --dock-grid: rgb(64 115 255 / 8%);
+  --nav-substrate: var(--dock-surface);
+  --footer-surface: #dcdee5;
+  --footer-text: var(--dark-1);
+  --footer-muted: #4a5068;
+  --footer-accent: #2f5fe0;
+  --footer-grid: rgb(64 115 255 / 8%);
+  --shadow-color: rgb(14 17 27 / 16%);
+  --scrim-color: rgb(8 10 18 / 62%);
+  --focus-ring: color-mix(in srgb, #2f5fe0 78%, white);
+  --danger-text: #982f2f;
+  --technical-grid: rgb(64 115 255 / 6%);
 }
 
-body.dark {
+:root.dark {
+  color-scheme: dark;
   --background-1: var(--dark-1);
   --background-2: var(--dark-2);
   --background-3: var(--dark-3);
@@ -54,15 +86,54 @@ body.dark {
   --text-color: var(--text-dark-mode);
   --highlight: var(--blue-dark-mode);
   --highlight-alt: var(--orange-dark-mode);
-  --overlay-color-initial: var(--overlay-initial-dark);
+  --text-on-accent: var(--dark-1);
+  --overlay-color-initial: var(--overlay-dark);
   --overlay-color-final: var(--overlay-final-dark);
+  --code-background: var(--code-background-dark);
+  --code-default: var(--code-default-dark);
   --highlight-content-link: var(--highlight-content-link-dark);
+  --surface-elevated: var(--dark-3);
+  --surface-strong: #0b0e17;
+  --surface-inverse: #0b0e17;
+  --inverse-text: #ffffff;
+  --text-muted: #a9b0c8;
+  --line-color: var(--dark-5);
+  --nav-accent: #799dff;
+  --dock-surface: #0b0e17;
+  --dock-text: #ffffff;
+  --dock-muted: #a9b0c8;
+  --dock-grid: rgb(121 157 255 / 6%);
+  --nav-substrate: var(--dock-surface);
+  --footer-surface: #0b0e17;
+  --footer-text: #ffffff;
+  --footer-muted: #a9b0c8;
+  --footer-accent: #799dff;
+  --footer-grid: rgb(121 157 255 / 6%);
+  --shadow-color: rgb(0 0 0 / 35%);
+  --scrim-color: rgb(4 6 12 / 72%);
+  --focus-ring: color-mix(in srgb, #799dff 78%, white);
+  --danger-text: #ffaaa2;
+  --technical-grid: rgb(121 157 255 / 5%);
+}
+
+html {
+  min-width: 320px;
+  background-color: var(--background-1);
+  scroll-padding-top: 9rem;
 }
 
 body {
-  font-family: 'Rubik', sans-serif;
-  background: var(--background-1);
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-site), 'Rubik', system-ui, sans-serif;
+  background-color: var(--background-1);
+  background-image:
+    linear-gradient(var(--technical-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--technical-grid) 1px, transparent 1px);
+  background-size: 32px 32px;
   color: var(--text-color);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body::-webkit-scrollbar {
@@ -77,10 +148,9 @@ body::-webkit-scrollbar-thumb {
   background: var(--highlight);
 }
 
-body.nav-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
+/* Suostumusasetukset löytyvät sivuston omista painikkeista. */
+.google-revocation-link-placeholder {
+  display: none !important;
 }
 
 .container {
@@ -89,14 +159,38 @@ body.nav-open {
   flex-direction: column;
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--surface-inverse);
+  color: var(--inverse-text);
+  font-weight: 700;
+  transform: translateY(-180%);
+  transition: transform 150ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 main {
   width: 100%;
-  max-width: 900px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 2em;
+  padding: clamp(1.25rem, 3vw, 2.75rem);
   min-height: 50vh;
   display: flex;
   flex-flow: column;
+}
+
+@media (max-width: 960px) {
+  main {
+    padding: 1.25rem 1rem calc(7.25rem + env(safe-area-inset-bottom));
+  }
 }
 
 a {
@@ -108,24 +202,54 @@ a {
   color: var(--highlight-alt);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
 figcaption {
   font-style: italic;
 }
 
 h1 {
   color: var(--highlight-alt);
-  font-size: 1.75rem;
-
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
   margin-bottom: 2rem;
+  text-wrap: balance;
 }
 
-a:hover:hover {
-  opacity: 0.7;
+@media (hover: hover) {
+  a:hover {
+    opacity: 0.78;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .md p {
@@ -207,6 +331,14 @@ a:hover:hover {
   letter-spacing: 0.5px;
 }
 
+.md p code {
+  border-radius: 5px;
+  border: 1px solid var(--background-6);
+  padding: 2px 4px;
+  background: var(--code-background);
+  color: var(--code-default);
+}
+
 .md aside > p {
   margin: 0;
 }
@@ -218,6 +350,18 @@ a:hover:hover {
 .md .table-wrapper {
   margin: 1.5rem 0;
   overflow-x: auto;
+  --table-scroll-hint: color-mix(in srgb, var(--highlight) 55%, transparent);
+  /* Vieritysvarjot: reunaan tulee varjo, kun taulukossa on sen takana lisää sisältöä.
+     Peitteet (local) liikkuvat sisällön mukana ja piilottavat varjon (scroll), kun reuna on saavutettu. */
+  background:
+    linear-gradient(to right, var(--background-1) 40%, transparent) left center / 2rem
+      100% no-repeat local,
+    linear-gradient(to left, var(--background-1) 40%, transparent) right center / 2rem
+      100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, var(--table-scroll-hint), transparent) left
+      center / 1.1rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, var(--table-scroll-hint), transparent)
+      right center / 1.1rem 100% no-repeat scroll;
 }
 
 .md .table-wrapper table {
@@ -232,6 +376,14 @@ a:hover:hover {
   text-align: left;
   white-space: nowrap;
   border-bottom: 1px solid var(--background-5);
+}
+
+/* Otsikot ja riviotsikot saavat rivittyä, jotta taulukko mahtuu palstaan aina kun mahdollista.
+   Luvut ja tunnukset pysyvät yhdellä rivillä. */
+.md .table-wrapper th,
+.md .table-wrapper td:first-child {
+  min-width: 5.5rem;
+  white-space: normal;
 }
 
 .md .table-wrapper th {
@@ -277,6 +429,6 @@ body div.md pre span {
   color: var(--shiki-light);
 }
 
-body.dark div.md pre span {
+:root.dark body div.md pre span {
   color: var(--shiki-dark);
 }

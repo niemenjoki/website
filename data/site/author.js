@@ -11,6 +11,7 @@ export const SITE_AUTHOR = {
     'https://x.com/niemenjoki',
     'https://www.linkedin.com/in/joonasniemenjoki/',
     'https://www.instagram.com/niemenjoki.dev',
+    'https://www.lieromaa.fi',
   ],
   bio: [
     'Olen rakennusautomaation ohjelmoija. Työskentelen erityisesti lämpöpumppujärjestelmien ja niiden ohjauslogiikan parissa. Työni keskittyy järjestelmien toimintaan, energiatehokkuuteen ja käytettävyyteen.',

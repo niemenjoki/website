@@ -1,0 +1,202 @@
+.DesktopContents {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.StickyContents {
+  position: sticky;
+  top: 9rem;
+  max-height: calc(100vh - 10.5rem);
+  padding-left: 1rem;
+  overflow-y: auto;
+  border-left: 2px solid var(--background-5);
+  scrollbar-width: thin;
+}
+
+.Title {
+  margin: 0 0 0.85rem;
+  color: var(--highlight-alt);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.List {
+  display: flex;
+  flex-direction: column;
+  gap: 0.58rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Item {
+  margin: 0;
+  padding: 0;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.LevelThree {
+  padding-left: 0.85rem;
+  font-size: 0.82rem;
+}
+
+.Link {
+  display: block;
+  color: var(--text-color);
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+}
+
+.Link:hover {
+  color: var(--highlight);
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.Link:focus-visible,
+.Trigger:focus-visible,
+.CloseButton:focus-visible {
+  outline: 3px solid var(--highlight);
+  outline-offset: 3px;
+}
+
+.MobileContents {
+  display: none;
+}
+
+.Trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border: 0;
+  border-top: 1px solid var(--background-5);
+  border-bottom: 1px solid var(--background-5);
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+}
+
+.TriggerMeta {
+  color: var(--highlight);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.Dialog {
+  width: min(calc(100% - 2rem), 34rem);
+  max-height: min(82vh, 44rem);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--background-6);
+  border-radius: 8px;
+  background: var(--background-1);
+  color: var(--text-color);
+  box-shadow: 0 1.5rem 4rem var(--shadow-color);
+}
+
+.Dialog::backdrop {
+  background: var(--scrim-color);
+}
+
+.DialogPanel {
+  max-height: min(82vh, 44rem);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.DialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--background-5);
+}
+
+.DialogHeader h2 {
+  margin: 0;
+  color: var(--highlight-alt);
+  font-size: 1.2rem;
+}
+
+.CloseButton {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--highlight);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.CloseButton:hover {
+  background: var(--highlight);
+  color: var(--text-on-accent);
+}
+
+@media (max-width: 760px) {
+  .DesktopContents {
+    display: none;
+  }
+
+  .MobileContents {
+    display: block;
+    margin-bottom: 1.25rem;
+  }
+
+  .Dialog .List {
+    gap: 0;
+  }
+
+  .Dialog .Item {
+    border-bottom: 1px solid var(--background-4);
+    font-size: 0.98rem;
+  }
+
+  .Dialog .LevelThree {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .Dialog .Link {
+    padding: 0.75rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Dialog[open] {
+    animation: contents-in 140ms ease-out;
+  }
+
+  .Dialog[open]::backdrop {
+    animation: backdrop-in 140ms ease-out;
+  }
+}
+
+@keyframes contents-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}

@@ -7,7 +7,7 @@ export const SITE_TITLE = 'Rakennusautomaation käytännön blogi | Joonas Nieme
 export const SITE_DESCRIPTION =
   'Käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta, lämpöpumpuista ja niitä sivuavista teknisistä aiheista.';
 export const BLOG_HEADING = 'Joonas Niemenjoen blogi';
-export const BLOG_SEARCH_PLACEHOLDER = 'Etsi julkaisun nimellä tai avainsanalla..';
+export const BLOG_SEARCH_PLACEHOLDER = 'Hae julkaisuja tai aiheita';
 export const REPO_URL = 'https://github.com/niemenjoki/website';
 export const LICENSE_URL = 'https://github.com/niemenjoki/website/blob/master/LICENSE.md';
 export const GOOGLE_SITE_VERIFICATION = 'QnhqvG850vkdtc4C7pk0jp9JUDowtwf-vVks_iHQLWY';

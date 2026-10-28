@@ -1,0 +1,427 @@
+.SiteSearch {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  color: var(--text-color);
+}
+
+.SearchPanel,
+.Form {
+  width: 100%;
+  min-width: 0;
+}
+
+.Label {
+  display: block;
+  margin: 0 0 0.5rem;
+  color: var(--highlight);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.InputWrap {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+}
+
+.InputIcon {
+  position: absolute;
+  z-index: 1;
+  left: 0.9rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--highlight);
+  pointer-events: none;
+}
+
+.Input {
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  padding: 0.68rem 3rem 0.68rem 2.7rem;
+  border: 1px solid var(--line-color, var(--background-5));
+  border-radius: 0.5rem;
+  background: var(--surface-elevated, var(--background-2));
+  color: var(--text-color);
+  font: inherit;
+  line-height: 1.4;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease;
+}
+
+.Input::placeholder {
+  color: var(--text-muted, var(--text-color));
+  opacity: 0.85;
+}
+
+.Input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.Input:hover {
+  border-color: color-mix(in srgb, var(--highlight) 55%, var(--line-color));
+}
+
+.Input:focus-visible {
+  border-color: var(--highlight);
+  outline: 3px solid color-mix(in srgb, var(--highlight) 24%, transparent);
+  outline-offset: 2px;
+  box-shadow: inset 3px 0 0 var(--nav-accent, var(--highlight-alt));
+}
+
+.IconButton,
+.CloseButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.IconButton {
+  width: 2.65rem;
+  height: 2.65rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  transition:
+    border-color 150ms ease,
+    color 150ms ease,
+    background-color 150ms ease;
+}
+
+.IconButton:hover,
+.IconButton[aria-expanded='true'] {
+  border-color: color-mix(in srgb, var(--nav-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--nav-accent) 11%, transparent);
+  color: var(--nav-accent, var(--highlight-alt));
+}
+
+.IconButtonHidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.CloseButton {
+  position: absolute;
+  z-index: 2;
+  right: 0.35rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+}
+
+.CloseButton:hover {
+  border-color: color-mix(in srgb, var(--highlight) 42%, transparent);
+  background: color-mix(in srgb, var(--highlight) 10%, transparent);
+  color: var(--highlight);
+}
+
+.ResultsPanel {
+  min-width: 0;
+  margin-top: 0.65rem;
+  overflow: hidden;
+  border: 1px solid var(--line-color, var(--background-5));
+  border-radius: 0.55rem;
+  background:
+    linear-gradient(var(--technical-grid, transparent) 1px, transparent 1px),
+    var(--surface-elevated, var(--background-2));
+  background-size:
+    24px 24px,
+    auto;
+  box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--text-color) 14%, transparent);
+}
+
+.ResultsHeader {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  padding: 0.78rem 0.9rem;
+  border-top: 3px solid var(--highlight);
+  border-bottom: 1px solid var(--line-color, var(--background-5));
+  background: color-mix(
+    in srgb,
+    var(--surface-elevated, var(--background-2)) 92%,
+    var(--nav-accent)
+  );
+}
+
+.ResultsHeader h2 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 0.8rem;
+  letter-spacing: 0.065em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.ResultsStatus {
+  min-width: 0;
+  margin: 0;
+  color: var(--text-muted, var(--text-color));
+  font-size: 0.72rem;
+  line-height: 1.35;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.Searching {
+  display: flex;
+  min-height: 5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.Searching span {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: var(--nav-accent, var(--highlight-alt));
+  animation: search-pulse 900ms ease-in-out infinite alternate;
+}
+
+.Searching span:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.Searching span:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+.ResultsGroups {
+  min-width: 0;
+}
+
+.ResultGroup + .ResultGroup {
+  border-top: 1px solid var(--line-color, var(--background-5));
+}
+
+.ResultGroupHeading {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  padding: 0.58rem 0.9rem;
+  background: color-mix(in srgb, var(--background-3) 72%, transparent);
+  color: var(--highlight-alt);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.ResultGroupCount {
+  display: inline-flex;
+  min-width: 1.75rem;
+  justify-content: flex-end;
+  color: var(--highlight);
+  font-size: 0.65rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ResultsList {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ResultItem {
+  min-width: 0;
+}
+
+.ResultItem + .ResultItem {
+  border-top: 1px solid color-mix(in srgb, var(--line-color) 68%, transparent);
+}
+
+.ResultLink {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.28rem;
+  padding: 0.8rem 2.2rem 0.85rem 0.9rem;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.ResultLink::after {
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  color: var(--highlight);
+  content: '→';
+  opacity: 0;
+  transform: translate(-0.3rem, -50%);
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease;
+}
+
+.ResultLink:hover,
+.ResultLink:focus-visible {
+  background: color-mix(in srgb, var(--nav-accent) 9%, transparent);
+  box-shadow: inset 3px 0 0 var(--nav-accent, var(--highlight-alt));
+  opacity: 1;
+  outline: 0;
+}
+
+.ResultLink:hover::after,
+.ResultLink:focus-visible::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.ResultMeta {
+  color: var(--highlight);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.065em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.ResultTitle {
+  color: var(--text-color);
+  font-size: 0.96rem;
+  font-weight: 800;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.ResultDescription {
+  color: var(--text-muted, var(--text-color));
+  font-size: 0.82rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.Empty {
+  margin: 0;
+  padding: 1rem 0.9rem 1.1rem;
+  color: var(--text-muted, var(--text-color));
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.Variant_navbar {
+  width: auto;
+}
+
+.Variant_navbar .SearchPanel {
+  position: absolute;
+  z-index: calc(var(--z-navigation, 300) + 20);
+  top: calc(100% + 0.55rem);
+  right: 0;
+  width: min(31rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 6rem);
+  padding: 0.8rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--line-color, var(--background-5));
+  border-radius: 0.65rem;
+  background: var(--surface-elevated, var(--background-2));
+  box-shadow: 0 1.2rem 3rem color-mix(in srgb, var(--text-color) 24%, transparent);
+}
+
+.Variant_navbar .Label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.Variant_navbar .ResultsPanel {
+  box-shadow: none;
+}
+
+.Variant_mobile .ResultsPanel {
+  box-shadow: none;
+}
+
+.Variant_home,
+.Variant_blog,
+.Variant_page {
+  max-width: 42rem;
+}
+
+.Variant_page {
+  max-width: none;
+}
+
+@keyframes search-pulse {
+  from {
+    opacity: 0.35;
+    transform: translateY(0.15rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-0.15rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .ResultsHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .ResultsStatus {
+    text-align: left;
+  }
+
+  .ResultDescription {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .Variant_navbar .SearchPanel {
+    right: -3.1rem;
+    width: min(24rem, calc(100vw - 1rem));
+    max-height: calc(100vh - 5rem);
+  }
+
+  .Variant_mobile .ResultsPanel {
+    overflow: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .Input,
+  .IconButton,
+  .ResultLink,
+  .ResultLink::after {
+    transition: none;
+  }
+
+  .Searching span {
+    animation: none;
+  }
+}

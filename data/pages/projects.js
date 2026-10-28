@@ -72,4 +72,4 @@ export const projectPageDefinitions = {
   },
 };
 
-export const primaryProjectOrder = ['compressCreateReactApp', 'lieromaa'];
+export const primaryProjectOrder = ['lieromaa', 'compressCreateReactApp'];

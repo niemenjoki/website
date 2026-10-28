@@ -1,103 +1,361 @@
 .Footer {
-  color: var(--text-color);
-  background: linear-gradient(var(--background-2), var(--background-1));
-  padding: 3rem 1.5rem;
-  font-size: 0.95rem;
+  --nav-accent: var(--footer-accent);
+  --footer-line: color-mix(in srgb, var(--footer-accent) 30%, var(--line-color));
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(3.5rem, 7vw, 6.5rem) clamp(1rem, 3vw, 2.5rem) 2rem;
+  padding-right: max(clamp(1rem, 3vw, 2.5rem), env(safe-area-inset-right));
+  padding-left: max(clamp(1rem, 3vw, 2.5rem), env(safe-area-inset-left));
+  border-top: 1px solid var(--footer-line);
+  background: var(--footer-surface);
+  color: var(--footer-text);
+  font-size: 0.94rem;
+}
+
+.Footer::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--footer-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--footer-grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  content: '';
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+  pointer-events: none;
 }
 
 .Inner {
-  max-width: 1100px;
+  display: flex;
+  width: 100%;
+  max-width: 90rem;
+  min-width: 0;
+  flex-direction: column;
+  gap: clamp(1.6rem, 3vw, 2.6rem);
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
 }
 
-.Columns {
+.RootHeader {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.8fr);
+  align-items: end;
+  gap: clamp(2rem, 6vw, 7rem);
 }
 
-.Columns h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+.BrandBlock {
+  min-width: 0;
 }
 
-.Columns ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+.Eyebrow,
+.SocialLabel {
+  color: var(--nav-accent);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-transform: uppercase;
 }
 
-.Columns li a {
-  color: var(--text-color);
-  text-decoration: none;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
+.BrandBlock h2 {
+  margin: 0.35rem 0 0.65rem;
+  color: var(--footer-text);
+  font-size: clamp(2.5rem, 6vw, 5.6rem);
+  letter-spacing: -0.055em;
+  line-height: 0.9;
 }
 
-.Columns li a:hover {
-  opacity: 1;
-  text-decoration: underline;
+.Description {
+  max-width: 44rem;
+  color: var(--footer-muted);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.65;
+}
+
+.RootActions {
+  display: grid;
+  min-width: 0;
+  gap: 1rem;
 }
 
 .Socials {
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  font-size: 1.5em;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.Socials a:not(:first-child) {
-  margin: 0 0.25rem;
+.Socials > span:last-child {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 1.45rem;
+}
+
+.Socials a {
+  display: inline-flex;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--footer-line);
+  border-radius: 50%;
+  color: inherit;
+}
+
+.Socials a:hover {
+  border-color: var(--nav-accent);
+  color: var(--nav-accent);
+  opacity: 1;
+}
+
+.DesktopIndex {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  border-top: 1px solid var(--footer-line);
+  border-left: 1px solid var(--footer-line);
+}
+
+.IndexColumn {
+  min-width: 0;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border-right: 1px solid var(--footer-line);
+  border-bottom: 1px solid var(--footer-line);
+}
+
+.IndexColumn h3 {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 0.65rem;
+  margin: 0 0 1rem;
+  color: var(--footer-text);
+  font-size: 0.9rem;
+  letter-spacing: 0.045em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.IndexColumn h3 span {
+  color: var(--nav-accent);
+  font-size: 0.65rem;
+}
+
+.DesktopIndex ul,
+.MobileIndex ul {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.DesktopIndex li + li,
+.MobileIndex li + li {
+  border-top: 1px solid color-mix(in srgb, var(--footer-line) 62%, transparent);
+}
+
+.DesktopIndex li a,
+.MobileIndex li a {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.58rem 0;
+  color: var(--footer-muted);
+  line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.DesktopIndex li a:hover,
+.MobileIndex li a:hover {
+  color: var(--nav-accent);
+  opacity: 1;
+}
+
+.MobileIndex {
+  display: none;
 }
 
 .Bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 1rem;
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: 0.85;
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.8rem 2rem;
+  padding-top: 0.2rem;
+  color: var(--footer-muted);
+  font-size: 0.76rem;
+  letter-spacing: 0.025em;
+  line-height: 1.55;
+}
+
+.Bottom p,
+.Bottom > div {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.SafeLinks {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.2rem;
+  text-align: right;
+}
+
+.SafeLinks a,
+.LinkButton {
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.18em;
+}
+
+.SafeLinks a:hover,
+.LinkButton:hover {
+  color: var(--nav-accent);
+  opacity: 1;
+}
+
+.AppearanceUtility {
+  display: inline-flex;
+  align-items: center;
   gap: 0.3rem;
 }
-.Links {
-  margin-top: 0.25rem;
+
+.AppearanceUtility button {
+  width: 2rem;
+  height: 2rem;
+  border-color: var(--footer-line);
 }
 
-.Links a {
-  color: var(--text-color);
-  text-decoration: none;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
+.ConsentMessage {
+  grid-column: 1 / -1;
+  padding: 0.7rem;
+  border-left: 3px solid var(--nav-accent);
+  background: color-mix(in srgb, var(--nav-accent) 8%, transparent);
 }
 
-.Links a:hover {
-  opacity: 1;
-  text-decoration: underline;
+.Footer :is(a, button, summary):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
-@media (min-width: 600px) {
-  .Columns {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 960px) {
+  .Footer {
+    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom));
+  }
+
+  .DesktopIndex {
+    display: none;
+  }
+
+  .MobileIndex {
+    display: grid;
+    border-top: 1px solid var(--footer-line);
+  }
+
+  .MobileDirectGroup {
+    padding: 0.75rem 0 0.9rem;
+    border-bottom: 1px solid var(--footer-line);
+  }
+
+  .MobileDirectHeading {
+    display: grid;
+    min-height: 2.5rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .MobileDirectHeading h3 {
+    min-width: 0;
+    margin: 0;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .MobileDirectHeading > span:first-child {
+    color: var(--nav-accent);
+    font-size: 0.68rem;
+    font-weight: 800;
+  }
+
+  .MobileDirectGroup ul {
+    padding-left: 2.15rem;
+  }
+
+  .GroupCount {
+    color: var(--nav-accent);
+    font-size: 0.68rem;
+    font-weight: 800;
   }
 }
 
-@media (min-width: 900px) {
-  .Columns {
-    grid-template-columns: repeat(4, 1fr);
+@media (max-width: 900px) {
+  .RootHeader {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .Footer {
+    padding: 3.5rem 1rem calc(7.5rem + env(safe-area-inset-bottom));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-left: max(1rem, env(safe-area-inset-left));
   }
 
   .Bottom {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .SafeLinks {
+    justify-content: flex-start;
     text-align: left;
   }
+}
+
+@media (max-width: 390px) {
+  .RootActions,
+  .Socials,
+  .Bottom {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1180px) {
+  .DesktopIndex {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.OtherSite {
+  margin: 0;
+  color: var(--footer-muted);
+  font-size: 0.85rem;
+}
+
+.OtherSite a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
 }

@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 
 import Advert from '@/components/Advert/Advert';
+import BlogTagNavigation from '@/components/BlogTagNavigation/BlogTagNavigation';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
-import SafeLink from '@/components/SafeLink/SafeLink';
-import SearchPosts from '@/components/SearchPosts/SearchPosts';
+import SiteSearch from '@/components/SiteSearch/SiteSearch';
 import {
   BLOG_SEARCH_PLACEHOLDER,
   POSTS_PER_PAGE,
@@ -18,9 +18,8 @@ import {
   getPostsByTag,
   slugifyTag,
 } from '@/lib/content/index.mjs';
+import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
-
-import classes from './TagPage.module.css';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -86,32 +85,18 @@ export default async function BlogTagPage({ params }) {
 
       <h1>Julkaisut avainsanalla "{tagName}"</h1>
 
-      <SearchPosts
-        list={posts}
-        keys={['title', 'description', 'keywords', 'tags']}
+      <SiteSearch
+        searchItems={getSiteSearchIndex()}
+        variant="blog"
+        label="Hae sivustolta"
         placeholder={BLOG_SEARCH_PLACEHOLDER}
+        resultLimit={5}
       />
 
-      <div className={classes.Taglist}>
-        <SafeLink href="/blogi" className={classes.Tag}>
-          Kaikki
-        </SafeLink>
-        {allTags.map((t) => {
-          const isActive = slugifyTag(t) === slugifyTag(decodedTag);
-          return (
-            <SafeLink
-              key={t}
-              href={`/blogi/${slugifyTag(t)}/sivu/1`}
-              className={`${classes.Tag} ${isActive ? classes.ActiveTag : ''}`}
-            >
-              {t}
-            </SafeLink>
-          );
-        })}
-      </div>
+      <BlogTagNavigation activeTagSlug={decodedTag} tags={allTags} />
 
-      {posts.map((post, i) => (
-        <Post key={i} post={post} />
+      {posts.map((post) => (
+        <Post key={post.slug} post={post} />
       ))}
 
       <Pagination

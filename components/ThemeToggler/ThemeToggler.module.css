@@ -1,13 +1,39 @@
 .ThemeToggler {
-  font-size: 28px;
+  display: inline-flex;
+  width: 2.65rem;
+  height: 2.65rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 1.1rem;
   cursor: pointer;
-}
-.ThemeToggler:hover {
-  opacity: 0.7;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
 }
 
-@media (min-width: 845px) {
-  .ThemeToggler {
-    font-size: 20px;
-  }
+.ThemeToggler:hover {
+  border-color: var(--line-color);
+  background: var(--background-3);
+  color: var(--highlight-alt);
+}
+
+.UseLightIcon {
+  display: none;
+}
+
+.UseDarkIcon {
+  display: inline-flex;
+}
+
+:global(:root.dark) .UseLightIcon {
+  display: inline-flex;
+}
+
+:global(:root.dark) .UseDarkIcon {
+  display: none;
 }

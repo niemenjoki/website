@@ -2,7 +2,7 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './Pagination.module.css';
 
-const Pagination = ({ numPages, currentPage, basePath }) => {
+const Pagination = ({ numPages, currentPage, basePath, firstPagePath }) => {
   const total = Number(numPages) || 1;
   const page = Number(currentPage) || 1;
 
@@ -12,51 +12,51 @@ const Pagination = ({ numPages, currentPage, basePath }) => {
   const isLast = page === total;
 
   const pagePath = (pageNumber) =>
-    pageNumber === 1 ? `${basePath}/sivu/1` : `${basePath}/sivu/${pageNumber}`;
+    pageNumber === 1
+      ? (firstPagePath ?? `${basePath}/sivu/1`)
+      : `${basePath}/sivu/${pageNumber}`;
 
   const previousPage = pagePath(page - 1);
   const nextPage = pagePath(page + 1);
 
   return (
-    <>
-      <div className={classes.Pagination} aria-label="pagination">
-        <ul>
-          {!isFirst && (
-            <li key="previous">
-              <SafeLink href={previousPage} className={classes.TextButton}>
-                Edellinen
+    <nav className={classes.Pagination} aria-label="Blogisivujen sivutus">
+      <ul>
+        {!isFirst && (
+          <li key="previous">
+            <SafeLink href={previousPage} className={classes.TextButton}>
+              Edellinen
+            </SafeLink>
+          </li>
+        )}
+
+        {Array.from({ length: total }, (_, i) => {
+          const pageNumber = i + 1;
+          const isActive = pageNumber === page;
+
+          return (
+            <li key={pageNumber}>
+              <SafeLink
+                href={pagePath(pageNumber)}
+                className={`${classes.NumberButton} ${isActive ? classes.ActiveButton : ''}`}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                <span className={classes.VisuallyHidden}>Sivu </span>
+                {pageNumber}
               </SafeLink>
             </li>
-          )}
+          );
+        })}
 
-          {Array.from({ length: total }, (_, i) => {
-            const pageNumber = i + 1;
-            const isActive = pageNumber === page;
-
-            return (
-              <li key={pageNumber}>
-                <SafeLink
-                  href={pagePath(pageNumber)}
-                  className={`${classes.NumberButton} ${
-                    isActive ? classes.ActiveButton : ''
-                  }`}
-                >
-                  {pageNumber}
-                </SafeLink>
-              </li>
-            );
-          })}
-
-          {!isLast && (
-            <li key="next">
-              <SafeLink href={nextPage} className={classes.TextButton}>
-                Seuraava
-              </SafeLink>
-            </li>
-          )}
-        </ul>
-      </div>
-    </>
+        {!isLast && (
+          <li key="next">
+            <SafeLink href={nextPage} className={classes.TextButton}>
+              Seuraava
+            </SafeLink>
+          </li>
+        )}
+      </ul>
+    </nav>
   );
 };
 

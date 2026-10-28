@@ -24,7 +24,7 @@
 .Tag {
   background: var(--highlight);
   padding: 0.25rem 0.5rem;
-  color: var(--background-1);
+  color: var(--text-on-accent);
   border-radius: 4px;
   white-space: nowrap;
 }

@@ -1,40 +1,115 @@
-import { useEffect, useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 
 import Icon from '../Icon/Icon';
 import classes from './ThemeToggler.module.css';
 
-// Theme preference: localStorage 'darkMode', otherwise the system setting. Light on the server and during hydration.
-const listeners = new Set();
-const subscribe = (listener) => {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
-};
-const getSnapshot = () => {
-  const modeInStorage = localStorage.getItem('darkMode');
-  if (modeInStorage) return JSON.parse(modeInStorage);
+const THEME_CHANGE_EVENT = 'niemenjoki:theme-change';
+
+function readStoredThemePreference() {
+  let modeInStorage = null;
+
+  try {
+    modeInStorage = localStorage.getItem('darkMode');
+  } catch {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  if (modeInStorage === 'true') {
+    return true;
+  }
+
+  if (modeInStorage === 'false') {
+    return false;
+  }
+
+  if (modeInStorage !== null) {
+    try {
+      localStorage.removeItem('darkMode');
+    } catch {}
+  }
+
   return window.matchMedia('(prefers-color-scheme: dark)').matches;
-};
-const getServerSnapshot = () => false;
+}
+
+function hasStoredThemePreference() {
+  try {
+    return localStorage.getItem('darkMode') !== null;
+  } catch {
+    return false;
+  }
+}
+
+function applyTheme(isDarkMode) {
+  document.documentElement.classList.toggle('dark', isDarkMode);
+  document.body.classList.toggle('dark', isDarkMode);
+}
 
 const ThemeToggler = (props) => {
-  const isDarkMode = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const { copy, style, ...buttonProps } = props;
+  const [isDarkMode, setIsDarkMode] = useState(null);
 
   useEffect(() => {
-    document.body.classList.toggle('dark', isDarkMode);
-  }, [isDarkMode]);
+    const syncTheme = (event) => {
+      const nextMode =
+        typeof event?.detail?.isDarkMode === 'boolean'
+          ? event.detail.isDarkMode
+          : readStoredThemePreference();
+
+      applyTheme(nextMode);
+      setIsDarkMode(nextMode);
+    };
+
+    syncTheme();
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const syncSystemTheme = (event) => {
+      if (!hasStoredThemePreference()) {
+        applyTheme(event.matches);
+        setIsDarkMode(event.matches);
+      }
+    };
+
+    window.addEventListener(THEME_CHANGE_EVENT, syncTheme);
+    window.addEventListener('storage', syncTheme);
+    mediaQuery.addEventListener?.('change', syncSystemTheme);
+
+    return () => {
+      window.removeEventListener(THEME_CHANGE_EVENT, syncTheme);
+      window.removeEventListener('storage', syncTheme);
+      mediaQuery.removeEventListener?.('change', syncSystemTheme);
+    };
+  }, []);
 
   const handleClick = () => {
-    localStorage.setItem('darkMode', JSON.stringify(!isDarkMode));
-    listeners.forEach((listener) => listener());
+    const nextMode = !document.documentElement.classList.contains('dark');
+    try {
+      localStorage.setItem('darkMode', JSON.stringify(nextMode));
+    } catch {}
+    applyTheme(nextMode);
+    setIsDarkMode(nextMode);
+    window.dispatchEvent(
+      new CustomEvent(THEME_CHANGE_EVENT, { detail: { isDarkMode: nextMode } })
+    );
   };
 
   return (
-    <Icon
-      name={isDarkMode ? 'sun' : 'moon'}
+    <button
+      type="button"
       className={classes.ThemeToggler}
       onClick={handleClick}
-      {...props}
-    />
+      aria-label={
+        isDarkMode == null ? copy.toggle : isDarkMode ? copy.useLight : copy.useDark
+      }
+      aria-pressed={isDarkMode ?? undefined}
+      style={style}
+      {...buttonProps}
+    >
+      <span className={classes.UseLightIcon} aria-hidden="true">
+        <Icon name="sun" />
+      </span>
+      <span className={classes.UseDarkIcon} aria-hidden="true">
+        <Icon name="moon" />
+      </span>
+    </button>
   );
 };
 

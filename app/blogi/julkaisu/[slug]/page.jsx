@@ -10,7 +10,6 @@ import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import {
   getAllContentSlugs,
   getContentMdxSource,
@@ -87,9 +86,9 @@ export default async function PostPage({ params }) {
           },
         }}
         preTitle={<Breadcrumbs items={breadcrumbItems} />}
+        share={{ title: data.title, tags: data.tags }}
       />
 
-      <SocialShareButtons title={data.title} tags={data.tags} />
       <Advert />
       <PostRecommendation posts={recommendedPosts} />
     </>
