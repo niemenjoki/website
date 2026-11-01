@@ -47,11 +47,12 @@ export default function PrivacyPage() {
 
         <h2>Tietojen kerääminen ja käyttö</h2>
         <p>
-          Tämä verkkosivusto ei suoraan kerää mitään henkilökohtaisesti tunnistettavaa
-          tietoa. Sivustolla käytetään kuitenkin kolmannen osapuolen palveluita, jotka
-          voivat kerätä tietoa, kuten IP-osoitteita, selaintietoja, laitetietoja ja
-          selauskäyttäytymistä. Sivustoa voi käyttää myös mainostenesto-ohjelmien tai
-          muiden seurantaa estävien työkalujen kanssa.
+          Sivuston oma analytiikka kirjaa sivujen avaukset palvelimella ilman evästeitä,
+          eikä selaimeesi tallenneta sitä varten mitään (ks. Oma analytiikka). Lisäksi
+          sivustolla käytetään kolmannen osapuolen palveluita, jotka voivat kerätä tietoa,
+          kuten IP-osoitteita, selaintietoja, laitetietoja ja selauskäyttäytymistä.
+          Sivustoa voi käyttää myös mainostenesto-ohjelmien tai muiden seurantaa estävien
+          työkalujen kanssa.
         </p>
 
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
@@ -62,9 +63,12 @@ export default function PrivacyPage() {
             suostumus (GDPR Art. 6(1)(a)).
           </li>
           <li>
-            Sivuston käytön ja suorituskyvyn analysointi (Vercel Analytics ja Speed
-            Insights): Oikeusperusteena oikeutettu etu (GDPR Art. 6(1)(f)) sivuston
-            kehittämiseksi.
+            Sivuston käytön analysointi (sivuston oma analytiikka): Oikeusperusteena
+            oikeutettu etu (GDPR Art. 6(1)(f)) sivuston kehittämiseksi.
+          </li>
+          <li>
+            Sivuston toimittaminen ja suojaaminen (Vercel ja Cloudflare): Oikeusperusteena
+            oikeutettu etu (GDPR Art. 6(1)(f)).
           </li>
           <li>
             Käyttäjäasetusten tallentaminen (localStorage): Oikeusperusteena
@@ -108,39 +112,35 @@ export default function PrivacyPage() {
           .
         </p>
 
-        <h2>Vercel Analytics ja Speed Insights</h2>
+        <h2>Oma analytiikka</h2>
         <p>
-          Sivustolla käytetään myös Vercel Analyticsia ja Speed Insights -palvelua
-          sivuston käytön ja suorituskyvyn seuraamiseen. Palvelut eivät käytä evästeitä.
-          Vercelin mukaan käynnin yhteydessä käsitellään teknisiä tietoja, kuten
-          IP-osoitetta, mutta niitä ei tallenneta, ja tallennettu tieto on koostettua
-          tilastotietoa, josta yksittäistä kävijää ei voi tunnistaa. Tietoja, kuten
-          reitti, URL, verkkonopeus, selain, laite, maa, käyttöjärjestelmä ja Web Vitals
-          -metriikit, käytetään aggregoidusti. Näiden palveluiden avulla voidaan
-          esimerkiksi seurata kävijämäärää ja kehittää sivuston käytettävyyttä.
-          Vierailijaistunnot hylätään 24 tunnin jälkeen, ja aggregoidut tiedot säilytetään
-          Vercelin käytäntöjen mukaisesti, tyypillisesti 30-90 päivää suunnitelmasta
-          riippuen.
+          Sivustolla käytetään omaa kevyttä analytiikkaa sivuston käytön seuraamiseen. Kun
+          avaat sivun, sivuston palvelin kirjaa sivupolun, aikaleiman, ulkoisen viittaavan
+          sivun osoitteen ilman URL-parametreja (esimerkiksi google.com), mahdolliset
+          UTM-kampanjaparametrit (utm_source, utm_medium, utm_campaign, utm_content ja
+          utm_term), laitetyypin, selaimen ja käyttöjärjestelmän nimen sekä maan, jos
+          sivuston palveluntarjoaja ilmoittaa sen pyynnön mukana. Samalla palvelin laskee
+          IP-osoitteesta ja selaintunnisteesta kävijätiivisteen, jolla saman päivän
+          käynnit voidaan laskea yhteen. Laskennassa käytetään satunnaista avainta, joka
+          vaihtuu joka päivä ja poistetaan vuorokauden päätyttyä, joten samaa kävijää ei
+          voi tunnistaa eri päivinä. IP-osoitetta ja selaintunnistetta ei tallenneta, eikä
+          selaimeesi tallenneta tätä varten mitään. Kävijätiiviste on pseudonyymi tieto,
+          ja sitä käsitellään henkilötietona.
         </p>
         <p>
-          Lisätietoja löydät palveluntarjoajien sivuilta:
-          <br />
-          <a
-            href="https://vercel.com/docs/analytics/privacy-policy"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Vercel Analyticsin tietosuoja
-          </a>{' '}
-          ja{' '}
-          <a
-            href="https://vercel.com/docs/speed-insights/privacy-policy"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Speed Insightsin tietosuoja
-          </a>
-          .
+          Jos selaimesi lähettää Do Not Track- tai Global Privacy Control -asetuksen,
+          sivun avausta ei kirjata. Hakukoneiden ja muiden automaattisten ohjelmien
+          pyyntöjä ei myöskään kirjata. Tiedot tallennetaan ylläpitäjän omalle
+          palvelimelle, eikä niitä luovuteta eteenpäin. Raportointi tehdään sivu- ja
+          päivätasolla.
+        </p>
+
+        <h2>Sivuston ylläpito</h2>
+        <p>
+          Sivusto toimii Vercelin palvelussa Cloudflaren välityksellä. Palvelut
+          käsittelevät sivupyyntöjen yhteydessä teknisiä tietoja, kuten IP-osoitetta ja
+          selaimen tietoja, jotta sivu voidaan toimittaa ja palvelu suojata
+          väärinkäytöksiltä.
         </p>
 
         <h2>LocalStorage</h2>
@@ -165,8 +165,9 @@ export default function PrivacyPage() {
         <h2>Tietojen vastaanottajat</h2>
         <p>
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
-          palveluissa kuvatulla tavalla (Google, Vercel). En luovuta tietoja muille
-          osapuolille ilman suostumustasi.
+          palveluissa kuvatulla tavalla (Google, Vercel ja Cloudflare). Oman analytiikan
+          tiedot pysyvät omassa hallinnassani. En luovuta tietoja muille osapuolille ilman
+          suostumustasi.
         </p>
 
         <h2>Tietojen säilytysaika</h2>
@@ -174,6 +175,11 @@ export default function PrivacyPage() {
           Tietoja säilytetään vain niin kauan kuin on tarpeen edellä mainittuihin
           tarkoituksiin. Tarkemmat säilytysajat on kuvattu kunkin palvelun kohdalla. Kun
           tiedot eivät enää ole tarpeen, ne poistetaan tai anonymisoidaan.
+        </p>
+        <p>
+          Oman analytiikan yksittäiset sivun avaukset säilytetään 25 kuukautta, minkä
+          jälkeen niistä jää vain päiväkohtainen yhteenveto. Kävijätiivisteen päivittäinen
+          avain poistetaan vuorokauden päätyttyä.
         </p>
 
         <h2>Rekisteröidyn oikeudet</h2>

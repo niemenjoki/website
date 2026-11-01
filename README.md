@@ -13,7 +13,7 @@ This is a solo project. I am not actively looking for contributors, but the repo
 - Structured metadata and JSON-LD for pages and posts
 - Automatically generated `sitemap.xml` and RSS feed
 - Guard rails for internal links and image paths
-- Production-only analytics and consent-gated AdSense ads
+- Server-side, cookieless page view analytics (Looku) and consent-gated AdSense ads
 
 ## Tech stack
 
@@ -23,7 +23,7 @@ This is a solo project. I am not actively looking for contributors, but the repo
 - `rehype-pretty-code` + `shiki` for code blocks
 - CSS Modules
 - Sharp for image optimization
-- Vercel Analytics and Speed Insights
+- Looku connector in `proxy.js` (`lib/looku/next.js`)
 
 ## Local development
 
@@ -51,7 +51,8 @@ The dev server runs on `0.0.0.0`, and `predev` automatically:
 - validates metadata
 - runs Prettier
 
-No environment variables are required for local development in the current setup.
+No environment variables are required for local development in the current setup. In production, page views are sent
+to a Looku receiver when `LOOKU_ENDPOINT`, `LOOKU_SITE_ID` and `LOOKU_SIGNING_KEY` are set.
 
 ## Available scripts
 
@@ -135,7 +136,7 @@ The goal is to make SEO and social metadata part of the normal development workf
 ## Production behavior
 
 - Ads are disabled in development
-- Vercel Analytics and Speed Insights are disabled in development
+- Looku sends page views only from production (`VERCEL_ENV=production`), never from previews or development
 - AdSense is only loaded after consent has been granted
 - `app/rss/route.js` generates the RSS feed
 - `app/sitemap.js` generates the sitemap and validates generated URLs against the safe route manifest

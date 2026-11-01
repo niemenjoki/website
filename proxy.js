@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+import { trackPageview } from '@/lib/looku/next.js';
+
 const GONE_PATHS = new Set([
   '/blogi/infrastruktuuri/sivu/1',
   '/blogi/julkaisu/onko-5g-vaarallista',
@@ -19,8 +21,21 @@ const GONE_PATHS = new Set([
   '/blog/page/[pageIndex]',
 ]);
 
+// Page views are recorded on the server with Looku, and nothing is stored in the browser. The receiver address and
+// keys come from the environment variables LOOKU_ENDPOINT, LOOKU_SITE_ID and LOOKU_SIGNING_KEY. Only production sends
+// data.
+const LOOKU_OPTIONS = {
+  excludePaths: ['/k3v9q7t2'],
+};
+
 function normalizePathname(pathname) {
-  const decodedPathname = decodeURIComponent(pathname);
+  let decodedPathname;
+  try {
+    decodedPathname = decodeURIComponent(pathname);
+  } catch {
+    // The proxy now runs on every page, so a malformed address must not cause an error page.
+    return pathname;
+  }
 
   if (decodedPathname.length > 1 && decodedPathname.endsWith('/')) {
     return decodedPathname.slice(0, -1);
@@ -29,10 +44,11 @@ function normalizePathname(pathname) {
   return decodedPathname;
 }
 
-export function proxy(request) {
+export function proxy(request, event) {
   const pathname = normalizePathname(request.nextUrl.pathname);
 
   if (!GONE_PATHS.has(pathname)) {
+    trackPageview(request, event, LOOKU_OPTIONS);
     return NextResponse.next();
   }
 
@@ -46,6 +62,21 @@ export function proxy(request) {
   });
 }
 
+// The first entry is Looku's recommended matcher: pages only, without prefetches and files. The other entries keep the
+// removed addresses answering 410, including /projects/LICENSE.md, which the first entry skips because of its extension.
 export const config = {
-  matcher: ['/blog/:path*', '/blogi/:path*', '/projects/:path*'],
+  matcher: [
+    {
+      // A character class matches the dot without escaping.
+      source: '/((?!api|_next/static|_next/image|.*[.]).*)',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: 'header', key: 'sec-purpose', value: '(.*)prefetch(.*)' },
+      ],
+    },
+    '/blog/:path*',
+    '/blogi/:path*',
+    '/projects/:path*',
+  ],
 };

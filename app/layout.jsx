@@ -4,7 +4,6 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import AdSenseConsentGate from '@/components/AdSense/AdSenseConsentGate';
-import Analytics from '@/components/Analytics/Analytics';
 import Footer from '@/components/Footer/Footer';
 import NavigationShell from '@/components/Navigation/NavigationShell';
 import { ADSENSE_ENABLED } from '@/data/site/adsense';
@@ -61,7 +60,6 @@ export default function RootLayout({ children }) {
           <main id="main-content">{children}</main>
           <Footer navigation={navigation} />
         </div>
-        <Analytics />
         {ADSENSE_ENABLED ? <AdSenseConsentGate /> : null}
       </body>
     </html>
