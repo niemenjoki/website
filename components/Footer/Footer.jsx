@@ -17,7 +17,10 @@ import { openConsentPreferences } from '@/lib/site/consentPreferences';
 import classes from './Footer.module.css';
 
 // Rakenne Lieromaan alatunnisteen mukaan, ilman yritystietoja, kielivalintaa ja matoaiheita.
-const OTHER_SITE = { label: 'Lieromaa.fi', href: 'https://www.lieromaa.fi' };
+const OTHER_SITE = {
+  label: 'Lieromaa.fi',
+  href: 'https://www.lieromaa.fi/?utm_source=niemenjoki.fi&utm_medium=referral&utm_campaign=toinen-sivustoni',
+};
 
 function FooterLinkList({ items }) {
   return (
