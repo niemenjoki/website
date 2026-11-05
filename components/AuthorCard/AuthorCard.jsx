@@ -1,6 +1,6 @@
 import { SITE_AUTHOR } from '@/data/site/author';
 import { aboutPage, blogIndexPage } from '@/lib/site/pageRecords.mjs';
-import portrait from '@/public/images/portrait2024.avif';
+import portrait from '@/public/images/portrait2026.avif';
 
 import SafeImage from '../SafeImage/SafeImage';
 import SafeLink from '../SafeLink/SafeLink';

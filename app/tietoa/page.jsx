@@ -5,7 +5,7 @@ import { AUTHOR_ID } from '@/data/site/schema.mjs';
 import { aboutPage } from '@/lib/site/pageRecords.mjs';
 import { createPageStructuredData } from '@/lib/structuredData/createPageStructuredData';
 import { createAuthorStructuredDataNode } from '@/lib/structuredData/createSiteStructuredData';
-import portrait from '@/public/images/portrait2024.avif';
+import portrait from '@/public/images/portrait2026.avif';
 
 import classes from './Tietoa.module.css';
 

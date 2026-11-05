@@ -1,6 +1,6 @@
 export const SITE_AUTHOR = {
   name: 'Joonas Niemenjoki',
-  portraitPath: '/images/portrait2024.avif',
+  portraitPath: '/images/portrait2026.avif',
   portraitAlt: 'Valokuva Joonas Niemenjoesta',
   profilePath: '/tietoa',
   linkedInUrl: 'https://www.linkedin.com/in/joonasniemenjoki/',
