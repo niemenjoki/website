@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server';
 
+import {
+  ANALYTICS_OPT_OUT_COOKIE,
+  ANALYTICS_OPT_OUT_PATH,
+} from '@/lib/analytics/optOut.js';
 import { trackPageview } from '@/lib/looku/next.js';
 
 const GONE_PATHS = new Set([
@@ -21,11 +25,12 @@ const GONE_PATHS = new Set([
   '/blog/page/[pageIndex]',
 ]);
 
-// Page views are recorded on the server with Looku, and nothing is stored in the browser. The receiver address and
+// Page views are recorded on the server with Looku, and nothing is stored in visitors' browsers. The receiver address and
 // keys come from the environment variables LOOKU_ENDPOINT, LOOKU_SITE_ID and LOOKU_SIGNING_KEY. Only production sends
-// data.
+// data. The owner's browser is left out with the opt-out cookie.
 const LOOKU_OPTIONS = {
-  excludePaths: ['/k3v9q7t2'],
+  excludePaths: ['/k3v9q7t2', ANALYTICS_OPT_OUT_PATH],
+  optOutCookie: ANALYTICS_OPT_OUT_COOKIE,
 };
 
 function normalizePathname(pathname) {
