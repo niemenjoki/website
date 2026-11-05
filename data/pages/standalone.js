@@ -25,8 +25,8 @@ export const standalonePageDefinitions = {
       'Kirjoitan käytännön kokemuksiin perustuvia havaintoja ja vinkkejä rakennusautomaatiosta ja sitä sivuavista aiheista.',
     image: {
       url: SITE_AUTHOR.portraitPath,
-      width: 1024,
-      height: 1024,
+      width: 400,
+      height: 400,
       alt: SITE_AUTHOR.portraitAlt,
     },
     navigationLabel: 'Tietoa sivustosta',

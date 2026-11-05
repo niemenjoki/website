@@ -8,8 +8,8 @@ export const homePageDefinition = {
   description: SITE_DESCRIPTION,
   image: {
     url: SITE_AUTHOR.portraitPath,
-    width: 1024,
-    height: 1024,
+    width: 400,
+    height: 400,
     alt: SITE_AUTHOR.portraitAlt,
   },
   shortLabel: 'Etusivu',

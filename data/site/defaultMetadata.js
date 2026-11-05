@@ -10,8 +10,8 @@ import {
 
 const portraitImage = {
   url: SITE_AUTHOR.portraitPath,
-  width: 1024,
-  height: 1024,
+  width: 400,
+  height: 400,
   alt: SITE_AUTHOR.portraitAlt,
 };
 
