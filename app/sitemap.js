@@ -39,8 +39,13 @@ export default async function sitemap() {
 
   const latestPost = getLatestPostDate(posts);
 
-  const add = (url, lastmod) => {
-    urls.set(url, { url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
+  // The path is kept as written for the route check. The address is percent-encoded, because tag names contain ä and ö.
+  const add = (path, lastmod) => {
+    urls.set(path, {
+      path,
+      url: `${SITE_URL}${encodeURI(path)}`,
+      lastModified: toISODate(lastmod),
+    });
   };
 
   const staticLastModified = (route, fallback) => {
@@ -51,16 +56,18 @@ export default async function sitemap() {
     return fallback ?? latestPost;
   };
 
-  // --- Static pages
-  staticSitePages.forEach((page) =>
-    add(
-      page.canonicalUrl,
-      staticLastModified(
+  // --- Static pages (the blog index repeats the home page and points to it as canonical, so it is left out)
+  staticSitePages
+    .filter((page) => page.canonicalUrl !== blogIndexPage.canonicalUrl)
+    .forEach((page) =>
+      add(
         page.canonicalUrl,
-        getPageLastModified(page) ?? staticRouteMap.get(page.canonicalUrl)
+        staticLastModified(
+          page.canonicalUrl,
+          getPageLastModified(page) ?? staticRouteMap.get(page.canonicalUrl)
+        )
       )
-    )
-  );
+    );
 
   // --- Tag pages
   for (const tag of postTags) {
@@ -79,12 +86,13 @@ export default async function sitemap() {
   const entries = Array.from(urls.values());
 
   // --- Validate paths
-  entries.forEach(({ url }) => {
-    const path = url.replace(SITE_URL, '');
+  entries.forEach(({ path }) => {
     if (!safeLinks.includes(path)) {
       throw new Error(`Invalid url defined in sitemap: "${path}"`);
     }
   });
 
-  return entries.sort((a, b) => a.url.localeCompare(b.url, 'fi'));
+  return entries
+    .sort((a, b) => a.path.localeCompare(b.path, 'fi'))
+    .map(({ url, lastModified }) => ({ url, lastModified }));
 }

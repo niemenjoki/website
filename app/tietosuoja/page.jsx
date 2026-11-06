@@ -201,7 +201,7 @@ export default function PrivacyPage() {
         </ul>
         <p>
           Voit käyttää oikeuksiasi ottamalla yhteyttä sähköpostitse osoitteeseen
-          joonas.niemenjoki(a)gmail.com. Vastaamme pyyntöösi kuukauden kuluessa.
+          joonas.niemenjoki(a)gmail.com. Vastaan pyyntöösi kuukauden kuluessa.
         </p>
 
         <h2>Valitusoikeus</h2>

@@ -102,7 +102,7 @@ const Advert = ({ adClient, adSlot }) => {
         data-ad-client={resolvedAdClient}
         data-ad-slot={resolvedAdSlot}
         data-ad-format="auto"
-        data-full-width-responsive="true"
+        data-full-width-responsive="false"
       />
     </div>
   );

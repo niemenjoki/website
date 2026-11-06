@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 import { SITE_AUTHOR } from '@/data/site/author';
+import { SITE_TITLE } from '@/data/site/constants.mjs';
 import { getContentMetadata } from '@/lib/content/index.mjs';
 
 export const POST_IMAGE_SIZE = { width: 1200, height: 630 };
@@ -39,6 +40,15 @@ function titleFontSize(title) {
 
 export async function renderPostImage(slug) {
   const { title, tags = [] } = getContentMetadata({ slug });
+  return renderShareImage({ title, tag: tags[0] });
+}
+
+// The default share image for pages that have no image of their own.
+export async function renderSiteImage() {
+  return renderShareImage({ title: SITE_TITLE.split(' | ')[0] });
+}
+
+async function renderShareImage({ title, tag }) {
   const [regular, bold] = await Promise.all([loadRubik(400), loadRubik(700)]);
 
   return new ImageResponse(
@@ -93,10 +103,8 @@ export async function renderPostImage(slug) {
         >
           Blogi
         </div>
-        {tags[0] ? (
-          <div style={{ display: 'flex', fontSize: 28, color: COLORS.muted }}>
-            {tags[0]}
-          </div>
+        {tag ? (
+          <div style={{ display: 'flex', fontSize: 28, color: COLORS.muted }}>{tag}</div>
         ) : null}
       </div>
 

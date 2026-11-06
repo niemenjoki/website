@@ -1,3 +1,9 @@
+/* The graphic has a fixed size. On narrow screens it scrolls sideways inside this box instead of widening the page. */
+.GraphicScroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .Graphic {
   position: relative;
   width: 600px;

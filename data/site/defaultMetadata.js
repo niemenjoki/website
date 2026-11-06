@@ -8,11 +8,12 @@ import {
   SITE_URL,
 } from './constants.mjs';
 
-const portraitImage = {
-  url: SITE_AUTHOR.portraitPath,
-  width: 400,
-  height: 400,
-  alt: SITE_AUTHOR.portraitAlt,
+// Share cards need a wide PNG or JPEG, so pages without an image of their own use this one (app/jakokuva.png).
+export const defaultShareImage = {
+  url: '/jakokuva.png',
+  width: 1200,
+  height: 630,
+  alt: SITE_TITLE,
 };
 
 export const defaultMetadata = {
@@ -34,7 +35,7 @@ export const defaultMetadata = {
     siteName: SITE_NAME,
     type: 'website',
     url: '/',
-    images: [portraitImage],
+    images: [defaultShareImage],
     locale: SITE_LOCALE,
   },
 
@@ -42,11 +43,11 @@ export const defaultMetadata = {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [portraitImage.url],
+    images: [defaultShareImage.url],
   },
 
   icons: {
     icon: '/icons/favicon.ico',
-    apple: SITE_AUTHOR.portraitPath,
+    apple: '/icons/apple-touch-icon.png',
   },
 };

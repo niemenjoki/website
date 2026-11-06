@@ -34,8 +34,8 @@ export const projectPageDefinitions = {
     updatedAt: '2026-03-20',
     pageType: 'ItemPage',
     pageIdSuffix: '#itempage',
-    pageName: 'Lieromaa-sivuprojekti | Joonas Niemenjoki projekti',
-    title: 'Lieromaa-sivuprojekti | Joonas Niemenjoki projekti',
+    pageName: 'Lieromaa, matokompostoinnin sivuprojekti | Joonas Niemenjoki',
+    title: 'Lieromaa, matokompostoinnin sivuprojekti | Joonas Niemenjoki',
     description:
       'Lieromaa on sivuprojektini, joka keskittyy matokompostointiin, kompostimatoihin ja käytännönläheiseen kestävään arkeen.',
     image: {
