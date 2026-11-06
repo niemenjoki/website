@@ -1,7 +1,7 @@
 {
   "title": "Lämpöpumppujen kompressorien vuorottelu käyntituntien mukaan",
-  "description": "Kiinteä käyntijärjestys kasaa käynnistykset vuorollaan yhdelle kompressorille. Näin vuorottelun voi tehdä toisin: logiikka, simulaatio ja malliteksti.",
-  "date": "2026-10-15",
+  "description": "Vuorottelu jää suunnitelmissa usein ohjelmoijan arvattavaksi. Yksinkertainen toteutustapa, kahden vuoden simulaatio ja malliteksti toimintaselostukseen.",
+  "date": "2026-11-06",
   "tags": ["lämpöpumput", "ohjelmointi"],
   "keywords": [
     "lämpöpumput",

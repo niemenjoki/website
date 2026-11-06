@@ -4,6 +4,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
+import CompressorRotationDemo from '@/components/CompressorRotationDemo/CompressorRotationDemo';
 import DhwPidSimulator from '@/components/DhwPidSimulator/DhwPidSimulator';
 import InfoBox from '@/components/InfoBox/InfoBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
@@ -31,6 +32,7 @@ export const mdxComponents = {
   SafeImage,
   InfoBox,
   Advert,
+  CompressorRotationDemo,
   DhwPidSimulator,
 };
 
