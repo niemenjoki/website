@@ -69,6 +69,9 @@ export function proxy(request, event) {
 
 // The first entry is Looku's recommended matcher: pages only, without prefetches and files. The other entries keep the
 // removed addresses answering 410, including /projects/LICENSE.md, which the first entry skips because of its extension.
+// Every entry leaves prefetches out: Next.js removes the prefetch headers before the proxy runs, so without this each
+// link that the browser loads in advance would be counted as a page view. Next.js reads the config as a literal, so the
+// list is repeated.
 export const config = {
   matcher: [
     {
@@ -80,8 +83,29 @@ export const config = {
         { type: 'header', key: 'sec-purpose', value: '(.*)prefetch(.*)' },
       ],
     },
-    '/blog/:path*',
-    '/blogi/:path*',
-    '/projects/:path*',
+    {
+      source: '/blog/:path*',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: 'header', key: 'sec-purpose', value: '(.*)prefetch(.*)' },
+      ],
+    },
+    {
+      source: '/blogi/:path*',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: 'header', key: 'sec-purpose', value: '(.*)prefetch(.*)' },
+      ],
+    },
+    {
+      source: '/projects/:path*',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: 'header', key: 'sec-purpose', value: '(.*)prefetch(.*)' },
+      ],
+    },
   ],
 };
