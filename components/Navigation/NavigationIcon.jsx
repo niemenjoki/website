@@ -11,6 +11,14 @@ const ICON_PATHS = {
       <path d="M8 8h8M8 12h8M8 16h5" />
     </>
   ),
+  projects: (
+    <>
+      <rect x="4" y="4" width="7" height="7" rx="1.5" />
+      <rect x="13" y="4" width="7" height="7" rx="1.5" />
+      <rect x="4" y="13" width="7" height="7" rx="1.5" />
+      <rect x="13" y="13" width="7" height="7" rx="1.5" />
+    </>
+  ),
   about: (
     <>
       <circle cx="12" cy="8" r="3.2" />

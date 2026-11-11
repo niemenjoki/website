@@ -1,0 +1,45 @@
+.ProjectPage {
+  max-width: 720px;
+  margin: 2rem auto;
+}
+
+.ProjectPage h1 {
+  overflow-wrap: anywhere;
+}
+
+.ProjectPage h2 {
+  margin: 2rem 0 0.5rem;
+}
+
+.ProjectPage p {
+  margin: 1rem 0;
+}
+
+.ProjectPage ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.ProjectPage li {
+  margin: 0.5rem 0;
+}
+
+.Badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1.25rem;
+  align-items: center;
+}
+
+.Badges img {
+  display: block;
+}
+
+.ProjectPage :is(p, li) a {
+  color: var(--highlight-content-link);
+}
+
+.Links a {
+  overflow-wrap: anywhere;
+}

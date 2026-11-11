@@ -1,0 +1,55 @@
+.ProjectsPage {
+  max-width: 720px;
+  margin: 2rem auto;
+}
+
+.ProjectsPage > p {
+  margin: 1rem 0;
+}
+
+.Group {
+  margin-top: 2rem;
+}
+
+.Card {
+  display: block;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 9px;
+  background: var(--background-3);
+  color: inherit;
+  text-decoration: none;
+}
+
+.CardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+
+.CardTitle {
+  font-size: 22px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  transition: color 0.1s ease-in-out;
+}
+
+.Card:hover .CardTitle,
+.Card:focus-visible .CardTitle {
+  color: var(--highlight);
+}
+
+.TypeLabel {
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: var(--highlight-content-link);
+  color: var(--text-on-accent);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.Summary {
+  display: block;
+  margin-top: 0.5rem;
+}

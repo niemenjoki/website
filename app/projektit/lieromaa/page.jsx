@@ -1,77 +1,50 @@
-import Advert from '@/components/Advert/Advert';
-import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
+import Link from 'next/link';
+
+import ProjectPage from '@/components/ProjectPage/ProjectPage';
 import SafeImage from '@/components/SafeImage/SafeImage';
-import { lieromaaProjectPage } from '@/lib/site/pageRecords.mjs';
-import { createProjectStructuredData } from '@/lib/structuredData/createProjectStructuredData';
+import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
+import { projectSitePages } from '@/lib/site/pageRecords.mjs';
 import wormsOnHandImage from '@/public/images/kompostimadot_kammenella.avif';
 
-import classes from './Lieromaa.module.css';
+const page = projectSitePages.lieromaa;
 
-export { default as generateMetadata } from './generateMetadata';
+export function generateMetadata() {
+  return createPageMetadata(page.metadata);
+}
 
 export default function LieromaaProjectPage() {
-  const breadcrumbItems = [
-    { name: 'Etusivu', href: '/' },
-    { name: lieromaaProjectPage.shortLabel },
-  ];
-  const structuredData = createProjectStructuredData({
-    page: lieromaaProjectPage,
-    breadcrumbItems,
-  });
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
-        }}
+    <ProjectPage page={page}>
+      <SafeImage
+        src={wormsOnHandImage}
+        alt={page.image.alt}
+        placeholder="blur"
+        style={{ width: '100%', maxWidth: '600px', height: 'auto' }}
+        priority
       />
 
-      <div className={classes.ProjectPage}>
-        <Breadcrumbs items={breadcrumbItems} />
-        <h1>{lieromaaProjectPage.shortLabel}</h1>
-        <SafeImage
-          src={wormsOnHandImage}
-          alt="Valokuva kompostimadoista kädellä"
-          placeholder="blur"
-          style={{ width: '100%', maxWidth: '600px', height: 'auto' }}
-          priority
-        />
-        <p>
-          Lieromaa on sivuprojektini, joka syntyi käytännön tarpeesta ja omasta
-          kiinnostuksesta kompostointiin ja kestävään arkeen, ja josta kehittyi
-          pienimuotoinen, toiminimen kautta harjoitettava sivutoimi. Projektin ytimessä on
-          matokompostointi eli biojätteen käsittely kompostimatojen avulla
-          kotitalousmittakaavassa.
-        </p>
+      <p>
+        Lieromaa on sivuprojektini, joka keskittyy matokompostointiin eli biojätteen
+        kompostointiin kompostimatojen avulla kotitalouden mittakaavassa. Se syntyi omasta
+        kiinnostuksesta kompostointiin ja kestävään arkeen, ja siitä kehittyi pieni
+        sivutoimi, jota harjoitan toiminimellä.
+      </p>
 
-        <p>
-          Sivustolla jaan omien kokemusteni pohjalta tietoa matokompostoinnista, autan
-          aiheesta kiinnostuneita alkuun ja myyn kompostimatoja. Tavoitteena on madaltaa
-          kynnystä aloittaa ja välttää yleisimmät virheet.
-        </p>
+      <p>
+        Lieromaan sivuilla kerron omien kokemusteni pohjalta, miten matokompostointi
+        aloitetaan ja miten yleisimmät virheet vältetään. Verkkokaupasta saa
+        kompostimatoja.
+      </p>
 
-        <p>
-          Lieromaa toimii samalla kokeilualustana sisällöntuotannolle,
-          hakukoneoptimoinnille ja teknisille ratkaisuille, joita hyödynnän myös muissa
-          projekteissani. Sivusto on ohjelmoitu kokonaan itse ja sen kehitys on jatkuvaa.
-        </p>
-
-        <p>
-          👉 Tutustu projektiin osoitteessa{' '}
-          <a
-            className="extlink"
-            href="https://www.lieromaa.fi/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            lieromaa.fi
-          </a>
-        </p>
-      </div>
-
-      <Advert />
-    </>
+      <p>
+        Lieromaa on myös kokeilualustani sisällöntuotannolle, hakukoneoptimoinnille ja
+        tekniikalle. Sivusto on ohjelmoitu kokonaan itse, ja siellä on käytössä myös muita
+        projektejani: kävijätilastot kertoo <Link href="/projektit/looku">Looku</Link>,
+        laskujen maksuosan piirtää{' '}
+        <Link href="/projektit/fi-invoice-payment-slip">fi-invoice-payment-slip</Link> ja
+        kassan noutopisteet hakee{' '}
+        <Link href="/projektit/posti-pickup-points">posti-pickup-points</Link>.
+      </p>
+    </ProjectPage>
   );
 }
