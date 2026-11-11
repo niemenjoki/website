@@ -49,13 +49,11 @@
   color: var(--text-color);
   overflow-wrap: anywhere;
   text-decoration: none;
-  text-underline-offset: 0.18em;
 }
 
 .Link:hover {
   color: var(--highlight);
   opacity: 1;
-  text-decoration: underline;
 }
 
 .Link:focus-visible,
@@ -145,7 +143,7 @@
 }
 
 .CloseButton:hover {
-  background: var(--highlight);
+  background: var(--highlight-content-link);
   color: var(--text-on-accent);
 }
 

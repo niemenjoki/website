@@ -91,17 +91,6 @@
   font-size: clamp(1.12rem, 2vw, 1.28rem);
 }
 
-.Content a {
-  color: var(--highlight-content-link);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.16em;
-}
-
-.Content a:hover {
-  opacity: 0.75;
-}
-
 .Content a:focus-visible {
   outline: 3px solid var(--highlight);
   outline-offset: 3px;

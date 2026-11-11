@@ -22,7 +22,7 @@
 }
 
 .Tag {
-  background: var(--highlight);
+  background: var(--highlight-content-link);
   padding: 0.25rem 0.5rem;
   color: var(--text-on-accent);
   border-radius: 4px;

@@ -14,11 +14,11 @@ export default function Breadcrumbs({ items = [] }) {
     gap: '0.25rem',
     fontSize: '0.95rem',
     marginBottom: '1rem',
-    color: 'var(--highlight)',
   };
 
+  // The same look as links in running text: colour, no underline. The current page is plain bold text.
   const linkStyle = {
-    textDecoration: 'underline',
+    color: 'var(--highlight-content-link)',
   };
 
   const separatorStyle = { margin: '0 0.3rem', opacity: 0.6 };

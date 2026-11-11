@@ -214,19 +214,16 @@
 .LinkButton {
   border: 0;
   background: none;
-  color: inherit;
+  color: var(--highlight-content-link);
   cursor: pointer;
   font: inherit;
   padding: 0;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
-  text-underline-offset: 0.18em;
 }
 
-.SafeLinks a:hover,
-.LinkButton:hover {
-  color: var(--nav-accent);
-  opacity: 1;
+@media (hover: hover) {
+  .LinkButton:hover {
+    opacity: 0.78;
+  }
 }
 
 .AppearanceUtility {
@@ -354,8 +351,5 @@
 }
 
 .OtherSite a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
-  text-underline-offset: 0.2em;
+  color: var(--highlight-content-link);
 }

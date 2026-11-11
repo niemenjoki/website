@@ -20,7 +20,6 @@
 
 .AuthorInfo a {
   color: var(--highlight-content-link);
-  text-decoration: underline;
 }
 
 .AuthorHeading {

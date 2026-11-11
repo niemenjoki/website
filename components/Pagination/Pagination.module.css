@@ -41,8 +41,8 @@
 .TextButton:hover,
 .NumberButton:hover,
 .ActiveButton {
-  border-color: var(--highlight);
-  background: var(--highlight);
+  border-color: var(--highlight-content-link);
+  background: var(--highlight-content-link);
   color: var(--text-on-accent);
   opacity: 1;
 }

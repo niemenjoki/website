@@ -16,7 +16,8 @@
   --overlay-final-dark: hsla(226deg, 32%, 8%, 95%);
   --code-background-dark: var(--dark-3);
   --code-default-dark: #dcdee5;
-  --highlight-content-link-dark: #799dff;
+  /* Links and tags without an underline: at least 4.5:1 against the background and 3:1 against body text. */
+  --highlight-content-link-dark: #5b80fb;
 
   /* LIGHT MODE */
   --light-1: #e8e9ee; /*hue 226 */
@@ -32,7 +33,7 @@
   --overlay-final-light: hsla(226deg, 32%, 92%, 90%);
   --code-background-light: #f4f5f8;
   --code-default-light: #1c2236;
-  --highlight-content-link-light: #0032bb;
+  --highlight-content-link-light: #1850ec;
 }
 
 :root {
@@ -198,8 +199,11 @@ a {
   text-decoration: none;
 }
 
-.extlink {
-  color: var(--highlight-alt);
+/* Links in running text look the same on every page: the content link colour, no underline. */
+.extlink,
+.md a {
+  color: var(--highlight-content-link);
+  transition: opacity 0.1s ease-in-out;
 }
 
 *,
@@ -310,14 +314,6 @@ h1 {
 }
 .md h6 {
   font-weight: lighter;
-}
-
-.md a {
-  color: var(--highlight);
-  transition: opacity 0.1s ease-in-out;
-}
-.md a:hover {
-  opacity: 0.7;
 }
 
 .md em {
