@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server';
 
-import {
-  ANALYTICS_OPT_OUT_COOKIE,
-  ANALYTICS_OPT_OUT_PATH,
-} from '@/lib/analytics/optOut.js';
-import { trackPageview } from '@/lib/looku/next.js';
+import { lookuRequestHeaders, trackPageview } from '@/lib/looku/next.js';
+import { LOOKU_OPTIONS } from '@/lib/looku/options.js';
 
 const GONE_PATHS = new Set([
   '/blogi/infrastruktuuri/sivu/1',
@@ -25,14 +22,6 @@ const GONE_PATHS = new Set([
   '/blog/page/[pageIndex]',
 ]);
 
-// Page views are recorded on the server with Looku, and nothing is stored in visitors' browsers. The receiver address and
-// keys come from the environment variables LOOKU_ENDPOINT, LOOKU_SITE_ID and LOOKU_SIGNING_KEY. Only production sends
-// data. The owner's browser is left out with the opt-out cookie.
-const LOOKU_OPTIONS = {
-  excludePaths: ['/k3v9q7t2', ANALYTICS_OPT_OUT_PATH],
-  optOutCookie: ANALYTICS_OPT_OUT_COOKIE,
-};
-
 function normalizePathname(pathname) {
   let decodedPathname;
   try {
@@ -49,12 +38,16 @@ function normalizePathname(pathname) {
   return decodedPathname;
 }
 
-export function proxy(request, event) {
+// Page views are recorded on the server with Looku, and nothing is stored in visitors' browsers. The address goes on to
+// the not-found page in a signed request header, so it can tell Looku that the page does not exist.
+export async function proxy(request, event) {
   const pathname = normalizePathname(request.nextUrl.pathname);
 
   if (!GONE_PATHS.has(pathname)) {
     trackPageview(request, event, LOOKU_OPTIONS);
-    return NextResponse.next();
+    return NextResponse.next({
+      request: { headers: await lookuRequestHeaders(request, LOOKU_OPTIONS) },
+    });
   }
 
   return new NextResponse('Gone', {
