@@ -20,6 +20,20 @@ const GONE_PATHS = new Set([
   '/blogi/oppiminen/sivu/1',
   '/projects/LICENSE.md',
   '/blog/page/[pageIndex]',
+  '/blog/post/atoms-empty-space-why-things-look-feel-solid',
+  '/blog/post/best-advice-for-people-starting-university-studies',
+  '/blog/post/correct-way-learning-javascript-how-and-where',
+  '/blog/post/how-can-birds-safely-sit-on-power-lines',
+  '/blog/post/how-cellular-networks-like-5g-4g-are-different',
+  '/blog/post/how-great-physicists-remember-all-equations-formulas',
+  '/blog/post/how-heatpumps-work',
+  '/blog/post/how-setup-raspberry-pi-without-monitor-april-2022-update',
+  '/blog/post/how-to-make-and-publish-npm-package',
+  '/blog/post/what-caused-chernobyl-accident',
+  '/blog/post/why-do-we-feel-sleepy',
+  '/blog/post/why-humans-rule-the-world',
+  '/about',
+  '/blog/history/page/1',
 ]);
 
 function normalizePathname(pathname) {
