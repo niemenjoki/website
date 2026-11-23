@@ -4,7 +4,7 @@ import ProjectPage from '@/components/ProjectPage/ProjectPage';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
 import { projectSitePages } from '@/lib/site/pageRecords.mjs';
-import wormsOnHandImage from '@/public/images/kompostimadot_kammenella.avif';
+import wormsOnHandImage from '@/public/images/kompostimadot_kammenella.webp';
 
 const page = projectSitePages.lieromaa;
 

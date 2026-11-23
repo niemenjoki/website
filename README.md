@@ -17,7 +17,7 @@ This is a solo project. I am not actively looking for contributors, but the repo
 
 ## Tech stack
 
-- Next.js 16 App Router (built with webpack)
+- Next.js 16 App Router (built with Turbopack)
 - React 19
 - MDX via `next-mdx-remote`
 - `rehype-pretty-code` + `shiki` for code blocks

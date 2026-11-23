@@ -2,18 +2,18 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import compressorActiveImage from '@/public/images/content/DhwPidSimulator/Kompressori-aktiivinen.avif';
-import compressorImage from '@/public/images/content/DhwPidSimulator/Kompressori.avif';
-import boxBlack from '@/public/images/content/DhwPidSimulator/Laatikko-Musta.avif';
-import boxRedDark from '@/public/images/content/DhwPidSimulator/Laatikko-Punainen-Tumma.avif';
-import boxRed from '@/public/images/content/DhwPidSimulator/Laatikko-Punainen.avif';
-import tankImage from '@/public/images/content/DhwPidSimulator/Lamminvesivaraaja.avif';
-import arrowRedRight from '@/public/images/content/DhwPidSimulator/Nuoli-Punainen-Oikea.avif';
-import arrowRedDarkLeft from '@/public/images/content/DhwPidSimulator/Nuoli-Punainen-Tumma-Vasen.avif';
-import dot from '@/public/images/content/DhwPidSimulator/Pallo.avif';
-import pumpActiveImage from '@/public/images/content/DhwPidSimulator/Pumppu-aktiivinen.avif';
-import backgroundPanel from '@/public/images/content/DhwPidSimulator/Tausta.avif';
-import valveImage from '@/public/images/content/DhwPidSimulator/Venttiili.avif';
+import compressorActiveImage from '@/public/images/content/DhwPidSimulator/Kompressori-aktiivinen.webp';
+import compressorImage from '@/public/images/content/DhwPidSimulator/Kompressori.webp';
+import boxBlack from '@/public/images/content/DhwPidSimulator/Laatikko-Musta.webp';
+import boxRedDark from '@/public/images/content/DhwPidSimulator/Laatikko-Punainen-Tumma.webp';
+import boxRed from '@/public/images/content/DhwPidSimulator/Laatikko-Punainen.webp';
+import tankImage from '@/public/images/content/DhwPidSimulator/Lamminvesivaraaja.webp';
+import arrowRedRight from '@/public/images/content/DhwPidSimulator/Nuoli-Punainen-Oikea.webp';
+import arrowRedDarkLeft from '@/public/images/content/DhwPidSimulator/Nuoli-Punainen-Tumma-Vasen.webp';
+import dot from '@/public/images/content/DhwPidSimulator/Pallo.webp';
+import pumpActiveImage from '@/public/images/content/DhwPidSimulator/Pumppu-aktiivinen.webp';
+import backgroundPanel from '@/public/images/content/DhwPidSimulator/Tausta.webp';
+import valveImage from '@/public/images/content/DhwPidSimulator/Venttiili.webp';
 
 import classes from './DhwPidSimulator.module.css';
 import simulationStep from './sim/simulationStep';

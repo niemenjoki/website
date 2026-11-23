@@ -418,7 +418,7 @@ export const projectPageDefinitions = {
     description:
       'Lieromaa on sivuprojektini, joka keskittyy matokompostointiin, kompostimatoihin ja käytännönläheiseen kestävään arkeen.',
     image: {
-      url: '/images/kompostimadot_kammenella.avif',
+      url: '/images/kompostimadot_kammenella.webp',
       alt: 'Valokuva kompostimadoista kädellä',
     },
     navigationLabel: 'Lieromaa',
@@ -443,7 +443,7 @@ export const projectPageDefinitions = {
         description:
           'Lieromaa on sivuprojekti, jossa julkaisen sisältöä matokompostoinnista, autan alkuun ja myyn kompostimatoja.',
         url: 'https://www.lieromaa.fi/',
-        image: '/images/kompostimadot_kammenella.avif',
+        image: '/images/kompostimadot_kammenella.webp',
       },
     },
   },
