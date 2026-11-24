@@ -36,8 +36,11 @@ function resolveImportedStaticPath(src) {
   return matchingPaths[0];
 }
 
+// Vercel serves statically imported images from /_next/static/immutable/media/ when the site is built with Turbopack.
+const STATIC_MEDIA_PREFIXES = ['/_next/static/media/', '/_next/static/immutable/media/'];
+
 function isSafeSrc(src) {
-  if (src.startsWith('/_next/static/media/')) {
+  if (STATIC_MEDIA_PREFIXES.some((prefix) => src.startsWith(prefix))) {
     const resolvedPath = resolveImportedStaticPath(src);
 
     if (!resolvedPath) {
